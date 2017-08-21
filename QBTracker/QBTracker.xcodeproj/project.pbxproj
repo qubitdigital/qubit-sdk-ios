@@ -10,6 +10,8 @@
 		42F0CD581F4AEE2B00BD9010 /* QBTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F0CD4E1F4AEE2B00BD9010 /* QBTracker.framework */; };
 		42F0CD5D1F4AEE2B00BD9010 /* QBTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F0CD5C1F4AEE2B00BD9010 /* QBTrackerTests.swift */; };
 		42F0CD5F1F4AEE2B00BD9010 /* QBTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 42F0CD511F4AEE2B00BD9010 /* QBTracker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		42F0CD6C1F4B044F00BD9010 /* QBApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F0CD6B1F4B044F00BD9010 /* QBApiService.swift */; };
+		42F0CD711F4B058500BD9010 /* ConfigurationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F0CD701F4B058500BD9010 /* ConfigurationEntity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,6 +32,8 @@
 		42F0CD5C1F4AEE2B00BD9010 /* QBTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBTrackerTests.swift; sourceTree = "<group>"; };
 		42F0CD5E1F4AEE2B00BD9010 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42F0CD691F4AF14D00BD9010 /* ConfigurationService.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ConfigurationService.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		42F0CD6B1F4B044F00BD9010 /* QBApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBApiService.swift; sourceTree = "<group>"; };
+		42F0CD701F4B058500BD9010 /* ConfigurationEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,7 @@
 		42F0CD501F4AEE2B00BD9010 /* QBTracker */ = {
 			isa = PBXGroup;
 			children = (
+				42F0CD6A1F4B03CC00BD9010 /* APIClient */,
 				42F0CD511F4AEE2B00BD9010 /* QBTracker.h */,
 				42F0CD521F4AEE2B00BD9010 /* Info.plist */,
 			);
@@ -94,6 +99,23 @@
 				42F0CD691F4AF14D00BD9010 /* ConfigurationService.playground */,
 			);
 			path = Playgrounds;
+			sourceTree = "<group>";
+		};
+		42F0CD6A1F4B03CC00BD9010 /* APIClient */ = {
+			isa = PBXGroup;
+			children = (
+				42F0CD6F1F4B056700BD9010 /* Entities */,
+				42F0CD6B1F4B044F00BD9010 /* QBApiService.swift */,
+			);
+			path = APIClient;
+			sourceTree = "<group>";
+		};
+		42F0CD6F1F4B056700BD9010 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				42F0CD701F4B058500BD9010 /* ConfigurationEntity.swift */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,12 +174,14 @@
 		42F0CD451F4AEE2B00BD9010 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = QB;
 				LastSwiftUpdateCheck = 0900;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = Qubit;
 				TargetAttributes = {
 					42F0CD4D1F4AEE2B00BD9010 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0900;
 					};
 					42F0CD561F4AEE2B00BD9010 = {
 						CreatedOnToolsVersion = 9.0;
@@ -204,6 +228,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42F0CD6C1F4B044F00BD9010 /* QBApiService.swift in Sources */,
+				42F0CD711F4B058500BD9010 /* ConfigurationEntity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,6 +368,7 @@
 		42F0CD631F4AEE2B00BD9010 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = HAWH5C9J75;
@@ -354,6 +381,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.qubit.QBTracker;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -362,6 +390,7 @@
 		42F0CD641F4AEE2B00BD9010 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = HAWH5C9J75;
@@ -382,6 +411,7 @@
 		42F0CD661F4AEE2B00BD9010 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = HAWH5C9J75;
 				INFOPLIST_FILE = QBTrackerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -395,6 +425,7 @@
 		42F0CD671F4AEE2B00BD9010 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = HAWH5C9J75;
 				INFOPLIST_FILE = QBTrackerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
