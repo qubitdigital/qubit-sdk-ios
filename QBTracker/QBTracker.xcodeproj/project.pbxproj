@@ -29,6 +29,7 @@
 		42F0CD571F4AEE2B00BD9010 /* QBTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QBTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		42F0CD5C1F4AEE2B00BD9010 /* QBTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBTrackerTests.swift; sourceTree = "<group>"; };
 		42F0CD5E1F4AEE2B00BD9010 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		42F0CD691F4AF14D00BD9010 /* ConfigurationService.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ConfigurationService.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				42F0CD501F4AEE2B00BD9010 /* QBTracker */,
+				42F0CD681F4AF0FE00BD9010 /* Playgrounds */,
 				42F0CD5B1F4AEE2B00BD9010 /* QBTrackerTests */,
 				42F0CD4F1F4AEE2B00BD9010 /* Products */,
 			);
@@ -84,6 +86,14 @@
 				42F0CD5E1F4AEE2B00BD9010 /* Info.plist */,
 			);
 			path = QBTrackerTests;
+			sourceTree = "<group>";
+		};
+		42F0CD681F4AF0FE00BD9010 /* Playgrounds */ = {
+			isa = PBXGroup;
+			children = (
+				42F0CD691F4AF14D00BD9010 /* ConfigurationService.playground */,
+			);
+			path = Playgrounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
