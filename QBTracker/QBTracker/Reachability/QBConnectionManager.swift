@@ -9,24 +9,28 @@
 import Foundation
 
 class QBConnectionManager: NSObject {
-    public let shared = QBConnectionManager()
+    static let shared = QBConnectionManager()
     
-    private var reach: QBReachability?
+    private var reachability: QBReachability?
     
     private override init() {
         super.init()
         
-        reach = QBReachability()
+        reachability = QBReachability()
         
-        reach?.whenReachable = { (reachability) in
+        reachability?.whenReachable = { (reachability) in
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CONNECTION_CHANGED_VALID_NOTIFICATION_KEY"), object: nil)
         }
         
-        reach?.whenUnreachable = { (reachability) in
+        reachability?.whenUnreachable = { (reachability) in
             print("UNREACHABLE!")
         }
         
-        try? reach?.startNotifier()
+        do {
+            try reachability?.startNotifier()
+        } catch {
+            print("Error starting reachability notifier.")
+        }
     }
     
     func checkConnection() -> Bool {
