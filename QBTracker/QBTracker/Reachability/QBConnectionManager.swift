@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc public class QBConnectionManager: NSObject {
+class QBConnectionManager: NSObject {
     public let shared = QBConnectionManager()
     
     private var reach: QBReachability?
@@ -29,14 +29,10 @@ import Foundation
         try? reach?.startNotifier()
     }
     
-    public func checkConnection() -> Bool {
+    func checkConnection() -> Bool {
         let networkReachability = QBReachability()
         let  networkStatus = networkReachability?.currentReachabilityStatus
         
-        if networkStatus == .notReachable {
-            return false
-        }
-        
-        return true
+        return networkStatus != .notReachable
     }
 }
