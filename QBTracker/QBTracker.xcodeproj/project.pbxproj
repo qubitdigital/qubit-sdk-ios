@@ -14,6 +14,8 @@
 		42F0CD761F4B119500BD9010 /* QBConfigurationRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F0CD751F4B119500BD9010 /* QBConfigurationRepositoryImp.swift */; };
 		42F0CD781F4B11D400BD9010 /* QBConfigurationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F0CD771F4B11D400BD9010 /* QBConfigurationService.swift */; };
 		42F0CD7D1F4B182E00BD9010 /* QBConfigurationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F0CD7C1F4B182E00BD9010 /* QBConfigurationTest.swift */; };
+		A0431ADD1F4AF6F200FA85CF /* QBReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0431ADC1F4AF6F200FA85CF /* QBReachability.swift */; };
+		A0431AE01F4AF77200FA85CF /* QBConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0431ADF1F4AF77200FA85CF /* QBConnectionManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,8 @@
 		42F0CD751F4B119500BD9010 /* QBConfigurationRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBConfigurationRepositoryImp.swift; sourceTree = "<group>"; };
 		42F0CD771F4B11D400BD9010 /* QBConfigurationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBConfigurationService.swift; sourceTree = "<group>"; };
 		42F0CD7C1F4B182E00BD9010 /* QBConfigurationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBConfigurationTest.swift; sourceTree = "<group>"; };
+		A0431ADC1F4AF6F200FA85CF /* QBReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QBReachability.swift; sourceTree = "<group>"; };
+		A0431ADF1F4AF77200FA85CF /* QBConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBConnectionManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				4215A1EB1F4C2C2000B7732E /* Services */,
+				A0431AD91F4AF3F800FA85CF /* Reachability */,
 				42F0CD6A1F4B03CC00BD9010 /* APIClient */,
 				42F0CD511F4AEE2B00BD9010 /* QBTracker.h */,
 				42F0CD521F4AEE2B00BD9010 /* Info.plist */,
@@ -130,6 +135,15 @@
 				42F0CD701F4B058500BD9010 /* QBConfigurationEntity.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		A0431AD91F4AF3F800FA85CF /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				A0431ADF1F4AF77200FA85CF /* QBConnectionManager.swift */,
+				A0431ADC1F4AF6F200FA85CF /* QBReachability.swift */,
+			);
+			path = Reachability;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,6 +260,8 @@
 				42F0CD761F4B119500BD9010 /* QBConfigurationRepositoryImp.swift in Sources */,
 				42F0CD781F4B11D400BD9010 /* QBConfigurationService.swift in Sources */,
 				42F0CD711F4B058500BD9010 /* QBConfigurationEntity.swift in Sources */,
+				A0431AE01F4AF77200FA85CF /* QBConnectionManager.swift in Sources */,
+				A0431ADD1F4AF6F200FA85CF /* QBReachability.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
