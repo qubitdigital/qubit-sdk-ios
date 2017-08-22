@@ -6,6 +6,20 @@
 	objectVersion = 48;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		A0F372B31F4C45F700283075 /* CommonCrypto */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = A0F372B41F4C45F700283075 /* Build configuration list for PBXAggregateTarget "CommonCrypto" */;
+			buildPhases = (
+				A0F372B71F4C462C00283075 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = CommonCrypto;
+			productName = CommonCrypto;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		42F0CD581F4AEE2B00BD9010 /* QBTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F0CD4E1F4AEE2B00BD9010 /* QBTracker.framework */; };
 		42F0CD5F1F4AEE2B00BD9010 /* QBTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 42F0CD511F4AEE2B00BD9010 /* QBTracker.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -16,6 +30,9 @@
 		42F0CD7D1F4B182E00BD9010 /* QBConfigurationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F0CD7C1F4B182E00BD9010 /* QBConfigurationTest.swift */; };
 		A0431ADD1F4AF6F200FA85CF /* QBReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0431ADC1F4AF6F200FA85CF /* QBReachability.swift */; };
 		A0431AE01F4AF77200FA85CF /* QBConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0431ADF1F4AF77200FA85CF /* QBConnectionManager.swift */; };
+		A099EE6B1F4C2F6D007319A9 /* QBSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A099EE6A1F4C2F6D007319A9 /* QBSessionManager.swift */; };
+		A099EE6E1F4C38DD007319A9 /* String+md5.swift in Sources */ = {isa = PBXBuildFile; fileRef = A099EE6D1F4C38DD007319A9 /* String+md5.swift */; };
+		A0F372931F4C40EA00283075 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0F372921F4C40EA00283075 /* Security.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +42,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 42F0CD4D1F4AEE2B00BD9010;
 			remoteInfo = QBTracker;
+		};
+		A0F372B81F4C465800283075 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 42F0CD451F4AEE2B00BD9010 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A0F372B31F4C45F700283075;
+			remoteInfo = CommonCrypto;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -42,6 +66,13 @@
 		42F0CD7C1F4B182E00BD9010 /* QBConfigurationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBConfigurationTest.swift; sourceTree = "<group>"; };
 		A0431ADC1F4AF6F200FA85CF /* QBReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QBReachability.swift; sourceTree = "<group>"; };
 		A0431ADF1F4AF77200FA85CF /* QBConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBConnectionManager.swift; sourceTree = "<group>"; };
+		A099EE6A1F4C2F6D007319A9 /* QBSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBSessionManager.swift; sourceTree = "<group>"; };
+		A099EE6D1F4C38DD007319A9 /* String+md5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+md5.swift"; sourceTree = "<group>"; };
+		A0F372921F4C40EA00283075 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		A0F3729B1F4C418400283075 /* CommonCrypto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonCrypto.h; sourceTree = "<group>"; };
+		A0F3729C1F4C418400283075 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A0F372A61F4C418400283075 /* CommonCryptoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonCryptoTests.m; sourceTree = "<group>"; };
+		A0F372A81F4C418400283075 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0F372931F4C40EA00283075 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,7 +110,10 @@
 				42F0CD501F4AEE2B00BD9010 /* QBTracker */,
 				42F0CD681F4AF0FE00BD9010 /* Playgrounds */,
 				42F0CD5B1F4AEE2B00BD9010 /* QBTrackerTests */,
+				A0F3729A1F4C418400283075 /* CommonCrypto */,
+				A0F372A51F4C418400283075 /* CommonCryptoTests */,
 				42F0CD4F1F4AEE2B00BD9010 /* Products */,
+				A0F372911F4C40EA00283075 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -95,6 +130,8 @@
 			isa = PBXGroup;
 			children = (
 				4215A1EB1F4C2C2000B7732E /* Services */,
+				A099EE6C1F4C38C2007319A9 /* Extensions */,
+				A099EE691F4C2F58007319A9 /* QBSession */,
 				A0431AD91F4AF3F800FA85CF /* Reachability */,
 				42F0CD6A1F4B03CC00BD9010 /* APIClient */,
 				42F0CD511F4AEE2B00BD9010 /* QBTracker.h */,
@@ -146,6 +183,49 @@
 			path = Reachability;
 			sourceTree = "<group>";
 		};
+		A099EE691F4C2F58007319A9 /* QBSession */ = {
+			isa = PBXGroup;
+			children = (
+				A099EE6A1F4C2F6D007319A9 /* QBSessionManager.swift */,
+			);
+			path = QBSession;
+			sourceTree = "<group>";
+		};
+		A099EE6C1F4C38C2007319A9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A099EE6D1F4C38DD007319A9 /* String+md5.swift */,
+			);
+			name = Extensions;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		A0F372911F4C40EA00283075 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A0F372921F4C40EA00283075 /* Security.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A0F3729A1F4C418400283075 /* CommonCrypto */ = {
+			isa = PBXGroup;
+			children = (
+				A0F3729B1F4C418400283075 /* CommonCrypto.h */,
+				A0F3729C1F4C418400283075 /* Info.plist */,
+			);
+			path = CommonCrypto;
+			sourceTree = "<group>";
+		};
+		A0F372A51F4C418400283075 /* CommonCryptoTests */ = {
+			isa = PBXGroup;
+			children = (
+				A0F372A61F4C418400283075 /* CommonCryptoTests.m */,
+				A0F372A81F4C418400283075 /* Info.plist */,
+			);
+			path = CommonCryptoTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -172,6 +252,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A0F372B91F4C465800283075 /* PBXTargetDependency */,
 			);
 			name = QBTracker;
 			productName = QBTracker;
@@ -214,6 +295,9 @@
 					42F0CD561F4AEE2B00BD9010 = {
 						CreatedOnToolsVersion = 9.0;
 					};
+					A0F372B31F4C45F700283075 = {
+						CreatedOnToolsVersion = 9.0;
+					};
 				};
 			};
 			buildConfigurationList = 42F0CD481F4AEE2B00BD9010 /* Build configuration list for PBXProject "QBTracker" */;
@@ -230,6 +314,7 @@
 			targets = (
 				42F0CD4D1F4AEE2B00BD9010 /* QBTracker */,
 				42F0CD561F4AEE2B00BD9010 /* QBTrackerTests */,
+				A0F372B31F4C45F700283075 /* CommonCrypto */,
 			);
 		};
 /* End PBXProject section */
@@ -250,6 +335,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A0F372B71F4C462C00283075 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "mkdir -p \"${BUILT_PRODUCTS_DIR}/CommonCryptoModuleMap\"\ncat <<EOF > \"${BUILT_PRODUCTS_DIR}/CommonCryptoModuleMap/module.modulemap\"\nmodule CommonCrypto [system] {\n    header \"${SDKROOT}/usr/include/CommonCrypto/CommonCrypto.h\"\n    export *\n}\nEOF";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		42F0CD491F4AEE2B00BD9010 /* Sources */ = {
@@ -281,6 +382,11 @@
 			target = 42F0CD4D1F4AEE2B00BD9010 /* QBTracker */;
 			targetProxy = 42F0CD591F4AEE2B00BD9010 /* PBXContainerItemProxy */;
 		};
+		A0F372B91F4C465800283075 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A0F372B31F4C45F700283075 /* CommonCrypto */;
+			targetProxy = A0F372B81F4C465800283075 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -288,6 +394,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -338,6 +445,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_INCLUDE_PATHS = "${PROJECT_DIR}/CommonCrypto";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -348,6 +456,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -390,6 +499,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_INCLUDE_PATHS = "${PROJECT_DIR}/CommonCrypto";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -400,6 +510,7 @@
 		42F0CD631F4AEE2B00BD9010 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
@@ -407,12 +518,18 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				HEADER_SEARCH_PATHS = (
+					"${inherited}",
+					"${BUILT_PRODUCTS_DIR}/CommonCrypto",
+				);
 				INFOPLIST_FILE = QBTracker/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qubit.QBTracker;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -422,6 +539,7 @@
 		42F0CD641F4AEE2B00BD9010 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
@@ -429,12 +547,18 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				HEADER_SEARCH_PATHS = (
+					"${inherited}",
+					"${BUILT_PRODUCTS_DIR}/CommonCrypto",
+				);
 				INFOPLIST_FILE = QBTracker/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qubit.QBTracker;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -468,6 +592,24 @@
 			};
 			name = Release;
 		};
+		A0F372B51F4C45F700283075 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = HAWH5C9J75;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "";
+			};
+			name = Debug;
+		};
+		A0F372B61F4C45F700283075 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = HAWH5C9J75;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -494,6 +636,15 @@
 			buildConfigurations = (
 				42F0CD661F4AEE2B00BD9010 /* Debug */,
 				42F0CD671F4AEE2B00BD9010 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A0F372B41F4C45F700283075 /* Build configuration list for PBXAggregateTarget "CommonCrypto" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A0F372B51F4C45F700283075 /* Debug */,
+				A0F372B61F4C45F700283075 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
