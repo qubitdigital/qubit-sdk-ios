@@ -8,10 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		42F0CD581F4AEE2B00BD9010 /* QBTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F0CD4E1F4AEE2B00BD9010 /* QBTracker.framework */; };
-		42F0CD5D1F4AEE2B00BD9010 /* QBTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F0CD5C1F4AEE2B00BD9010 /* QBTrackerTests.swift */; };
 		42F0CD5F1F4AEE2B00BD9010 /* QBTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 42F0CD511F4AEE2B00BD9010 /* QBTracker.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		42F0CD6C1F4B044F00BD9010 /* QBApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F0CD6B1F4B044F00BD9010 /* QBApiService.swift */; };
-		42F0CD711F4B058500BD9010 /* ConfigurationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F0CD701F4B058500BD9010 /* ConfigurationEntity.swift */; };
+		42F0CD6C1F4B044F00BD9010 /* QBApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F0CD6B1F4B044F00BD9010 /* QBApiClient.swift */; };
+		42F0CD711F4B058500BD9010 /* QBConfigurationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F0CD701F4B058500BD9010 /* QBConfigurationEntity.swift */; };
+		42F0CD761F4B119500BD9010 /* QBConfigurationRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F0CD751F4B119500BD9010 /* QBConfigurationRepositoryImp.swift */; };
+		42F0CD781F4B11D400BD9010 /* QBConfigurationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F0CD771F4B11D400BD9010 /* QBConfigurationService.swift */; };
+		42F0CD7D1F4B182E00BD9010 /* QBConfigurationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F0CD7C1F4B182E00BD9010 /* QBConfigurationTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,11 +31,13 @@
 		42F0CD511F4AEE2B00BD9010 /* QBTracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QBTracker.h; sourceTree = "<group>"; };
 		42F0CD521F4AEE2B00BD9010 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42F0CD571F4AEE2B00BD9010 /* QBTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QBTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		42F0CD5C1F4AEE2B00BD9010 /* QBTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBTrackerTests.swift; sourceTree = "<group>"; };
 		42F0CD5E1F4AEE2B00BD9010 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42F0CD691F4AF14D00BD9010 /* ConfigurationService.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ConfigurationService.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		42F0CD6B1F4B044F00BD9010 /* QBApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBApiService.swift; sourceTree = "<group>"; };
-		42F0CD701F4B058500BD9010 /* ConfigurationEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationEntity.swift; sourceTree = "<group>"; };
+		42F0CD6B1F4B044F00BD9010 /* QBApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBApiClient.swift; sourceTree = "<group>"; };
+		42F0CD701F4B058500BD9010 /* QBConfigurationEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBConfigurationEntity.swift; sourceTree = "<group>"; };
+		42F0CD751F4B119500BD9010 /* QBConfigurationRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBConfigurationRepositoryImp.swift; sourceTree = "<group>"; };
+		42F0CD771F4B11D400BD9010 /* QBConfigurationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBConfigurationService.swift; sourceTree = "<group>"; };
+		42F0CD7C1F4B182E00BD9010 /* QBConfigurationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBConfigurationTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4215A1EB1F4C2C2000B7732E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				42F0CD751F4B119500BD9010 /* QBConfigurationRepositoryImp.swift */,
+				42F0CD771F4B11D400BD9010 /* QBConfigurationService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		42F0CD441F4AEE2B00BD9010 = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +90,7 @@
 		42F0CD501F4AEE2B00BD9010 /* QBTracker */ = {
 			isa = PBXGroup;
 			children = (
+				4215A1EB1F4C2C2000B7732E /* Services */,
 				42F0CD6A1F4B03CC00BD9010 /* APIClient */,
 				42F0CD511F4AEE2B00BD9010 /* QBTracker.h */,
 				42F0CD521F4AEE2B00BD9010 /* Info.plist */,
@@ -87,8 +101,8 @@
 		42F0CD5B1F4AEE2B00BD9010 /* QBTrackerTests */ = {
 			isa = PBXGroup;
 			children = (
-				42F0CD5C1F4AEE2B00BD9010 /* QBTrackerTests.swift */,
 				42F0CD5E1F4AEE2B00BD9010 /* Info.plist */,
+				42F0CD7C1F4B182E00BD9010 /* QBConfigurationTest.swift */,
 			);
 			path = QBTrackerTests;
 			sourceTree = "<group>";
@@ -105,7 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				42F0CD6F1F4B056700BD9010 /* Entities */,
-				42F0CD6B1F4B044F00BD9010 /* QBApiService.swift */,
+				42F0CD6B1F4B044F00BD9010 /* QBApiClient.swift */,
 			);
 			path = APIClient;
 			sourceTree = "<group>";
@@ -113,7 +127,7 @@
 		42F0CD6F1F4B056700BD9010 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				42F0CD701F4B058500BD9010 /* ConfigurationEntity.swift */,
+				42F0CD701F4B058500BD9010 /* QBConfigurationEntity.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -228,8 +242,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42F0CD6C1F4B044F00BD9010 /* QBApiService.swift in Sources */,
-				42F0CD711F4B058500BD9010 /* ConfigurationEntity.swift in Sources */,
+				42F0CD6C1F4B044F00BD9010 /* QBApiClient.swift in Sources */,
+				42F0CD761F4B119500BD9010 /* QBConfigurationRepositoryImp.swift in Sources */,
+				42F0CD781F4B11D400BD9010 /* QBConfigurationService.swift in Sources */,
+				42F0CD711F4B058500BD9010 /* QBConfigurationEntity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,7 +253,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42F0CD5D1F4AEE2B00BD9010 /* QBTrackerTests.swift in Sources */,
+				42F0CD7D1F4B182E00BD9010 /* QBConfigurationTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
