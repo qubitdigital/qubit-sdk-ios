@@ -1,5 +1,5 @@
 //
-//  ConfigurationEntity.swift
+//  QBConfigurationEntity.swift
 //  QBTracker
 //
 //  Created by Pavlo Davydiuk on 21/08/2017.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ConfigEntity: Codable {
+struct QBConfigurationEntity: Codable {
     let sendAutoViewEvents: Bool
     let sendAutoInteractionEvents: Bool
     let sendGeoData: Bool
