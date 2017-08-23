@@ -21,6 +21,12 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		422370821F4C6B2B008D401E /* QBContextEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422370811F4C6B2B008D401E /* QBContextEntity.swift */; };
+		422370841F4C6B3B008D401E /* QBMetaEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422370831F4C6B3B008D401E /* QBMetaEntity.swift */; };
+		423AEFE31F4C41EF00F6EF6D /* QBEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423AEFE21F4C41EF00F6EF6D /* QBEventService.swift */; };
+		423AEFE51F4C421000F6EF6D /* QBEventRespositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423AEFE41F4C421000F6EF6D /* QBEventRespositoryImp.swift */; };
+		423AEFE71F4C431500F6EF6D /* QBEventEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423AEFE61F4C431500F6EF6D /* QBEventEntity.swift */; };
+		423AEFE91F4C505300F6EF6D /* QBStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423AEFE81F4C505300F6EF6D /* QBStatusEntity.swift */; };
 		42F0CD581F4AEE2B00BD9010 /* QBTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F0CD4E1F4AEE2B00BD9010 /* QBTracker.framework */; };
 		42F0CD5F1F4AEE2B00BD9010 /* QBTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 42F0CD511F4AEE2B00BD9010 /* QBTracker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		42F0CD6C1F4B044F00BD9010 /* QBApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F0CD6B1F4B044F00BD9010 /* QBApiClient.swift */; };
@@ -30,7 +36,6 @@
 		42F0CD7D1F4B182E00BD9010 /* QBConfigurationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F0CD7C1F4B182E00BD9010 /* QBConfigurationTest.swift */; };
 		A0431ADD1F4AF6F200FA85CF /* QBReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0431ADC1F4AF6F200FA85CF /* QBReachability.swift */; };
 		A0431AE01F4AF77200FA85CF /* QBConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0431ADF1F4AF77200FA85CF /* QBConnectionManager.swift */; };
-		A0F372BB1F4C5D4D00283075 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A0F372BA1F4C5D4D00283075 /* libsqlite3.tbd */; };
 		A0F372BE1F4C623F00283075 /* QBDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F372BD1F4C623F00283075 /* QBDatabase.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +57,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		422370811F4C6B2B008D401E /* QBContextEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBContextEntity.swift; sourceTree = "<group>"; };
+		422370831F4C6B3B008D401E /* QBMetaEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBMetaEntity.swift; sourceTree = "<group>"; };
+		423AEFE21F4C41EF00F6EF6D /* QBEventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBEventService.swift; sourceTree = "<group>"; };
+		423AEFE41F4C421000F6EF6D /* QBEventRespositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBEventRespositoryImp.swift; sourceTree = "<group>"; };
+		423AEFE61F4C431500F6EF6D /* QBEventEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBEventEntity.swift; sourceTree = "<group>"; };
+		423AEFE81F4C505300F6EF6D /* QBStatusEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBStatusEntity.swift; sourceTree = "<group>"; };
 		42F0CD4E1F4AEE2B00BD9010 /* QBTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QBTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42F0CD511F4AEE2B00BD9010 /* QBTracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QBTracker.h; sourceTree = "<group>"; };
 		42F0CD521F4AEE2B00BD9010 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -81,7 +92,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0F372BB1F4C5D4D00283075 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,6 +111,8 @@
 			children = (
 				42F0CD751F4B119500BD9010 /* QBConfigurationRepositoryImp.swift */,
 				42F0CD771F4B11D400BD9010 /* QBConfigurationService.swift */,
+				423AEFE41F4C421000F6EF6D /* QBEventRespositoryImp.swift */,
+				423AEFE21F4C41EF00F6EF6D /* QBEventService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -172,6 +184,10 @@
 			isa = PBXGroup;
 			children = (
 				42F0CD701F4B058500BD9010 /* QBConfigurationEntity.swift */,
+				423AEFE81F4C505300F6EF6D /* QBStatusEntity.swift */,
+				423AEFE61F4C431500F6EF6D /* QBEventEntity.swift */,
+				422370811F4C6B2B008D401E /* QBContextEntity.swift */,
+				422370831F4C6B3B008D401E /* QBMetaEntity.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -368,10 +384,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				423AEFE31F4C41EF00F6EF6D /* QBEventService.swift in Sources */,
+				423AEFE91F4C505300F6EF6D /* QBStatusEntity.swift in Sources */,
 				42F0CD6C1F4B044F00BD9010 /* QBApiClient.swift in Sources */,
+				422370821F4C6B2B008D401E /* QBContextEntity.swift in Sources */,
+				422370841F4C6B3B008D401E /* QBMetaEntity.swift in Sources */,
 				42F0CD761F4B119500BD9010 /* QBConfigurationRepositoryImp.swift in Sources */,
 				42F0CD781F4B11D400BD9010 /* QBConfigurationService.swift in Sources */,
+				423AEFE51F4C421000F6EF6D /* QBEventRespositoryImp.swift in Sources */,
 				42F0CD711F4B058500BD9010 /* QBConfigurationEntity.swift in Sources */,
+				423AEFE71F4C431500F6EF6D /* QBEventEntity.swift in Sources */,
 				A0431AE01F4AF77200FA85CF /* QBConnectionManager.swift in Sources */,
 				A0F372BE1F4C623F00283075 /* QBDatabase.swift in Sources */,
 				A0431ADD1F4AF6F200FA85CF /* QBReachability.swift in Sources */,

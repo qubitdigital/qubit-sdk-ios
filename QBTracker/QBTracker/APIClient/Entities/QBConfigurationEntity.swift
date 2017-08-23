@@ -9,13 +9,18 @@
 import Foundation
 
 struct QBConfigurationEntity: Codable {
-    let sendAutoViewEvents: Bool
-    let sendAutoInteractionEvents: Bool
-    let sendGeoData: Bool
-    let disabled: Bool
-    let configurationReloadInterval: Int
-    let queueTimeout: Int
-    let vertical: String
+    let sendAutoViewEvents: Bool?
+    let sendAutoInteractionEvents: Bool?
+    let sendGeoData: Bool?
+    let disabled: Bool?
+    let configurationReloadInterval: Int?
+    let queueTimeout: Int?
+    let vertical: String?
+    let endpoint: String?
+    let schemaVersion: String?
+    let propertyId: String?
+    let namespace: String?
+    
     
     private enum CodingKeys : String, CodingKey {
         case sendAutoViewEvents = "send_auto_view_events"
@@ -25,5 +30,10 @@ struct QBConfigurationEntity: Codable {
         case configurationReloadInterval = "configuration_reload_interval"
         case queueTimeout = "queue_timeout"
         case vertical
+        case endpoint
+        case schemaVersion
+        case propertyId
+        case namespace
     }
+    
 }
