@@ -30,9 +30,8 @@
 		42F0CD7D1F4B182E00BD9010 /* QBConfigurationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F0CD7C1F4B182E00BD9010 /* QBConfigurationTest.swift */; };
 		A0431ADD1F4AF6F200FA85CF /* QBReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0431ADC1F4AF6F200FA85CF /* QBReachability.swift */; };
 		A0431AE01F4AF77200FA85CF /* QBConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0431ADF1F4AF77200FA85CF /* QBConnectionManager.swift */; };
-		A099EE6B1F4C2F6D007319A9 /* QBSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A099EE6A1F4C2F6D007319A9 /* QBSessionManager.swift */; };
-		A099EE6E1F4C38DD007319A9 /* String+md5.swift in Sources */ = {isa = PBXBuildFile; fileRef = A099EE6D1F4C38DD007319A9 /* String+md5.swift */; };
-		A0F372931F4C40EA00283075 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0F372921F4C40EA00283075 /* Security.framework */; };
+		A0F372BB1F4C5D4D00283075 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A0F372BA1F4C5D4D00283075 /* libsqlite3.tbd */; };
+		A0F372BE1F4C623F00283075 /* QBDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F372BD1F4C623F00283075 /* QBDatabase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +72,8 @@
 		A0F3729C1F4C418400283075 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A0F372A61F4C418400283075 /* CommonCryptoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonCryptoTests.m; sourceTree = "<group>"; };
 		A0F372A81F4C418400283075 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A0F372BA1F4C5D4D00283075 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		A0F372BD1F4C623F00283075 /* QBDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBDatabase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0F372931F4C40EA00283075 /* Security.framework in Frameworks */,
+				A0F372BB1F4C5D4D00283075 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,6 +130,7 @@
 		42F0CD501F4AEE2B00BD9010 /* QBTracker */ = {
 			isa = PBXGroup;
 			children = (
+				A0F372BC1F4C61F000283075 /* Database */,
 				4215A1EB1F4C2C2000B7732E /* Services */,
 				A099EE6C1F4C38C2007319A9 /* Extensions */,
 				A099EE691F4C2F58007319A9 /* QBSession */,
@@ -203,6 +205,7 @@
 		A0F372911F4C40EA00283075 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A0F372BA1F4C5D4D00283075 /* libsqlite3.tbd */,
 				A0F372921F4C40EA00283075 /* Security.framework */,
 			);
 			name = Frameworks;
@@ -224,6 +227,14 @@
 				A0F372A81F4C418400283075 /* Info.plist */,
 			);
 			path = CommonCryptoTests;
+			sourceTree = "<group>";
+		};
+		A0F372BC1F4C61F000283075 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				A0F372BD1F4C623F00283075 /* QBDatabase.swift */,
+			);
+			path = Database;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -362,6 +373,7 @@
 				42F0CD781F4B11D400BD9010 /* QBConfigurationService.swift in Sources */,
 				42F0CD711F4B058500BD9010 /* QBConfigurationEntity.swift in Sources */,
 				A0431AE01F4AF77200FA85CF /* QBConnectionManager.swift in Sources */,
+				A0F372BE1F4C623F00283075 /* QBDatabase.swift in Sources */,
 				A0431ADD1F4AF6F200FA85CF /* QBReachability.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
