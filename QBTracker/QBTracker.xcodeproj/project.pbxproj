@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		420738741F4D8E2A005A0B9E /* QBConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420738731F4D8D0F005A0B9E /* QBConfigurationManager.swift */; };
+		420738761F4D9739005A0B9E /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420738751F4D9739005A0B9E /* UserDefaults+Extensions.swift */; };
 		422370821F4C6B2B008D401E /* QBContextEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422370811F4C6B2B008D401E /* QBContextEntity.swift */; };
 		422370841F4C6B3B008D401E /* QBMetaEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422370831F4C6B3B008D401E /* QBMetaEntity.swift */; };
 		423AEFE31F4C41EF00F6EF6D /* QBEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423AEFE21F4C41EF00F6EF6D /* QBEventService.swift */; };
@@ -72,6 +74,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		420738731F4D8D0F005A0B9E /* QBConfigurationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBConfigurationManager.swift; sourceTree = "<group>"; };
+		420738751F4D9739005A0B9E /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		422370811F4C6B2B008D401E /* QBContextEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBContextEntity.swift; sourceTree = "<group>"; };
 		422370831F4C6B3B008D401E /* QBMetaEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBMetaEntity.swift; sourceTree = "<group>"; };
 		423AEFE21F4C41EF00F6EF6D /* QBEventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBEventService.swift; sourceTree = "<group>"; };
@@ -138,6 +142,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		420738721F4D8D0F005A0B9E /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				420738731F4D8D0F005A0B9E /* QBConfigurationManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		4215A1EB1F4C2C2000B7732E /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,6 +194,7 @@
 				A099EE691F4C2F58007319A9 /* QBSession */,
 				A0431AD91F4AF3F800FA85CF /* Reachability */,
 				42F0CD6A1F4B03CC00BD9010 /* APIClient */,
+				420738721F4D8D0F005A0B9E /* Managers */,
 				42F0CD511F4AEE2B00BD9010 /* QBTracker.h */,
 				42F0CD521F4AEE2B00BD9010 /* Info.plist */,
 			);
@@ -260,6 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				A099EE6D1F4C38DD007319A9 /* String+md5.swift */,
+				420738751F4D9739005A0B9E /* UserDefaults+Extensions.swift */,
 			);
 			name = Extensions;
 			path = "New Group";
@@ -467,8 +481,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				423AEFE31F4C41EF00F6EF6D /* QBEventService.swift in Sources */,
+				420738741F4D8E2A005A0B9E /* QBConfigurationManager.swift in Sources */,
 				423AEFE91F4C505300F6EF6D /* QBStatusEntity.swift in Sources */,
 				42F0CD6C1F4B044F00BD9010 /* QBApiClient.swift in Sources */,
+				420738761F4D9739005A0B9E /* UserDefaults+Extensions.swift in Sources */,
 				422370821F4C6B2B008D401E /* QBContextEntity.swift in Sources */,
 				A0F5BF591F4D7833009EFE8D /* QBDataModel.xcdatamodeld in Sources */,
 				422370841F4C6B3B008D401E /* QBMetaEntity.swift in Sources */,
