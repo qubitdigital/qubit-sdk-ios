@@ -18,7 +18,7 @@ class QBConfigurationManager {
     private var timer: Timer?
     private var lastUpdateTimeStamp: Double {
         didSet {
-            print("lastUpdateTimeStamp updated = \(lastUpdateTimeStamp) \n")
+            QBLog.verbose("lastUpdateTimeStamp updated = \(lastUpdateTimeStamp)")
         }
     }
 
@@ -30,13 +30,13 @@ class QBConfigurationManager {
     }
     
     private func downloadConfig() {
-        print("downloadConfig() \n")
+        QBLog.mark()
         defaultConfigurationService.getConfigution(forId: "roeld") { [weak self] result in
             guard let strongSelf = self else { return }
             
             switch result {
             case .success(let config):
-                print("config = \(config) \n")
+                QBLog.debug("config = \(config)")
                 
                 strongSelf.currentConfiguration = config
                 strongSelf.lastUpdateTimeStamp = NSDate().timeIntervalSince1970
@@ -47,14 +47,14 @@ class QBConfigurationManager {
                 
                 strongSelf.startTimer()
             case .failure(let error):
-                print("error = \(error) \n")
+                QBLog.error("error = \(error)")
             }
         }
     }
     
     private func shouldUpdateConfiguration() -> Bool {
         let timestamp = NSDate().timeIntervalSince1970
-        print("current timestamp = \(timestamp), last update timestamp = \(lastUpdateTimeStamp), diff = \(timestamp - lastUpdateTimeStamp) \n")
+        QBLog.verbose("current timestamp = \(timestamp), last update timestamp = \(lastUpdateTimeStamp), diff = \(timestamp - lastUpdateTimeStamp)")
         if (timestamp > lastUpdateTimeStamp + QBConfigurationEntity.getReleoadIntervalInSeconds(from: self.currentConfiguration)) {
             return true
         }
@@ -73,24 +73,24 @@ extension QBConfigurationManager {
         }
         
         DispatchQueue.main.async {
-            print("🚀 startTimer \n")
+            QBLog.verbose("🚀 startTimer")
             self.timer = Timer.scheduledTimer(timeInterval: reloadInterval, target: self, selector: #selector(self.timerTick), userInfo: nil, repeats: true)
         }
     }
     
     private func stopTimer() {
-        print("🛑 stopTimer \n")
+        QBLog.verbose("🛑 stopTimer")
         self.timer?.invalidate()
         self.timer = nil
     }
     
     @objc private func timerTick() {
-        print("⏰ timer tick \n")
+        QBLog.verbose("⏰ timer tick")
         if (self.shouldUpdateConfiguration()) {
-            print(" Config is outdated \n")
+            QBLog.debug("Config is outdated")
             self.downloadConfig()
         } else {
-            print("Config is actual \n")
+            QBLog.debug("Config is actual")
         }
     }
 }
