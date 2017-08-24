@@ -101,12 +101,10 @@
 		A0431ADF1F4AF77200FA85CF /* QBConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBConnectionManager.swift; sourceTree = "<group>"; };
 		A099EE6A1F4C2F6D007319A9 /* QBSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBSessionManager.swift; sourceTree = "<group>"; };
 		A099EE6D1F4C38DD007319A9 /* String+md5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+md5.swift"; sourceTree = "<group>"; };
-		A0F372921F4C40EA00283075 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A0F3729B1F4C418400283075 /* CommonCrypto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonCrypto.h; sourceTree = "<group>"; };
 		A0F3729C1F4C418400283075 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A0F372A61F4C418400283075 /* CommonCryptoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonCryptoTests.m; sourceTree = "<group>"; };
 		A0F372A81F4C418400283075 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A0F372BA1F4C5D4D00283075 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		A0F372BD1F4C623F00283075 /* QBDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBDatabase.swift; sourceTree = "<group>"; };
 		A0F5BF581F4D7833009EFE8D /* QBDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QBDataModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -268,8 +266,6 @@
 		A0F372911F4C40EA00283075 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A0F372BA1F4C5D4D00283075 /* libsqlite3.tbd */,
-				A0F372921F4C40EA00283075 /* Security.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -295,8 +291,8 @@
 		A0F372BC1F4C61F000283075 /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				A0F372BD1F4C623F00283075 /* QBDatabase.swift */,
 				A0F5BF571F4D7833009EFE8D /* QBDataModel.xcdatamodeld */,
+				A0F372BD1F4C623F00283075 /* QBDatabase.swift */,
 				A01CC8561F4D8D29009336F8 /* QBDatabaseManager.swift */,
 			);
 			path = Database;
