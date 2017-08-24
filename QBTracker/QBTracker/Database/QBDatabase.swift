@@ -19,7 +19,10 @@ class QBDatabase {
             fatalError("Error loading model \(modelName) from bundle")
         }
         
-        let managedObjectModel = NSManagedObjectModel(contentsOf: modelUrl)
+        guard let managedObjectModel = NSManagedObjectModel(contentsOf: modelUrl) else {
+            fatalError("Error loading model \(modelName) from bundle")
+        }
+        
         let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
         
         managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
