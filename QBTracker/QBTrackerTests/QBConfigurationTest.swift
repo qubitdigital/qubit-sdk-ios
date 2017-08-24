@@ -53,5 +53,5 @@ class QBConfigurationTest: XCTestCase {
         
         waitForExpectations(timeout: 5.0)
     }
-        
+
 }

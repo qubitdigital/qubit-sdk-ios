@@ -9,34 +9,31 @@
 import Foundation
 import CoreData
 
-class QBDatabase: NSObject {
-    
+class QBDatabase {
+
     var managedObjectContext: NSManagedObjectContext
     
-    init(completion: @escaping () -> ()) {
-        guard let modelUrl = Bundle.main.url(forResource: "DataModel", withExtension: "momd") else {
-            fatalError("Error loading model from bundle")
+    init(modelName: String) {
+        let bundle = Bundle(for: QBDatabase.self)
+        guard let modelUrl = bundle.url(forResource: modelName, withExtension: "momd") else {
+            fatalError("Error loading model \(modelName) from bundle")
         }
         
         let managedObjectModel = NSManagedObjectModel(contentsOf: modelUrl)
         let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
-        let queue = DispatchQueue.global(qos: .background)
         
-        managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
         
-        queue.async {
-            guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else {
-                fatalError("Unable to resolve document directory")
-            }
-            
-            let persistentStoreUrl = documentsUrl.appendingPathComponent("DataModel.sqlite")
-            do {
-                try persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: persistentStoreUrl, options: nil)
-                DispatchQueue.main.sync(execute: completion)
-            } catch {
-                fatalError("Error migrating persistent store: \(error)")
-            }
+        guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else {
+            fatalError("Unable to resolve document directory")
+        }
+        let databaseName = modelName + ".sqlite"
+        let persistentStoreUrl = documentsUrl.appendingPathComponent(databaseName)
+        do {
+            try persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: persistentStoreUrl, options: nil)
+        } catch {
+            fatalError("Error migrating persistent store: \(error)")
         }
     }
     
