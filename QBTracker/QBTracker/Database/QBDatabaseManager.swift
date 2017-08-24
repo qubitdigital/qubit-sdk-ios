@@ -9,19 +9,24 @@
 import Foundation
 import CoreData
 
-class QBDatabaseManager {
+public class QBDatabaseManager {
     
-    static let shared = QBDatabaseManager()
+    public static let shared = QBDatabaseManager()
     static let kQBDataModelName = "QBDataModel"
     
-    var database: QBDatabase
+    var database: QBDatabase?
     
     private init() {
         database = QBDatabase(modelName: QBDatabaseManager.kQBDataModelName)
     }
     
-    func query<T: NSManagedObject>(entity: T, predicate: NSPredicate? = nil) -> [T] {
-        let entityName = String(describing: entity)
+    public func query<T: NSManagedObject>(entityType: T.Type, predicate: NSPredicate? = nil) -> [T] {
+        guard let database = database else {
+            print("Database is not initialized")
+            return []
+        }
+        
+        let entityName = String(describing: entityType)
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         fetchRequest.predicate = predicate
         
@@ -35,14 +40,24 @@ class QBDatabaseManager {
         return []
     }
     
-    func insert<T: NSManagedObject>(entity: T) -> T? {
-        let entityName = String(describing: entity)
+    public func insert<T: NSManagedObject>(entityType: T.Type) -> T? {
+        guard let database = database else {
+            print("Database is not initialized")
+            return nil
+        }
+        
+        let entityName = String(describing: entityType)
         let object = NSEntityDescription.insertNewObject(forEntityName: entityName, into: database.managedObjectContext) as? T
         
         return object
     }
     
-    func save() -> Bool {
+    @discardableResult public func save() -> Bool {
+        guard let database = database else {
+            print("Database is not initialized")
+            return false
+        }
+        
         do {
             try database.managedObjectContext.save()
             return true
@@ -53,9 +68,14 @@ class QBDatabaseManager {
         return false
     }
     
-    func deleteAll<T: NSManagedObject>(from entity: T) -> Bool {
-        let entityName = String(describing: entity)
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: entity))
+    @discardableResult public func deleteAll<T: NSManagedObject>(from entityType: T.Type) -> Bool {
+        guard let database = database else {
+            print("Database is not initialized")
+            return false
+        }
+        
+        let entityName = String(describing: entityType)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: entityType))
         
         do {
             let results = try database.managedObjectContext.fetch(fetchRequest) as? [T] ?? []
@@ -67,7 +87,12 @@ class QBDatabaseManager {
         return false
     }
     
-    func delete(entries: [NSManagedObject]) -> Bool {
+    @discardableResult func delete(entries: [NSManagedObject]) -> Bool {
+        guard let database = database else {
+            print("Database is not initialized")
+            return false
+        }
+        
         do {
             for entry in entries {
                 database.managedObjectContext.delete(entry)
