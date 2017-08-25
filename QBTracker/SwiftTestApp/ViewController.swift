@@ -7,21 +7,25 @@
 //
 
 import UIKit
-import QBTracker
+//import QBTracker
+@testable import QBTracker
 
 class ViewController: UIViewController {
-
+    
+    var manager: QBConfigurationManager?
+    var timer: Timer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
         
-        // Dispose of any resources that can be recreated.
+        manager = QBConfigurationManager.shared
+        
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerTick), userInfo: nil, repeats: true)
     }
-
+    
+    @objc func timerTick() {
+        print("tick")
+    }
 
 }
 
