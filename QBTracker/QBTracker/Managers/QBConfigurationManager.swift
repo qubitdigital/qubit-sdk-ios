@@ -11,7 +11,14 @@ import Foundation
 class QBConfigurationManager {
     // MARK: Internal
     static let shared = QBConfigurationManager()
-    var currentConfiguration: QBConfigurationEntity? = nil
+    private var remoteConfiguration: QBConfigurationEntity? = nil {
+        didSet {
+            UserDefaults.standard.lastSavedRemoteConfiguration = self.remoteConfiguration
+            self.lastUpdateTimeStamp = NSDate().timeIntervalSince1970
+            
+            self.startTimer()
+        }
+    }
     
     // MARK: Private
     private var timestamp:Int = 0
@@ -25,27 +32,22 @@ class QBConfigurationManager {
     private init() {
         self.lastUpdateTimeStamp = 0
 //        [self loadVisitorId];
+        QBLog.info("device id = \(QBDevice.getId())")
         downloadConfig()
-//        [self updateFromDictionary:nil];
     }
     
     private func downloadConfig() {
         QBLog.mark()
-        defaultConfigurationService.getConfigution(forId: "roeld") { [weak self] result in
+        defaultConfigurationService.getConfigution(forId: "miquido") { [weak self] result in
             guard let strongSelf = self else { return }
             
             switch result {
             case .success(let config):
                 QBLog.debug("config = \(config)")
                 
-                strongSelf.currentConfiguration = config
-                strongSelf.lastUpdateTimeStamp = NSDate().timeIntervalSince1970
+                QBLog.debug("userDefaults = \(UserDefaults.standard.lastSavedRemoteConfiguration.debugDescription)")
                 
-                if let timer = strongSelf.timer, timer.isValid {
-                    return
-                }
-                
-                strongSelf.startTimer()
+                strongSelf.remoteConfiguration = config
             case .failure(let error):
                 QBLog.error("error = \(error)")
             }
@@ -55,10 +57,22 @@ class QBConfigurationManager {
     private func shouldUpdateConfiguration() -> Bool {
         let timestamp = NSDate().timeIntervalSince1970
         QBLog.verbose("current timestamp = \(timestamp), last update timestamp = \(lastUpdateTimeStamp), diff = \(timestamp - lastUpdateTimeStamp)")
-        if (timestamp > lastUpdateTimeStamp + QBConfigurationEntity.getReleoadIntervalInSeconds(from: self.currentConfiguration)) {
+        if (timestamp > lastUpdateTimeStamp + QBConfigurationEntity.getReleoadIntervalInSeconds(from: self.remoteConfiguration)) {
             return true
         }
         return false;
+    }
+    
+    func getConfiguration() -> QBConfigurationEntity {
+        if let remoteConfiguration = self.remoteConfiguration {            
+            return remoteConfiguration
+        }
+        
+        if let lastSavedRemoteConfiguration = UserDefaults.standard.lastSavedRemoteConfiguration {
+            return lastSavedRemoteConfiguration
+        }
+        
+        return QBConfigurationEntity()
     }
 
 }
@@ -66,8 +80,12 @@ class QBConfigurationManager {
 // MARK: - Timer
 extension QBConfigurationManager {
     private func startTimer() {
+        if let timer = self.timer, timer.isValid {
+            return
+        }
+        
         self.stopTimer()
-        let reloadInterval = QBConfigurationEntity.getReleoadIntervalInSeconds(from: self.currentConfiguration)
+        let reloadInterval = QBConfigurationEntity.getReleoadIntervalInSeconds(from: self.remoteConfiguration)
         guard reloadInterval > 0 else {
             return
         }

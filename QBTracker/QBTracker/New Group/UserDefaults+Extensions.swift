@@ -9,8 +9,18 @@
 import Foundation
 
 extension UserDefaults {
-    var onboardingCompleted: Bool {
-        get { return bool(forKey: #function) }
-        set { set(newValue, forKey: #function) }
+    var lastSavedRemoteConfiguration: QBConfigurationEntity? {
+        get {
+            if let configurationData = data(forKey: #function), let configuration = try? JSONDecoder().decode(QBConfigurationEntity.self, from: configurationData) {
+                return configuration
+            }
+            
+            return nil
+        }
+        set {
+            if let encoded = try? JSONEncoder().encode(newValue) {
+                set(encoded, forKey: #function)
+            }
+        }
     }
 }
