@@ -16,12 +16,12 @@ class QBDatabase {
     init?(modelName: String) {
         let bundle = Bundle(for: QBDatabase.self)
         guard let modelUrl = bundle.url(forResource: modelName, withExtension: "momd") else {
-            print("FatalError loading model \(modelName) from bundle")
+            QBLog.error("FatalError loading model \(modelName) from bundle")
             return nil
         }
         
         guard let managedObjectModel = NSManagedObjectModel(contentsOf: modelUrl) else {
-            print("FatalError loading model \(modelName) from bundle")
+            QBLog.error("FatalError loading model \(modelName) from bundle")
             return nil
         }
         
@@ -31,7 +31,7 @@ class QBDatabase {
         managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
         
         guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else {
-            print("FatalError: Unable to resolve document directory")
+            QBLog.error("FatalError: Unable to resolve document directory")
             return nil
         }
         
@@ -40,7 +40,7 @@ class QBDatabase {
         do {
             try persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: persistentStoreUrl, options: nil)
         } catch {
-            print("FatalError migrating persistent store: \(error)")
+            QBLog.error("FatalError migrating persistent store: \(error)")
         }
     }
     

@@ -22,7 +22,7 @@ public class QBDatabaseManager {
     
     public func query<T: NSManagedObject>(entityType: T.Type, predicate: NSPredicate? = nil) -> [T] {
         guard let database = database else {
-            print("Database is not initialized")
+            QBLog.error("Database is not initialized")
             return []
         }
         
@@ -34,7 +34,7 @@ public class QBDatabaseManager {
             let results = try database.managedObjectContext.fetch(fetchRequest) as? [T] ?? []
             return results
         } catch {
-            print ("Error performing query for entityName: \(entityName) error: \(error.localizedDescription)")
+            QBLog.error("Error performing query for entityName: \(entityName) error: \(error.localizedDescription)")
         }
         
         return []
@@ -42,7 +42,7 @@ public class QBDatabaseManager {
     
     public func insert<T: NSManagedObject>(entityType: T.Type) -> T? {
         guard let database = database else {
-            print("Database is not initialized")
+            QBLog.error("Database is not initialized")
             return nil
         }
         
@@ -54,7 +54,7 @@ public class QBDatabaseManager {
     
     @discardableResult public func save() -> Bool {
         guard let database = database else {
-            print("Database is not initialized")
+            QBLog.error("Database is not initialized")
             return false
         }
         
@@ -62,7 +62,7 @@ public class QBDatabaseManager {
             try database.managedObjectContext.save()
             return true
         } catch {
-            print ("Error saving changes to database \(error.localizedDescription)")
+            QBLog.error("Error saving changes to database \(error.localizedDescription)")
         }
         
         return false
@@ -70,7 +70,7 @@ public class QBDatabaseManager {
     
     @discardableResult public func deleteAll<T: NSManagedObject>(from entityType: T.Type) -> Bool {
         guard let database = database else {
-            print("Database is not initialized")
+            QBLog.error("Database is not initialized")
             return false
         }
         
@@ -81,7 +81,7 @@ public class QBDatabaseManager {
             let results = try database.managedObjectContext.fetch(fetchRequest) as? [T] ?? []
             return delete(entries: results)
         } catch {
-            print ("Error deleting all entries from entityName: \(entityName) error: \(error.localizedDescription)")
+            QBLog.error("Error deleting all entries from entityName: \(entityName) error: \(error.localizedDescription)")
         }
         
         return false
@@ -89,7 +89,7 @@ public class QBDatabaseManager {
     
     @discardableResult func delete(entries: [NSManagedObject]) -> Bool {
         guard let database = database else {
-            print("Database is not initialized")
+            QBLog.error("Database is not initialized")
             return false
         }
         
@@ -100,7 +100,7 @@ public class QBDatabaseManager {
             try database.managedObjectContext.save()
             return true
         } catch {
-            print ("Error deleting entries: \(error.localizedDescription)")
+            QBLog.error("Error deleting entries: \(error.localizedDescription)")
         }
         
         return false

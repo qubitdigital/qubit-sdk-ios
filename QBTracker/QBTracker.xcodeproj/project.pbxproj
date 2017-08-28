@@ -47,7 +47,7 @@
 		A0431ADD1F4AF6F200FA85CF /* QBReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0431ADC1F4AF6F200FA85CF /* QBReachability.swift */; };
 		A0431AE01F4AF77200FA85CF /* QBConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0431ADF1F4AF77200FA85CF /* QBConnectionManager.swift */; };
 		A08335DA1F4EF13400F509D5 /* QBEventDatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08335D91F4EF13400F509D5 /* QBEventDatabaseTests.swift */; };
-		A08D69A91F4F0BA800CE2FD5 /* NSManagedObjectConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08D69A81F4F0BA800CE2FD5 /* NSManagedObjectConvertible.swift */; };
+		A08D69AB1F53F8C500CE2FD5 /* QBDatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08D69AA1F53F8C500CE2FD5 /* QBDatabaseHelper.swift */; };
 		A0F372BE1F4C623F00283075 /* QBDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F372BD1F4C623F00283075 /* QBDatabase.swift */; };
 		A0F5BF591F4D7833009EFE8D /* QBDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A0F5BF571F4D7833009EFE8D /* QBDataModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
@@ -108,7 +108,7 @@
 		A0431ADC1F4AF6F200FA85CF /* QBReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QBReachability.swift; sourceTree = "<group>"; };
 		A0431ADF1F4AF77200FA85CF /* QBConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBConnectionManager.swift; sourceTree = "<group>"; };
 		A08335D91F4EF13400F509D5 /* QBEventDatabaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBEventDatabaseTests.swift; sourceTree = "<group>"; };
-		A08D69A81F4F0BA800CE2FD5 /* NSManagedObjectConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObjectConvertible.swift; sourceTree = "<group>"; };
+		A08D69AA1F53F8C500CE2FD5 /* QBDatabaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBDatabaseHelper.swift; sourceTree = "<group>"; };
 		A099EE6A1F4C2F6D007319A9 /* QBSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBSessionManager.swift; sourceTree = "<group>"; };
 		A099EE6D1F4C38DD007319A9 /* String+md5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+md5.swift"; sourceTree = "<group>"; };
 		A0F3729B1F4C418400283075 /* CommonCrypto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonCrypto.h; sourceTree = "<group>"; };
@@ -200,7 +200,6 @@
 		42F0CD501F4AEE2B00BD9010 /* QBTracker */ = {
 			isa = PBXGroup;
 			children = (
-				A08D69A71F4F0B9200CE2FD5 /* Protocols */,
 				A0F372BC1F4C61F000283075 /* Database */,
 				4215A1EB1F4C2C2000B7732E /* Services */,
 				A099EE6C1F4C38C2007319A9 /* Extensions */,
@@ -276,14 +275,6 @@
 			path = Reachability;
 			sourceTree = "<group>";
 		};
-		A08D69A71F4F0B9200CE2FD5 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				A08D69A81F4F0BA800CE2FD5 /* NSManagedObjectConvertible.swift */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
 		A099EE691F4C2F58007319A9 /* QBSession */ = {
 			isa = PBXGroup;
 			children = (
@@ -333,6 +324,7 @@
 				A0F5BF571F4D7833009EFE8D /* QBDataModel.xcdatamodeld */,
 				A0F372BD1F4C623F00283075 /* QBDatabase.swift */,
 				A01CC8561F4D8D29009336F8 /* QBDatabaseManager.swift */,
+				A08D69AA1F53F8C500CE2FD5 /* QBDatabaseHelper.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -508,13 +500,13 @@
 				420738761F4D9739005A0B9E /* UserDefaults+Extensions.swift in Sources */,
 				422370821F4C6B2B008D401E /* QBContextEntity.swift in Sources */,
 				A0F5BF591F4D7833009EFE8D /* QBDataModel.xcdatamodeld in Sources */,
+				A08D69AB1F53F8C500CE2FD5 /* QBDatabaseHelper.swift in Sources */,
 				422370841F4C6B3B008D401E /* QBMetaEntity.swift in Sources */,
 				42F0CD761F4B119500BD9010 /* QBConfigurationRepositoryImp.swift in Sources */,
 				42F0CD781F4B11D400BD9010 /* QBConfigurationService.swift in Sources */,
 				423AEFE51F4C421000F6EF6D /* QBEventRespositoryImp.swift in Sources */,
 				4207389A1F4F08E0005A0B9E /* QBLog.swift in Sources */,
 				A01CC8571F4D8D29009336F8 /* QBDatabaseManager.swift in Sources */,
-				A08D69A91F4F0BA800CE2FD5 /* NSManagedObjectConvertible.swift in Sources */,
 				42F0CD711F4B058500BD9010 /* QBConfigurationEntity.swift in Sources */,
 				423AEFE71F4C431500F6EF6D /* QBEventEntity.swift in Sources */,
 				A0431AE01F4AF77200FA85CF /* QBConnectionManager.swift in Sources */,
