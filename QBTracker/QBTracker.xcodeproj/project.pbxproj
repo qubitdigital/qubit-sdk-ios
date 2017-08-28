@@ -21,9 +21,12 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		42054D181F502C7A00386771 /* QBDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42054D171F502C7A00386771 /* QBDevice.swift */; };
+		42054D1B1F50359900386771 /* QBKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42054D1A1F50359900386771 /* QBKeychain.swift */; };
 		420738741F4D8E2A005A0B9E /* QBConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420738731F4D8D0F005A0B9E /* QBConfigurationManager.swift */; };
 		420738761F4D9739005A0B9E /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420738751F4D9739005A0B9E /* UserDefaults+Extensions.swift */; };
 		4207389A1F4F08E0005A0B9E /* QBLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420738991F4F08E0005A0B9E /* QBLog.swift */; };
+		420743751F50440F0099E5BA /* String+md5.swift in Sources */ = {isa = PBXBuildFile; fileRef = A099EE6D1F4C38DD007319A9 /* String+md5.swift */; };
 		422370821F4C6B2B008D401E /* QBContextEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422370811F4C6B2B008D401E /* QBContextEntity.swift */; };
 		422370841F4C6B3B008D401E /* QBMetaEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422370831F4C6B3B008D401E /* QBMetaEntity.swift */; };
 		423AEFE31F4C41EF00F6EF6D /* QBEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423AEFE21F4C41EF00F6EF6D /* QBEventService.swift */; };
@@ -77,6 +80,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		42054D171F502C7A00386771 /* QBDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBDevice.swift; sourceTree = "<group>"; };
+		42054D1A1F50359900386771 /* QBKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBKeychain.swift; sourceTree = "<group>"; };
 		420738731F4D8D0F005A0B9E /* QBConfigurationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBConfigurationManager.swift; sourceTree = "<group>"; };
 		420738751F4D9739005A0B9E /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		420738991F4F08E0005A0B9E /* QBLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBLog.swift; sourceTree = "<group>"; };
@@ -146,6 +151,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		42054D151F50256200386771 /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				42054D1A1F50359900386771 /* QBKeychain.swift */,
+			);
+			path = Keychain;
+			sourceTree = "<group>";
+		};
 		420738721F4D8D0F005A0B9E /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,7 +170,10 @@
 		420738961F4F08B6005A0B9E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				A0431AD91F4AF3F800FA85CF /* Reachability */,
+				42054D151F50256200386771 /* Keychain */,
 				420738991F4F08E0005A0B9E /* QBLog.swift */,
+				42054D171F502C7A00386771 /* QBDevice.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -204,7 +220,6 @@
 				4215A1EB1F4C2C2000B7732E /* Services */,
 				A099EE6C1F4C38C2007319A9 /* Extensions */,
 				A099EE691F4C2F58007319A9 /* QBSession */,
-				A0431AD91F4AF3F800FA85CF /* Reachability */,
 				42F0CD6A1F4B03CC00BD9010 /* APIClient */,
 				420738721F4D8D0F005A0B9E /* Managers */,
 				420738961F4F08B6005A0B9E /* Utils */,
@@ -502,10 +517,13 @@
 				A0F5BF591F4D7833009EFE8D /* QBDataModel.xcdatamodeld in Sources */,
 				A08D69AB1F53F8C500CE2FD5 /* QBDatabaseHelper.swift in Sources */,
 				422370841F4C6B3B008D401E /* QBMetaEntity.swift in Sources */,
+				420743751F50440F0099E5BA /* String+md5.swift in Sources */,
+				42054D181F502C7A00386771 /* QBDevice.swift in Sources */,
 				42F0CD761F4B119500BD9010 /* QBConfigurationRepositoryImp.swift in Sources */,
 				42F0CD781F4B11D400BD9010 /* QBConfigurationService.swift in Sources */,
 				423AEFE51F4C421000F6EF6D /* QBEventRespositoryImp.swift in Sources */,
 				4207389A1F4F08E0005A0B9E /* QBLog.swift in Sources */,
+				42054D1B1F50359900386771 /* QBKeychain.swift in Sources */,
 				A01CC8571F4D8D29009336F8 /* QBDatabaseManager.swift in Sources */,
 				42F0CD711F4B058500BD9010 /* QBConfigurationEntity.swift in Sources */,
 				423AEFE71F4C431500F6EF6D /* QBEventEntity.swift in Sources */,
