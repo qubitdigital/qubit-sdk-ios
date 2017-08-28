@@ -23,4 +23,19 @@ extension UserDefaults {
             }
         }
     }
+    
+    var lastSavedRemoteLookup: QBLookupEntity? {
+        get {
+            if let lookupData = data(forKey: #function), let lookup = try? JSONDecoder().decode(QBLookupEntity.self, from: lookupData) {
+                return lookup
+            }
+            
+            return nil
+        }
+        set {
+            if let encoded = try? JSONEncoder().encode(newValue) {
+                set(encoded, forKey: #function)
+            }
+        }
+    }
 }

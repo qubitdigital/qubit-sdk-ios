@@ -18,7 +18,7 @@ struct QBConfigurationEntity: Codable {
     //  AO: If endpoint is defined then data_location should be ignored.
     let dataLocation: String?
     let lookupEndpoint: String?
-    let lookupCacheExpireTime: Int?
+    let lookupReloadInterval: Int?
     let lookupRequestTimeout: Int?
     
     init(from decoder: Decoder) throws {
@@ -52,8 +52,8 @@ struct QBConfigurationEntity: Codable {
         let lookupEndpoint = try? values.decode(String.self, forKey: .lookupEndpoint)
         self.lookupEndpoint = lookupEndpoint != nil ? lookupEndpoint : DefaultValues.lookupEndpoint
         
-        let lookupCacheExpireTime = try? values.decode(Int.self, forKey: .lookupCacheExpireTime)
-        self.lookupCacheExpireTime = lookupCacheExpireTime != nil ? lookupCacheExpireTime : DefaultValues.lookupCacheExpireTime
+        let lookupReloadInterval = try? values.decode(Int.self, forKey: .lookupReloadInterval)
+        self.lookupReloadInterval = lookupReloadInterval != nil ? lookupReloadInterval : DefaultValues.lookupReloadInterval
         
         let lookupRequestTimeout = try? values.decode(Int.self, forKey: .lookupRequestTimeout)
         self.lookupRequestTimeout = lookupRequestTimeout != nil ? lookupRequestTimeout : DefaultValues.lookupRequestTimeout
@@ -67,7 +67,7 @@ struct QBConfigurationEntity: Codable {
         self.namespace = DefaultValues.namespace
         self.dataLocation = DefaultValues.dataLocation
         self.lookupEndpoint = DefaultValues.lookupEndpoint
-        self.lookupCacheExpireTime = DefaultValues.lookupCacheExpireTime
+        self.lookupReloadInterval = DefaultValues.lookupReloadInterval
         self.lookupRequestTimeout = DefaultValues.lookupRequestTimeout
     }
     
@@ -79,7 +79,7 @@ struct QBConfigurationEntity: Codable {
         case namespace
         case dataLocation = "data_location"
         case lookupEndpoint = "lookup_attribute_url"
-        case lookupCacheExpireTime = "lookup_get_request_timeout"
+        case lookupReloadInterval = "lookup_get_request_timeout"
         case lookupRequestTimeout = "lookup_cache_expire_time"
     }
 }
@@ -95,7 +95,7 @@ extension QBConfigurationEntity {
         static let namespace = ""
         static let dataLocation = "EU"
         static let lookupEndpoint = "lookup.qubit.com"
-        static let lookupCacheExpireTime = 60
+        static let lookupReloadInterval = 60
         static let lookupRequestTimeout = 5
     }
     
@@ -104,10 +104,37 @@ extension QBConfigurationEntity {
 
 // MARK: - Helpers
 extension QBConfigurationEntity {
-    static func getReleoadIntervalInSeconds(from configuration: QBConfigurationEntity?) -> Double {
-        guard let configurationReloadInterval = configuration?.configurationReloadInterval else {
+    func configurationReloadIntervalInSeconds() -> Double {
+        guard let configurationReloadInterval = self.configurationReloadInterval else {
             return 0.0
         }
         return Double(configurationReloadInterval * 60)
+    }
+    
+    func lookupReloadIntervalInSeconds() -> Double {
+        guard let lookupReloadInterval = self.lookupReloadInterval else {
+            return 0.0
+        }
+        return Double(lookupReloadInterval * 60)
+    }
+    
+    func lookupEndpointUrl() -> URL? {
+        return self.urlFrom(stringUrl: self.lookupEndpoint)
+    }
+    
+    func mainEndpointUrl() -> URL? {
+        return self.urlFrom(stringUrl: self.endpoint)
+    }
+    
+    private func urlFrom(stringUrl: String?) -> URL? {
+        guard let endpoint = stringUrl else {
+            return nil
+        }
+        
+        if endpoint.hasPrefix("https://") {
+            return URL(string: endpoint)
+        } else {
+            return URL(string: "https://\(endpoint)")
+        }
     }
 }

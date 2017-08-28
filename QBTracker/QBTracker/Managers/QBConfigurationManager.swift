@@ -11,6 +11,20 @@ import Foundation
 class QBConfigurationManager {
     // MARK: Internal
     static let shared = QBConfigurationManager()
+    
+    var configuration: QBConfigurationEntity {
+        if let remoteConfiguration = self.remoteConfiguration {
+            return remoteConfiguration
+        }
+        
+        if let lastSavedRemoteConfiguration = UserDefaults.standard.lastSavedRemoteConfiguration {
+            return lastSavedRemoteConfiguration
+        }
+        
+        return QBConfigurationEntity()
+    }
+    
+    // MARK: Private
     private var remoteConfiguration: QBConfigurationEntity? = nil {
         didSet {
             UserDefaults.standard.lastSavedRemoteConfiguration = self.remoteConfiguration
@@ -19,20 +33,16 @@ class QBConfigurationManager {
             self.startTimer()
         }
     }
-    
-    // MARK: Private
     private var timestamp:Int = 0
     private var timer: Timer?
     private var lastUpdateTimeStamp: Double {
         didSet {
-            QBLog.verbose("lastUpdateTimeStamp updated = \(lastUpdateTimeStamp)")
+            QBLog.verbose("configuration lastUpdateTimeStamp updated = \(lastUpdateTimeStamp)")
         }
     }
 
     private init() {
         self.lastUpdateTimeStamp = 0
-//        [self loadVisitorId];
-        QBLog.info("device id = \(QBDevice.getId())")
         downloadConfig()
     }
     
@@ -57,35 +67,19 @@ class QBConfigurationManager {
     private func shouldUpdateConfiguration() -> Bool {
         let timestamp = NSDate().timeIntervalSince1970
         QBLog.verbose("current timestamp = \(timestamp), last update timestamp = \(lastUpdateTimeStamp), diff = \(timestamp - lastUpdateTimeStamp)")
-        if (timestamp > lastUpdateTimeStamp + QBConfigurationEntity.getReleoadIntervalInSeconds(from: self.remoteConfiguration)) {
+        if (timestamp > lastUpdateTimeStamp + self.configuration.configurationReloadIntervalInSeconds()) {
             return true
         }
         return false;
     }
     
-    func getConfiguration() -> QBConfigurationEntity {
-        if let remoteConfiguration = self.remoteConfiguration {            
-            return remoteConfiguration
-        }
-        
-        if let lastSavedRemoteConfiguration = UserDefaults.standard.lastSavedRemoteConfiguration {
-            return lastSavedRemoteConfiguration
-        }
-        
-        return QBConfigurationEntity()
-    }
-
 }
 
 // MARK: - Timer
 extension QBConfigurationManager {
     private func startTimer() {
-        if let timer = self.timer, timer.isValid {
-            return
-        }
-        
         self.stopTimer()
-        let reloadInterval = QBConfigurationEntity.getReleoadIntervalInSeconds(from: self.remoteConfiguration)
+        let reloadInterval = self.configuration.configurationReloadIntervalInSeconds()
         guard reloadInterval > 0 else {
             return
         }
