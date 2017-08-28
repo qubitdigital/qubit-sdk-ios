@@ -10,7 +10,10 @@ import Foundation
 
 class QBConfigurationManager {
     // MARK: Internal
-    static let shared = QBConfigurationManager()
+    //static let shared = QBConfigurationManager()
+    
+    var trackingId: String
+    
     private var remoteConfiguration: QBConfigurationEntity? = nil {
         didSet {
             UserDefaults.standard.lastSavedRemoteConfiguration = self.remoteConfiguration
@@ -29,8 +32,9 @@ class QBConfigurationManager {
         }
     }
 
-    private init() {
+    init(with trackingId: String) {
         self.lastUpdateTimeStamp = 0
+        self.trackingId = trackingId
 //        [self loadVisitorId];
         QBLog.info("device id = \(QBDevice.getId())")
         downloadConfig()

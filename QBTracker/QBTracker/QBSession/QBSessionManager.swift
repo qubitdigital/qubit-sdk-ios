@@ -40,7 +40,7 @@ class QBSessionManager {
     
     func getValidSessionId() -> String {
         if !(isSessionValid()) {
-            startNewSession(fromView: false)
+            startNewSession()
         } else {
             sessionTimestamp = Date().timeIntervalSince1970
         }
@@ -66,9 +66,7 @@ class QBSessionManager {
         return sequenceNumber
     }
     
-    private func startNewSession(fromView: Bool) {
-        let previousSessionTimestamp = sessionTimestamp
-        
+    private func startNewSession(fromView: Bool = false) {
         let currentDateTimeInterval = Date().timeIntervalSince1970
         let currentDateString = NSNumber(value: currentDateTimeInterval).stringValue
         let newSessionId = currentDateString.md5
@@ -91,7 +89,7 @@ class QBSessionManager {
         return !(currentTimestamp >= sessionTimestamp + sessionTime)
     }
     
-    @discardableResult private func loadValues() {
+    private func loadValues() {
         let userDefaults = UserDefaults.standard
         
         sessionId = userDefaults.object(forKey: QBSessionKeys.sessionId.rawValue) as? String ?? ""
