@@ -10,8 +10,6 @@ import Foundation
 
 class QBConfigurationManager {
     // MARK: Internal
-    static let shared = QBConfigurationManager()
-    
     var configuration: QBConfigurationEntity {
         if let remoteConfiguration = self.remoteConfiguration {
             return remoteConfiguration
@@ -23,6 +21,8 @@ class QBConfigurationManager {
         
         return QBConfigurationEntity()
     }
+    
+    var trackingId: String
     
     // MARK: Private
     private var remoteConfiguration: QBConfigurationEntity? = nil {
@@ -41,8 +41,9 @@ class QBConfigurationManager {
         }
     }
 
-    private init() {
+    init(with trackingId: String) {
         self.lastUpdateTimeStamp = 0
+        self.trackingId = trackingId
         downloadConfig()
     }
     
