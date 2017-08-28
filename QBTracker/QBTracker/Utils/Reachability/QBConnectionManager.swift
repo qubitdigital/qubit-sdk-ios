@@ -19,11 +19,11 @@ class QBConnectionManager: NSObject {
         reachability = QBReachability()
         
         reachability?.whenReachable = { (reachability) in
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CONNECTION_CHANGED_VALID_NOTIFICATION_KEY"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CONNECTION_CHANGED_REACHABLE"), object: nil)
         }
         
         reachability?.whenUnreachable = { (reachability) in
-            print("UNREACHABLE!")
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CONNECTION_CHANGED_NOT_REACHABLE"), object: nil)
         }
         
         do {

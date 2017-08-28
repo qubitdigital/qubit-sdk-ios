@@ -31,5 +31,21 @@ class QBEventRepositoryImp: QBEventRepository {
         apiClient.dataTask(request: request, method: HTTPMethod.post, completion: completion)
     }
     
+    func sendEvents(events: [QBEventEntity], completion: ((Result<QBStatusEntity>) -> ())?) {
+        print("func sendEvents()\n")
+        
+        guard let url = URL(string: configUrl) else {
+            let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "URL for send events is nil"]) as Error
+            print("URL for send events is nil")
+            completion?(.failure(error))
+            return
+        }
+        
+        let request = URLRequest(url: url)
+        //        request.httpBody =
+        
+        apiClient.dataTask(request: request, method: HTTPMethod.post, completion: completion)
+    }
+    
 }
 

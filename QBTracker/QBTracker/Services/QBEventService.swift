@@ -10,10 +10,12 @@ import Foundation
 
 protocol QBEventRepository {
     func sendEvent(withString string: String, completion: ((Result<QBStatusEntity>) -> ())?)
+    func sendEvents(events: [QBEventEntity], completion: ((Result<QBStatusEntity>) -> ())?)
 }
 
 protocol QBEventService {
     func sendEvent(withString string: String, completion: ((Result<QBStatusEntity>) -> ())?)
+    func sendEvents(events: [QBEventEntity], completion: ((Result<QBStatusEntity>) -> ())?)
 }
 
 class QBEventServiceImp: QBEventService {
@@ -25,6 +27,10 @@ class QBEventServiceImp: QBEventService {
     
     func sendEvent(withString string: String, completion: ((Result<QBStatusEntity>) -> ())?) {
         repository.sendEvent(withString: string, completion: completion)
+    }
+    
+    func sendEvents(events: [QBEventEntity], completion: ((Result<QBStatusEntity>) -> ())?) {
+        
     }
 }
 

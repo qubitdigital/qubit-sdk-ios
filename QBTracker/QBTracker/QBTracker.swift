@@ -16,6 +16,8 @@ public class QBTracker: NSObject {
     
     private var configurationManager: QBConfigurationManager?
     private var sessionId: String?
+    private var trackingId: String?
+    private let eventManger = QBEventManager()
     
     override private init() {
         super.init()
@@ -25,6 +27,9 @@ public class QBTracker: NSObject {
     public func initialize(withTrackingId id: String) {
         QBLog.info("QBTracker Initalization...")
         
+        assert(id.isEmpty, "Tracking id cannot be empty")
+        
+        trackingId = id
         configurationManager = QBConfigurationManager(with: id)
         sessionId = QBSessionManager.shared.getValidSessionId()
     }
