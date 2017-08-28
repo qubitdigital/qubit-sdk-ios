@@ -92,9 +92,11 @@ extension QBConfigurationManager {
     }
     
     private func stopTimer() {
-        QBLog.verbose("🛑 stopTimer")
-        self.timer?.invalidate()
-        self.timer = nil
+        DispatchQueue.main.async {
+            QBLog.verbose("🛑 stopTimer")
+            self.timer?.invalidate()
+            self.timer = nil
+        }
     }
     
     @objc private func timerTick() {
