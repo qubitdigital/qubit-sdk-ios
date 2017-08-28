@@ -9,29 +9,20 @@
 import Foundation
 
 struct QBConfigurationEntity: Codable {
-    let sendAutoViewEvents: Bool?
-    let sendAutoInteractionEvents: Bool? 
-    let sendGeoData: Bool?
+    
     let disabled: Bool?
     let configurationReloadInterval: Int?
     let queueTimeout: Int?
-    let vertical: String?
-    let endpoint: URL?
-    let schemaVersion: String?
-    let propertyId: String?
+    let endpoint: String?
     let namespace: String?
+    //  AO: If endpoint is defined then data_location should be ignored.
+    let dataLocation: String?
+    let lookupEndpoint: String?
+    let lookupCacheExpireTime: Int?
+    let lookupRequestTimeout: Int?
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        
-        let sendAutoViewEvents = try? values.decode(Bool.self, forKey: .sendAutoViewEvents)
-        self.sendAutoViewEvents = sendAutoViewEvents != nil ? sendAutoViewEvents : DefaultValues.sendAutoViewEvents
-        
-        let sendAutoInteractionEvents = try? values.decode(Bool.self, forKey: .sendAutoInteractionEvents)
-        self.sendAutoInteractionEvents = sendAutoInteractionEvents != nil ? sendAutoInteractionEvents : DefaultValues.sendAutoInteractionEvents
-        
-        let sendGeoData = try? values.decode(Bool.self, forKey: .sendGeoData)
-        self.sendGeoData = sendGeoData != nil ? sendGeoData : DefaultValues.sendGeoData
         
         let disabled = try? values.decode(Bool.self, forKey: .disabled)
         self.disabled = disabled != nil ? disabled : DefaultValues.disabled
@@ -42,71 +33,78 @@ struct QBConfigurationEntity: Codable {
         let queueTimeout = try? values.decode(Int.self, forKey: .queueTimeout)
         self.queueTimeout = queueTimeout != nil ? queueTimeout : DefaultValues.queueTimeout
         
-        let vertical = try? values.decode(String.self, forKey: .vertical)
-        self.vertical = vertical != nil ? vertical : DefaultValues.vertical
+        let dataLocation = try? values.decode(String.self, forKey: .namespace)
+        self.dataLocation = dataLocation != nil ? dataLocation : DefaultValues.dataLocation
         
-        let endpoint = try? values.decode(URL.self, forKey: .endpoint)
-        self.endpoint = endpoint != nil ? endpoint : DefaultValues.endpoint
-        
-        let schemaVersion = try? values.decode(String.self, forKey: .schemaVersion)
-        self.schemaVersion = schemaVersion != nil ? schemaVersion : DefaultValues.schemaVersion
-        
-        let propertyId = try? values.decode(String.self, forKey: .propertyId)
-        self.propertyId = propertyId != nil ? propertyId : DefaultValues.propertyId
-        
+        if let endpoint = try? values.decode(String.self, forKey: .endpoint) {
+            self.endpoint = endpoint
+        } else {
+            if self.dataLocation == "US" {
+                self.endpoint = DefaultValues.endpointUS
+            } else {
+                self.endpoint = DefaultValues.endpointEU
+            }
+        }
+    
         let namespace = try? values.decode(String.self, forKey: .namespace)
         self.namespace = namespace != nil ? namespace : DefaultValues.namespace
+        
+        let lookupEndpoint = try? values.decode(String.self, forKey: .lookupEndpoint)
+        self.lookupEndpoint = lookupEndpoint != nil ? lookupEndpoint : DefaultValues.lookupEndpoint
+        
+        let lookupCacheExpireTime = try? values.decode(Int.self, forKey: .lookupCacheExpireTime)
+        self.lookupCacheExpireTime = lookupCacheExpireTime != nil ? lookupCacheExpireTime : DefaultValues.lookupCacheExpireTime
+        
+        let lookupRequestTimeout = try? values.decode(Int.self, forKey: .lookupRequestTimeout)
+        self.lookupRequestTimeout = lookupRequestTimeout != nil ? lookupRequestTimeout : DefaultValues.lookupRequestTimeout
     }
     
     init() {
-        self.sendAutoViewEvents = DefaultValues.sendAutoViewEvents
-        self.sendAutoInteractionEvents = DefaultValues.sendAutoInteractionEvents
-        self.sendGeoData = DefaultValues.sendGeoData
         self.disabled = DefaultValues.disabled
         self.configurationReloadInterval = DefaultValues.configurationReloadInterval
         self.queueTimeout = DefaultValues.queueTimeout
-        self.vertical = DefaultValues.vertical
-        self.endpoint = DefaultValues.endpoint
-        self.schemaVersion = DefaultValues.schemaVersion
-        self.propertyId = DefaultValues.propertyId
+        self.endpoint = DefaultValues.endpointEU
         self.namespace = DefaultValues.namespace
+        self.dataLocation = DefaultValues.dataLocation
+        self.lookupEndpoint = DefaultValues.lookupEndpoint
+        self.lookupCacheExpireTime = DefaultValues.lookupCacheExpireTime
+        self.lookupRequestTimeout = DefaultValues.lookupRequestTimeout
     }
     
     private enum CodingKeys : String, CodingKey {
-        case sendAutoViewEvents = "send_auto_view_events"
-        case sendAutoInteractionEvents = "send_auto_interaction_events"
-        case sendGeoData = "send_geo_data"
         case disabled
         case configurationReloadInterval = "configuration_reload_interval"
         case queueTimeout = "queue_timeout"
-        case vertical
         case endpoint
-        case schemaVersion
-        case propertyId
         case namespace
+        case dataLocation = "data_location"
+        case lookupEndpoint = "lookup_attribute_url"
+        case lookupCacheExpireTime = "lookup_get_request_timeout"
+        case lookupRequestTimeout = "lookup_cache_expire_time"
     }
 }
 
 // MARK: - Default values
 extension QBConfigurationEntity {
     private struct DefaultValues {
-        static let sendAutoViewEvents = false
-        static let sendAutoInteractionEvents = false
-        static let sendGeoData = true
         static let disabled = false
         static let configurationReloadInterval = 60
         static let queueTimeout = 60
-        static let vertical = "ec"
-        static let endpoint = URL(string: "https://gong-eb.qubit.com/events/raw")
-        static let schemaVersion = "3"
-        static let propertyId = "1234"
+        static let endpointEU = "gong-eb.qubit.com"
+        static let endpointUS = "gong-gc.qubit.com"
         static let namespace = ""
+        static let dataLocation = "EU"
+        static let lookupEndpoint = "lookup.qubit.com"
+        static let lookupCacheExpireTime = 60
+        static let lookupRequestTimeout = 5
     }
+    
+
 }
 
 // MARK: - Helpers
 extension QBConfigurationEntity {
-    static func getReleoadIntervalInSeconds(from configuration: QBConfigurationEntity?) -> Double{
+    static func getReleoadIntervalInSeconds(from configuration: QBConfigurationEntity?) -> Double {
         guard let configurationReloadInterval = configuration?.configurationReloadInterval else {
             return 0.0
         }
