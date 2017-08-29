@@ -11,36 +11,14 @@ import Foundation
 @objc
 public class QubitSDK: NSObject {
     
-    @objc
-    public static var shared: QubitSDK = QubitSDK()
-    
-    private var configurationManager: QBConfigurationManager?
-    private var lookupManager: QBLookupManager?
-    private var sessionId: String?
-    private var trackingId: String?
-    private let eventManger = QBEventManager()
-    
-    override private init() {
-        super.init()
-    }
-    
     @objc(initializeWithTrackingId:)
-    public func initialize(withTrackingId id: String) {
-        QBLog.info("QBTracker Initalization...")
-        
-        assert(id.isEmpty, "Tracking id cannot be empty")
-        
-        trackingId = id
-        configurationManager = QBConfigurationManager(with: id)
-        if let configurationManager = configurationManager {
-            lookupManager = QBLookupManager(withConfigurationManager: configurationManager, withTrackingId: id)
-        }
-//        sessionId = QBSessionManager.shared.getValidSessionId()
+    public class func initialize(withTrackingId id: String) {
+        QBTracker.shared.initialize(withTrackingId: id)
     }
     
     @objc(sendEventWithType:data:)
-    public func sendEvent(type: String, data: String) {
-        
+    public class func sendEvent(type: String, data: String) {
+        QBTracker.shared.sendEvent(type: type, data: data)
     }
 
 }
