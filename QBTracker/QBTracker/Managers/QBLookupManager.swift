@@ -26,11 +26,11 @@ class QBLookupManager {
         }
     }
     private let configurationManager: QBConfigurationManager
-    private let trakingId: String
+    private let trackingId: String
     
-    init(withConfigurationManager configurationManager: QBConfigurationManager, withTrakingId trakingId: String) {
+    init(withConfigurationManager configurationManager: QBConfigurationManager, withTrackingId trackingId: String) {
         self.configurationManager = configurationManager
-        self.trakingId = trakingId
+        self.trackingId = trackingId
         self.lastUpdateTimeStamp = 0
         downloadLookup()
     }
@@ -38,7 +38,7 @@ class QBLookupManager {
     private func downloadLookup() {
         QBLog.mark()
         
-        let lookupService = QBLookupServiceImp(withConfigurationManager: self.configurationManager, withTrakingId: self.trakingId)
+        let lookupService = QBLookupServiceImp(withConfigurationManager: self.configurationManager, withTrackingId: self.trackingId)
         
         lookupService.getLookup(forDeviceId: QBDevice.getId()) { [weak self] result in
             guard let strongSelf = self else { return }

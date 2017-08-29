@@ -131,10 +131,17 @@ extension QBConfigurationEntity {
             return nil
         }
         
-        if endpoint.hasPrefix("https://") {
+        let httpPrefix = "http://"
+        let httpsPrefix = "https://"
+        if endpoint.hasPrefix(httpPrefix) {
+            let hostWithHttps = endpoint.replacingOccurrences(of: httpPrefix, with: httpsPrefix)
+            return URL(string: hostWithHttps)
+        }
+        
+        if endpoint.hasPrefix(httpsPrefix) {
             return URL(string: endpoint)
         } else {
-            return URL(string: "https://\(endpoint)")
+            return URL(string: "\(httpsPrefix)\(endpoint)")
         }
     }
 }

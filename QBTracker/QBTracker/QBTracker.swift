@@ -28,7 +28,7 @@ public class QBTracker: NSObject {
         
         configurationManager = QBConfigurationManager(with: id)
         if let configurationManager = configurationManager {
-            lookupManager = QBLookupManager(withConfigurationManager: configurationManager, withTrakingId: id)
+            lookupManager = QBLookupManager(withConfigurationManager: configurationManager, withTrackingId: id)
         }
 //        sessionId = QBSessionManager.shared.getValidSessionId()
     }

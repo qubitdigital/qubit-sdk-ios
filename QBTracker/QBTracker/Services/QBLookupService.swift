@@ -18,11 +18,11 @@ private let apiClient: QBAPIClient = {
 
 class QBLookupServiceImp: QBLookupService {
     private let configurationManager: QBConfigurationManager
-    private let trakingId: String
+    private let trackingId: String
     
-    init(withConfigurationManager configurationManager: QBConfigurationManager, withTrakingId trakingId: String) {
+    init(withConfigurationManager configurationManager: QBConfigurationManager, withTrackingId trackingId: String) {
         self.configurationManager = configurationManager
-        self.trakingId = trakingId
+        self.trackingId = trackingId
     }
     
     func getLookup(forDeviceId id: String, completion: ((Result<QBLookupEntity>) -> ())?) {
@@ -34,7 +34,7 @@ class QBLookupServiceImp: QBLookupService {
         }
         
         var urlWithPath = url
-        urlWithPath.appendPathComponent(trakingId)
+        urlWithPath.appendPathComponent(trackingId)
         urlWithPath.appendPathComponent(id)
         
         let request = URLRequest(url: urlWithPath)
