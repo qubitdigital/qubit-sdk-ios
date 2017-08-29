@@ -23,7 +23,7 @@ class QBConfigurationRepositoryImp: QBConfigurationRepository {
     func getConfigution(forId id: String, completion: ((Result<QBConfigurationEntity>) -> ())?) {
         guard let url = getConfigUrl(forId: id) else {
             let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "URL for configuration is nil"]) as Error
-            print("URL for configuration is nil")
+            QBLog.error("URL for configuration is nil")
             completion?(.failure(error))
             return
         }

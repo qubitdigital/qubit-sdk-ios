@@ -15,6 +15,7 @@ public class QBTracker: NSObject {
     public static var shared: QBTracker = QBTracker()
     
     private var configurationManager: QBConfigurationManager?
+    private var lookupManager: QBLookupManager?
     private var sessionId: String?
     
     override private init() {
@@ -26,7 +27,10 @@ public class QBTracker: NSObject {
         QBLog.info("QBTracker Initalization...")
         
         configurationManager = QBConfigurationManager(with: id)
-        sessionId = QBSessionManager.shared.getValidSessionId()
+        if let configurationManager = configurationManager {
+            lookupManager = QBLookupManager(withConfigurationManager: configurationManager, withTrackingId: id)
+        }
+//        sessionId = QBSessionManager.shared.getValidSessionId()
     }
     
     @objc(sendEventWithType:data:)
