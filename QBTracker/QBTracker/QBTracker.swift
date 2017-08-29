@@ -10,24 +10,23 @@ import Foundation
 
 class QBTracker {
     
-    static var shared: QBTracker = QBTracker()
+    static let shared: QBTracker = QBTracker()
     
     private var configurationManager: QBConfigurationManager?
     private var lookupManager: QBLookupManager?
     private var sessionId: String?
     private var trackingId: String?
-    private let eventManger = QBEventManager()
-    
-    private init() {
+    private var eventManager: QBEventManager?
 
-    }
+    private init() {}
     
-    func initialize(withTrackingId id: String) {
+    func initialize(withTrackingId id: String, logLevel: QBLogLevel = QBLogLevel.debug) {
+        QBLog.logLevel = logLevel
         QBLog.info("QBTracker Initalization...")
-        
-        assert(id.isEmpty, "Tracking id cannot be empty")
+        assert(!id.isEmpty, "Tracking id cannot be empty")
         
         trackingId = id
+        eventManager = QBEventManager()
         configurationManager = QBConfigurationManager(with: id)
         if let configurationManager = configurationManager {
             lookupManager = QBLookupManager(withConfigurationManager: configurationManager, withTrackingId: id)
@@ -37,7 +36,7 @@ class QBTracker {
     
     func sendEvent(type: String, data: String) {
         let event = QBEventEntity(type: type, eventData: data)
-        eventManger.queue(event: event)
+        eventManager?.queue(event: event)
     }
     
 }

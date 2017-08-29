@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum QBLogLevel: String {
+enum QBLogType: String {
     case error = "[‼️]"
     case info = "[ℹ️]"
     case debug = "[💬]"
@@ -16,9 +16,20 @@ enum QBLogLevel: String {
     case warning = "[⚠️]"
 }
 
+@objc
+public enum QBLogLevel: Int {
+    case error
+    case info
+    case debug
+    case verbose
+    case warning
+}
+
 class QBLog {
     
     static var dateFormat = "yyyy-MM-dd hh:mm:ssSSS"
+    static var logLevel: QBLogLevel = QBLogLevel.debug
+    
     static var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = dateFormat
@@ -28,32 +39,45 @@ class QBLog {
     }
     
     static func error(_ message: String, fileName: String = #file, line: Int = #line, funcName: String = #function) {
-        QBLog.log(message: message, event: QBLogLevel.error, fileName: fileName, line: line, funcName: funcName)
+        QBLog.log(message: message, type: QBLogType.error, fileName: fileName, line: line, funcName: funcName)
     }
     
     static func info(_ message: String, fileName: String = #file, line: Int = #line, funcName: String = #function) {
-        QBLog.log(message: message, event: QBLogLevel.info, fileName: fileName, line: line, funcName: funcName)
+        QBLog.log(message: message, type: QBLogType.info, fileName: fileName, line: line, funcName: funcName)
     }
     
     static func debug(_ message: String, fileName: String = #file, line: Int = #line, funcName: String = #function) {
-        QBLog.log(message: message, event: QBLogLevel.debug, fileName: fileName, line: line, funcName: funcName)
+        QBLog.log(message: message, type: QBLogType.debug, fileName: fileName, line: line, funcName: funcName)
     }
     
     static func verbose(_ message: String, fileName: String = #file, line: Int = #line, funcName: String = #function) {
-        QBLog.log(message: message, event: QBLogLevel.verbose, fileName: fileName, line: line, funcName: funcName)
+        QBLog.log(message: message, type: QBLogType.verbose, fileName: fileName, line: line, funcName: funcName)
     }
     
     static func warning(_ message: String, fileName: String = #file, line: Int = #line, funcName: String = #function) {
-        QBLog.log(message: message, event: QBLogLevel.warning, fileName: fileName, line: line, funcName: funcName)
+        QBLog.log(message: message, type: QBLogType.warning, fileName: fileName, line: line, funcName: funcName)
     }
     
     static func mark(fileName: String = #file, line: Int = #line, funcName: String = #function) {
-        QBLog.log(message: "", event: QBLogLevel.verbose, fileName: fileName, line: line, funcName: funcName)
+        QBLog.log(message: "", type: QBLogType.verbose, fileName: fileName, line: line, funcName: funcName)
     }
     
-    private static func log(message: String, event: QBLogLevel, fileName: String = #file, line: Int = #line, funcName: String = #function) {
+    private static func log(message: String, type: QBLogType, fileName: String = #file, line: Int = #line, funcName: String = #function) {
         #if DEBUG
-            print("\(Date().toString()) \(event.rawValue)[\(sourceFileName(filePath: fileName))]:\(line) \(funcName) -> \(message)")
+            switch (logLevel, type) {
+            case (QBLogLevel.error, QBLogType.error):
+                fallthrough
+            case (QBLogLevel.warning, QBLogType.warning):
+                fallthrough
+            case (QBLogLevel.info, QBLogType.info):
+                fallthrough
+            case (QBLogLevel.verbose, _):
+                fallthrough
+            case (QBLogLevel.debug, _):
+                print("\(Date().toString()) \(type.rawValue)[\(sourceFileName(filePath: fileName))]:\(line) \(funcName) -> \(message)")
+            case (_, _):
+                break
+            }
         #endif
     }
     

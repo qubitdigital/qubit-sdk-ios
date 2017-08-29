@@ -51,6 +51,23 @@ class QBEventManager {
         databaseManager.save()
     }
     
+    func sendSessionEvent(start: TimeInterval, end: TimeInterval) {
+        var params: [String : Any] = ["ipAddress" : "",
+                                      "deviceType" : "mobile",
+                                      "osName" : "iOS",
+                                      "osVersion" : UIDevice.current.systemVersion,
+                                      "appType" : "app"]
+        if start != 0 {
+            params["firstViewTs"] = start * 1000
+        }
+        
+        if end != 0 {
+            params["lastViewTs"] = end * 1000
+        }
+
+        sendEvent(type: "session", data: params)
+    }
+    
     @objc
     private func sendEvents() {
         lock.lock()
@@ -68,6 +85,10 @@ class QBEventManager {
             }
             self?.lock.unlock()
         }
+    }
+    
+    private func sendEvent(type: String, data: [AnyHashable : Any]) {
+        
     }
 
     private func convert(events: [QBEvent]) -> [QBEventEntity] {
