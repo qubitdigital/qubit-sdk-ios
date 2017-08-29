@@ -9,10 +9,10 @@
 import Foundation
 
 @objc
-public class QBTracker: NSObject {
+public class QubitSDK: NSObject {
     
     @objc
-    public static var shared: QBTracker = QBTracker()
+    public static var shared: QubitSDK = QubitSDK()
     
     private var configurationManager: QBConfigurationManager?
     private var sessionId: String?

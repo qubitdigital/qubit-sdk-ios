@@ -9,6 +9,9 @@
 import Foundation
 
 struct QBEventEntity: Codable {
+    let type: String
+    let eventData: String
+    
     let context: QBContextEntity
     let meta: QBMetaEntity
 }

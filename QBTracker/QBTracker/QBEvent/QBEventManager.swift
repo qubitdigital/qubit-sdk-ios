@@ -44,7 +44,6 @@ class QBEventManager {
     
     func queue(event: QBEventEntity) {
         guard let dbEvent = databaseManager.insert(entityType: QBEvent.self) else {
-            QBLog.error("Error inserting event to db")
             return
         }
         
