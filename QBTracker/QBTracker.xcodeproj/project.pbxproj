@@ -33,6 +33,9 @@
 		423AEFE51F4C421000F6EF6D /* QBEventRespositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423AEFE41F4C421000F6EF6D /* QBEventRespositoryImp.swift */; };
 		423AEFE71F4C431500F6EF6D /* QBEventEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423AEFE61F4C431500F6EF6D /* QBEventEntity.swift */; };
 		423AEFE91F4C505300F6EF6D /* QBStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423AEFE81F4C505300F6EF6D /* QBStatusEntity.swift */; };
+		426EF6571F54106500FD3F10 /* QBLookupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426EF6561F54106500FD3F10 /* QBLookupManager.swift */; };
+		426EF6591F54160F00FD3F10 /* QBLookupEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426EF6581F54160F00FD3F10 /* QBLookupEntity.swift */; };
+		42D768B31F542AEE00FD7944 /* QBLookupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D768B21F542AEE00FD7944 /* QBLookupService.swift */; };
 		42F0CD581F4AEE2B00BD9010 /* QBTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F0CD4E1F4AEE2B00BD9010 /* QBTracker.framework */; };
 		42F0CD5F1F4AEE2B00BD9010 /* QBTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 42F0CD511F4AEE2B00BD9010 /* QBTracker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		42F0CD6C1F4B044F00BD9010 /* QBApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F0CD6B1F4B044F00BD9010 /* QBApiClient.swift */; };
@@ -93,6 +96,9 @@
 		423AEFE41F4C421000F6EF6D /* QBEventRespositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBEventRespositoryImp.swift; sourceTree = "<group>"; };
 		423AEFE61F4C431500F6EF6D /* QBEventEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBEventEntity.swift; sourceTree = "<group>"; };
 		423AEFE81F4C505300F6EF6D /* QBStatusEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBStatusEntity.swift; sourceTree = "<group>"; };
+		426EF6561F54106500FD3F10 /* QBLookupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBLookupManager.swift; sourceTree = "<group>"; };
+		426EF6581F54160F00FD3F10 /* QBLookupEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBLookupEntity.swift; sourceTree = "<group>"; };
+		42D768B21F542AEE00FD7944 /* QBLookupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBLookupService.swift; sourceTree = "<group>"; };
 		42F0CD4E1F4AEE2B00BD9010 /* QBTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QBTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42F0CD511F4AEE2B00BD9010 /* QBTracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QBTracker.h; sourceTree = "<group>"; };
 		42F0CD521F4AEE2B00BD9010 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -166,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				420738731F4D8D0F005A0B9E /* QBConfigurationManager.swift */,
+				426EF6561F54106500FD3F10 /* QBLookupManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -188,6 +195,7 @@
 				42F0CD771F4B11D400BD9010 /* QBConfigurationService.swift */,
 				423AEFE41F4C421000F6EF6D /* QBEventRespositoryImp.swift */,
 				423AEFE21F4C41EF00F6EF6D /* QBEventService.swift */,
+				42D768B21F542AEE00FD7944 /* QBLookupService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -269,6 +277,7 @@
 				423AEFE61F4C431500F6EF6D /* QBEventEntity.swift */,
 				422370811F4C6B2B008D401E /* QBContextEntity.swift */,
 				422370831F4C6B3B008D401E /* QBMetaEntity.swift */,
+				426EF6581F54160F00FD3F10 /* QBLookupEntity.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -520,9 +529,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				423AEFE31F4C41EF00F6EF6D /* QBEventService.swift in Sources */,
+				426EF6591F54160F00FD3F10 /* QBLookupEntity.swift in Sources */,
 				420738741F4D8E2A005A0B9E /* QBConfigurationManager.swift in Sources */,
 				423AEFE91F4C505300F6EF6D /* QBStatusEntity.swift in Sources */,
 				42F0CD6C1F4B044F00BD9010 /* QBApiClient.swift in Sources */,
+				42D768B31F542AEE00FD7944 /* QBLookupService.swift in Sources */,
 				420738761F4D9739005A0B9E /* UserDefaults+Extensions.swift in Sources */,
 				422370821F4C6B2B008D401E /* QBContextEntity.swift in Sources */,
 				A0F5BF591F4D7833009EFE8D /* QBDataModel.xcdatamodeld in Sources */,
@@ -543,6 +554,7 @@
 				A0431AE01F4AF77200FA85CF /* QBConnectionManager.swift in Sources */,
 				A0F372BE1F4C623F00283075 /* QBDatabase.swift in Sources */,
 				A0431ADD1F4AF6F200FA85CF /* QBReachability.swift in Sources */,
+				426EF6571F54106500FD3F10 /* QBLookupManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -738,6 +750,7 @@
 				);
 				INFOPLIST_FILE = QBTracker/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qubit.QBTracker;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -767,6 +780,7 @@
 				);
 				INFOPLIST_FILE = QBTracker/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qubit.QBTracker;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -813,6 +827,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = HAWH5C9J75;
 				INFOPLIST_FILE = SwiftTestApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qubit.SwiftTestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -828,6 +843,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = HAWH5C9J75;
 				INFOPLIST_FILE = SwiftTestApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qubit.SwiftTestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";

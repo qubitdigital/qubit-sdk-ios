@@ -15,6 +15,7 @@ public class QubitSDK: NSObject {
     public static var shared: QubitSDK = QubitSDK()
     
     private var configurationManager: QBConfigurationManager?
+    private var lookupManager: QBLookupManager?
     private var sessionId: String?
     private var trackingId: String?
     private let eventManger = QBEventManager()
@@ -31,7 +32,10 @@ public class QubitSDK: NSObject {
         
         trackingId = id
         configurationManager = QBConfigurationManager(with: id)
-        sessionId = QBSessionManager.shared.getValidSessionId()
+        if let configurationManager = configurationManager {
+            lookupManager = QBLookupManager(withConfigurationManager: configurationManager, withTrackingId: id)
+        }
+//        sessionId = QBSessionManager.shared.getValidSessionId()
     }
     
     @objc(sendEventWithType:data:)
