@@ -40,7 +40,8 @@ class QBDatabase {
         do {
             try persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: persistentStoreUrl, options: nil)
         } catch {
-            QBLog.error("FatalError migrating persistent store: \(error)")
+            QBLog.error("FatalError adding persistent store: \(error)")
+            return nil
         }
     }
     
