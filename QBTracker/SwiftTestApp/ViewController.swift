@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import QBTracker
+import QubitSDK
 //@testable import QBTracker
 
 class ViewController: UIViewController {

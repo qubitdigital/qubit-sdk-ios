@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
 
   s.source       = { :git => "https://bitbucket.org/miquido/qubit-sdk-ios.git", :tag => "#{s.version}" }
 
-  s.ios.vendored_frameworks = 'Framework/QBTracker.framework'
+  s.ios.vendored_frameworks = 'Framework/QubitSDK.framework'
 
   s.framework  = "CoreData"
 
