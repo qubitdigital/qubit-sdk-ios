@@ -9,9 +9,9 @@
 import Foundation
 import CoreData
 
-public class QBDatabaseManager {
+class QBDatabaseManager {
     
-    public static let shared = QBDatabaseManager()
+    static let shared = QBDatabaseManager()
     static let kQBDataModelName = "QBDataModel"
     
     var database: QBDatabase?
@@ -20,7 +20,7 @@ public class QBDatabaseManager {
         database = QBDatabase(modelName: QBDatabaseManager.kQBDataModelName)
     }
     
-    public func query<T: NSManagedObject>(entityType: T.Type, predicate: NSPredicate? = nil) -> [T] {
+    func query<T: NSManagedObject>(entityType: T.Type, predicate: NSPredicate? = nil) -> [T] {
         guard let database = database else {
             QBLog.error("Database is not initialized")
             return []
@@ -40,7 +40,7 @@ public class QBDatabaseManager {
         return []
     }
     
-    public func insert<T: NSManagedObject>(entityType: T.Type) -> T? {
+    func insert<T: NSManagedObject>(entityType: T.Type) -> T? {
         guard let database = database else {
             QBLog.error("Database is not initialized")
             return nil
@@ -52,7 +52,7 @@ public class QBDatabaseManager {
         return object
     }
     
-    @discardableResult public func save() -> Bool {
+    @discardableResult func save() -> Bool {
         guard let database = database else {
             QBLog.error("Database is not initialized")
             return false
@@ -68,7 +68,7 @@ public class QBDatabaseManager {
         return false
     }
     
-    @discardableResult public func deleteAll<T: NSManagedObject>(from entityType: T.Type) -> Bool {
+    @discardableResult func deleteAll<T: NSManagedObject>(from entityType: T.Type) -> Bool {
         guard let database = database else {
             QBLog.error("Database is not initialized")
             return false

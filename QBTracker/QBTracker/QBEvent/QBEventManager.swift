@@ -47,7 +47,7 @@ class QBEventManager {
             return
         }
         
-        dbEvent.dateAdded = Date()
+        dbEvent.dateAdded = NSDate()
         databaseManager.save()
     }
     

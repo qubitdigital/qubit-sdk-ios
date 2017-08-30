@@ -63,14 +63,14 @@ class QBKeychainSwift {
   var synchronizable: Bool = false
   
   /// Instantiate a KeychainSwift object
-  public init() { }
+  init() { }
   
   /**
   
   - parameter keyPrefix: a prefix that is added before the key in get/set methods. Note that `clear` method still clears everything from the Keychain.
 
   */
-  public init(keyPrefix: String) {
+  init(keyPrefix: String) {
     self.keyPrefix = keyPrefix
   }
   
@@ -312,7 +312,7 @@ import Security
 These options are used to determine when a keychain item should be readable. The default value is AccessibleWhenUnlocked.
 
 */
-public enum KeychainSwiftAccessOptions {
+enum KeychainSwiftAccessOptions {
   
   /**
   
@@ -424,34 +424,34 @@ import Foundation
 import Security
 
 /// Constants used by the library
-public struct KeychainSwiftConstants {
+struct KeychainSwiftConstants {
   /// Specifies a Keychain access group. Used for sharing Keychain items between apps.
-  public static var accessGroup: String { return toString(kSecAttrAccessGroup) }
+  static var accessGroup: String { return toString(kSecAttrAccessGroup) }
   
   /**
    
    A value that indicates when your app needs access to the data in a keychain item. The default value is AccessibleWhenUnlocked. For a list of possible values, see KeychainSwiftAccessOptions.
    
    */
-  public static var accessible: String { return toString(kSecAttrAccessible) }
+  static var accessible: String { return toString(kSecAttrAccessible) }
   
   /// Used for specifying a String key when setting/getting a Keychain value.
-  public static var attrAccount: String { return toString(kSecAttrAccount) }
+  static var attrAccount: String { return toString(kSecAttrAccount) }
 
   /// Used for specifying synchronization of keychain items between devices.
-  public static var attrSynchronizable: String { return toString(kSecAttrSynchronizable) }
+  static var attrSynchronizable: String { return toString(kSecAttrSynchronizable) }
   
   /// An item class key used to construct a Keychain search dictionary.
-  public static var klass: String { return toString(kSecClass) }
+  static var klass: String { return toString(kSecClass) }
   
   /// Specifies the number of values returned from the keychain. The library only supports single values.
-  public static var matchLimit: String { return toString(kSecMatchLimit) }
+  static var matchLimit: String { return toString(kSecMatchLimit) }
   
   /// A return data type used to get the data from the Keychain.
-  public static var returnData: String { return toString(kSecReturnData) }
+  static var returnData: String { return toString(kSecReturnData) }
   
   /// Used for specifying a value when setting a Keychain value.
-  public static var valueData: String { return toString(kSecValueData) }
+  static var valueData: String { return toString(kSecValueData) }
   
   static func toString(_ value: CFString) -> String {
     return value as String

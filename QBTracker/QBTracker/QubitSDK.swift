@@ -14,13 +14,12 @@ public class QubitSDK: NSObject {
     private override init() {
     }
     
-    
-    @objc(startWithTrackingId:logLevel:)
     /// Start the QBTracker
     ///
     /// - Parameters:
     ///   - id: trackingId
     ///   - logLevel: QBLogLevel
+    @objc(startWithTrackingId:logLevel:)
     public class func start(withTrackingId id: String, logLevel: QBLogLevel = QBLogLevel.disabled) {
         QBTracker.shared.start(withTrackingId: id, logLevel: logLevel)
     }

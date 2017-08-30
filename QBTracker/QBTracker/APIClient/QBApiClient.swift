@@ -20,7 +20,7 @@ enum HTTPMethod: String {
     case delete = "DELETE"
 }
 
-public class QBAPIClient {
+class QBAPIClient {
     
     func dataTask<T: Decodable>(request: URLRequest, method: HTTPMethod, completion: ((Result<T>) -> ())?) {
         var request = request
