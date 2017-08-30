@@ -25,7 +25,7 @@ class QBTracker {
     func initialize(withTrackingId id: String) {
         QBLog.info("QBTracker Initalization...")
         
-        assert(id.isEmpty, "Tracking id cannot be empty")
+        assert(!id.isEmpty, "Tracking id cannot be empty")
         
         trackingId = id
         configurationManager = QBConfigurationManager(with: id)

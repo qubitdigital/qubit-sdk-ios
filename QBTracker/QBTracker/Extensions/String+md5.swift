@@ -11,6 +11,7 @@ import CommonCrypto
 
 extension String {
     var md5: String {
+//        return ""
         let str = self.cString(using: String.Encoding.utf8)
         let strLen = CC_LONG(self.lengthOfBytes(using: String.Encoding.utf8))
         let digestLen = Int(CC_MD5_DIGEST_LENGTH)

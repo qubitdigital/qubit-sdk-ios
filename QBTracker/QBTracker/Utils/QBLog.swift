@@ -52,9 +52,9 @@ class QBLog {
     }
     
     private static func log(message: String, event: QBLogLevel, fileName: String = #file, line: Int = #line, funcName: String = #function) {
-        #if DEBUG
+//        #if DEBUG
             print("\(Date().toString()) \(event.rawValue)[\(sourceFileName(filePath: fileName))]:\(line) \(funcName) -> \(message)")
-        #endif
+//        #endif
     }
     
     private class func sourceFileName(filePath: String) -> String {

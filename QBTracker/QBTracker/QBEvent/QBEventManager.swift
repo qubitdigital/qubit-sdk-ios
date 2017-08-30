@@ -28,9 +28,9 @@ class QBEventManager {
     @objc
     private func initTimer() {
         stopTimer()
-        DispatchQueue.main.async {
-            self.timer = Timer.scheduledTimer(timeInterval: self.sendEventsTimeInterval, target: self, selector: #selector(self.sendEvents), userInfo: nil, repeats: true)
-        }
+//        DispatchQueue.main.async {
+//            self.timer = Timer.scheduledTimer(timeInterval: self.sendEventsTimeInterval, target: self, selector: #selector(self.sendEvents), userInfo: nil, repeats: true)
+//        }
     }
     
     @objc
@@ -51,36 +51,36 @@ class QBEventManager {
         databaseManager.save()
     }
     
-    @objc
-    private func sendEvents() {
-        lock.lock()
-        let currentEventBatch = databaseManager.query(entityType: QBEvent.self)
-        let events = convert(events: currentEventBatch)
-        
-        defaultEventService.sendEvents(events: events) { [weak self] (result) in
-            switch result {
-            case .success:
-                QBLog.info("Successfully sent events")
-                self?.databaseManager.delete(entries: currentEventBatch)
-            case .failure(let error):
-                QBLog.info("Error sending events \(error.localizedDescription)")
-                self?.markFailed(events: currentEventBatch)
-            }
-            self?.lock.unlock()
-        }
-    }
-
-    private func convert(events: [QBEvent]) -> [QBEventEntity] {
-        let result: [QBEventEntity] = []
-        
-        return result
-    }
-    
-    private func markFailed(events: [QBEvent]) {
-        events.forEach { (event) in
-            event.sendFailed = true
-        }
-        
-        databaseManager.save()
-    }
+//    @objc
+//    private func sendEvents() {
+//        lock.lock()
+//        let currentEventBatch = databaseManager.query(entityType: QBEvent.self)
+//        let events = convert(events: currentEventBatch)
+//        
+//        defaultEventService.sendEvents(events: events) { [weak self] (result) in
+//            switch result {
+//            case .success:
+//                QBLog.info("Successfully sent events")
+//                self?.databaseManager.delete(entries: currentEventBatch)
+//            case .failure(let error):
+//                QBLog.info("Error sending events \(error.localizedDescription)")
+//                self?.markFailed(events: currentEventBatch)
+//            }
+//            self?.lock.unlock()
+//        }
+//    }
+//
+//    private func convert(events: [QBEvent]) -> [QBEventEntity] {
+//        let result: [QBEventEntity] = []
+//        
+//        return result
+//    }
+//    
+//    private func markFailed(events: [QBEvent]) {
+//        events.forEach { (event) in
+////            event.sendFailed = true
+//        }
+//        
+//        databaseManager.save()
+//    }
 }
