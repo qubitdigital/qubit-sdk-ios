@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class QBDevice {
     private static let key = "QUBIT_VISITOR_ID"

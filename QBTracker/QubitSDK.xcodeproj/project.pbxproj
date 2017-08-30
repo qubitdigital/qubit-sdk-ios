@@ -37,7 +37,6 @@
 		426EF6591F54160F00FD3F10 /* QBLookupEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426EF6581F54160F00FD3F10 /* QBLookupEntity.swift */; };
 		42D768B31F542AEE00FD7944 /* QBLookupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D768B21F542AEE00FD7944 /* QBLookupService.swift */; };
 		42F0CD581F4AEE2B00BD9010 /* QubitSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F0CD4E1F4AEE2B00BD9010 /* QubitSDK.framework */; };
-		42F0CD5F1F4AEE2B00BD9010 /* QubitSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 42F0CD511F4AEE2B00BD9010 /* QubitSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		42F0CD6C1F4B044F00BD9010 /* QBApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F0CD6B1F4B044F00BD9010 /* QBApiClient.swift */; };
 		42F0CD711F4B058500BD9010 /* QBConfigurationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F0CD701F4B058500BD9010 /* QBConfigurationEntity.swift */; };
 		42F0CD761F4B119500BD9010 /* QBConfigurationRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F0CD751F4B119500BD9010 /* QBConfigurationRepositoryImp.swift */; };
@@ -103,7 +102,6 @@
 		426EF6581F54160F00FD3F10 /* QBLookupEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBLookupEntity.swift; sourceTree = "<group>"; };
 		42D768B21F542AEE00FD7944 /* QBLookupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBLookupService.swift; sourceTree = "<group>"; };
 		42F0CD4E1F4AEE2B00BD9010 /* QubitSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QubitSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		42F0CD511F4AEE2B00BD9010 /* QubitSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QubitSDK.h; sourceTree = "<group>"; };
 		42F0CD521F4AEE2B00BD9010 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42F0CD571F4AEE2B00BD9010 /* QubitSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QubitSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		42F0CD5E1F4AEE2B00BD9010 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -243,7 +241,6 @@
 				420738961F4F08B6005A0B9E /* Utils */,
 				A08D69BA1F556CE800CE2FD5 /* QBTracker.swift */,
 				A0D30B811F559F180029D3DC /* QubitSDK.swift */,
-				42F0CD511F4AEE2B00BD9010 /* QubitSDK.h */,
 				42F0CD521F4AEE2B00BD9010 /* Info.plist */,
 			);
 			path = QubitSDK;
@@ -380,7 +377,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42F0CD5F1F4AEE2B00BD9010 /* QubitSDK.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -769,6 +765,7 @@
 				SKIP_INSTALL = NO;
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME).h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -799,6 +796,7 @@
 				SKIP_INSTALL = NO;
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME).h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
