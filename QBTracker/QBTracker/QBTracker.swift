@@ -20,7 +20,7 @@ class QBTracker {
 
     private init() {}
     
-    func initialize(withTrackingId id: String, logLevel: QBLogLevel = QBLogLevel.debug) {
+    func start(withTrackingId id: String, logLevel: QBLogLevel = QBLogLevel.debug) {
         QBLog.logLevel = logLevel
         QBLog.info("QBTracker Initalization...")
         assert(!id.isEmpty, "Tracking id cannot be empty")
