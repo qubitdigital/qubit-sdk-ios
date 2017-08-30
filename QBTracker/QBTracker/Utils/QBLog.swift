@@ -18,6 +18,7 @@ enum QBLogType: String {
 
 @objc
 public enum QBLogLevel: Int {
+    case disabled
     case error
     case info
     case debug
@@ -28,7 +29,7 @@ public enum QBLogLevel: Int {
 class QBLog {
     
     static var dateFormat = "yyyy-MM-dd hh:mm:ssSSS"
-    static var logLevel: QBLogLevel = QBLogLevel.debug
+    static var logLevel: QBLogLevel = QBLogLevel.disabled
     
     static var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -63,22 +64,24 @@ class QBLog {
     }
     
     private static func log(message: String, type: QBLogType, fileName: String = #file, line: Int = #line, funcName: String = #function) {
-        #if DEBUG
-            switch (logLevel, type) {
-            case (QBLogLevel.error, QBLogType.error):
-                fallthrough
-            case (QBLogLevel.warning, QBLogType.warning):
-                fallthrough
-            case (QBLogLevel.info, QBLogType.info):
-                fallthrough
-            case (QBLogLevel.verbose, _):
-                fallthrough
-            case (QBLogLevel.debug, _):
-                print("\(Date().toString()) \(type.rawValue)[\(sourceFileName(filePath: fileName))]:\(line) \(funcName) -> \(message)")
-            case (_, _):
-                break
-            }
-        #endif
+        if logLevel == .disabled {
+            return
+        }
+        
+        switch (logLevel, type) {
+        case (QBLogLevel.error, QBLogType.error):
+            fallthrough
+        case (QBLogLevel.warning, QBLogType.warning):
+            fallthrough
+        case (QBLogLevel.info, QBLogType.info):
+            fallthrough
+        case (QBLogLevel.verbose, _):
+            fallthrough
+        case (QBLogLevel.debug, _):
+            print("\(Date().toString()) \(type.rawValue)[\(sourceFileName(filePath: fileName))]:\(line) \(funcName) -> \(message)")
+        case (_, _):
+            break
+        }
     }
     
     private class func sourceFileName(filePath: String) -> String {

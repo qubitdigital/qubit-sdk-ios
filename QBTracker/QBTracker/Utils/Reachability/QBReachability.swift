@@ -24,14 +24,14 @@
 import SystemConfiguration
 import Foundation
 
-public enum ReachabilityError: Error {
+enum ReachabilityError: Error {
     case FailedToCreateWithAddress(sockaddr_in)
     case FailedToCreateWithHostname(String)
     case UnableToSetCallback
     case UnableToSetDispatchQueue
 }
 
-public let ReachabilityChangedNotification = NSNotification.Name("ReachabilityChangedNotification")
+let ReachabilityChangedNotification = NSNotification.Name("ReachabilityChangedNotification")
 
 func callback(reachability:SCNetworkReachability, flags: SCNetworkReachabilityFlags, info: UnsafeMutableRawPointer?) {
     
@@ -44,16 +44,16 @@ func callback(reachability:SCNetworkReachability, flags: SCNetworkReachabilityFl
     }
 }
 
-public class QBReachability {
+class QBReachability {
     
-    public typealias NetworkReachable = (QBReachability) -> ()
-    public typealias NetworkUnreachable = (QBReachability) -> ()
+    typealias NetworkReachable = (QBReachability) -> ()
+    typealias NetworkUnreachable = (QBReachability) -> ()
     
-    public enum NetworkStatus: CustomStringConvertible {
+    enum NetworkStatus: CustomStringConvertible {
         
         case notReachable, reachableViaWiFi, reachableViaWWAN
         
-        public var description: String {
+        var description: String {
             switch self {
             case .reachableViaWWAN: return "Cellular"
             case .reachableViaWiFi: return "WiFi"
@@ -62,18 +62,18 @@ public class QBReachability {
         }
     }
     
-    public var whenReachable: NetworkReachable?
-    public var whenUnreachable: NetworkUnreachable?
-    public var reachableOnWWAN: Bool
+    var whenReachable: NetworkReachable?
+    var whenUnreachable: NetworkUnreachable?
+    var reachableOnWWAN: Bool
     
     // The notification center on which "reachability changed" events are being posted
-    public var notificationCenter: NotificationCenter = NotificationCenter.default
+    var notificationCenter: NotificationCenter = NotificationCenter.default
     
-    public var currentReachabilityString: String {
+    var currentReachabilityString: String {
         return "\(currentReachabilityStatus)"
     }
     
-    public var currentReachabilityStatus: NetworkStatus {
+    var currentReachabilityStatus: NetworkStatus {
         guard isReachable else { return .notReachable }
         
         if isReachableViaWiFi {
@@ -101,19 +101,19 @@ public class QBReachability {
     
     fileprivate let reachabilitySerialQueue = DispatchQueue(label: "uk.co.ashleymills.reachability")
     
-    required public init(reachabilityRef: SCNetworkReachability) {
+    required init(reachabilityRef: SCNetworkReachability) {
         reachableOnWWAN = true
         self.reachabilityRef = reachabilityRef
     }
     
-    public convenience init?(hostname: String) {
+    convenience init?(hostname: String) {
         
         guard let ref = SCNetworkReachabilityCreateWithName(nil, hostname) else { return nil }
         
         self.init(reachabilityRef: ref)
     }
     
-    public convenience init?() {
+    convenience init?() {
         
         var zeroAddress = sockaddr()
         zeroAddress.sa_len = UInt8(MemoryLayout<sockaddr>.size)
@@ -135,7 +135,7 @@ public class QBReachability {
     }
 }
 
-public extension QBReachability {
+extension QBReachability {
     
     // MARK: - *** Notifier methods ***
     func startNotifier() throws {
