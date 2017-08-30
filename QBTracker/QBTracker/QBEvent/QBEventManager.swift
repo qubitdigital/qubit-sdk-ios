@@ -28,9 +28,9 @@ class QBEventManager {
     @objc
     private func initTimer() {
         stopTimer()
-//        DispatchQueue.main.async {
-//            self.timer = Timer.scheduledTimer(timeInterval: self.sendEventsTimeInterval, target: self, selector: #selector(self.sendEvents), userInfo: nil, repeats: true)
-//        }
+        DispatchQueue.main.async {
+            self.timer = Timer.scheduledTimer(timeInterval: self.sendEventsTimeInterval, target: self, selector: #selector(self.sendEvents), userInfo: nil, repeats: true)
+        }
     }
     
     @objc
@@ -104,5 +104,4 @@ class QBEventManager {
         
         databaseManager.save()
     }
-
 }
