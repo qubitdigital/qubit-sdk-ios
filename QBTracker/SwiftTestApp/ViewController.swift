@@ -7,12 +7,11 @@
 //
 
 import UIKit
-//import QBTracker
-@testable import QBTracker
+import QBTracker
+//@testable import QBTracker
 
 class ViewController: UIViewController {
-    
-    var manager: QBConfigurationManager?
+
     var timer: Timer?
     
     override func viewDidLoad() {
