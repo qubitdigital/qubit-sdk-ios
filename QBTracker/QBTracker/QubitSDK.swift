@@ -16,6 +16,11 @@ public class QubitSDK: NSObject {
     
     
     @objc(startWithTrackingId:logLevel:)
+    /// Start the QBTracker
+    ///
+    /// - Parameters:
+    ///   - id: trackingId
+    ///   - logLevel: QBLogLevel
     public class func start(withTrackingId id: String, logLevel: QBLogLevel = QBLogLevel.disabled) {
         QBTracker.shared.start(withTrackingId: id, logLevel: logLevel)
     }

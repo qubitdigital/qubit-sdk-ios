@@ -13,8 +13,8 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        QubitSDK.initialize(withTrackingId: "miquido")
+
+        //QubitSDK.initialize(withTrackingId: "miquido")
     }
 }
 
