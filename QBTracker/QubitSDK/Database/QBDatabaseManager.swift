@@ -20,7 +20,7 @@ class QBDatabaseManager {
         database = QBDatabase(modelName: QBDatabaseManager.kQBDataModelName)
     }
     
-    func query<T: NSManagedObject>(entityType: T.Type, predicate: NSPredicate? = nil) -> [T] {
+    func query<T: NSManagedObject>(entityType: T.Type, predicate: NSPredicate? = nil, sortBy: String? = nil, ascending: Bool = false, limit: Int = 0) -> [T] {
         guard let database = database else {
             QBLog.error("Database is not initialized")
             return []
@@ -28,7 +28,13 @@ class QBDatabaseManager {
         
         let entityName = String(describing: entityType)
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        if let sortBy = sortBy, !sortBy.isEmpty {
+            let sortDescriptor = NSSortDescriptor(key: sortBy, ascending: ascending)
+            fetchRequest.sortDescriptors = [sortDescriptor]
+        }
+        
         fetchRequest.predicate = predicate
+        fetchRequest.fetchLimit = limit
         
         do {
             let results = try database.managedObjectContext.fetch(fetchRequest) as? [T] ?? []

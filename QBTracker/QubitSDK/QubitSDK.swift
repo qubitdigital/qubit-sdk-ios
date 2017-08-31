@@ -18,12 +18,17 @@ public class QubitSDK: NSObject {
     ///
     /// - Parameters:
     ///   - id: trackingId
-    ///   - logLevel: QBLogLevel
+    ///   - logLevel: QBLogLevel, default = .disabled
     @objc(startWithTrackingId:logLevel:)
     public class func start(withTrackingId id: String, logLevel: QBLogLevel = QBLogLevel.disabled) {
         QBTracker.shared.start(withTrackingId: id, logLevel: logLevel)
     }
     
+    /// Send and event
+    ///
+    /// - Parameters:
+    ///   - type: eventType
+    ///   - data: JSONString of event data
     @objc(sendEventWithType:data:)
     public class func sendEvent(type: String, data: String) {
         QBTracker.shared.sendEvent(type: type, data: data)
