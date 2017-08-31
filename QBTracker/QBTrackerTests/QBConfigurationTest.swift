@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import QBTracker
+@testable import QubitSDK
 
 class QBConfigurationTest: XCTestCase {
     

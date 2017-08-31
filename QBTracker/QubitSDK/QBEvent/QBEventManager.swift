@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class QBEventManager {
     
@@ -16,6 +17,7 @@ class QBEventManager {
     
     private var databaseManager = QBDatabaseManager.shared
     private var connectionManager = QBConnectionManager.shared
+    private let fetchLimit: Int = 25
     
     private let lock = NSLock()
     
@@ -72,7 +74,7 @@ class QBEventManager {
     @objc
     private func sendEvents() {
         lock.lock()
-        let currentEventBatch = databaseManager.query(entityType: QBEvent.self)
+        let currentEventBatch = databaseManager.query(entityType: QBEvent.self, sortBy: "dateAdded", ascending: true, limit: fetchLimit)
         let events = convert(events: currentEventBatch)
         
         defaultEventService.sendEvents(events: events) { [weak self] (result) in

@@ -7,12 +7,12 @@
 //
 
 import XCTest
-@testable import QBTracker
+@testable import QubitSDK
 
 class QBEventDatabaseTests: XCTestCase {
     
     let databaseManager = QBDatabaseManager.shared
-    let eventName: String = "Test event name"
+    let eventType: String = "TestType"
     
     override func setUp() {
         super.setUp()
@@ -36,21 +36,20 @@ class QBEventDatabaseTests: XCTestCase {
 
         XCTAssert(event != nil, "Error inserting event into database")
 
-        event?.name = self.eventName
+        event?.type = self.eventType
         let savedSuccessFully = self.databaseManager.save()
 
         XCTAssert(savedSuccessFully, "Could not save event in the database)")
     }
     
     func testEventQuery() {
-        let predicate = NSPredicate(format: "name = %@", self.eventName)
-        let events = self.databaseManager.query(entityType: QBEvent.self, predicate: predicate)
+        let events = self.databaseManager.query(entityType: QBEvent.self)
 
         XCTAssert(events.count > 0, "Error querying events")
 
         let event = events.first
 
-        XCTAssert(event?.name == self.eventName, "Wrong event queried.  Event name is: \(event?.name), expecting: \(self.eventName)")
+        XCTAssert(event?.type == self.eventType, "Wrong event queried.  Event name is: \(event?.type), expecting: \(self.eventType)")
     }
 
     func testEventDeleteAll() {
