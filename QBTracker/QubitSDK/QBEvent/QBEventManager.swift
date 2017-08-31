@@ -18,8 +18,8 @@ class QBEventManager {
     private var databaseManager = QBDatabaseManager.shared
     private var connectionManager = QBConnectionManager.shared
     private let fetchLimit: Int = 15
-    
-    private let lock = NSLock()
+
+	private var backgroundQueue: DispatchQueue?
     
     init() {
         initTimer()
@@ -31,6 +31,7 @@ class QBEventManager {
     @objc
     private func initTimer() {
         stopTimer()
+		backgroundQueue = DispatchQueue(label: "EventQueue", qos: .background, attributes: .concurrent)
         DispatchQueue.main.async {
             self.timer = Timer.scheduledTimer(timeInterval: self.sendEventsTimeInterval, target: self, selector: #selector(self.sendEvents), userInfo: nil, repeats: true)
         }
@@ -39,6 +40,7 @@ class QBEventManager {
     @objc
     private func stopTimer() {
         QBLog.verbose("Connection lost.  Stopping timer.")
+		backgroundQueue = nil
         DispatchQueue.main.async {
             self.timer?.invalidate()
             self.timer = nil
@@ -46,12 +48,14 @@ class QBEventManager {
     }
     
     func queue(event: QBEventEntity) {
-        guard let dbEvent = databaseManager.insert(entityType: QBEvent.self) else {
-            return
-        }
-        
-        dbEvent.dateAdded = NSDate()
-        databaseManager.save()
+		backgroundQueue?.sync {
+			guard let dbEvent = self.databaseManager.insert(entityType: QBEvent.self) else {
+				return
+			}
+			
+			dbEvent.dateAdded = NSDate()
+			self.databaseManager.save()
+		}
     }
     
     func sendSessionEvent(start: TimeInterval, end: TimeInterval) {
@@ -72,23 +76,23 @@ class QBEventManager {
     }
     
     @objc
-    private func sendEvents() {
-        lock.lock()
-        let currentEventBatch = databaseManager.query(entityType: QBEvent.self, sortBy: "dateAdded", ascending: true, limit: fetchLimit)
-        let events = convert(events: currentEventBatch)
-        
-        defaultEventService.sendEvents(events: events) { [weak self] (result) in
-            switch result {
-            case .success:
-                QBLog.info("Successfully sent events")
-                self?.databaseManager.delete(entries: currentEventBatch)
-            case .failure(let error):
-                QBLog.info("Error sending events \(error.localizedDescription)")
-                self?.markFailed(events: currentEventBatch)
-            }
-            self?.lock.unlock()
-        }
-    }
+	private func sendEvents() {
+		backgroundQueue?.sync {
+			let currentEventBatch = self.databaseManager.query(entityType: QBEvent.self, sortBy: "dateAdded", ascending: true, limit: self.fetchLimit)
+			let events = self.convert(events: currentEventBatch)
+			
+			defaultEventService.sendEvents(events: events) { [weak self] (result) in
+				switch result {
+				case .success:
+					QBLog.info("Successfully sent events")
+					self?.databaseManager.delete(entries: currentEventBatch)
+				case .failure(let error):
+					QBLog.info("Error sending events \(error.localizedDescription)")
+					self?.markFailed(events: currentEventBatch)
+				}
+			}
+		}
+	}
     
     private func sendEvent(type: String, data: [AnyHashable : Any]) {
         

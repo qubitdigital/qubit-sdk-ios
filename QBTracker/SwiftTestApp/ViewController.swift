@@ -17,11 +17,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        QubitSDK.start(withTrackingId: "miquido")
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerTick), userInfo: nil, repeats: true)
+        QubitSDK.start(withTrackingId: "miquido", logLevel: .verbose)
+		DispatchQueue.main.async {
+			self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerTick), userInfo: nil, repeats: true)
+		}
     }
     
     @objc func timerTick() {
+		//QubitSDK.sendEvent(type: "abc", data: "ddd")
         print("tick")
     }
 

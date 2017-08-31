@@ -27,17 +27,24 @@ class QBTracker {
         assert(!id.isEmpty, "Tracking id cannot be empty")
         
         trackingId = id
+		
         eventManager = QBEventManager()
         configurationManager = QBConfigurationManager(with: id)
         if let configurationManager = configurationManager {
             lookupManager = QBLookupManager(withConfigurationManager: configurationManager, withTrackingId: id)
         }
-        //        sessionId = QBSessionManager.shared.getValidSessionId()
+		
+		//sessionId = QBSessionManager.shared.getValidSessionId()
     }
     
     func sendEvent(type: String, data: String) {
         let event = QBEventEntity(type: type, eventData: data)
         eventManager?.queue(event: event)
     }
-    
+	
+	func stop() {
+		eventManager = nil
+		configurationManager = nil
+		lookupManager = nil
+	}
 }

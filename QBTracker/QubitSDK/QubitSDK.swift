@@ -33,5 +33,10 @@ public class QubitSDK: NSObject {
     public class func sendEvent(type: String, data: String) {
         QBTracker.shared.sendEvent(type: type, data: data)
     }
-    
+	
+	/// Stop tracking
+	@objc(stopTracking)
+	public class func stopTracking() {
+		QBTracker.shared.stop()
+	}
 }
