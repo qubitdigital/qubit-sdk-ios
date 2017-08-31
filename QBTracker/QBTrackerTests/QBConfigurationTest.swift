@@ -19,7 +19,8 @@ class QBConfigurationTest: XCTestCase {
     func testDownloadConfigurationWithCorrrectId() {
         weak var expectation = self.expectation(description: "Download configuration")
         
-        defaultConfigurationService.getConfigution(forId: "roeld") { result in
+        let service = QBConfigurationServiceImp(withTrackingId: "miquido")
+        service.getConfigution { result in
             switch result {
             case .success(let config):
                 print("config = \(config) \n")
@@ -38,7 +39,8 @@ class QBConfigurationTest: XCTestCase {
     func testDownloadConfigurationWithWrongId() {
         weak var expectation = self.expectation(description: "Download configuration")
         
-        defaultConfigurationService.getConfigution(forId: "qubit_test_123") { result in
+        let service = QBConfigurationServiceImp(withTrackingId: "qubit_test_123")
+        service.getConfigution { result in
             switch result {
             case .success(let config):
                 print("config = \(config) \n")
@@ -53,5 +55,5 @@ class QBConfigurationTest: XCTestCase {
         
         waitForExpectations(timeout: 5.0)
     }
-
+    
 }
