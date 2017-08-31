@@ -74,3 +74,5 @@ xcuserdata
 *.moved-aside
 *.xcuserstate
 Pods
+
+Framework/

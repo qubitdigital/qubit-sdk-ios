@@ -1,0 +1,7 @@
+platform :ios, '9.0'
+
+target 'QubitObjectiveCExampleApp' do
+
+	pod "QubitSDK", :path => "../"
+
+end
