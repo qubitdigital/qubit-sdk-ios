@@ -9,14 +9,14 @@
 import Foundation
 
 enum QBSessionKeys: String {
-    case sessionId = "sessionId"
-    case sessionNumber = "sessionNumber"
-    case viewNumber = "viewNumber"
-    case viewTimestamp = "viewTimestamp"
-    case sessionTimestamp = "sessionTimestamp"
-    case sessionStartTimestamp = "sessionStartTimestamp"
-    case sessionViewNumber = "sessionViewNumber"
-    case sequenceNumber = "sequenceNumber"
+    case sessionId
+    case sessionNumber
+    case viewNumber
+    case viewTimestamp
+    case sessionTimestamp
+    case sessionStartTimestamp
+    case sessionViewNumber
+    case sequenceNumber
 }
 
 class QBSessionManager {
@@ -62,7 +62,7 @@ class QBSessionManager {
     }
     
     func newSequenceNumber() -> Int {
-        sequenceNumber = sequenceNumber + 1
+        sequenceNumber += 1
         return sequenceNumber
     }
     
@@ -71,7 +71,7 @@ class QBSessionManager {
         let currentDateString = NSNumber(value: currentDateTimeInterval).stringValue
         let newSessionId = currentDateString.md5
         
-        sessionNumber = sessionNumber + 1
+        sessionNumber += 1
         sessionViewNumber = fromView ? 1 : 0
         sequenceNumber = 0
         sessionTimestamp = currentDateTimeInterval

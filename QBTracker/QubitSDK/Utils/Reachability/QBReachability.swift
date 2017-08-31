@@ -46,8 +46,8 @@ func callback(reachability:SCNetworkReachability, flags: SCNetworkReachabilityFl
 
 class QBReachability {
     
-    typealias NetworkReachable = (QBReachability) -> ()
-    typealias NetworkUnreachable = (QBReachability) -> ()
+    typealias NetworkReachable = (QBReachability) -> Void
+    typealias NetworkUnreachable = (QBReachability) -> Void
     
     enum NetworkStatus: CustomStringConvertible {
         
@@ -161,7 +161,7 @@ extension QBReachability {
         
         notifierRunning = true
     }
-    
+
     func stopNotifier() {
         defer { notifierRunning = false }
         guard let reachabilityRef = reachabilityRef else { return }

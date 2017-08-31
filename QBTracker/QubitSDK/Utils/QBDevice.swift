@@ -14,7 +14,7 @@ class QBDevice {
     
     static func getId() -> String {
         let keychain = QBKeychainSwift()
-        if let deviceId = keychain.get(key), deviceId.count > 0 {
+        if let deviceId = keychain.get(key), !deviceId.isEmpty {
             return deviceId
         }
         

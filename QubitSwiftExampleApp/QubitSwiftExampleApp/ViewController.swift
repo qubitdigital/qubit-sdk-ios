@@ -18,4 +18,3 @@ class ViewController: UIViewController {
         //QubitSDK.initialize(withTrackingId: "miquido")
     }
 }
-

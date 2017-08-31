@@ -100,7 +100,7 @@
 		423AEFE81F4C505300F6EF6D /* QBStatusEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBStatusEntity.swift; sourceTree = "<group>"; };
 		426EF6561F54106500FD3F10 /* QBLookupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBLookupManager.swift; sourceTree = "<group>"; };
 		426EF6581F54160F00FD3F10 /* QBLookupEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBLookupEntity.swift; sourceTree = "<group>"; };
-		42D768B21F542AEE00FD7944 /* QBLookupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBLookupService.swift; sourceTree = "<group>"; };
+		42D768B21F542AEE00FD7944 /* QBLookupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBLookupService.swift; sourceTree = "<group>"; usesTabs = 0; };
 		42F0CD4E1F4AEE2B00BD9010 /* QubitSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QubitSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42F0CD521F4AEE2B00BD9010 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42F0CD571F4AEE2B00BD9010 /* QubitSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QubitSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -217,6 +217,7 @@
 				A0F372911F4C40EA00283075 /* Frameworks */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 1;
 		};
 		42F0CD4F1F4AEE2B00BD9010 /* Products */ = {
 			isa = PBXGroup;
@@ -391,6 +392,7 @@
 				42F0CD4A1F4AEE2B00BD9010 /* Frameworks */,
 				42F0CD4B1F4AEE2B00BD9010 /* Headers */,
 				42F0CD4C1F4AEE2B00BD9010 /* Resources */,
+				424DB5031F57FDD60054A038 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -513,6 +515,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		424DB5031F57FDD60054A038 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\ncd $SRCROOT/..\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
 		A0F372B71F4C462C00283075 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
