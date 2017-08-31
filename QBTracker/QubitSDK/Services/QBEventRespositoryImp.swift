@@ -15,11 +15,11 @@ class QBEventRepositoryImp: QBEventRepository {
         return QBAPIClient()
     }()
     
-    func sendEvent(withString string: String, completion: ((Result<QBStatusEntity>) -> ())?) {
+    func sendEvent(withString string: String, completion: ((Result<QBStatusEntity>) -> Void)?) {
         print("func sendEvent()\n")
 
         guard let url = URL(string: configUrl) else {
-            let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "URL for send events is nil"]) as Error
+            let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "URL for send events is nil"]) as Error
             print("URL for send events is nil")
             completion?(.failure(error))
             return
@@ -31,11 +31,11 @@ class QBEventRepositoryImp: QBEventRepository {
         apiClient.dataTask(request: request, method: HTTPMethod.post, completion: completion)
     }
     
-    func sendEvents(events: [QBEventEntity], completion: ((Result<QBStatusEntity>) -> ())?) {
+    func sendEvents(events: [QBEventEntity], completion: ((Result<QBStatusEntity>) -> Void)?) {
         print("func sendEvents()\n")
         
         guard let url = URL(string: configUrl) else {
-            let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "URL for send events is nil"]) as Error
+            let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "URL for send events is nil"]) as Error
             print("URL for send events is nil")
             completion?(.failure(error))
             return
@@ -48,4 +48,3 @@ class QBEventRepositoryImp: QBEventRepository {
     }
     
 }
-

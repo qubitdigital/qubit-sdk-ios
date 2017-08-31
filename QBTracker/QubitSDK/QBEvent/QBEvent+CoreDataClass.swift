@@ -10,7 +10,6 @@
 import Foundation
 import CoreData
 
-
 class QBEvent: NSManagedObject {
 
 }

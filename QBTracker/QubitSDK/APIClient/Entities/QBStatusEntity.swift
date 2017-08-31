@@ -11,7 +11,7 @@ import Foundation
 struct QBStatusEntity: Codable {
     let status: QBResponceCodeEntity
     
-    struct QBResponceCodeEntity: Codable{
+    struct QBResponceCodeEntity: Codable {
         let message: String
         let code: Int
     }

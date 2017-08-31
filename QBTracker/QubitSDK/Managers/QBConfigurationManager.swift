@@ -33,7 +33,7 @@ class QBConfigurationManager {
             self.startTimer()
         }
     }
-    private var timestamp:Int = 0
+    private var timestamp: Int = 0
     private var timer: Timer?
     private var lastUpdateTimeStamp: Double {
         didSet {
@@ -68,10 +68,10 @@ class QBConfigurationManager {
     private func shouldUpdateConfiguration() -> Bool {
         let timestamp = NSDate().timeIntervalSince1970
         QBLog.verbose("current timestamp = \(timestamp), last update timestamp = \(lastUpdateTimeStamp), diff = \(timestamp - lastUpdateTimeStamp)")
-        if (timestamp > lastUpdateTimeStamp + self.configuration.configurationReloadIntervalInSeconds()) {
+        if timestamp > lastUpdateTimeStamp + self.configuration.configurationReloadIntervalInSeconds() {
             return true
         }
-        return false;
+        return false
     }
     
 }
@@ -101,7 +101,7 @@ extension QBConfigurationManager {
     
     @objc private func timerTick() {
         QBLog.verbose("⏰ timer tick")
-        if (self.shouldUpdateConfiguration()) {
+        if self.shouldUpdateConfiguration() {
             QBLog.debug("Config is outdated")
             self.downloadConfig()
         } else {

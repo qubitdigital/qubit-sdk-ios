@@ -9,11 +9,11 @@
 import Foundation
 
 protocol QBConfigurationRepository {
-    func getConfigution(forId id: String, completion: ((Result<QBConfigurationEntity>) -> ())?)
+    func getConfigution(forId id: String, completion: ((Result<QBConfigurationEntity>) -> Void)?)
 }
 
 protocol QBConfigurationService {
-    func getConfigution(forId id: String, completion: ((Result<QBConfigurationEntity>) -> ())?)
+    func getConfigution(forId id: String, completion: ((Result<QBConfigurationEntity>) -> Void)?)
 }
 
 class QBConfigurationServiceImp: QBConfigurationService {
@@ -22,8 +22,8 @@ class QBConfigurationServiceImp: QBConfigurationService {
     init(repository: QBConfigurationRepository) {
         self.repository = repository
     }
-    
-    func getConfigution(forId id: String, completion: ((Result<QBConfigurationEntity>) -> ())?) {
+	
+    func getConfigution(forId id: String, completion: ((Result<QBConfigurationEntity>) -> Void)?) {
         repository.getConfigution(forId: id, completion: completion)
     }
 }

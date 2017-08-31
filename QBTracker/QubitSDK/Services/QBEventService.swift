@@ -9,13 +9,13 @@
 import Foundation
 
 protocol QBEventRepository {
-    func sendEvent(withString string: String, completion: ((Result<QBStatusEntity>) -> ())?)
-    func sendEvents(events: [QBEventEntity], completion: ((Result<QBStatusEntity>) -> ())?)
+    func sendEvent(withString string: String, completion: ((Result<QBStatusEntity>) -> Void)?)
+    func sendEvents(events: [QBEventEntity], completion: ((Result<QBStatusEntity>) -> Void)?)
 }
 
 protocol QBEventService {
-    func sendEvent(withString string: String, completion: ((Result<QBStatusEntity>) -> ())?)
-    func sendEvents(events: [QBEventEntity], completion: ((Result<QBStatusEntity>) -> ())?)
+    func sendEvent(withString string: String, completion: ((Result<QBStatusEntity>) -> Void)?)
+    func sendEvents(events: [QBEventEntity], completion: ((Result<QBStatusEntity>) -> Void)?)
 }
 
 class QBEventServiceImp: QBEventService {
@@ -25,11 +25,11 @@ class QBEventServiceImp: QBEventService {
         self.repository = repository
     }
     
-    func sendEvent(withString string: String, completion: ((Result<QBStatusEntity>) -> ())?) {
+    func sendEvent(withString string: String, completion: ((Result<QBStatusEntity>) -> Void)?) {
         repository.sendEvent(withString: string, completion: completion)
     }
     
-    func sendEvents(events: [QBEventEntity], completion: ((Result<QBStatusEntity>) -> ())?) {
+    func sendEvents(events: [QBEventEntity], completion: ((Result<QBStatusEntity>) -> Void)?) {
         
     }
 }

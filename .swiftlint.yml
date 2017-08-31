@@ -1,0 +1,42 @@
+opt_in_rules:
+  - closure_end_indentation
+  - closing_brace
+  - closure_parameter_position
+  - comma
+  - control_statement
+  - class_delegate_protocol
+  - first_where
+  - unused_closure_parameter
+  - unused_enumerated
+  - unused_optional_binding
+  - type_name
+  - type_body_length
+  - trailing_comma
+  - switch_case_on_newline
+  - legacy_constant
+  - opening_brace
+  - statement_position
+  - cyclomatic_complexity
+  - redundant_void_return
+  - redundant_nil_coalescing
+  - generic_type_name
+  - empty_count
+  - weak_delegate
+  - force_unwrapping
+
+disabled_rules:
+  - todo
+  - line_length
+  - trailing_whitespace
+
+excluded:
+  - QBTracker/QubitSDK/Utils/Keychain/QBKeychain.swift
+  - QBTracker/QubitSDK/Utils/Reachability/QBReachability.swift
+
+line_length: 120  
+force_cast: warning
+force_try: warning
+identifier_name:
+  min_length: 2 
+  validates_start_with_lowercase: false
+

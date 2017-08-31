@@ -22,7 +22,7 @@ enum HTTPMethod: String {
 
 class QBAPIClient {
     
-    func dataTask<T: Decodable>(request: URLRequest, method: HTTPMethod, completion: ((Result<T>) -> ())?) {
+    func dataTask<T: Decodable>(request: URLRequest, method: HTTPMethod, completion: ((Result<T>) -> Void)?) {
         var request = request
         request.httpMethod = method.rawValue
         
@@ -38,7 +38,7 @@ class QBAPIClient {
             QBLog.debug("✅ Response = \(response?.description ?? "") \n")
             
             guard let data = data else {
-                let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "Data was not retrieved from request = \(request)"]) as Error
+                let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Data was not retrieved from request = \(request)"]) as Error
                 QBLog.error("Data was not retrieved from request = \(request) \n")
                 completion?(.failure(error))
                 return
@@ -48,8 +48,8 @@ class QBAPIClient {
             QBLog.debug("✅ ResponseString = \(responseString?.description ?? "") \n")
             
             if let response = response as? HTTPURLResponse {
-                guard (200...299 ~= response.statusCode) else {
-                    let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "Status code = \(response.statusCode) is not correct"]) as Error
+                guard 200...299 ~= response.statusCode else {
+                    let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Status code = \(response.statusCode) is not correct"]) as Error
                     QBLog.error("Status code = \(response.statusCode), status is wrong \n")
                     completion?(.failure(error))
                     return
@@ -71,5 +71,3 @@ class QBAPIClient {
     }
     
 }
-
-

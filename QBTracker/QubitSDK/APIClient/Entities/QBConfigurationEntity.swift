@@ -71,7 +71,7 @@ struct QBConfigurationEntity: Codable {
         self.lookupRequestTimeout = DefaultValues.lookupRequestTimeout
     }
     
-    private enum CodingKeys : String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case disabled
         case configurationReloadInterval = "configuration_reload_interval"
         case queueTimeout = "queue_timeout"
@@ -99,7 +99,6 @@ extension QBConfigurationEntity {
         static let lookupRequestTimeout = 5
     }
     
-
 }
 
 // MARK: - Helpers

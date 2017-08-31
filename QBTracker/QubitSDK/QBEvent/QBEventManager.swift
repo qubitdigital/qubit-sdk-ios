@@ -55,11 +55,11 @@ class QBEventManager {
     }
     
     func sendSessionEvent(start: TimeInterval, end: TimeInterval) {
-        var params: [String : Any] = ["ipAddress" : "",
-                                      "deviceType" : "mobile",
-                                      "osName" : "iOS",
-                                      "osVersion" : UIDevice.current.systemVersion,
-                                      "appType" : "app"]
+        var params: [String : Any] = ["ipAddress": "",
+                                      "deviceType": "mobile",
+                                      "osName": "iOS",
+                                      "osVersion": UIDevice.current.systemVersion,
+                                      "appType": "app"]
         if start != 0 {
             params["firstViewTs"] = start * 1000
         }

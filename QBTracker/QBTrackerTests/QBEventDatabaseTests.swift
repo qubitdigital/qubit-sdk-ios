@@ -45,7 +45,7 @@ class QBEventDatabaseTests: XCTestCase {
     func testEventQuery() {
         let events = self.databaseManager.query(entityType: QBEvent.self)
 
-        XCTAssert(events.count > 0, "Error querying events")
+        XCTAssert(!events.isEmpty, "Error querying events")
 
         let event = events.first
 
@@ -59,7 +59,7 @@ class QBEventDatabaseTests: XCTestCase {
 
         let events = self.databaseManager.query(entityType: QBEvent.self)
 
-        XCTAssert(events.count == 0, "Did not delete all events from the database, even though method returned success")
+        XCTAssert(!events.isEmpty, "Did not delete all events from the database, even though method returned success")
     }
     
 }

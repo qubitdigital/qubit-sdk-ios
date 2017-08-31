@@ -18,7 +18,7 @@ class QBLookupManager {
             self.startTimer()
         }
     }
-    private var timestamp:Int = 0
+    private var timestamp: Int = 0
     private var timer: Timer?
     private var lastUpdateTimeStamp: Double {
         didSet {
@@ -60,10 +60,10 @@ class QBLookupManager {
     private func shouldUpdateLookup() -> Bool {
         let timestamp = NSDate().timeIntervalSince1970
         QBLog.verbose("lookup current timestamp = \(timestamp), last update timestamp = \(lastUpdateTimeStamp), diff = \(timestamp - lastUpdateTimeStamp)")
-        if (timestamp > lastUpdateTimeStamp + self.configurationManager.configuration.lookupReloadIntervalInSeconds()) {
+        if timestamp > lastUpdateTimeStamp + self.configurationManager.configuration.lookupReloadIntervalInSeconds() {
             return true
         }
-        return false;
+        return false
     }
     
     func getLookup() -> QBLookupEntity {
@@ -105,7 +105,7 @@ extension QBLookupManager {
     
     @objc private func timerTick() {
         QBLog.verbose("⏰ lookup timer tick")
-        if (self.shouldUpdateLookup()) {
+        if self.shouldUpdateLookup() {
             QBLog.debug("Lookup is outdated")
             self.downloadLookup()
         } else {

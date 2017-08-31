@@ -10,7 +10,6 @@
 import Foundation
 import CoreData
 
-
 extension QBEvent {
 
     @nonobjc class func fetchRequest() -> NSFetchRequest<QBEvent> {
