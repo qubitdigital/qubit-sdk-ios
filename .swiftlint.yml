@@ -24,6 +24,9 @@ opt_in_rules:
   - weak_delegate
   - force_unwrapping
 
+function_body_length:
+  - 30
+
 disabled_rules:
   - todo
   - line_length
@@ -37,6 +40,5 @@ line_length: 120
 force_cast: warning
 force_try: warning
 identifier_name:
-  min_length: 2 
-  validates_start_with_lowercase: false
+  min_length: 2
 
