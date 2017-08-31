@@ -17,7 +17,7 @@ class QBEventManager {
     
     private var databaseManager = QBDatabaseManager.shared
     private var connectionManager = QBConnectionManager.shared
-    private let fetchLimit: Int = 25
+    private let fetchLimit: Int = 15
     
     private let lock = NSLock()
     
