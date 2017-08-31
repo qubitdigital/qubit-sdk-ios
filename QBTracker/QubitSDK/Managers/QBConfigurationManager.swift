@@ -61,6 +61,7 @@ class QBConfigurationManager {
                 strongSelf.remoteConfiguration = config
             case .failure(let error):
                 QBLog.error("error = \(error)")
+                self?.startTimer()
             }
         }
     }

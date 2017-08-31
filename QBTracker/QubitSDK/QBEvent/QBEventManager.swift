@@ -24,8 +24,13 @@ class QBEventManager {
     init() {
         initTimer()
         
+        //TODO: Change magic strings to Constants
         NotificationCenter.default.addObserver(self, selector: #selector(self.initTimer), name: NSNotification.Name(rawValue: "CONNECTION_CHANGED_REACHABLE"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.stopTimer), name: NSNotification.Name(rawValue: "CONNECTION_CHANGED_NOT_REACHABLE"), object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     @objc
@@ -39,6 +44,7 @@ class QBEventManager {
     
     @objc
     private func stopTimer() {
+        //TODO: should also be called when configuration flag (disabled) is true
         QBLog.verbose("Connection lost.  Stopping timer.")
 		backgroundQueue = nil
         DispatchQueue.main.async {

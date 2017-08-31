@@ -50,6 +50,7 @@ class QBLookupManager {
 
                 strongSelf.remoteLookup = lookup
             case .failure(let error):
+                //TODO: handle failure
                 QBLog.error("error = \(error)")
             }
         }

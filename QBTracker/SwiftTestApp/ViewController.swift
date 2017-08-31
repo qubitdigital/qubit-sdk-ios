@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     }
     
     @objc func timerTick() {
-		//QubitSDK.sendEvent(type: "abc", data: "ddd")
+		QubitSDK.sendEvent(type: "abc", data: "ddd")
         print("tick")
     }
 

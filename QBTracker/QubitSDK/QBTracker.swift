@@ -28,12 +28,13 @@ class QBTracker {
         
         trackingId = id
 		
-        eventManager = QBEventManager()
+        //TODO: add completions for initializers (ie.  start lookup manager once configuration is fetched.  Start event manager once lookup is fetched).
         configurationManager = QBConfigurationManager(with: id)
         if let configurationManager = configurationManager {
             lookupManager = QBLookupManager(withConfigurationManager: configurationManager, withTrackingId: id)
         }
 		
+        eventManager = QBEventManager()
 		//sessionId = QBSessionManager.shared.getValidSessionId()
     }
     
