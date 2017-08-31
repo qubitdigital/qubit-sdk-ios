@@ -23,7 +23,7 @@ class QBLookupServiceImp: QBLookupService {
         self.configurationManager = configurationManager
         self.trackingId = trackingId
     }
-	
+    
     func getLookup(forDeviceId id: String, completion: ((Result<QBLookupEntity>) -> Void)?) {
         guard let url = configurationManager.configuration.lookupEndpointUrl() else {
             let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "URL for lookup is nil"]) as Error

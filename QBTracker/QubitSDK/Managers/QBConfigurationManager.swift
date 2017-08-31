@@ -39,7 +39,7 @@ class QBConfigurationManager {
             QBLog.verbose("configuration lastUpdateTimeStamp updated = \(lastUpdateTimeStamp)")
         }
     }
-
+    
     init(with trackingId: String) {
         self.lastUpdateTimeStamp = 0
         self.trackingId = trackingId
@@ -48,7 +48,7 @@ class QBConfigurationManager {
     
     private func downloadConfig() {
         QBLog.mark()
-		let service = QBConfigurationServiceImp(withTrackingId: self.trackingId)
+        let service = QBConfigurationServiceImp(withTrackingId: self.trackingId)
         service.getConfigution { [weak self] result in
             guard let strongSelf = self else { return }
             
