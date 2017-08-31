@@ -18,7 +18,6 @@ class QBLookupManager {
             self.startTimer()
         }
     }
-    private var timestamp: Int = 0
     private var timer: Timer?
     private var lastUpdateTimeStamp: Double {
         didSet {

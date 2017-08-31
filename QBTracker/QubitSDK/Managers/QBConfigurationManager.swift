@@ -33,7 +33,6 @@ class QBConfigurationManager {
             self.startTimer()
         }
     }
-    private var timestamp: Int = 0
     private var timer: Timer?
     private var lastUpdateTimeStamp: Double {
         didSet {
@@ -49,7 +48,8 @@ class QBConfigurationManager {
     
     private func downloadConfig() {
         QBLog.mark()
-        defaultConfigurationService.getConfigution(forId: "miquido") { [weak self] result in
+		let service = QBConfigurationServiceImp(withTrackingId: self.trackingId)
+        service.getConfigution { [weak self] result in
             guard let strongSelf = self else { return }
             
             switch result {

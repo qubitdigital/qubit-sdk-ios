@@ -12,13 +12,12 @@ protocol QBLookupService {
     func getLookup(forDeviceId id: String, completion: ((Result<QBLookupEntity>) -> Void)?)
 }
 
-private let apiClient: QBAPIClient = {
-    return QBAPIClient()
-}()
-
 class QBLookupServiceImp: QBLookupService {
     private let configurationManager: QBConfigurationManager
     private let trackingId: String
+    private let apiClient: QBAPIClient = {
+        return QBAPIClient()
+    }()
     
     init(withConfigurationManager configurationManager: QBConfigurationManager, withTrackingId trackingId: String) {
         self.configurationManager = configurationManager
