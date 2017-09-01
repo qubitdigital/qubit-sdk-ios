@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        QubitSDK.start(withTrackingId: "miquido")
+        QubitSDK.start(withTrackingId: "miquido", logLevel: .verbose)
         //QubitSDK.initialize(withTrackingId: "miquido")
     }
 }

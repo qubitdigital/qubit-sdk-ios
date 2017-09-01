@@ -8,29 +8,37 @@
 
 import Foundation
 
+protocol QBConfigurationManagerDelegate: class {
+    func configurationUpdated()
+}
+
 class QBConfigurationManager {
     // MARK: Internal
+    var trackingId: String
+    weak var delegate: QBConfigurationManagerDelegate?
     var configuration: QBConfigurationEntity {
         if let remoteConfiguration = self.remoteConfiguration {
+            QBLog.verbose("used remote configuration")
             return remoteConfiguration
         }
         
         if let lastSavedRemoteConfiguration = UserDefaults.standard.lastSavedRemoteConfiguration {
+            QBLog.verbose("used last saved remote configuration")
             return lastSavedRemoteConfiguration
         }
         
+        assert(false, "configuration should be loaded")
+        QBLog.error("used default configuration")
         return QBConfigurationEntity()
     }
-    
-    var trackingId: String
-    
+
     // MARK: Private
     private var remoteConfiguration: QBConfigurationEntity? = nil {
         didSet {
             UserDefaults.standard.lastSavedRemoteConfiguration = self.remoteConfiguration
             self.lastUpdateTimeStamp = NSDate().timeIntervalSince1970
-            
             self.startTimer()
+            delegate?.configurationUpdated()
         }
     }
     private var timer: Timer?
@@ -40,9 +48,10 @@ class QBConfigurationManager {
         }
     }
     
-    init(with trackingId: String) {
-        self.lastUpdateTimeStamp = 0
+    init(withTrackingId trackingId: String, withDeleagte delegate: QBConfigurationManagerDelegate) {
         self.trackingId = trackingId
+        self.delegate = delegate
+        self.lastUpdateTimeStamp = 0
         downloadConfig()
     }
     
