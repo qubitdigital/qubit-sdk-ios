@@ -13,7 +13,7 @@ protocol QBConfigurationManagerDelegate: class {
 }
 
 class QBConfigurationManager {
-    // MARK: Internal
+    // MARK: - Private properties
     var trackingId: String
     weak var delegate: QBConfigurationManagerDelegate?
     var configuration: QBConfigurationEntity {
@@ -31,14 +31,18 @@ class QBConfigurationManager {
         QBLog.error("used default configuration")
         return QBConfigurationEntity()
     }
+    
+    // MARK: - Internal properties
+    private var isConfigurationLoaded: Bool {
+        return self.remoteConfiguration != nil || UserDefaults.standard.lastSavedRemoteConfiguration != nil
+    }
 
-    // MARK: Private
+    // MARK: - Private functions
     private var remoteConfiguration: QBConfigurationEntity? = nil {
         didSet {
             UserDefaults.standard.lastSavedRemoteConfiguration = self.remoteConfiguration
             self.lastUpdateTimeStamp = NSDate().timeIntervalSince1970
             self.startTimer()
-            delegate?.configurationUpdated()
         }
     }
     private var timer: Timer?
@@ -46,13 +50,6 @@ class QBConfigurationManager {
         didSet {
             QBLog.verbose("configuration lastUpdateTimeStamp updated = \(lastUpdateTimeStamp)")
         }
-    }
-    
-    init(withTrackingId trackingId: String, withDeleagte delegate: QBConfigurationManagerDelegate) {
-        self.trackingId = trackingId
-        self.delegate = delegate
-        self.lastUpdateTimeStamp = 0
-        downloadConfig()
     }
     
     private func downloadConfig() {
@@ -70,7 +67,10 @@ class QBConfigurationManager {
                 strongSelf.remoteConfiguration = config
             case .failure(let error):
                 QBLog.error("error = \(error)")
-                self?.startTimer()
+                strongSelf.startTimer()
+            }
+            if strongSelf.isConfigurationLoaded {
+                strongSelf.delegate?.configurationUpdated()
             }
         }
     }
@@ -82,6 +82,21 @@ class QBConfigurationManager {
             return true
         }
         return false
+    }
+    
+    // MARK: - Internal functions
+    init(withTrackingId trackingId: String, withDeleagte delegate: QBConfigurationManagerDelegate) {
+        self.trackingId = trackingId
+        self.delegate = delegate
+        self.lastUpdateTimeStamp = 0
+        downloadConfig()
+    }
+    
+    func getEventsEndpoint() -> URL? {
+        var url = self.configuration.mainEndpointUrl()
+        url?.appendPathComponent("events/raw")
+        url?.appendPathComponent(self.trackingId)
+        return url
     }
     
 }

@@ -11,19 +11,17 @@ import UIKit
 import CoreData
 
 class QBEventManager {
-    
-    private let sendEventsTimeInterval: TimeInterval = 1.0
+    var configurationManager: QBConfigurationManager?
+    private let sendEventsTimeInterval: TimeInterval = 5.0
+    private let fetchLimit: Int = 100
+
     private var timer: Timer?
-    
     private var databaseManager = QBDatabaseManager.shared
     private var connectionManager = QBConnectionManager.shared
-    private let fetchLimit: Int = 15
-
-	private var backgroundQueue: DispatchQueue?
+    private var backgroundQueue: DispatchQueue?
     
     init() {
         initTimer()
-        
         //TODO: Change magic strings to Constants
         NotificationCenter.default.addObserver(self, selector: #selector(self.initTimer), name: NSNotification.Name(rawValue: "CONNECTION_CHANGED_REACHABLE"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.stopTimer), name: NSNotification.Name(rawValue: "CONNECTION_CHANGED_NOT_REACHABLE"), object: nil)
@@ -33,33 +31,16 @@ class QBEventManager {
         NotificationCenter.default.removeObserver(self)
     }
     
-    @objc
-    private func initTimer() {
-        stopTimer()
-		backgroundQueue = DispatchQueue(label: "EventQueue", qos: .background, attributes: .concurrent)
-        DispatchQueue.main.async {
-            self.timer = Timer.scheduledTimer(timeInterval: self.sendEventsTimeInterval, target: self, selector: #selector(self.sendEvents), userInfo: nil, repeats: true)
-        }
-    }
-    
-    @objc
-    private func stopTimer() {
-        //TODO: should also be called when configuration flag (disabled) is true
-        QBLog.verbose("Connection lost.  Stopping timer.")
-		backgroundQueue = nil
-        DispatchQueue.main.async {
-            self.timer?.invalidate()
-            self.timer = nil
-        }
-    }
-    
+    // MARK: - Internal
     func queue(event: QBEventEntity) {
 		backgroundQueue?.sync {
 			guard let dbEvent = self.databaseManager.insert(entityType: QBEvent.self) else {
 				return
 			}
 			
-			dbEvent.dateAdded = NSDate()
+            dbEvent.data = event.eventData
+			dbEvent.type = event.type
+            dbEvent.dateAdded = NSDate()
 			self.databaseManager.save()
 		}
     }
@@ -81,13 +62,46 @@ class QBEventManager {
         sendEvent(type: "session", data: params)
     }
     
+    // MARK: - Private
+    @objc
+    private func initTimer() {
+        stopTimer()
+        backgroundQueue = DispatchQueue(label: "EventQueue", qos: .background, attributes: .concurrent)
+        DispatchQueue.main.async {
+            self.timer = Timer.scheduledTimer(timeInterval: self.sendEventsTimeInterval, target: self, selector: #selector(self.sendEvents), userInfo: nil, repeats: true)
+        }
+    }
+    
+    @objc
+    private func stopTimer() {
+        //TODO: should also be called when configuration flag (disabled) is true
+        QBLog.verbose("Connection lost.  Stopping timer.")
+        backgroundQueue = nil
+        DispatchQueue.main.async {
+            self.timer?.invalidate()
+            self.timer = nil
+        }
+    }
+    
     @objc
 	private func sendEvents() {
+        guard let configurationManager = configurationManager else {
+            return
+        }
+        
 		backgroundQueue?.sync {
 			let currentEventBatch = self.databaseManager.query(entityType: QBEvent.self, sortBy: "dateAdded", ascending: true, limit: self.fetchLimit)
+            
+            if currentEventBatch.isEmpty {
+                QBLog.debug("nothing to sent")
+                return
+            }
+            
 			let events = self.convert(events: currentEventBatch)
 			
-			defaultEventService.sendEvents(events: events) { [weak self] (result) in
+            let eventService = QBEventServiceImp(withConfigurationManager: configurationManager)
+            
+			eventService.sendEvents(events: events) { [weak self] (result) in
 				switch result {
 				case .success:
 					QBLog.info("Successfully sent events")
@@ -107,7 +121,16 @@ class QBEventManager {
     private func convert(events: [QBEvent]) -> [QBEventEntity] {
         let result: [QBEventEntity] = []
         
-        return result
+        let convertedArray = events.flatMap { (event: QBEvent) -> QBEventEntity in
+            var eventEntity = QBEventEntity(type: event.type!, eventData: event.data!)
+            let context = QBContextEntity(sessionNumber: 123, id: "123", viewNumber: 123, viewTs: 123, sessionTs: 123, sessionViewNumber: 132)
+            eventEntity.context = context
+            let meta = QBMetaEntity(id: "123", ts: 123, trackingId: "123", type: "123", source: "123", seq: 123)
+            eventEntity.meta = meta
+            return eventEntity
+        }
+        
+        return convertedArray
     }
     
     private func markFailed(events: [QBEvent]) {

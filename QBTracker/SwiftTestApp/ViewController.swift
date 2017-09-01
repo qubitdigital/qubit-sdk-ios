@@ -16,10 +16,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         QubitSDK.start(withTrackingId: "miquido", logLevel: .verbose)
 		DispatchQueue.main.async {
-			self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerTick), userInfo: nil, repeats: true)
+			self.timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(self.timerTick), userInfo: nil, repeats: true)
 		}
     }
     

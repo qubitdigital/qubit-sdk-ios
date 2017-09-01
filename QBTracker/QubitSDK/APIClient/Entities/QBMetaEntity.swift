@@ -9,10 +9,10 @@
 import Foundation
 
 struct QBMetaEntity: Codable {
-    let id: Int
-    let ts: String
+    let id: String
+    let ts: Int
     let trackingId: String
-    let type: Int
+    let type: String
     let source: String
     let seq: Int
 }

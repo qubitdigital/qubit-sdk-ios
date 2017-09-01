@@ -49,5 +49,6 @@ extension QBTracker: QBConfigurationManagerDelegate {
         if self.lookupManager == nil, let configurationManager = self.configurationManager, let trackingId = self.trackingId {
             lookupManager = QBLookupManager(withConfigurationManager: configurationManager, withTrackingId: trackingId)
         }
+        eventManager?.configurationManager = self.configurationManager
     }
 }

@@ -32,6 +32,7 @@ class QBConfigurationServiceImp: QBConfigurationService {
             let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "URL for configuration is nil"]) as Error
             QBLog.error("URL for configuration is nil")
             completion?(.failure(error))
+            assert(false, "URL for configuration is nil")
             return
         }
         

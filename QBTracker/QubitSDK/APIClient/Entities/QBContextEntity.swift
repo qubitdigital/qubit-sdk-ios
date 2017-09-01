@@ -9,10 +9,10 @@
 import Foundation
 
 struct QBContextEntity: Codable {
-    let sessionNumber: String
-    let id: Int
-    let viewNumber: String
+    let sessionNumber: Int
+    let id: String
+    let viewNumber: Int
     let viewTs: Int
-    let sessionTs: String
+    let sessionTs: Int
     let sessionViewNumber: Int
 }

@@ -8,32 +8,35 @@
 
 import Foundation
 
-protocol QBEventRepository {
-    func sendEvent(withString string: String, completion: ((Result<QBStatusEntity>) -> Void)?)
-    func sendEvents(events: [QBEventEntity], completion: ((Result<QBStatusEntity>) -> Void)?)
-}
-
 protocol QBEventService {
-    func sendEvent(withString string: String, completion: ((Result<QBStatusEntity>) -> Void)?)
     func sendEvents(events: [QBEventEntity], completion: ((Result<QBStatusEntity>) -> Void)?)
 }
 
 class QBEventServiceImp: QBEventService {
-    fileprivate let repository: QBEventRepository
+    private let configurationManager: QBConfigurationManager
+    private let apiClient: QBAPIClient = {
+        return QBAPIClient()
+    }()
     
-    init(repository: QBEventRepository) {
-        self.repository = repository
+    init(withConfigurationManager configurationManager: QBConfigurationManager) {
+        self.configurationManager = configurationManager
     }
-    
-    func sendEvent(withString string: String, completion: ((Result<QBStatusEntity>) -> Void)?) {
-        repository.sendEvent(withString: string, completion: completion)
-    }
-    
+
     func sendEvents(events: [QBEventEntity], completion: ((Result<QBStatusEntity>) -> Void)?) {
+        guard let url = configurationManager.getEventsEndpoint() else {
+            let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "URL for send events is nil"]) as Error
+            QBLog.error("URL for send events is nil")
+            completion?(.failure(error))
+            assert(false, "URL for send events is nil")
+            return
+        }
         
+        var request = URLRequest(url: url)
+        
+        let jsonData = try? JSONEncoder().encode(events)
+        request.httpBody = jsonData
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        apiClient.dataTask(request: request, method: HTTPMethod.post, completion: completion)
     }
 }
-
-let defaultEventService: QBEventService = QBEventServiceImp(
-    repository: QBEventRepositoryImp()
-)

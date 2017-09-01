@@ -12,8 +12,8 @@ struct QBEventEntity: Codable {
     let type: String
     let eventData: String
     
-    let context: QBContextEntity? = nil
-    let meta: QBMetaEntity? = nil
+    var context: QBContextEntity?
+    var meta: QBMetaEntity?
     
     init(type: String, eventData: String) {
         self.type = type

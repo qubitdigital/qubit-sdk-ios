@@ -29,6 +29,7 @@ class QBLookupServiceImp: QBLookupService {
             let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "URL for lookup is nil"]) as Error
             QBLog.error("URL for lookup is nil")
             completion?(.failure(error))
+            assert(false, "URL for lookup is nil")
             return
         }
         

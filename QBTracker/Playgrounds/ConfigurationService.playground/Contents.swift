@@ -1,14 +1,9 @@
 import UIKit
 import PlaygroundSupport
-@testable import QBTracker
+@testable import QubitSDK
 
-defaultConfigurationService.getConfigution(forId: "roeld") { result in
-    switch result {
-    case .success(let config):
-        print("config = \(config) \n")
-    case .failure(let error):
-        print("error = \(error) \n")
-    }
-}
+let service = QBConfigurationManager(withTrackingId: "miquido", withDeleagte: QBTracker.shared)
+
+print(service.getEventEndpoint())
 
 PlaygroundPage.current.needsIndefiniteExecution = true
