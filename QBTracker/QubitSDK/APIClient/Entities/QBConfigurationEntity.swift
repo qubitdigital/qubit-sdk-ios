@@ -10,31 +10,68 @@ import Foundation
 
 struct QBConfigurationEntity: Codable {
     
-    let disabled: Bool?
-    let configurationReloadInterval: Int?
-    let queueTimeout: Int?
-    let endpoint: String?
-    let namespace: String?
+    let disabled: Bool
+    let configurationReloadInterval: Int
+    let queueTimeout: Int
+    let namespace: String
+    let lookupEndpoint: String
+    let lookupReloadInterval: Int
+    let lookupRequestTimeout: Int
     //  AO: If endpoint is defined then data_location should be ignored.
-    let dataLocation: String?
-    let lookupEndpoint: String?
-    let lookupReloadInterval: Int?
-    let lookupRequestTimeout: Int?
+    let endpoint: String
+    let dataLocation: String
     
+    // swiftlint:disable function_body_length
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         
-        let disabled = try? values.decode(Bool.self, forKey: .disabled)
-        self.disabled = disabled != nil ? disabled : DefaultValues.disabled
+        if let disabled = try? values.decode(Bool.self, forKey: .disabled) {
+            self.disabled = disabled
+        } else {
+            self.disabled = DefaultValues.disabled
+        }
         
-        let configurationReloadInterval = try? values.decode(Int.self, forKey: .queueTimeout)
-        self.configurationReloadInterval = configurationReloadInterval != nil ? configurationReloadInterval : DefaultValues.configurationReloadInterval
-
-        let queueTimeout = try? values.decode(Int.self, forKey: .queueTimeout)
-        self.queueTimeout = queueTimeout != nil ? queueTimeout : DefaultValues.queueTimeout
+        if let configurationReloadInterval = try? values.decode(Int.self, forKey: .configurationReloadInterval) {
+            self.configurationReloadInterval = configurationReloadInterval
+        } else {
+            self.configurationReloadInterval = DefaultValues.configurationReloadInterval
+        }
         
-        let dataLocation = try? values.decode(String.self, forKey: .namespace)
-        self.dataLocation = dataLocation != nil ? dataLocation : DefaultValues.dataLocation
+        if let queueTimeout = try? values.decode(Int.self, forKey: .queueTimeout) {
+            self.queueTimeout = queueTimeout
+        } else {
+            self.queueTimeout = DefaultValues.queueTimeout
+        }
+        
+        if let namespace = try? values.decode(String.self, forKey: .namespace) {
+            self.namespace = namespace
+        } else {
+            self.namespace = DefaultValues.namespace
+        }
+        
+        if let lookupEndpoint = try? values.decode(String.self, forKey: .lookupEndpoint) {
+            self.lookupEndpoint = lookupEndpoint
+        } else {
+            self.lookupEndpoint = DefaultValues.lookupEndpoint
+        }
+        
+        if let lookupReloadInterval = try? values.decode(Int.self, forKey: .lookupReloadInterval) {
+            self.lookupReloadInterval = lookupReloadInterval
+        } else {
+            self.lookupReloadInterval = DefaultValues.lookupReloadInterval
+        }
+        
+        if let lookupRequestTimeout = try? values.decode(Int.self, forKey: .lookupRequestTimeout) {
+            self.lookupRequestTimeout = lookupRequestTimeout
+        } else {
+            self.lookupRequestTimeout = DefaultValues.lookupRequestTimeout
+        }
+        
+        if let dataLocation = try? values.decode(String.self, forKey: .dataLocation) {
+            self.dataLocation = dataLocation
+        } else {
+            self.dataLocation = DefaultValues.dataLocation
+        }
         
         if let endpoint = try? values.decode(String.self, forKey: .endpoint) {
             self.endpoint = endpoint
@@ -45,19 +82,8 @@ struct QBConfigurationEntity: Codable {
                 self.endpoint = DefaultValues.endpointEU
             }
         }
-    
-        let namespace = try? values.decode(String.self, forKey: .namespace)
-        self.namespace = namespace != nil ? namespace : DefaultValues.namespace
-        
-        let lookupEndpoint = try? values.decode(String.self, forKey: .lookupEndpoint)
-        self.lookupEndpoint = lookupEndpoint != nil ? lookupEndpoint : DefaultValues.lookupEndpoint
-        
-        let lookupReloadInterval = try? values.decode(Int.self, forKey: .lookupReloadInterval)
-        self.lookupReloadInterval = lookupReloadInterval != nil ? lookupReloadInterval : DefaultValues.lookupReloadInterval
-        
-        let lookupRequestTimeout = try? values.decode(Int.self, forKey: .lookupRequestTimeout)
-        self.lookupRequestTimeout = lookupRequestTimeout != nil ? lookupRequestTimeout : DefaultValues.lookupRequestTimeout
     }
+    // swiftlint:enable function_body_length
     
     init() {
         self.disabled = DefaultValues.disabled
@@ -75,12 +101,12 @@ struct QBConfigurationEntity: Codable {
         case disabled
         case configurationReloadInterval = "configuration_reload_interval"
         case queueTimeout = "queue_timeout"
-        case endpoint
         case namespace
-        case dataLocation = "data_location"
         case lookupEndpoint = "lookup_attribute_url"
         case lookupReloadInterval = "lookup_get_request_timeout"
         case lookupRequestTimeout = "lookup_cache_expire_time"
+        case endpoint
+        case dataLocation = "data_location"
     }
 }
 
@@ -88,15 +114,15 @@ struct QBConfigurationEntity: Codable {
 extension QBConfigurationEntity {
     private struct DefaultValues {
         static let disabled = false
-        static let configurationReloadInterval = 60
+        static let configurationReloadInterval = 2
         static let queueTimeout = 60
-        static let endpointEU = "gong-eb.qubit.com"
-        static let endpointUS = "gong-gc.qubit.com"
         static let namespace = ""
-        static let dataLocation = "EU"
         static let lookupEndpoint = "lookup.qubit.com"
         static let lookupReloadInterval = 60
         static let lookupRequestTimeout = 5
+        static let dataLocation = "EU"
+        static let endpointEU = "gong-eb.qubit.com"
+        static let endpointUS = "gong-gc.qubit.com"
     }
     
 }
@@ -104,16 +130,10 @@ extension QBConfigurationEntity {
 // MARK: - Helpers
 extension QBConfigurationEntity {
     func configurationReloadIntervalInSeconds() -> Double {
-        guard let configurationReloadInterval = self.configurationReloadInterval else {
-            return 0.0
-        }
         return Double(configurationReloadInterval * 60)
     }
     
     func lookupReloadIntervalInSeconds() -> Double {
-        guard let lookupReloadInterval = self.lookupReloadInterval else {
-            return 0.0
-        }
         return Double(lookupReloadInterval * 60)
     }
     
