@@ -27,7 +27,6 @@ class QBConfigurationManager {
             return lastSavedRemoteConfiguration
         }
         
-        assert(false, "configuration should be loaded")
         QBLog.error("used default configuration")
         return QBConfigurationEntity()
     }
@@ -60,7 +59,7 @@ class QBConfigurationManager {
             
             switch result {
             case .success(let config):
-                QBLog.debug("config = \(config)")
+//                QBLog.debug("config = \(config)")
                 
                 QBLog.debug("userDefaults = \(UserDefaults.standard.lastSavedRemoteConfiguration.debugDescription)")
                 

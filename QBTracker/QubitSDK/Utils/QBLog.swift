@@ -78,7 +78,7 @@ class QBLog {
         case (QBLogLevel.verbose, _):
             fallthrough
         case (QBLogLevel.debug, _):
-            print("\(Date().toString()) \(type.rawValue)[\(sourceFileName(filePath: fileName))]:\(line) \(funcName) -> \(message)")
+            print("\(Date().toString()) \(type.rawValue)[\(sourceFileName(filePath: fileName)):\(line)] \(funcName) -> \(message)")
         case (_, _):
             break
         }

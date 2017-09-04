@@ -11,7 +11,11 @@ import UIKit
 import CoreData
 
 class QBEventManager {
-    var configurationManager: QBConfigurationManager?
+    var configurationManager: QBConfigurationManager? {
+        didSet {
+            initTimer()
+        }
+    }
     private let sendEventsTimeInterval: TimeInterval = 5.0
     private let fetchLimit: Int = 100
 
@@ -32,6 +36,7 @@ class QBEventManager {
     
     // MARK: - Internal
     func queue(event: QBEventEntity) {
+        QBLog.mark()
 		backgroundQueue?.sync {
 			guard let dbEvent = self.databaseManager.insert(entityType: QBEvent.self) else {
 				return
@@ -64,16 +69,29 @@ class QBEventManager {
     // MARK: - Private
     @objc
     private func initTimer() {
-        stopTimer()
-        backgroundQueue = DispatchQueue(label: "EventQueue", qos: .background, attributes: .concurrent)
-        DispatchQueue.main.async {
-            self.timer = Timer.scheduledTimer(timeInterval: self.sendEventsTimeInterval, target: self, selector: #selector(self.sendEvents), userInfo: nil, repeats: true)
+        guard let configurationManager = configurationManager else {
+            QBLog.info("Configuration is loading, so timer don't started")
+            stopTimer()
+            return
+        }
+        
+        if configurationManager.configuration.disabled {
+            QBLog.info("Sending events disabled in configuration, so timer don't started")
+            stopTimer()
+            return
+        }
+        
+        if timer == nil && backgroundQueue == nil {
+            stopTimer()
+            backgroundQueue = DispatchQueue(label: "EventQueue", qos: .background, attributes: .concurrent)
+            DispatchQueue.main.async {
+                self.timer = Timer.scheduledTimer(timeInterval: self.sendEventsTimeInterval, target: self, selector: #selector(self.sendEvents), userInfo: nil, repeats: true)
+            }
         }
     }
     
     @objc
     private func stopTimer() {
-        //TODO: should also be called when configuration flag (disabled) is true
         QBLog.verbose("Connection lost.  Stopping timer.")
         backgroundQueue = nil
         DispatchQueue.main.async {
@@ -85,6 +103,12 @@ class QBEventManager {
     @objc
 	private func sendEvents() {
         guard let configurationManager = configurationManager else {
+            QBLog.info("Configuration is loading, so events will be send after load config")
+            return
+        }
+        
+        if configurationManager.configuration.disabled {
+            QBLog.info("Sending events disabled in configuration")
             return
         }
         
@@ -92,7 +116,7 @@ class QBEventManager {
 			let currentEventBatch = self.databaseManager.query(entityType: QBEvent.self, sortBy: "dateAdded", ascending: true, limit: self.fetchLimit)
             
             if currentEventBatch.isEmpty {
-                QBLog.debug("nothing to sent")
+                QBLog.debug("🔶 nothing to sent")
                 return
             }
             
@@ -103,7 +127,7 @@ class QBEventManager {
 			eventService.sendEvents(events: events) { [weak self] (result) in
 				switch result {
 				case .success:
-					QBLog.info("Successfully sent events")
+					QBLog.info("✅ Successfully sent events")
 					self?.databaseManager.delete(entries: currentEventBatch)
 				case .failure(let error):
 					QBLog.info("Error sending events \(error.localizedDescription)")
@@ -124,7 +148,7 @@ class QBEventManager {
             var eventEntity = QBEventEntity(type: event.type!, eventData: event.data!)
             let context = QBContextEntity(sessionNumber: 123, id: "123", viewNumber: 123, viewTs: 123, sessionTs: 123, sessionViewNumber: 132)
             eventEntity.context = context
-            let meta = QBMetaEntity(id: "123", ts: 123, trackingId: "123", type: "ecProduct", source: "123", seq: 123)
+            let meta = QBMetaEntity(id: "123", ts: 123, trackingId: "123", type: "ecView", source: "123", seq: 123)
             eventEntity.meta = meta
             return eventEntity
         }

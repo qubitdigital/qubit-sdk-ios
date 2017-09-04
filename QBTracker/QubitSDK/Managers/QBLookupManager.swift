@@ -44,7 +44,7 @@ class QBLookupManager {
             
             switch result {
             case .success(let lookup):
-                QBLog.debug("lookup = \(lookup)")
+//                QBLog.debug("lookup = \(lookup)")
 
                 QBLog.debug("userDefaults = \(UserDefaults.standard.lastSavedRemoteLookup.debugDescription)")
 

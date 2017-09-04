@@ -25,6 +25,7 @@ class QBAPIClient {
     func dataTask<T: Decodable>(request: URLRequest, method: HTTPMethod, completion: ((Result<T>) -> Void)?) {
         var request = request
         request.httpMethod = method.rawValue
+        request.cachePolicy = .reloadIgnoringLocalCacheData
         
         let session = URLSession(configuration: .default)
         

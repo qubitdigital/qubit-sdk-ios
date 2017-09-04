@@ -41,8 +41,11 @@ class QBTracker {
             print("Please call QubitSDK.start(withTrackingId: \"YOUR_TRACKING_ID\"), before sending events")
             return
         }
-        // TODO: handle not inicialized state
-        // TODO: handle disabled configuration
+        if let disabled = configurationManager?.configuration.disabled, disabled {
+            QBLog.info("Sending events disabled in configuration")
+            return
+        }
+
         let event = QBEventEntity(type: type, eventData: data)
         eventManager?.queue(event: event)
     }
