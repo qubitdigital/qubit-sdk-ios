@@ -16,15 +16,14 @@ class QBEventManager {
     private let fetchLimit: Int = 100
 
     private var timer: Timer?
-    private var databaseManager = QBDatabaseManager.shared
-    private var connectionManager = QBConnectionManager.shared
+    private var databaseManager = QBDatabaseManager()
+    private var connectionManager = QBConnectionManager()
     private var backgroundQueue: DispatchQueue?
     
     init() {
         initTimer()
-        //TODO: Change magic strings to Constants
-        NotificationCenter.default.addObserver(self, selector: #selector(self.initTimer), name: NSNotification.Name(rawValue: "CONNECTION_CHANGED_REACHABLE"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.stopTimer), name: NSNotification.Name(rawValue: "CONNECTION_CHANGED_NOT_REACHABLE"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.initTimer), name: NSNotification.Name(rawValue: QBConnectionManager.notificationKeyReachable), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.stopTimer), name: NSNotification.Name(rawValue: QBConnectionManager.notificationKeyNotReachable), object: nil)
     }
     
     deinit {
@@ -125,7 +124,7 @@ class QBEventManager {
             var eventEntity = QBEventEntity(type: event.type!, eventData: event.data!)
             let context = QBContextEntity(sessionNumber: 123, id: "123", viewNumber: 123, viewTs: 123, sessionTs: 123, sessionViewNumber: 132)
             eventEntity.context = context
-            let meta = QBMetaEntity(id: "123", ts: 123, trackingId: "123", type: "123", source: "123", seq: 123)
+            let meta = QBMetaEntity(id: "123", ts: 123, trackingId: "123", type: "ecProduct", source: "123", seq: 123)
             eventEntity.meta = meta
             return eventEntity
         }

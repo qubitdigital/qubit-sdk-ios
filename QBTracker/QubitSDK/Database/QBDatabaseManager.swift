@@ -10,13 +10,11 @@ import Foundation
 import CoreData
 
 class QBDatabaseManager {
-    
-    static let shared = QBDatabaseManager()
     static let kQBDataModelName = "QBDataModel"
     
     var database: QBDatabase?
     
-    private init() {
+    init() {
         database = QBDatabase(modelName: QBDatabaseManager.kQBDataModelName)
     }
     

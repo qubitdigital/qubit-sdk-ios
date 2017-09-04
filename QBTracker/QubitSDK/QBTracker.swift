@@ -17,6 +17,10 @@ class QBTracker {
     private var sessionId: String?
     private var trackingId: String?
     private var eventManager: QBEventManager?
+    
+    private var trackerAleradyStarted: Bool {
+        return configurationManager != nil && eventManager != nil && trackingId != nil
+    }
 
     private init() {}
     
@@ -33,6 +37,12 @@ class QBTracker {
     }
     
     func sendEvent(type: String, data: String) {
+        guard trackerAleradyStarted else {
+            print("Please call QubitSDK.start(withTrackingId: \"YOUR_TRACKING_ID\"), before sending events")
+            return
+        }
+        // TODO: handle not inicialized state
+        // TODO: handle disabled configuration
         let event = QBEventEntity(type: type, eventData: data)
         eventManager?.queue(event: event)
     }
@@ -41,7 +51,9 @@ class QBTracker {
 		eventManager = nil
 		configurationManager = nil
 		lookupManager = nil
+        QBLog.info("tracker stoped")
 	}
+    
 }
 
 extension QBTracker: QBConfigurationManagerDelegate {
