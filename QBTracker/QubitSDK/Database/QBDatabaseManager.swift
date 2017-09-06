@@ -56,26 +56,26 @@ class QBDatabaseManager {
         return object
     }
     
-    @discardableResult func save() -> Bool {
+    func save() {
         guard let database = database else {
             QBLog.error("Database is not initialized")
-            return false
+            return
         }
         
-        do {
-            try database.managedObjectContext.save()
-            return true
-        } catch {
+        database.managedObjectContext.performAndWait {
+            do {
+                try database.managedObjectContext.save()
+            } catch {
             QBLog.error("Error saving changes to database \(error.localizedDescription)")
+            }
         }
         
-        return false
     }
     
-    @discardableResult func deleteAll<T: NSManagedObject>(from entityType: T.Type) -> Bool {
+    func deleteAll<T: NSManagedObject>(from entityType: T.Type) {
         guard let database = database else {
             QBLog.error("Database is not initialized")
-            return false
+            return
         }
         
         let entityName = String(describing: entityType)
@@ -83,30 +83,27 @@ class QBDatabaseManager {
         
         do {
             let results = try database.managedObjectContext.fetch(fetchRequest) as? [T] ?? []
-            return delete(entries: results)
+            delete(entries: results)
         } catch {
             QBLog.error("Error deleting all entries from entityName: \(entityName) error: \(error.localizedDescription)")
         }
-        
-        return false
     }
     
-    @discardableResult func delete(entries: [NSManagedObject]) -> Bool {
+    func delete(entries: [NSManagedObject]) {
         guard let database = database else {
             QBLog.error("Database is not initialized")
-            return false
+            return
         }
         
-        do {
-            for entry in entries {
-                database.managedObjectContext.delete(entry)
+        database.managedObjectContext.performAndWait {
+            do {
+                for entry in entries {
+                    database.managedObjectContext.delete(entry)
+                }
+                try database.managedObjectContext.save()
+            } catch {
+                QBLog.error("Error deleting entries: \(error.localizedDescription)")
             }
-            try database.managedObjectContext.save()
-            return true
-        } catch {
-            QBLog.error("Error deleting entries: \(error.localizedDescription)")
         }
-        
-        return false
     }
 }

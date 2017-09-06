@@ -13,23 +13,24 @@ import CoreData
 class QBEventManager {
     var configurationManager: QBConfigurationManager? {
         didSet {
-            initTimer()
+            startEventManager()
         }
     }
     var sessionManager: QBSessionManager?
     var lookupManager: QBLookupManager?
-    private let sendEventsTimeInterval: TimeInterval = 5.0
+    private let sendTimeFrameInterval: Int = 500
     private let fetchLimit: Int = 15
-
-    private var timer: Timer?
+    private var isSendingEvents: Bool = false
+    
     private var databaseManager = QBDatabaseManager()
     private var connectionManager = QBConnectionManager()
-    private var backgroundQueue: DispatchQueue?
-    
+    private var backgroundUploadQueue: DispatchQueue?
+    private var backgroundCoreDataQueue: DispatchQueue?
+
     init() {
-        initTimer()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.initTimer), name: NSNotification.Name(rawValue: QBConnectionManager.notificationKeyReachable), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.stopTimer), name: NSNotification.Name(rawValue: QBConnectionManager.notificationKeyNotReachable), object: nil)
+        startEventManager()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.startEventManager), name: NSNotification.Name(rawValue: QBConnectionManager.notificationKeyReachable), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.stopEventManager), name: NSNotification.Name(rawValue: QBConnectionManager.notificationKeyNotReachable), object: nil)
     }
     
     deinit {
@@ -39,7 +40,7 @@ class QBEventManager {
     // MARK: - Internal
     func queue(event: QBEventEntity) {
         QBLog.mark()
-		backgroundQueue?.sync {
+		backgroundCoreDataQueue?.sync {
 			guard var dbEvent = self.databaseManager.insert(entityType: QBEvent.self),
                   var dbContext = self.databaseManager.insert(entityType: QBContextEvent.self),
                   var dbMeta = self.databaseManager.insert(entityType: QBMetaEvent.self)
@@ -72,35 +73,43 @@ class QBEventManager {
     
     // MARK: - Private
     @objc
-    private func initTimer() {
+    private func startEventManager() {
         guard let configurationManager = configurationManager else {
             QBLog.info("Configuration is loading, so timer don't started")
-            stopTimer()
+            stopEventManager()
             return
         }
         
         if configurationManager.configuration.disabled {
             QBLog.info("Sending events disabled in configuration, so timer don't started")
-            stopTimer()
+            stopEventManager()
             return
         }
         
-        if timer == nil && backgroundQueue == nil {
-            stopTimer()
-            backgroundQueue = DispatchQueue(label: "EventQueue", qos: .background, attributes: .concurrent)
-            DispatchQueue.main.async {
-                self.timer = Timer.scheduledTimer(timeInterval: self.sendEventsTimeInterval, target: self, selector: #selector(self.sendEvents), userInfo: nil, repeats: true)
-            }
-        }
+        backgroundUploadQueue = DispatchQueue(label: "EventUploadingQueue", qos: .background, attributes: .concurrent)
+        backgroundCoreDataQueue = DispatchQueue(label: "EventCoreDataQueue", qos: .background, attributes: .concurrent)
+        trySendEvents()
     }
     
     @objc
-    private func stopTimer() {
+    private func stopEventManager() {
         QBLog.verbose("Connection lost.  Stopping timer.")
-        backgroundQueue = nil
-        DispatchQueue.main.async {
-            self.timer?.invalidate()
-            self.timer = nil
+        backgroundUploadQueue = nil
+        backgroundCoreDataQueue = nil
+    }
+    
+    @objc
+    private func trySendEvents() {
+        backgroundCoreDataQueue?.sync { [weak self] in
+            guard let fetchLimit = self?.fetchLimit, let sendTimeFrameInterval = self?.sendTimeFrameInterval else { return }
+            let deadlineTime = DispatchTime.now() + .milliseconds(sendTimeFrameInterval)
+            self?.backgroundUploadQueue?.asyncAfter(deadline: deadlineTime) {
+                if ((self?.databaseManager.query(entityType: QBEvent.self, sortBy: "dateAdded", ascending: true, limit: fetchLimit).first) != nil) {
+                    self?.sendEvents()
+                } else {
+                    self?.trySendEvents()
+                }
+            }
         }
     }
     
@@ -116,7 +125,7 @@ class QBEventManager {
             return
         }
         
-		backgroundQueue?.sync {
+		backgroundUploadQueue?.sync {
 			let currentEventBatch = self.databaseManager.query(entityType: QBEvent.self, sortBy: "dateAdded", ascending: true, limit: self.fetchLimit)
             
             if currentEventBatch.isEmpty {
@@ -128,6 +137,7 @@ class QBEventManager {
 			
             let eventService = QBEventServiceImp(withConfigurationManager: configurationManager)
             
+            self.isSendingEvents = true
 			eventService.sendEvents(events: events) { [weak self] (result) in
 				switch result {
 				case .success:
@@ -137,6 +147,8 @@ class QBEventManager {
 					QBLog.info("Error sending events \(error.localizedDescription)")
 					self?.markFailed(events: currentEventBatch)
 				}
+                self?.isSendingEvents = false
+                self?.trySendEvents()
 			}
 		}
 	}
