@@ -19,7 +19,7 @@ class QBEventManager {
     var sessionManager: QBSessionManager?
     var lookupManager: QBLookupManager?
     private let sendEventsTimeInterval: TimeInterval = 5.0
-    private let fetchLimit: Int = 100
+    private let fetchLimit: Int = 15
 
     private var timer: Timer?
     private var databaseManager = QBDatabaseManager()
@@ -40,13 +40,15 @@ class QBEventManager {
     func queue(event: QBEventEntity) {
         QBLog.mark()
 		backgroundQueue?.sync {
-			guard let dbEvent = self.databaseManager.insert(entityType: QBEvent.self) else {
+			guard var dbEvent = self.databaseManager.insert(entityType: QBEvent.self),
+                  var dbContext = self.databaseManager.insert(entityType: QBContextEvent.self),
+                  var dbMeta = self.databaseManager.insert(entityType: QBMetaEvent.self)
+                else {
 				return
 			}
-			
-            dbEvent.data = event.eventData
-			dbEvent.type = event.type
-            dbEvent.dateAdded = NSDate()
+        
+            dbEvent = event.fillQBEvent(event: &dbEvent, context: &dbContext, meta: &dbMeta)
+            
 			self.databaseManager.save()
 		}
     }
@@ -146,13 +148,8 @@ class QBEventManager {
     private func convert(events: [QBEvent]) -> [QBEventEntity] {
         let result: [QBEventEntity] = []
         
-        let convertedArray = events.flatMap { (event: QBEvent) -> QBEventEntity in
-            var eventEntity = QBEventEntity(type: event.type!, eventData: event.data!)
-            
-            let context = QBContextEntity(id: QBDevice.getId(), sample: String(QBDevice.getId().hashValue), viewNumber: 1, sessionNumber: 1, sessionViewNumber: 1, conversionNumber: 2, conversionCycleNumber: 2, lifetimeValue: QBContextEntity.QBLifetimeValue(value: 2312), lifetimeCurrency: "USD", timeZoneOffset: 1000, viewTs: 1231312312, sessionTs: 1231312312)
-            let meta = QBMetaEntity(id: NSUUID().uuidString, ts: Int(Date().timeIntervalSince1970), trackingId: "miquido", type: "ecProduct", source: "iOS@0.3.1", seq: 3, batchTs: 6)
-            eventEntity.meta = meta
-            eventEntity.context = context
+        let convertedArray = events.flatMap { (event: QBEvent) -> QBEventEntity? in
+            let eventEntity = QBEventEntity.create(with: event)
             return eventEntity
         }
         

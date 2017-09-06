@@ -48,8 +48,11 @@ class QBTracker {
             QBLog.info("Sending events disabled in configuration")
             return
         }
-
-        let event = QBEventEntity(type: type, eventData: data)
+        let context = QBContextEntity(id: QBDevice.getId(), sample: String(QBDevice.getId().hashValue), viewNumber: 1, sessionNumber: 1, sessionViewNumber: 1, conversionNumber: 2, conversionCycleNumber: 2, lifetimeValue: QBContextEntity.QBLifetimeValue(value: 2312), lifetimeCurrency: "USD", timeZoneOffset: 1000, viewTs: 1231312312, sessionTs: 1231312312)
+        let meta = QBMetaEntity(id: NSUUID().uuidString, ts: Int(Date().timeIntervalSince1970), trackingId: "miquido", type: "ecProduct", source: "iOS@0.3.1", seq: 3, batchTs: 6)
+        
+        let event = QBEventEntity(type: type, eventData: data, context: context, meta: meta, session: nil)
+        
         eventManager?.queue(event: event)
     }
 	
