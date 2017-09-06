@@ -16,6 +16,8 @@ class QBEventManager {
             initTimer()
         }
     }
+    var sessionManager: QBSessionManager?
+    var lookupManager: QBLookupManager?
     private let sendEventsTimeInterval: TimeInterval = 5.0
     private let fetchLimit: Int = 100
 
@@ -146,10 +148,11 @@ class QBEventManager {
         
         let convertedArray = events.flatMap { (event: QBEvent) -> QBEventEntity in
             var eventEntity = QBEventEntity(type: event.type!, eventData: event.data!)
-            let context = QBContextEntity(sessionNumber: 123, id: "123", viewNumber: 123, viewTs: 123, sessionTs: 123, sessionViewNumber: 132)
-            eventEntity.context = context
-            let meta = QBMetaEntity(id: "123", ts: 123, trackingId: "123", type: "ecView", source: "123", seq: 123)
+            
+            let context = QBContextEntity(id: QBDevice.getId(), sample: String(QBDevice.getId().hashValue), viewNumber: 1, sessionNumber: 1, sessionViewNumber: 1, conversionNumber: 2, conversionCycleNumber: 2, lifetimeValue: 2730, lifetimeCurrency: "USD", timeZoneOffset: 1000, viewTs: 1231312312, sessionTs: 1231312312)
+            let meta = QBMetaEntity(id: NSUUID().uuidString, ts: Int(Date().timeIntervalSince1970), trackingId: "miquido", type: "ecView", source: "iOS@0.3.1", seq: 3, batchTs: 6)
             eventEntity.meta = meta
+            eventEntity.context = context
             return eventEntity
         }
         

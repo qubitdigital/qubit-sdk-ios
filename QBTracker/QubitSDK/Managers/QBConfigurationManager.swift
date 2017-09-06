@@ -14,7 +14,7 @@ protocol QBConfigurationManagerDelegate: class {
 
 class QBConfigurationManager {
     // MARK: - Private properties
-    var trackingId: String
+    let trackingId: String
     weak var delegate: QBConfigurationManagerDelegate?
     var configuration: QBConfigurationEntity {
         if let remoteConfiguration = self.remoteConfiguration {
@@ -59,8 +59,6 @@ class QBConfigurationManager {
             
             switch result {
             case .success(let config):
-//                QBLog.debug("config = \(config)")
-                
                 QBLog.debug("userDefaults = \(UserDefaults.standard.lastSavedRemoteConfiguration.debugDescription)")
                 
                 strongSelf.remoteConfiguration = config

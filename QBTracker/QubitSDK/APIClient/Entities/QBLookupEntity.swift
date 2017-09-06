@@ -9,5 +9,10 @@
 import Foundation
 
 struct QBLookupEntity: Codable {
-
+    let ipAddress: String?
+    let viewNumber: Int?
+    let sessionNumber: Int?
+    let conversionNumber: Int?
+    let conversionCycleNumber: Int?
+//    let lifetimeValue: Int?
 }

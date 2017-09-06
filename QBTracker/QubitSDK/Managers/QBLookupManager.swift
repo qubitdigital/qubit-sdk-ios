@@ -8,7 +8,26 @@
 
 import Foundation
 
+protocol QBLookupManagerDelegate: class {
+    func lookupUpdated()
+}
+
 class QBLookupManager {
+    
+    weak var delegate: QBLookupManagerDelegate?
+    var lookup: QBLookupEntity? {
+        if let remoteLookup = self.remoteLookup {
+            QBLog.verbose("used remote lookup")
+            return remoteLookup
+        }
+        
+        if let lastSavedRemoteLookup = UserDefaults.standard.lastSavedRemoteLookup {
+            QBLog.verbose("used last saved remote lookup")
+            return lastSavedRemoteLookup
+        }
+
+        return nil
+    }
     
     private var remoteLookup: QBLookupEntity? = nil {
         didSet {
@@ -44,14 +63,15 @@ class QBLookupManager {
             
             switch result {
             case .success(let lookup):
-//                QBLog.debug("lookup = \(lookup)")
-
                 QBLog.debug("userDefaults = \(UserDefaults.standard.lastSavedRemoteLookup.debugDescription)")
 
                 strongSelf.remoteLookup = lookup
             case .failure(let error):
                 //TODO: handle failure
                 QBLog.error("error = \(error)")
+            }
+            if strongSelf.lookup != nil {
+                strongSelf.delegate?.lookupUpdated()
             }
         }
         
@@ -65,19 +85,7 @@ class QBLookupManager {
         }
         return false
     }
-    
-    func getLookup() -> QBLookupEntity {
-        if let remoteLookup = self.remoteLookup {
-            return remoteLookup
-        }
         
-        if let lastSavedRemoteLookup = UserDefaults.standard.lastSavedRemoteLookup {
-            return lastSavedRemoteLookup
-        }
-        
-        return QBLookupEntity()
-    }
-    
 }
 
 // MARK: - Timer

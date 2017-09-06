@@ -9,10 +9,19 @@
 import Foundation
 
 struct QBContextEntity: Codable {
-    let sessionNumber: Int
     let id: String
-    let viewNumber: Int
+    let sample: String
+    let viewNumber: Int // lookup
+    let sessionNumber: Int // lookup
+    let sessionViewNumber: Int
+    
+    let conversionNumber: Int // lookup
+    let conversionCycleNumber: Int // lookup
+    
+    let lifetimeValue: Int // lookup
+    let lifetimeCurrency: String
+    
+    let timeZoneOffset: Int
     let viewTs: Int
     let sessionTs: Int
-    let sessionViewNumber: Int
 }

@@ -8,112 +8,67 @@
 
 import Foundation
 
-enum QBSessionKeys: String {
-    case sessionId
-    case sessionNumber
-    case viewNumber
-    case viewTimestamp
-    case sessionTimestamp
-    case sessionStartTimestamp
-    case sessionViewNumber
-    case sequenceNumber
-}
-
 class QBSessionManager {
-    
-    static let shared = QBSessionManager()
-    
-    fileprivate let sessionTime: Double = 1800
-    
-    var sessionId: String = ""
-    var sessionNumber: Int = 0
-    var sessionTimestamp: Double = 0.0
-    var sessionStartTimestamp: Double = 0.0
-    var viewNumber: Int = 0
-    var viewTimestamp: Double = 0.0
-    var sessionViewNumber: Int = 0
-    var sequenceNumber: Int = 0
-    
-    private init() {
-        loadValues()
-    }
-    
-    func getValidSessionId() -> String {
-        if !(isSessionValid()) {
-            startNewSession()
+
+    var session: QBSessionEntity {
+        if self.isSessionValid() {
+            return currentSession
         } else {
-            sessionTimestamp = Date().timeIntervalSince1970
+            startNewSession()
+            return currentSession
         }
-        
-        saveValues()
-        return sessionId
     }
     
-    func increaseViewNumber() -> Bool {
-        viewNumber += 1
-        viewTimestamp = Date().timeIntervalSince1970
-        
-        if !isSessionValid() {
-            startNewSession(fromView: true)
-            return true
+    private var currentSession: QBSessionEntity
+    private let sessionTime: Double = 1800
+    
+    init() {
+        guard let lastSession = UserDefaults.standard.session else {
+            self.currentSession = QBSessionEntity()
+            return
         }
-        
-        return false
+        self.currentSession = lastSession
+        self.startNewSession()
     }
     
-    func newSequenceNumber() -> Int {
-        sequenceNumber += 1
-        return sequenceNumber
+    private func startNewSession() {
+        self.currentSession.sessionNumber += 1
+        self.currentSession.sessionViewNumber = 0
+        self.currentSession.sequenceNumber = 0
+        
+//      let oldTimeStamp = self.session.sessionTimestamp
+        let timestamp = Date().timeIntervalSince1970
+        let timestampString = NSNumber(value: timestamp).stringValue
+        let newSessionId = timestampString.md5
+        self.currentSession.sessionId = newSessionId
+        
+        self.currentSession.sessionTimestamp = timestamp
+        self.currentSession.sessionStartTimestamp = timestamp
+        
+        self.saveSession()
+        //TODO: send session event
     }
     
-    private func startNewSession(fromView: Bool = false) {
-        let currentDateTimeInterval = Date().timeIntervalSince1970
-        let currentDateString = NSNumber(value: currentDateTimeInterval).stringValue
-        let newSessionId = currentDateString.md5
-        
-        sessionNumber += 1
-        sessionViewNumber = fromView ? 1 : 0
-        sequenceNumber = 0
-        sessionTimestamp = currentDateTimeInterval
-        sessionStartTimestamp = currentDateTimeInterval
-        
-        //TODO: Implement QBTrackingManager
-        //QBTrackingManager.shared.dispatchSessionEvent(now, withEnd: previousSessionTimestamp)
-        
-        sessionId = newSessionId
+    private func saveSession() {
+        UserDefaults.standard.session = self.currentSession
+    }
+    
+    func increaseViewNumber() {
+        self.currentSession.viewNumber += 1
+        self.currentSession.sessionViewNumber += 1
+        self.currentSession.viewTimestamp = Date().timeIntervalSince1970
+        self.saveSession()
     }
     
     private func isSessionValid() -> Bool {
         let currentTimestamp = Date().timeIntervalSince1970
-
-        return !(currentTimestamp >= sessionTimestamp + sessionTime)
+        return currentTimestamp < self.currentSession.sessionTimestamp + sessionTime
     }
     
-    private func loadValues() {
-        let userDefaults = UserDefaults.standard
-        
-        sessionId = userDefaults.object(forKey: QBSessionKeys.sessionId.rawValue) as? String ?? ""
-        sessionNumber = userDefaults.object(forKey: QBSessionKeys.sessionNumber.rawValue) as? Int ?? 0
-        viewNumber = userDefaults.object(forKey: QBSessionKeys.viewNumber.rawValue) as? Int ?? 0
-        viewTimestamp = userDefaults.object(forKey: QBSessionKeys.viewTimestamp.rawValue) as? Double ?? 0.0
-        sessionTimestamp = userDefaults.object(forKey: QBSessionKeys.sessionTimestamp.rawValue) as? Double ?? 0.0
-        sessionStartTimestamp = userDefaults.object(forKey: QBSessionKeys.sessionStartTimestamp.rawValue) as? Double ?? 0.0
-        sessionViewNumber = userDefaults.object(forKey: QBSessionKeys.sessionViewNumber.rawValue) as? Int ?? 0
-        sequenceNumber = userDefaults.object(forKey: QBSessionKeys.sequenceNumber.rawValue) as? Int ?? 0
-    }
+    // TODO: Look like it's don't needed
+//    func newSequenceNumber() -> Int {
+//        sequenceNumber += 1
+//        return sequenceNumber
+//    }
     
-    private func saveValues() {
-        let userDefaults = UserDefaults.standard
-        
-        userDefaults.set(sessionId, forKey: QBSessionKeys.sessionId.rawValue)
-        userDefaults.set(sessionNumber, forKey: QBSessionKeys.sessionNumber.rawValue)
-        userDefaults.set(viewNumber, forKey: QBSessionKeys.viewNumber.rawValue)
-        userDefaults.set(viewTimestamp, forKey: QBSessionKeys.viewTimestamp.rawValue)
-        userDefaults.set(sessionTimestamp, forKey: QBSessionKeys.sessionTimestamp.rawValue)
-        userDefaults.set(sessionStartTimestamp, forKey: QBSessionKeys.sessionStartTimestamp.rawValue)
-        userDefaults.set(sessionViewNumber, forKey: QBSessionKeys.sessionViewNumber.rawValue)
-        userDefaults.set(sequenceNumber, forKey: QBSessionKeys.sequenceNumber.rawValue)
-        
-        userDefaults.synchronize()
-    }
 }

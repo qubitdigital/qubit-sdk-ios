@@ -15,4 +15,5 @@ struct QBMetaEntity: Codable {
     let type: String
     let source: String
     let seq: Int
+    let batchTs: Int
 }

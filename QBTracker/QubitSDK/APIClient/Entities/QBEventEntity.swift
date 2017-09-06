@@ -14,6 +14,7 @@ struct QBEventEntity: Codable {
     
     var context: QBContextEntity?
     var meta: QBMetaEntity?
+    var session: QBSessionEntity?
     
     init(type: String, eventData: String) {
         self.type = type

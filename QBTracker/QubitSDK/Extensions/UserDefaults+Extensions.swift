@@ -20,6 +20,7 @@ extension UserDefaults {
         set {
             if let encoded = try? JSONEncoder().encode(newValue) {
                 set(encoded, forKey: #function)
+                synchronize()
             }
         }
     }
@@ -35,6 +36,23 @@ extension UserDefaults {
         set {
             if let encoded = try? JSONEncoder().encode(newValue) {
                 set(encoded, forKey: #function)
+                synchronize()
+            }
+        }
+    }
+    
+    var session: QBSessionEntity? {
+        get {
+            if let sessionData = data(forKey: #function), let session = try? JSONDecoder().decode(QBSessionEntity.self, from: sessionData) {
+                return session
+            }
+            
+            return nil
+        }
+        set {
+            if let encoded = try? JSONEncoder().encode(newValue) {
+                set(encoded, forKey: #function)
+                synchronize()
             }
         }
     }

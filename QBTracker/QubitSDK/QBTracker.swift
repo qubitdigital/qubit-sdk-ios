@@ -14,9 +14,9 @@ class QBTracker {
     
     private var configurationManager: QBConfigurationManager?
     private var lookupManager: QBLookupManager?
-    private var sessionId: String?
     private var trackingId: String?
     private var eventManager: QBEventManager?
+    private var sessionManager: QBSessionManager?
     
     private var trackerAleradyStarted: Bool {
         return configurationManager != nil && eventManager != nil && trackingId != nil
@@ -29,11 +29,14 @@ class QBTracker {
         QBLog.info("QBTracker Initalization...")
 
         assert(!id.isEmpty, "Tracking id cannot be empty")
+        if id.isEmpty {
+            QBLog.error("Tracking id cannot be empty")
+            return
+        }
         
         trackingId = id
         configurationManager = QBConfigurationManager(withTrackingId: id, withDeleagte: self)
         eventManager = QBEventManager()
-		//sessionId = QBSessionManager.shared.getValidSessionId()
     }
     
     func sendEvent(type: String, data: String) {
@@ -63,7 +66,17 @@ extension QBTracker: QBConfigurationManagerDelegate {
     func configurationUpdated() {
         if self.lookupManager == nil, let configurationManager = self.configurationManager, let trackingId = self.trackingId {
             lookupManager = QBLookupManager(withConfigurationManager: configurationManager, withTrackingId: trackingId)
+            lookupManager?.delegate = self
         }
         eventManager?.configurationManager = self.configurationManager
+    }
+}
+
+extension QBTracker: QBLookupManagerDelegate {
+    func lookupUpdated() {
+        eventManager?.lookupManager = self.lookupManager
+        if self.sessionManager == nil {
+            self.sessionManager = QBSessionManager()
+        }
     }
 }
