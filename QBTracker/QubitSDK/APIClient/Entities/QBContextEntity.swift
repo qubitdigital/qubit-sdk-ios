@@ -18,10 +18,15 @@ struct QBContextEntity: Codable {
     let conversionNumber: Int // lookup
     let conversionCycleNumber: Int // lookup
     
-    let lifetimeValue: Int // lookup
+    let lifetimeValue: QBLifetimeValue // lookup
     let lifetimeCurrency: String
     
     let timeZoneOffset: Int
     let viewTs: Int
     let sessionTs: Int
+    
+    struct QBLifetimeValue: Codable {
+        let value: Int
+        let currency = "USD"
+    }
 }
