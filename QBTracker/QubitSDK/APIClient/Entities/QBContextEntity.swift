@@ -31,7 +31,6 @@ struct QBContextEntity: Codable {
     }
 }
 
-
 extension QBContextEntity {
     func fillQBContextEvent(context: inout QBContextEvent) -> QBContextEvent {
         context.id = self.id

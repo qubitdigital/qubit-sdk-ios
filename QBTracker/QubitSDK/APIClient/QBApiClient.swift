@@ -35,9 +35,7 @@ class QBAPIClient {
                 completion?(.failure(error))
                 return
             }
-            
             QBLog.debug("✅ Response = \(response?.description ?? "") \n")
-            
             guard let data = data else {
                 let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Data was not retrieved from request = \(request)"]) as Error
                 QBLog.error("Data was not retrieved from request = \(request) \n")

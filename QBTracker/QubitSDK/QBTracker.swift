@@ -53,7 +53,7 @@ class QBTracker {
         
         let event = QBEventEntity(type: type, eventData: data, context: context, meta: meta, session: nil)
         
-        eventManager?.queue(event: event)
+        eventManager?.addEventInQueue(event: event)
     }
 	
 	func stop() {
