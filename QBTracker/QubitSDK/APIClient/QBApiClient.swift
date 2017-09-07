@@ -22,11 +22,15 @@ enum HTTPMethod: String {
 
 class QBAPIClient {
     
-    func dataTask<T: Decodable>(request: URLRequest, method: HTTPMethod, completion: ((Result<T>) -> Void)?) {
+    func setup(request: URLRequest, method: HTTPMethod) -> URLRequest {
         var request = request
         request.httpMethod = method.rawValue
         request.cachePolicy = .reloadIgnoringLocalCacheData
-        
+        return request
+    }
+    
+    func dataTask<T: Decodable>(request: URLRequest, method: HTTPMethod, completion: ((Result<T>) -> Void)?) {
+        let request = setup(request: request, method: method)
         let session = URLSession(configuration: .default)
         
         let task = session.dataTask(with: request) { (data, response, error) in

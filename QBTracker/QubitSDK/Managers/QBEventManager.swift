@@ -10,6 +10,17 @@ import Foundation
 import UIKit
 import CoreData
 
+struct QBEventManagerConfig {
+    var sendingAttemptsDoneCount = 0
+    var sendTimeFrameInterval: Int = 500
+    let batchIntervalMs: Int = 500
+    let expBackoffBaseTimeSec: Int = 5
+    let expBackoffMaxSendingAttempts: Int = 7
+    let maxRetryIntervalSec: Int = 60 * 5
+    let oneEventCount = 1
+    let fetchLimit: Int = 15
+}
+
 class QBEventManager {
     var configurationManager: QBConfigurationManager? {
         didSet {
@@ -19,15 +30,8 @@ class QBEventManager {
     var sessionManager: QBSessionManager?
     var lookupManager: QBLookupManager?
     
-    private var sendingAttemptsDoneCount = 0
-    private var sendTimeFrameInterval: Int = 500
-    private let batchIntervalMs: Int = 500
-    private let expBackoffBaseTimeSec: Int = 5
-    private let expBackoffMaxSendingAttempts: Int = 7
-    private let maxRetryIntervalSec: Int = 60 * 5
-    
-    private let fetchLimit: Int = 15
     private var isSendingEvents: Bool = false
+    private var config: QBEventManagerConfig = QBEventManagerConfig()
     
     private var databaseManager = QBDatabaseManager()
     private var connectionManager = QBConnectionManager()
@@ -109,7 +113,7 @@ class QBEventManager {
     @objc
     private func trySendEvents() {
         backgroundCoreDataQueue?.sync { [weak self] in
-            guard let fetchLimit = self?.fetchLimit, let sendTimeFrameInterval = self?.sendTimeFrameInterval else { return }
+            guard let fetchLimit = self?.config.fetchLimit, let sendTimeFrameInterval = self?.config.sendTimeFrameInterval else { return }
             let deadlineTime = DispatchTime.now() + .milliseconds(sendTimeFrameInterval)
             self?.backgroundUploadQueue?.asyncAfter(deadline: deadlineTime) {
                 if ((self?.databaseManager.query(entityType: QBEvent.self, sortBy: "dateAdded", ascending: true, limit: fetchLimit).first) != nil) {
@@ -121,7 +125,7 @@ class QBEventManager {
     
     @objc
     private func trySendEventsWhenFirstEventAdded() {
-        if self.databaseManager.query(entityType: QBEvent.self, sortBy: "dateAdded", ascending: true, limit: fetchLimit).count == 1, self.isSendingEvents == false {
+        if self.databaseManager.query(entityType: QBEvent.self, sortBy: "dateAdded", ascending: true, limit: config.fetchLimit).count == 1, self.isSendingEvents == false {
             self.trySendEvents()
         }
     }
@@ -139,7 +143,7 @@ class QBEventManager {
         }
         
 		backgroundUploadQueue?.sync {
-			let currentEventBatch = self.databaseManager.query(entityType: QBEvent.self, sortBy: "dateAdded", ascending: true, limit: self.fetchLimit)
+			let currentEventBatch = self.databaseManager.query(entityType: QBEvent.self, sortBy: "dateAdded", ascending: true, limit: self.config.fetchLimit)
             
             if currentEventBatch.isEmpty {
                 QBLog.debug("🔶 nothing to sent")
@@ -157,13 +161,13 @@ class QBEventManager {
 				case .success:
 					QBLog.info("✅ Successfully sent events")
 					strongSelf.databaseManager.delete(entries: currentEventBatch)
-                    strongSelf.sendTimeFrameInterval = strongSelf.batchIntervalMs
-                    strongSelf.sendingAttemptsDoneCount = 0
+                    strongSelf.config.sendTimeFrameInterval = strongSelf.config.batchIntervalMs
+                    strongSelf.config.sendingAttemptsDoneCount = 0
 				case .failure(let error):
-					QBLog.info("Error sending events \(error.localizedDescription)")
+					QBLog.info("⛔️ Error sending events \(error.localizedDescription)")
 					strongSelf.markFailed(events: currentEventBatch)
-                    strongSelf.sendingAttemptsDoneCount += 1
-                    strongSelf.sendTimeFrameInterval = strongSelf.evaluateIntervalMsToNextRetry(sendingAttemptsDone: strongSelf.sendingAttemptsDoneCount)
+                    strongSelf.config.sendingAttemptsDoneCount += 1
+                    strongSelf.config.sendTimeFrameInterval = strongSelf.evaluateIntervalMsToNextRetry(sendingAttemptsDone: strongSelf.config.sendingAttemptsDoneCount)
 				}
                 strongSelf.isSendingEvents = false
                 strongSelf.trySendEvents()
@@ -194,12 +198,12 @@ class QBEventManager {
     }
     
     private func evaluateIntervalMsToNextRetry(sendingAttemptsDone: Int) -> Int {
-        if sendingAttemptsDone > expBackoffMaxSendingAttempts {
-            let seconds = TimeInterval(maxRetryIntervalSec)
+        if sendingAttemptsDone > config.expBackoffMaxSendingAttempts {
+            let seconds = TimeInterval(config.maxRetryIntervalSec)
             return seconds.millisecond
         } else {
-            let maxSecs: Int = 2 ^ (sendingAttemptsDone - 1) * expBackoffBaseTimeSec
-            return Int(min(arc4random_uniform(UInt32(maxSecs))+1, UInt32(maxRetryIntervalSec)))
+            let maxSecs: Int = 2 ^ (sendingAttemptsDone - 1) * config.expBackoffBaseTimeSec
+            return Int(min(arc4random_uniform(UInt32(maxSecs))+1, UInt32(config.maxRetryIntervalSec)))
         }
     }
 }
