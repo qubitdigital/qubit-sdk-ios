@@ -61,7 +61,7 @@ class QBTracker {
             // TODO: fill batchTs, I think filling should be in QBEventManager
             let meta = QBMetaEntity(id: NSUUID().uuidString, ts: Int(Date().timeIntervalSince1970), trackingId: trackingId, type: type, source: session.deviceInfo.getOsNameAndVersion(), seq: session.sequenceNumber, batchTs: 123)
             let event = QBEventEntity(type: type, eventData: data, context: context, meta: meta, session: nil)
-            eventManager?.queue(event: event)
+            eventManager?.addEventInQueue(event: event)
         }
     }
 	

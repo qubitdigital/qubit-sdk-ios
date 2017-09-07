@@ -60,6 +60,7 @@
 		A0D30B821F559F180029D3DC /* QubitSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D30B811F559F180029D3DC /* QubitSDK.swift */; };
 		A0F372BE1F4C623F00283075 /* QBDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F372BD1F4C623F00283075 /* QBDatabase.swift */; };
 		A0F5BF591F4D7833009EFE8D /* QBDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A0F5BF571F4D7833009EFE8D /* QBDataModel.xcdatamodeld */; };
+		B905C8071F6177BC00A9A084 /* TimeInterval+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B905C8061F6177BC00A9A084 /* TimeInterval+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +136,7 @@
 		A0F372A81F4C418400283075 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A0F372BD1F4C623F00283075 /* QBDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBDatabase.swift; sourceTree = "<group>"; };
 		A0F5BF581F4D7833009EFE8D /* QBDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QBDataModel.xcdatamodel; sourceTree = "<group>"; };
+		B905C8061F6177BC00A9A084 /* TimeInterval+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -324,6 +326,7 @@
 			children = (
 				A099EE6D1F4C38DD007319A9 /* String+md5.swift */,
 				420738751F4D9739005A0B9E /* UserDefaults+Extensions.swift */,
+				B905C8061F6177BC00A9A084 /* TimeInterval+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -547,6 +550,7 @@
 				423AEFE91F4C505300F6EF6D /* QBStatusEntity.swift in Sources */,
 				42F0CD6C1F4B044F00BD9010 /* QBApiClient.swift in Sources */,
 				42D768B31F542AEE00FD7944 /* QBLookupService.swift in Sources */,
+				B905C8071F6177BC00A9A084 /* TimeInterval+Extensions.swift in Sources */,
 				420738761F4D9739005A0B9E /* UserDefaults+Extensions.swift in Sources */,
 				422370821F4C6B2B008D401E /* QBContextEntity.swift in Sources */,
 				A0F5BF591F4D7833009EFE8D /* QBDataModel.xcdatamodeld in Sources */,

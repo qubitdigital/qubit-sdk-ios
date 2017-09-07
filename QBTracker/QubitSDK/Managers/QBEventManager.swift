@@ -16,7 +16,13 @@ class QBEventManager {
             startEventManager()
         }
     }
-    private let sendTimeFrameInterval: Int = 500
+
+    private var sendingAttemptsDoneCount = 0
+    private var sendTimeFrameInterval: Int = 500
+    private let batchIntervalMs: Int = 500
+    private let expBackoffBaseTimeSec: Int = 5
+    private let expBackoffMaxSendingAttempts: Int = 7
+    private let maxRetryIntervalSec: Int = 60 * 5
     private let fetchLimit: Int = 15
     private var isSendingEvents: Bool = false
     private var databaseManager = QBDatabaseManager()
@@ -35,19 +41,20 @@ class QBEventManager {
     }
     
     // MARK: - Internal
-    func queue(event: QBEventEntity) {
+    func addEventInQueue(event: QBEventEntity) {
         QBLog.mark()
-		backgroundCoreDataQueue?.sync {
-			guard var dbEvent = self.databaseManager.insert(entityType: QBEvent.self),
-                  var dbContext = self.databaseManager.insert(entityType: QBContextEvent.self),
-                  var dbMeta = self.databaseManager.insert(entityType: QBMetaEvent.self)
+		backgroundCoreDataQueue?.sync { [weak self] in
+			guard var dbEvent = self?.databaseManager.insert(entityType: QBEvent.self),
+                  var dbContext = self?.databaseManager.insert(entityType: QBContextEvent.self),
+                  var dbMeta = self?.databaseManager.insert(entityType: QBMetaEvent.self)
                 else {
 				return
 			}
         
             dbEvent = event.fillQBEvent(event: &dbEvent, context: &dbContext, meta: &dbMeta)
             
-			self.databaseManager.save()
+			self?.databaseManager.save()
+            self?.trySendEventsWhenFirstEventAdded()
 		}
     }
     
@@ -103,10 +110,15 @@ class QBEventManager {
             self?.backgroundUploadQueue?.asyncAfter(deadline: deadlineTime) {
                 if ((self?.databaseManager.query(entityType: QBEvent.self, sortBy: "dateAdded", ascending: true, limit: fetchLimit).first) != nil) {
                     self?.sendEvents()
-                } else {
-                    self?.trySendEvents()
                 }
             }
+        }
+    }
+    
+    @objc
+    private func trySendEventsWhenFirstEventAdded() {
+        if self.databaseManager.query(entityType: QBEvent.self, sortBy: "dateAdded", ascending: true, limit: fetchLimit).count == 1, self.isSendingEvents == false {
+            self.trySendEvents()
         }
     }
     
@@ -136,16 +148,21 @@ class QBEventManager {
             
             self.isSendingEvents = true
 			eventService.sendEvents(events: events) { [weak self] (result) in
+                guard let strongSelf = self else { return }
 				switch result {
 				case .success:
 					QBLog.info("✅ Successfully sent events")
-					self?.databaseManager.delete(entries: currentEventBatch)
+					strongSelf.databaseManager.delete(entries: currentEventBatch)
+                    strongSelf.sendTimeFrameInterval = strongSelf.batchIntervalMs
+                    strongSelf.sendingAttemptsDoneCount = 0
 				case .failure(let error):
 					QBLog.info("Error sending events \(error.localizedDescription)")
-					self?.markFailed(events: currentEventBatch)
+					strongSelf.markFailed(events: currentEventBatch)
+                    strongSelf.sendingAttemptsDoneCount += 1
+                    strongSelf.sendTimeFrameInterval = strongSelf.evaluateIntervalMsToNextRetry(sendingAttemptsDone: strongSelf.sendingAttemptsDoneCount)
 				}
-                self?.isSendingEvents = false
-                self?.trySendEvents()
+                strongSelf.isSendingEvents = false
+                strongSelf.trySendEvents()
 			}
 		}
 	}
@@ -155,7 +172,6 @@ class QBEventManager {
     }
 
     private func convert(events: [QBEvent]) -> [QBEventEntity] {
-        let result: [QBEventEntity] = []
         
         let convertedArray = events.flatMap { (event: QBEvent) -> QBEventEntity? in
             let eventEntity = QBEventEntity.create(with: event)
@@ -171,5 +187,15 @@ class QBEventManager {
         }
         
         databaseManager.save()
+    }
+    
+    private func evaluateIntervalMsToNextRetry(sendingAttemptsDone: Int) -> Int {
+        if sendingAttemptsDone > expBackoffMaxSendingAttempts {
+            let seconds = TimeInterval(maxRetryIntervalSec)
+            return seconds.millisecond
+        } else {
+            let maxSecs: Int = 2 ^ (sendingAttemptsDone - 1) * expBackoffBaseTimeSec
+            return Int(max(arc4random_uniform(UInt32(maxSecs))+1, UInt32(maxRetryIntervalSec)))
+        }
     }
 }

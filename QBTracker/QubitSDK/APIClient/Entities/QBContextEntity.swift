@@ -37,7 +37,6 @@ struct QBContextEntity: Codable {
             self.value = value
         }
     }
-
 }
 
 extension QBContextEntity {
