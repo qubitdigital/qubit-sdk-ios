@@ -29,6 +29,13 @@ struct QBContextEntity: Codable {
     struct QBLifetimeValue: Codable {
         let value: Int
         let currency = "USD"
+        
+        init?(withValue value: Int?) {
+            guard let value = value else {
+                return nil
+            }
+            self.value = value
+        }
     }
 
 }
@@ -43,11 +50,7 @@ extension QBContextEntity {
         
         self.conversionNumber = lookup?.conversionNumber
         self.conversionCycleNumber = lookup?.conversionCycleNumber
-        var lifeTimeValueTemp: QBLifetimeValue?
-        if let lifeTimeInt = lookup?.lifetimeValue {
-            lifeTimeValueTemp = QBLifetimeValue(value: lifeTimeInt)
-        }
-        self.lifetimeValue = lifeTimeValueTemp
+        self.lifetimeValue = QBLifetimeValue(withValue: lookup?.lifetimeValue)
         // TODO: set timezone offset
         self.timeZoneOffset = 0
         self.viewTs = Int(session.viewTimestamp)
@@ -88,12 +91,7 @@ extension QBContextEntity {
             let sessionTs = context.sessionTs?.intValue
         else { return nil }
         
-        var lifeTimeValue: QBLifetimeValue?
-        if let lifeTimeInt = context.lifetimeValue?.intValue {
-            lifeTimeValue = QBLifetimeValue(value: lifeTimeInt)
-        }
-        
-        let contextEntity = QBContextEntity(id: id, sample: sample, viewNumber: viewNumber, sessionNumber: sessionNumber, sessionViewNumber: sessionViewNumber, conversionNumber: context.conversionNumber?.intValue, conversionCycleNumber: context.conversionCycleNumber?.intValue, lifetimeValue: lifeTimeValue, timeZoneOffset: timeZoneOffset, viewTs: viewTs, sessionTs: sessionTs)
+        let contextEntity = QBContextEntity(id: id, sample: sample, viewNumber: viewNumber, sessionNumber: sessionNumber, sessionViewNumber: sessionViewNumber, conversionNumber: context.conversionNumber?.intValue, conversionCycleNumber: context.conversionCycleNumber?.intValue, lifetimeValue: QBLifetimeValue(withValue: context.lifetimeValue?.intValue), timeZoneOffset: timeZoneOffset, viewTs: viewTs, sessionTs: sessionTs)
         return contextEntity
     }
 }

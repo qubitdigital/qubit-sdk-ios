@@ -10,11 +10,15 @@ import Foundation
 import UIKit
 
 struct QBDeviceInfoEntity: Codable {
+    enum QBAppType: String, Codable {
+        case app
+    }
+    
     let deviceType: String
     let deviceName: String
     let osName: String
     let osVersion: String
-    let appType = "app"
+    let appType = QBAppType.app
     let appName: String
     let appVersion: String
     let screenWidth: Int
