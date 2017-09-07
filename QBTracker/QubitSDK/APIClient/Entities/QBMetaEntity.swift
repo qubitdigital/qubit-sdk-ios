@@ -17,3 +17,31 @@ struct QBMetaEntity: Codable {
     let seq: Int
     let batchTs: Int
 }
+
+extension QBMetaEntity {
+    func fillQBMetaEvent(meta: inout QBMetaEvent) -> QBMetaEvent {
+        meta.id = self.id
+        meta.ts = NSNumber(value: self.ts)
+        meta.trackingId = self.trackingId
+        meta.type = self.type
+        meta.source = self.source
+        meta.seq = NSNumber(value: self.seq)
+        meta.batchTs = NSNumber(value: self.batchTs)
+        return meta
+    }
+    
+    static func create(with meta: QBMetaEvent) -> QBMetaEntity? {
+        guard
+            let id = meta.id,
+            let ts = meta.ts?.intValue,
+            let trackingId = meta.trackingId,
+            let type = meta.type,
+            let source = meta.source,
+            let seq = meta.seq?.intValue,
+            let batchTs = meta.batchTs?.intValue
+            else { return nil }
+        
+        let metaEntity = QBMetaEntity(id: id, ts: ts, trackingId: trackingId, type: type, source: source, seq: seq, batchTs: batchTs)
+        return metaEntity
+    }
+}

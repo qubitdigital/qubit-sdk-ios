@@ -19,12 +19,38 @@ class ViewController: UIViewController {
         
         QubitSDK.start(withTrackingId: "miquido", logLevel: .verbose)
 		DispatchQueue.main.async {
-			self.timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(self.timerTick), userInfo: nil, repeats: true)
+			self.timer = Timer.scheduledTimer(timeInterval: 20, target: self, selector: #selector(self.timerTick), userInfo: nil, repeats: true)
 		}
     }
     
     @objc func timerTick() {
 		QubitSDK.sendEvent(type: "abc", data: "ddd")
+        let deadlineTime1 = DispatchTime.now() + .milliseconds(100)
+        let deadlineTime2 = DispatchTime.now() + .milliseconds(600)
+
+        DispatchQueue.main.asyncAfter(deadline: deadlineTime1) {
+            QubitSDK.sendEvent(type: "abc", data: "ddd")
+            QubitSDK.sendEvent(type: "abc", data: "ddd")
+            QubitSDK.sendEvent(type: "abc", data: "ddd")
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: deadlineTime2) {
+            QubitSDK.sendEvent(type: "abc", data: "ddd")
+            QubitSDK.sendEvent(type: "abc", data: "ddd")
+            QubitSDK.sendEvent(type: "abc", data: "ddd")
+            QubitSDK.sendEvent(type: "abc", data: "ddd")
+            QubitSDK.sendEvent(type: "abc", data: "ddd")
+            QubitSDK.sendEvent(type: "abc", data: "ddd")
+            QubitSDK.sendEvent(type: "abc", data: "ddd")
+            QubitSDK.sendEvent(type: "abc", data: "ddd")
+            QubitSDK.sendEvent(type: "abc", data: "ddd")
+            QubitSDK.sendEvent(type: "abc", data: "ddd")
+            QubitSDK.sendEvent(type: "abc", data: "ddd")
+            QubitSDK.sendEvent(type: "abc", data: "ddd")
+        }
+        
+
+
         print("tick")
     }
 
