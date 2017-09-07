@@ -34,6 +34,14 @@ struct QBDeviceInfoEntity: Codable {
         screenHeight = Int(screenSize.height)
     }
 
+}
+
+// MARK: - Helpers
+extension QBDeviceInfoEntity {
+    func getOsNameAndVersion() -> String {
+        return osName + "@" + osVersion
+    }
+    
     private static func getDeviceType() -> String {
         switch UIDevice.current.userInterfaceIdiom {
         case .unspecified:
@@ -75,5 +83,4 @@ struct QBDeviceInfoEntity: Codable {
         }
         return identifier
     }
-
 }

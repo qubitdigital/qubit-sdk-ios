@@ -16,12 +16,9 @@ class QBEventManager {
             startEventManager()
         }
     }
-    var sessionManager: QBSessionManager?
-    var lookupManager: QBLookupManager?
     private let sendTimeFrameInterval: Int = 500
     private let fetchLimit: Int = 15
     private var isSendingEvents: Bool = false
-    
     private var databaseManager = QBDatabaseManager()
     private var connectionManager = QBConnectionManager()
     private var backgroundUploadQueue: DispatchQueue?

@@ -12,13 +12,12 @@ import UIKit
 struct QBSessionEntity: Codable {
     var sessionId: String
     var sessionNumber: Int
-    var sessionTimestamp: Double
+    var lastEventTimestamp: Double
     var sessionStartTimestamp: Double
     var viewNumber: Int
     var viewTimestamp: Double
     var sessionViewNumber: Int
     var sequenceNumber: Int
-    
     let deviceInfo: QBDeviceInfoEntity
     
     // swiftlint:disable function_body_length
@@ -37,10 +36,10 @@ struct QBSessionEntity: Codable {
             self.sessionNumber = DefaultValues.sessionNumber
         }
         
-        if let sessionTimestamp = try? values.decode(Double.self, forKey: .sessionTimestamp) {
-            self.sessionTimestamp = sessionTimestamp
+        if let lastEventTimestamp = try? values.decode(Double.self, forKey: .lastEventTimestamp) {
+            self.lastEventTimestamp = lastEventTimestamp
         } else {
-            self.sessionTimestamp = DefaultValues.sessionTimestamp
+            self.lastEventTimestamp = DefaultValues.lastEventTimestamp
         }
         
         if let sessionStartTimestamp = try? values.decode(Double.self, forKey: .sessionStartTimestamp) {
@@ -80,7 +79,7 @@ struct QBSessionEntity: Codable {
     init() {
         sessionId = DefaultValues.sessionId
         sessionNumber = DefaultValues.sessionNumber
-        sessionTimestamp = DefaultValues.sessionTimestamp
+        lastEventTimestamp = DefaultValues.lastEventTimestamp
         sessionStartTimestamp = DefaultValues.sessionStartTimestamp
         viewNumber = DefaultValues.viewNumber
         viewTimestamp = DefaultValues.viewTimestamp
@@ -95,7 +94,7 @@ extension QBSessionEntity {
     private struct DefaultValues {
         static let sessionId = ""
         static let sessionNumber = 0
-        static let sessionTimestamp = 0.0
+        static let lastEventTimestamp = 0.0
         static let sessionStartTimestamp = 0.0
         static let viewNumber = 0
         static let viewTimestamp = 0.0
