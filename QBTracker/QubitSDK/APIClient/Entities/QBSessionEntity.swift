@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct QBSessionEntity: Codable {
     var sessionId: String
@@ -17,6 +18,8 @@ struct QBSessionEntity: Codable {
     var viewTimestamp: Double
     var sessionViewNumber: Int
     var sequenceNumber: Int
+    
+    let deviceInfo: QBDeviceInfoEntity
     
     // swiftlint:disable function_body_length
     init(from decoder: Decoder) throws {
@@ -69,6 +72,8 @@ struct QBSessionEntity: Codable {
         } else {
             self.sequenceNumber = DefaultValues.sequenceNumber
         }
+        
+        deviceInfo = QBDeviceInfoEntity()
     }
     // swiftlint:enable function_body_length
     
@@ -81,6 +86,7 @@ struct QBSessionEntity: Codable {
         viewTimestamp = DefaultValues.viewTimestamp
         sessionViewNumber = DefaultValues.sessionViewNumber
         sequenceNumber = DefaultValues.sequenceNumber
+        deviceInfo = QBDeviceInfoEntity()
     }
 }
 
