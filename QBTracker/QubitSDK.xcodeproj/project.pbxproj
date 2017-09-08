@@ -30,6 +30,7 @@
 		422370821F4C6B2B008D401E /* QBContextEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422370811F4C6B2B008D401E /* QBContextEntity.swift */; };
 		422370841F4C6B3B008D401E /* QBMetaEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422370831F4C6B3B008D401E /* QBMetaEntity.swift */; };
 		422E54161F613B1700E37B7A /* QBDeviceInfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422E54151F613B1700E37B7A /* QBDeviceInfoEntity.swift */; };
+		422E89CE1F6281A0007217D8 /* QubitSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 42F0CD4E1F4AEE2B00BD9010 /* QubitSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		423AEFE31F4C41EF00F6EF6D /* QBEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423AEFE21F4C41EF00F6EF6D /* QBEventService.swift */; };
 		423AEFE71F4C431500F6EF6D /* QBEventEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423AEFE61F4C431500F6EF6D /* QBEventEntity.swift */; };
 		423AEFE91F4C505300F6EF6D /* QBStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423AEFE81F4C505300F6EF6D /* QBStatusEntity.swift */; };
@@ -86,6 +87,20 @@
 			remoteInfo = CommonCrypto;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		422E89CF1F6281A0007217D8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				422E89CE1F6281A0007217D8 /* QubitSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		42054D171F502C7A00386771 /* QBDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBDevice.swift; sourceTree = "<group>"; };
@@ -424,6 +439,7 @@
 				A024B5B21F4D7B83009748A1 /* Sources */,
 				A024B5B31F4D7B83009748A1 /* Frameworks */,
 				A024B5B41F4D7B83009748A1 /* Resources */,
+				422E89CF1F6281A0007217D8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -844,6 +860,7 @@
 		A024B5C61F4D7B83009748A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = HAWH5C9J75;
 				INFOPLIST_FILE = SwiftTestApp/Info.plist;
@@ -859,6 +876,7 @@
 		A024B5C71F4D7B83009748A1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = HAWH5C9J75;
 				INFOPLIST_FILE = SwiftTestApp/Info.plist;
