@@ -19,7 +19,7 @@ class QBTracker {
     private var sessionManager: QBSessionManager?
     
     private var trackerAleradyStarted: Bool {
-        return configurationManager != nil && eventManager != nil && trackingId != nil
+        return configurationManager != nil && eventManager != nil && trackingId != nil && sessionManager != nil
     }
 
     private init() {}
@@ -37,6 +37,7 @@ class QBTracker {
         trackingId = id
         configurationManager = QBConfigurationManager(withTrackingId: id, withDeleagte: self)
         eventManager = QBEventManager()
+        sessionManager = QBSessionManager()
     }
     
     func sendEvent(type: String, data: String) {
@@ -44,22 +45,31 @@ class QBTracker {
             print("Please call QubitSDK.start(withTrackingId: \"YOUR_TRACKING_ID\"), before sending events")
             return
         }
+        
+        guard let trackingId = self.trackingId else {
+            QBLog.info("trakingId is nil")
+            return
+        }
+        
         if let disabled = configurationManager?.configuration.disabled, disabled {
             QBLog.info("Sending events disabled in configuration")
             return
         }
-        let context = QBContextEntity(id: QBDevice.getId(), sample: String(QBDevice.getId().hashValue), viewNumber: 1, sessionNumber: 1, sessionViewNumber: 1, conversionNumber: 2, conversionCycleNumber: 2, lifetimeValue: QBContextEntity.QBLifetimeValue(value: 2312), lifetimeCurrency: "USD", timeZoneOffset: 1000, viewTs: 1231312312, sessionTs: 1231312312)
-        let meta = QBMetaEntity(id: NSUUID().uuidString, ts: Int(Date().timeIntervalSince1970), trackingId: "miquido", type: "ecProduct", source: "iOS@0.3.1", seq: 3, batchTs: 6)
         
-        let event = QBEventEntity(type: type, eventData: data, context: context, meta: meta, session: nil)
-        
-        eventManager?.addEventInQueue(event: event)
+        if let session = sessionManager?.session {
+            let context = QBContextEntity(withSession: session, lookup: lookupManager?.lookup)
+            // TODO: fill batchTs, I think filling should be in QBEventManager
+            let meta = QBMetaEntity(id: NSUUID().uuidString, ts: Int(Date().timeIntervalSince1970), trackingId: trackingId, type: type, source: session.deviceInfo.getOsNameAndVersion(), seq: session.sequenceNumber, batchTs: 123)
+            let event = QBEventEntity(type: type, eventData: data, context: context, meta: meta, session: nil)
+            eventManager?.addEventInQueue(event: event)
+        }
     }
 	
 	func stop() {
 		eventManager = nil
 		configurationManager = nil
 		lookupManager = nil
+        sessionManager = nil
         QBLog.info("tracker stoped")
 	}
     
@@ -76,10 +86,15 @@ extension QBTracker: QBConfigurationManagerDelegate {
 }
 
 extension QBTracker: QBLookupManagerDelegate {
-    func lookupUpdated() {
-        eventManager?.lookupManager = self.lookupManager
-        if self.sessionManager == nil {
-            self.sessionManager = QBSessionManager()
+    func lookupUpdateSuccessful() {
+        if let lookup = lookupManager?.lookup {
+            sessionManager?.fillSessionProperties(fromLookup: lookup)
+            sessionManager?.sendSessionEvent()
         }
     }
+    
+    func lookupUpdateFailed() {
+        sessionManager?.sendSessionEvent()
+    }
+
 }

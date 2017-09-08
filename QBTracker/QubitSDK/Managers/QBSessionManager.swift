@@ -21,6 +21,7 @@ class QBSessionManager {
     
     private var currentSession: QBSessionEntity
     private let sessionTime: Double = 1800
+    private var lookupManager: QBLookupManager?
     
     init() {
         guard let lastSession = UserDefaults.standard.session else {
@@ -29,6 +30,10 @@ class QBSessionManager {
         }
         self.currentSession = lastSession
         self.startNewSession()
+    }
+    
+    func fillSessionProperties(fromLookup lookup: QBLookupEntity)  {
+        // TODO
     }
     
     private func startNewSession() {
@@ -42,15 +47,19 @@ class QBSessionManager {
         let newSessionId = timestampString.md5
         self.currentSession.sessionId = newSessionId
         
-        self.currentSession.sessionTimestamp = timestamp
+        self.currentSession.lastEventTimestamp = timestamp
         self.currentSession.sessionStartTimestamp = timestamp
         
         self.saveSession()
-        //TODO: send session event
     }
     
     private func saveSession() {
         UserDefaults.standard.session = self.currentSession
+    }
+    
+    private func isSessionValid() -> Bool {
+        let currentTimestamp = Date().timeIntervalSince1970
+        return currentTimestamp < self.currentSession.lastEventTimestamp + sessionTime
     }
     
     func increaseViewNumber() {
@@ -60,12 +69,10 @@ class QBSessionManager {
         self.saveSession()
     }
     
-    private func isSessionValid() -> Bool {
-        let currentTimestamp = Date().timeIntervalSince1970
-        return currentTimestamp < self.currentSession.sessionTimestamp + sessionTime
+    func sendSessionEvent() {
+        //TODO: send session event
     }
     
-    // TODO: Look like it's don't needed
 //    func newSequenceNumber() -> Int {
 //        sequenceNumber += 1
 //        return sequenceNumber

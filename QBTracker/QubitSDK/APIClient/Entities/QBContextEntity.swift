@@ -15,11 +15,12 @@ struct QBContextEntity: Codable {
     let sessionNumber: Int // lookup
     let sessionViewNumber: Int
     
-    let conversionNumber: Int // lookup
-    let conversionCycleNumber: Int // lookup
-    
-    let lifetimeValue: QBLifetimeValue // lookup
-    let lifetimeCurrency: String
+    // Alex(Slack) 1:34 PM:
+    // Sorry, yes in that case don't enrich those fields. Its a best effort enrichment. There are only a few that rely on lookup
+    // if we recieve events without those feilds enriched, on our backend we add in the values.
+    let conversionNumber: Int? // lookup
+    let conversionCycleNumber: Int? // lookup
+    let lifetimeValue: QBLifetimeValue? // lookup
     
     let timeZoneOffset: Int
     let viewTs: Int
@@ -28,25 +29,55 @@ struct QBContextEntity: Codable {
     struct QBLifetimeValue: Codable {
         let value: Int
         let currency = "USD"
+        
+        init?(withValue value: Int?) {
+            guard let value = value else {
+                return nil
+            }
+            self.value = value
+        }
     }
 }
 
 extension QBContextEntity {
+    init(withSession session: QBSessionEntity, lookup: QBLookupEntity?) {
+        self.id = QBDevice.getId()
+        self.sample = String(QBDevice.getId().hashValue)
+        self.viewNumber = session.viewNumber
+        self.sessionNumber = session.sessionNumber
+        self.sessionViewNumber = session.sessionViewNumber
+        
+        self.conversionNumber = lookup?.conversionNumber
+        self.conversionCycleNumber = lookup?.conversionCycleNumber
+        self.lifetimeValue = QBLifetimeValue(withValue: lookup?.lifetimeValue)
+        // TODO: set timezone offset
+        self.timeZoneOffset = 0
+        self.viewTs = Int(session.viewTimestamp)
+        self.sessionTs = Int(session.sessionStartTimestamp)
+    }
+    
     func fillQBContextEvent(context: inout QBContextEvent) -> QBContextEvent {
         context.id = self.id
         context.sample = self.sample
         context.viewNumber = NSNumber(value: self.viewNumber)
         context.sessionNumber = NSNumber(value: self.sessionNumber)
         context.sessionViewNumber = NSNumber(value: self.sessionViewNumber)
-        context.conversionNumber = NSNumber(value: self.conversionNumber)
-        context.conversionCycleNumber = NSNumber(value: self.conversionCycleNumber)
-        context.lifetimeValue = NSNumber(value: self.lifetimeValue.value)
-        context.lifetimeCurrency = self.lifetimeCurrency
+        if let conversionNumber = self.conversionNumber {
+            context.conversionNumber = NSNumber(value: conversionNumber)
+        }
+        if let conversionCycleNumber = self.conversionCycleNumber {
+            context.conversionCycleNumber = NSNumber(value: conversionCycleNumber)
+        }
+        if let lifetimeValue = self.lifetimeValue {
+            context.lifetimeValue = NSNumber(value: lifetimeValue.value)
+            context.lifetimeCurrency = lifetimeValue.currency
+        }
         context.timeZoneOffset = NSNumber(value: self.timeZoneOffset)
         context.viewTs = NSNumber(value: self.viewTs)
         context.sessionTs = NSNumber(value: self.sessionTs)
         return context
     }
+    
     static func create(with context: QBContextEvent) -> QBContextEntity? {
         guard
             let id = context.id,
@@ -54,15 +85,12 @@ extension QBContextEntity {
             let viewNumber = context.viewNumber?.intValue,
             let sessionNumber = context.sessionNumber?.intValue,
             let sessionViewNumber = context.sessionViewNumber?.intValue,
-            let conversionNumber = context.conversionNumber?.intValue,
-            let conversionCycleNumber = context.conversionCycleNumber?.intValue,
-            let lifetimeValue = context.lifetimeValue?.intValue,
-            let lifetimeCurrency = context.lifetimeCurrency,
             let timeZoneOffset = context.timeZoneOffset?.intValue,
             let viewTs = context.viewTs?.intValue,
             let sessionTs = context.sessionTs?.intValue
         else { return nil }
-        let contextEntity = QBContextEntity(id: id, sample: sample, viewNumber: viewNumber, sessionNumber: sessionNumber, sessionViewNumber: sessionViewNumber, conversionNumber: conversionNumber, conversionCycleNumber: conversionCycleNumber, lifetimeValue: QBLifetimeValue(value: lifetimeValue), lifetimeCurrency: lifetimeCurrency, timeZoneOffset: timeZoneOffset, viewTs: viewTs, sessionTs: sessionTs)
+        
+        let contextEntity = QBContextEntity(id: id, sample: sample, viewNumber: viewNumber, sessionNumber: sessionNumber, sessionViewNumber: sessionViewNumber, conversionNumber: context.conversionNumber?.intValue, conversionCycleNumber: context.conversionCycleNumber?.intValue, lifetimeValue: QBLifetimeValue(withValue: context.lifetimeValue?.intValue), timeZoneOffset: timeZoneOffset, viewTs: viewTs, sessionTs: sessionTs)
         return contextEntity
     }
 }

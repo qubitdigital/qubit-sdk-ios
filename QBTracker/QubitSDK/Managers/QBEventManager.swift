@@ -27,12 +27,9 @@ class QBEventManager {
             startEventManager()
         }
     }
-    var sessionManager: QBSessionManager?
-    var lookupManager: QBLookupManager?
     
     private var isSendingEvents: Bool = false
     private var config: QBEventManagerConfig = QBEventManagerConfig()
-    
     private var databaseManager = QBDatabaseManager()
     private var connectionManager = QBConnectionManager()
     private var backgroundUploadQueue: DispatchQueue?

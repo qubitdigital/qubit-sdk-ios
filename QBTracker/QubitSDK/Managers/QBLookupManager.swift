@@ -9,7 +9,8 @@
 import Foundation
 
 protocol QBLookupManagerDelegate: class {
-    func lookupUpdated()
+    func lookupUpdateSuccessful()
+    func lookupUpdateFailed()
 }
 
 class QBLookupManager {
@@ -64,17 +65,13 @@ class QBLookupManager {
             switch result {
             case .success(let lookup):
                 QBLog.debug("userDefaults = \(UserDefaults.standard.lastSavedRemoteLookup.debugDescription)")
-
                 strongSelf.remoteLookup = lookup
+                strongSelf.delegate?.lookupUpdateSuccessful()
             case .failure(let error):
-                //TODO: handle failure
                 QBLog.error("error = \(error)")
-            }
-            if strongSelf.lookup != nil {
-                strongSelf.delegate?.lookupUpdated()
+                strongSelf.delegate?.lookupUpdateFailed()
             }
         }
-        
     }
     
     private func shouldUpdateLookup() -> Bool {
