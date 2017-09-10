@@ -96,6 +96,12 @@ class QBConfigurationManager {
         return url
     }
     
+    func getEventsDedupeEndpoint() -> URL? {
+        var url = self.configuration.mainEndpointUrl()
+        url?.appendPathComponent("events/raw")
+        url?.appendPathComponent("\(self.trackingId)?dedupe=true")
+        return url
+    }
 }
 
 // MARK: - Timer
