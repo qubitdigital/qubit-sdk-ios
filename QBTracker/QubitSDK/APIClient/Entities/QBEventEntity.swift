@@ -8,6 +8,25 @@
 
 import Foundation
 
+enum QBEventType: String {
+    case session
+    case view
+    case other
+    
+    public init(type: String) {
+        switch type {
+        case "session":
+            self = .session
+            break
+        case "view":
+            self = .view
+            break
+        default:
+            self = .other
+        }
+    }
+}
+
 struct QBEventEntity: Codable {
     let type: String
     let eventData: String
@@ -25,6 +44,7 @@ struct QBEventEntity: Codable {
     }
 }
 
+// MARK: - Bridges
 extension QBEventEntity {
     func fillQBEvent(event: inout QBEvent, context: inout QBContextEvent, meta: inout QBMetaEvent) -> QBEvent {
         event.data = self.eventData
@@ -36,9 +56,16 @@ extension QBEventEntity {
     }
     
     static func create(with event: QBEvent) -> QBEventEntity? {
-        guard let type = event.type, let data = event.data, let context = event.context, let meta = event.meta else { return nil }
+        guard let type = event.type, let context = event.context, let meta = event.meta else { return nil }
         guard let contextEntity = QBContextEntity.create(with: context), let metaEntity = QBMetaEntity.create(with: meta) else { return nil }
-        let eventEntity = QBEventEntity(type: type, eventData: data, context: contextEntity, meta: metaEntity, session: nil)
+        let eventEntity = QBEventEntity(type: type, eventData: "", context: contextEntity, meta: metaEntity, session: nil)
         return eventEntity
+    }
+}
+
+// MARK: - Helpers
+extension QBEventEntity {
+    static func getEnumEventType(fromString string: String) -> QBEventType {
+        return QBEventType(type: string)
     }
 }

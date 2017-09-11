@@ -24,29 +24,29 @@ class ViewController: UIViewController {
     }
     
     @objc func timerTick() {
-		QubitSDK.sendEvent(type: "abc", data: "ddd")
+		QubitSDK.sendEvent(type: "testing", data: "view0")
         let deadlineTime1 = DispatchTime.now() + .milliseconds(100)
         let deadlineTime2 = DispatchTime.now() + .milliseconds(600)
 
         DispatchQueue.main.asyncAfter(deadline: deadlineTime1) {
-            QubitSDK.sendEvent(type: "abc", data: "ddd")
-            QubitSDK.sendEvent(type: "abc", data: "ddd")
-            QubitSDK.sendEvent(type: "abc", data: "ddd")
+            QubitSDK.sendEvent(type: "View", data: "ddd")
+            QubitSDK.sendEvent(type: "View", data: "ddd")
+            QubitSDK.sendEvent(type: "View", data: "ddd")
         }
         
         DispatchQueue.main.asyncAfter(deadline: deadlineTime2) {
-            QubitSDK.sendEvent(type: "abc", data: "ddd")
-            QubitSDK.sendEvent(type: "abc", data: "ddd")
-            QubitSDK.sendEvent(type: "abc", data: "ddd")
-            QubitSDK.sendEvent(type: "abc", data: "ddd")
-            QubitSDK.sendEvent(type: "abc", data: "ddd")
-            QubitSDK.sendEvent(type: "abc", data: "ddd")
-            QubitSDK.sendEvent(type: "abc", data: "ddd")
-            QubitSDK.sendEvent(type: "abc", data: "ddd")
-            QubitSDK.sendEvent(type: "abc", data: "ddd")
-            QubitSDK.sendEvent(type: "abc", data: "ddd")
-            QubitSDK.sendEvent(type: "abc", data: "ddd")
-            QubitSDK.sendEvent(type: "abc", data: "ddd")
+            QubitSDK.sendEvent(type: "Product", data: "ddd")
+            QubitSDK.sendEvent(type: "Product", data: "ddd")
+            QubitSDK.sendEvent(type: "Product", data: "ddd")
+            QubitSDK.sendEvent(type: "Product", data: "ddd")
+            QubitSDK.sendEvent(type: "Product", data: "ddd")
+            QubitSDK.sendEvent(type: "Product", data: "ddd")
+            QubitSDK.sendEvent(type: "Product", data: "ddd")
+            QubitSDK.sendEvent(type: "Product", data: "ddd")
+            QubitSDK.sendEvent(type: "Product", data: "ddd")
+            QubitSDK.sendEvent(type: "Product", data: "ddd")
+            QubitSDK.sendEvent(type: "Product", data: "ddd")
+            QubitSDK.sendEvent(type: "Product", data: "ddd")
         }
         print("tick")
     }
