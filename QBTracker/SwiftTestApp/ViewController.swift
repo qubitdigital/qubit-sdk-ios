@@ -24,20 +24,10 @@ class ViewController: UIViewController {
     }
     
     @objc func timerTick() {
-		QubitSDK.sendEvent(type: "abc", data: "ddd")
-        let deadlineTime1 = DispatchTime.now() + .milliseconds(100)
-        let deadlineTime2 = DispatchTime.now() + .milliseconds(600)
-
-        DispatchQueue.main.asyncAfter(deadline: deadlineTime1) {
-            QubitSDK.sendEvent(type: "abc", data: "{\"test_event\" : \"dupa\"}")
-            QubitSDK.sendEvent(type: "abc", data: "{\"test_event\" : \"dupa\"")
-            QubitSDK.sendEvent(type: "abc", data: "{\"test_event\" : \"dupa\"")
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: deadlineTime2) {
-            QubitSDK.sendEvent(type: "abc", data: "{\"test_event\" : \"dupa\"")
-        }
         print("tick")
     }
-
+    @IBAction func tapOnEventButton(_ sender: UIButton) {
+        QubitSDK.sendEvent(type: "abc", data: "{\"test_event\" : \"dupa\"}")
+    }
+    
 }

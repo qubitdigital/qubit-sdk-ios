@@ -124,10 +124,16 @@ class QBEventManager {
     private func trySendEvents() {
         backgroundCoreDataQueue?.sync { [weak self] in
             guard let fetchLimit = self?.config.fetchLimit, let sendTimeFrameInterval = self?.config.sendTimeFrameInterval else { return }
+            guard let `self` = self else { return }
+
             let deadlineTime = DispatchTime.now() + .milliseconds(sendTimeFrameInterval)
-            self?.backgroundUploadQueue?.asyncAfter(deadline: deadlineTime) {
-                if ((self?.databaseManager.query(entityType: QBEvent.self, sortBy: "dateAdded", ascending: true, limit: fetchLimit).first) != nil) {
-                    self?.sendEvents()
+            self.backgroundUploadQueue?.asyncAfter(deadline: deadlineTime) { [weak self] in
+                guard let `self` = self else { return }
+
+                self.databaseManager.query(entityType: QBEvent.self, sortBy: "dateAdded", ascending: true, limit: fetchLimit) { results in
+                    if !results.isEmpty {
+                        self.sendEvents()
+                    }
                 }
             }
         }
@@ -135,8 +141,10 @@ class QBEventManager {
     
     @objc
     private func trySendEventsWhenFirstEventAdded() {
-        if self.databaseManager.query(entityType: QBEvent.self, sortBy: "dateAdded", ascending: true, limit: config.fetchLimit).count == 1, self.isSendingEvents == false {
-            self.trySendEvents()
+        self.databaseManager.query(entityType: QBEvent.self, sortBy: "dateAdded", ascending: true, limit: self.config.fetchLimit) { results in
+            if results.count == 1 && self.isSendingEvents == false {
+                self.trySendEvents()
+            }
         }
     }
     
@@ -156,33 +164,36 @@ class QBEventManager {
             
             guard let `self` = self else { return }
             
-			let currentEventBatch = self.databaseManager.query(entityType: QBEvent.self, sortBy: "dateAdded", ascending: true, limit: self.config.fetchLimit)
-            
-            if currentEventBatch.isEmpty {
-                QBLog.debug("🔶 nothing to sent")
-                return
-            }
-            
-			let events = self.convert(events: currentEventBatch)
-			
-            let eventService = QBEventServiceImp(withConfigurationManager: configurationManager)
-            
-            self.isSendingEvents = true
-            eventService.sendEvents(events: events, dedupe: self.config.dedupeActive) { [weak self] (result) in
+            self.databaseManager.query(entityType: QBEvent.self, sortBy: "dateAdded", ascending: true, limit: self.config.fetchLimit) { [weak self] currentEventBatch in
+                
                 guard let `self` = self else { return }
-				switch result {
-				case .success:
-					QBLog.info("✅ Successfully sent events")
-					self.databaseManager.delete(entries: currentEventBatch)
-                    self.config.reset()
-				case .failure(let error):
-					QBLog.info("⛔️ Error sending events \(error.localizedDescription)")
-                    let code = (error as NSError).code
-					self.markFailed(events: currentEventBatch)
-                    self.config.increaseRetry(sendTimeInterval: self.evaluateIntervalMsToNextRetry(sendingAttemptsDone: self.config.sendingAttemptsDoneCount), isTimeOutRelated: (code == NSURLErrorTimedOut || code == NSURLErrorNetworkConnectionLost))
-				}
-                self.isSendingEvents = false
-                self.trySendEvents()
+                
+                if currentEventBatch.isEmpty {
+                    QBLog.debug("🔶 nothing to sent")
+                    return
+                }
+                
+                let events = self.convert(events: currentEventBatch)
+                
+                let eventService = QBEventServiceImp(withConfigurationManager: configurationManager)
+                
+                self.isSendingEvents = true
+                eventService.sendEvents(events: events, dedupe: self.config.dedupeActive) { [weak self] (result) in
+                    guard let `self` = self else { return }
+                    switch result {
+                    case .success:
+                        QBLog.info("✅ Successfully sent events")
+                        self.databaseManager.delete(entries: currentEventBatch)
+                        self.config.reset()
+                    case .failure(let error):
+                        QBLog.info("⛔️ Error sending events \(error.localizedDescription)")
+                        let code = (error as NSError).code
+                        self.markFailed(events: currentEventBatch)
+                        self.config.increaseRetry(sendTimeInterval: self.evaluateIntervalMsToNextRetry(sendingAttemptsDone: self.config.sendingAttemptsDoneCount), isTimeOutRelated: (code == NSURLErrorTimedOut || code == NSURLErrorNetworkConnectionLost))
+                    }
+                    self.isSendingEvents = false
+                    self.trySendEvents()
+                }
             }
 		}
 	}

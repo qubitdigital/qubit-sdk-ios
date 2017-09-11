@@ -18,10 +18,11 @@ class QBDatabaseManager {
         database = QBDatabase(modelName: QBDatabaseManager.kQBDataModelName)
     }
     
-    func query<T: NSManagedObject>(entityType: T.Type, predicate: NSPredicate? = nil, sortBy: String? = nil, ascending: Bool = false, limit: Int = 0) -> [T] {
+    func query<T: NSManagedObject>(entityType: T.Type, predicate: NSPredicate? = nil, sortBy: String? = nil, ascending: Bool = false, limit: Int = 0, completion:( ([T]) -> Void )?) {
         guard let database = database else {
             QBLog.error("Database is not initialized")
-            return []
+            completion?([])
+            return
         }
         
         let entityName = String(describing: entityType)
@@ -34,14 +35,15 @@ class QBDatabaseManager {
         fetchRequest.predicate = predicate
         fetchRequest.fetchLimit = limit
         
-        do {
-            let results = try database.managedObjectContext.fetch(fetchRequest) as? [T] ?? []
-            return results
-        } catch {
-            QBLog.error("Error performing query for entityName: \(entityName) error: \(error.localizedDescription)")
+        database.managedObjectContext.performAndWait {
+            do {
+                let results = try database.managedObjectContext.fetch(fetchRequest) as? [T] ?? []
+                completion?(results)
+            } catch {
+                completion?([])
+                QBLog.error("Error performing query for entityName: \(entityName) error: \(error.localizedDescription)")
+            }
         }
-        
-        return []
     }
     
     func insert<T: NSManagedObject>(entityType: T.Type) -> T? {
