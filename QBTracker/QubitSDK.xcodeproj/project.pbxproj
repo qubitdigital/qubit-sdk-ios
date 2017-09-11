@@ -34,7 +34,7 @@
 		423AEFE31F4C41EF00F6EF6D /* QBEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423AEFE21F4C41EF00F6EF6D /* QBEventService.swift */; };
 		423AEFE71F4C431500F6EF6D /* QBEventEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423AEFE61F4C431500F6EF6D /* QBEventEntity.swift */; };
 		423AEFE91F4C505300F6EF6D /* QBStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423AEFE81F4C505300F6EF6D /* QBStatusEntity.swift */; };
-		423D43D61F62D0200075A85B /* NSDate+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423D43D51F62D0200075A85B /* NSDate+Extensions.swift */; };
+		423D43D61F62D0200075A85B /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423D43D51F62D0200075A85B /* Date+Extensions.swift */; };
 		425215E51F5D98A400866D8E /* QBSessionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425215E41F5D98A400866D8E /* QBSessionEntity.swift */; };
 		426EF6571F54106500FD3F10 /* QBLookupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426EF6561F54106500FD3F10 /* QBLookupManager.swift */; };
 		426EF6591F54160F00FD3F10 /* QBLookupEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426EF6581F54160F00FD3F10 /* QBLookupEntity.swift */; };
@@ -116,7 +116,7 @@
 		423AEFE21F4C41EF00F6EF6D /* QBEventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBEventService.swift; sourceTree = "<group>"; };
 		423AEFE61F4C431500F6EF6D /* QBEventEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBEventEntity.swift; sourceTree = "<group>"; };
 		423AEFE81F4C505300F6EF6D /* QBStatusEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBStatusEntity.swift; sourceTree = "<group>"; };
-		423D43D51F62D0200075A85B /* NSDate+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSDate+Extensions.swift"; sourceTree = "<group>"; };
+		423D43D51F62D0200075A85B /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		425215E41F5D98A400866D8E /* QBSessionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBSessionEntity.swift; sourceTree = "<group>"; };
 		426EF6561F54106500FD3F10 /* QBLookupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBLookupManager.swift; sourceTree = "<group>"; };
 		426EF6581F54160F00FD3F10 /* QBLookupEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBLookupEntity.swift; sourceTree = "<group>"; };
@@ -346,7 +346,7 @@
 				A099EE6D1F4C38DD007319A9 /* String+md5.swift */,
 				420738751F4D9739005A0B9E /* UserDefaults+Extensions.swift */,
 				B905C8061F6177BC00A9A084 /* TimeInterval+Extensions.swift */,
-				423D43D51F62D0200075A85B /* NSDate+Extensions.swift */,
+				423D43D51F62D0200075A85B /* Date+Extensions.swift */,
 				B900287C1F65DD5500F8D498 /* Dictionary+Extensions.swift */,
 			);
 			path = Extensions;
@@ -578,7 +578,7 @@
 				422370821F4C6B2B008D401E /* QBContextEntity.swift in Sources */,
 				A0F5BF591F4D7833009EFE8D /* QBDataModel.xcdatamodeld in Sources */,
 				A0D30B821F559F180029D3DC /* QubitSDK.swift in Sources */,
-				423D43D61F62D0200075A85B /* NSDate+Extensions.swift in Sources */,
+				423D43D61F62D0200075A85B /* Date+Extensions.swift in Sources */,
 				422370841F4C6B3B008D401E /* QBMetaEntity.swift in Sources */,
 				420743751F50440F0099E5BA /* String+md5.swift in Sources */,
 				42054D181F502C7A00386771 /* QBDevice.swift in Sources */,
