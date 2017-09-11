@@ -8,10 +8,16 @@
 
 import Foundation
 
-extension Dictionary where Key: CustomDebugStringConvertible, Value:CustomDebugStringConvertible {
-    func prettyPrint() {
-        for (key, value) in self {
-            print("\(key) = \(value)")
+extension Dictionary {
+    
+    static func convert(jsonData: Data?) -> Any? {
+        if let data = jsonData {
+            do {
+                return try JSONSerialization.jsonObject(with: data, options: [])
+            } catch {
+            }
         }
+        return nil
     }
+    
 }

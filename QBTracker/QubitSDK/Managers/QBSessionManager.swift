@@ -32,7 +32,7 @@ class QBSessionManager {
         self.startNewSession()
     }
     
-    func fillSessionProperties(fromLookup lookup: QBLookupEntity)  {
+    func fillSessionProperties(fromLookup lookup: QBLookupEntity) {
         // TODO
     }
     
