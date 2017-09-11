@@ -9,7 +9,7 @@
 import Foundation
 
 protocol QBEventService {
-    func sendEvents(events: [QBEventEntity], completion: ((Result<QBStatusEntity>) -> Void)?)
+    func sendEvents(events: [QBEventEntity], dedupe: Bool, completion: ((Result<QBStatusEntity>) -> Void)?)
 }
 
 class QBEventServiceImp: QBEventService {
@@ -22,8 +22,8 @@ class QBEventServiceImp: QBEventService {
         self.configurationManager = configurationManager
     }
 
-    func sendEvents(events: [QBEventEntity], completion: ((Result<QBStatusEntity>) -> Void)?) {
-        guard let url = configurationManager.getEventsEndpoint() else {
+    func sendEvents(events: [QBEventEntity], dedupe: Bool, completion: ((Result<QBStatusEntity>) -> Void)?) {
+        guard let url = dedupe ? configurationManager.getEventsDedupeEndpoint() : configurationManager.getEventsEndpoint() else {
             let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "URL for send events is nil"]) as Error
             QBLog.error("URL for send events is nil")
             completion?(.failure(error))

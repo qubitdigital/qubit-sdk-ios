@@ -12,6 +12,7 @@ import CoreData
 
 struct QBEventManagerConfig {
     var sendingAttemptsDoneCount = 0
+    var dedupeActive:Bool = false
     var sendTimeFrameInterval: Int = 500
     let batchIntervalMs: Int = 500
     let expBackoffBaseTimeSec: Int = 5
@@ -19,6 +20,18 @@ struct QBEventManagerConfig {
     let maxRetryIntervalSec: Int = 60 * 5
     let oneEventCount = 1
     let fetchLimit: Int = 15
+    
+    mutating func reset() {
+        sendTimeFrameInterval = batchIntervalMs
+        sendingAttemptsDoneCount = 0
+        dedupeActive = false
+    }
+    
+    mutating func increaseRetry(sendTimeInterval: Int, isTimeOutRelated: Bool) {
+        sendTimeFrameInterval = sendTimeInterval
+        sendingAttemptsDoneCount += 1
+        dedupeActive = true
+    }
 }
 
 class QBEventManager {
@@ -139,7 +152,10 @@ class QBEventManager {
             return
         }
         
-		backgroundUploadQueue?.sync {
+		backgroundUploadQueue?.sync { [weak self] in
+            
+            guard let `self` = self else { return }
+            
 			let currentEventBatch = self.databaseManager.query(entityType: QBEvent.self, sortBy: "dateAdded", ascending: true, limit: self.config.fetchLimit)
             
             if currentEventBatch.isEmpty {
@@ -152,22 +168,21 @@ class QBEventManager {
             let eventService = QBEventServiceImp(withConfigurationManager: configurationManager)
             
             self.isSendingEvents = true
-			eventService.sendEvents(events: events) { [weak self] (result) in
-                guard let strongSelf = self else { return }
+            eventService.sendEvents(events: events, dedupe: self.config.dedupeActive) { [weak self] (result) in
+                guard let `self` = self else { return }
 				switch result {
 				case .success:
 					QBLog.info("✅ Successfully sent events")
-					strongSelf.databaseManager.delete(entries: currentEventBatch)
-                    strongSelf.config.sendTimeFrameInterval = strongSelf.config.batchIntervalMs
-                    strongSelf.config.sendingAttemptsDoneCount = 0
+					self.databaseManager.delete(entries: currentEventBatch)
+                    self.config.reset()
 				case .failure(let error):
 					QBLog.info("⛔️ Error sending events \(error.localizedDescription)")
-					strongSelf.markFailed(events: currentEventBatch)
-                    strongSelf.config.sendingAttemptsDoneCount += 1
-                    strongSelf.config.sendTimeFrameInterval = strongSelf.evaluateIntervalMsToNextRetry(sendingAttemptsDone: strongSelf.config.sendingAttemptsDoneCount)
+                    let code = (error as NSError).code
+					self.markFailed(events: currentEventBatch)
+                    self.config.increaseRetry(sendTimeInterval: self.evaluateIntervalMsToNextRetry(sendingAttemptsDone: self.config.sendingAttemptsDoneCount), isTimeOutRelated: (code == NSURLErrorTimedOut || code == NSURLErrorNetworkConnectionLost))
 				}
-                strongSelf.isSendingEvents = false
-                strongSelf.trySendEvents()
+                self.isSendingEvents = false
+                self.trySendEvents()
 			}
 		}
 	}
