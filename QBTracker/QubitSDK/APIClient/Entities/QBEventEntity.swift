@@ -18,7 +18,7 @@ enum QBEventType: String {
         case "session":
             self = .session
             break
-        case "view":
+        case "View":
             self = .view
             break
         default:
