@@ -12,12 +12,12 @@ import UIKit
 struct QBSessionEntity: Codable {
     var sessionId: String
     var sessionNumber: Int
-    var lastEventTimestamp: Double
-    var sessionStartTimestamp: Double
+    var lastEventTimestampInMS: Int
+    var sessionStartTimestampInMS: Int
     var viewNumber: Int
-    var viewTimestamp: Double
+    var viewTimestampInMS: Int
     var sessionViewNumber: Int
-    var sequenceNumber: Int
+    var sequenceEventNumber: Int
     let deviceInfo: QBDeviceInfoEntity
     
     // swiftlint:disable function_body_length
@@ -36,16 +36,16 @@ struct QBSessionEntity: Codable {
             self.sessionNumber = DefaultValues.sessionNumber
         }
         
-        if let lastEventTimestamp = try? values.decode(Double.self, forKey: .lastEventTimestamp) {
-            self.lastEventTimestamp = lastEventTimestamp
+        if let lastEventTimestampInMS = try? values.decode(Int.self, forKey: .lastEventTimestampInMS) {
+            self.lastEventTimestampInMS = lastEventTimestampInMS
         } else {
-            self.lastEventTimestamp = DefaultValues.lastEventTimestamp
+            self.lastEventTimestampInMS = DefaultValues.lastEventTimestampInMS
         }
         
-        if let sessionStartTimestamp = try? values.decode(Double.self, forKey: .sessionStartTimestamp) {
-            self.sessionStartTimestamp = sessionStartTimestamp
+        if let sessionStartTimestampInMS = try? values.decode(Int.self, forKey: .sessionStartTimestampInMS) {
+            self.sessionStartTimestampInMS = sessionStartTimestampInMS
         } else {
-            self.sessionStartTimestamp = DefaultValues.sessionStartTimestamp
+            self.sessionStartTimestampInMS = DefaultValues.sessionStartTimestampInMS
         }
         
         if let viewNumber = try? values.decode(Int.self, forKey: .viewNumber) {
@@ -54,10 +54,10 @@ struct QBSessionEntity: Codable {
             self.viewNumber = DefaultValues.viewNumber
         }
         
-        if let viewTimestamp = try? values.decode(Double.self, forKey: .viewTimestamp) {
-            self.viewTimestamp = viewTimestamp
+        if let viewTimestampInMS = try? values.decode(Int.self, forKey: .viewTimestampInMS) {
+            self.viewTimestampInMS = viewTimestampInMS
         } else {
-            self.viewTimestamp = DefaultValues.viewTimestamp
+            self.viewTimestampInMS = DefaultValues.viewTimestampInMS
         }
         
         if let sessionViewNumber = try? values.decode(Int.self, forKey: .sessionViewNumber) {
@@ -66,10 +66,10 @@ struct QBSessionEntity: Codable {
             self.sessionViewNumber = DefaultValues.sessionViewNumber
         }
         
-        if let sequenceNumber = try? values.decode(Int.self, forKey: .sequenceNumber) {
-            self.sequenceNumber = sequenceNumber
+        if let sequenceEventNumber = try? values.decode(Int.self, forKey: .sequenceEventNumber) {
+            self.sequenceEventNumber = sequenceEventNumber
         } else {
-            self.sequenceNumber = DefaultValues.sequenceNumber
+            self.sequenceEventNumber = DefaultValues.sequenceEventNumber
         }
         
         deviceInfo = QBDeviceInfoEntity()
@@ -79,12 +79,12 @@ struct QBSessionEntity: Codable {
     init() {
         sessionId = DefaultValues.sessionId
         sessionNumber = DefaultValues.sessionNumber
-        lastEventTimestamp = DefaultValues.lastEventTimestamp
-        sessionStartTimestamp = DefaultValues.sessionStartTimestamp
+        lastEventTimestampInMS = DefaultValues.lastEventTimestampInMS
+        sessionStartTimestampInMS = DefaultValues.sessionStartTimestampInMS
         viewNumber = DefaultValues.viewNumber
-        viewTimestamp = DefaultValues.viewTimestamp
+        viewTimestampInMS = DefaultValues.viewTimestampInMS
         sessionViewNumber = DefaultValues.sessionViewNumber
-        sequenceNumber = DefaultValues.sequenceNumber
+        sequenceEventNumber = DefaultValues.sequenceEventNumber
         deviceInfo = QBDeviceInfoEntity()
     }
 }
@@ -94,11 +94,11 @@ extension QBSessionEntity {
     private struct DefaultValues {
         static let sessionId = ""
         static let sessionNumber = 0
-        static let lastEventTimestamp = 0.0
-        static let sessionStartTimestamp = 0.0
+        static let lastEventTimestampInMS = 0
+        static let sessionStartTimestampInMS = 0
         static let viewNumber = 0
-        static let viewTimestamp = 0.0
+        static let viewTimestampInMS = 0
         static let sessionViewNumber = 0
-        static let sequenceNumber = 0
+        static let sequenceEventNumber = 0
     }
 }

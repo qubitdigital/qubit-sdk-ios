@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13233.4" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="QBContextEvent" representedClassName=".QBContextEvent" syncable="YES">
-        <attribute name="conversionCycleNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="conversionNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="conversionCycleNumber" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="conversionNumber" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lifetimeCurrency" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="lifetimeValue" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lifetimeValue" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="sample" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="sessionNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="sessionTs" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="sessionViewNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="timeZoneOffset" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="viewNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="viewTs" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="sessionNumber" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="sessionTs" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="sessionViewNumber" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="timeZoneOffset" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="viewNumber" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="viewTs" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QBEvent" inverseName="context" inverseEntity="QBEvent" syncable="YES"/>
     </entity>
     <entity name="QBEvent" representedClassName=".QBEvent" syncable="YES">
@@ -24,18 +24,18 @@
         <relationship name="meta" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QBMetaEvent" inverseName="event" inverseEntity="QBMetaEvent" syncable="YES"/>
     </entity>
     <entity name="QBMetaEvent" representedClassName=".QBMetaEvent" syncable="YES">
-        <attribute name="batchTs" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="batchTs" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="seq" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="seq" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="trackingId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="ts" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="ts" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QBEvent" inverseName="meta" inverseEntity="QBEvent" syncable="YES"/>
     </entity>
     <elements>
-        <element name="QBEvent" positionX="-63" positionY="-18" width="128" height="135"/>
         <element name="QBContextEvent" positionX="-63" positionY="9" width="128" height="240"/>
+        <element name="QBEvent" positionX="-63" positionY="-18" width="128" height="135"/>
         <element name="QBMetaEvent" positionX="-54" positionY="18" width="128" height="165"/>
     </elements>
 </model>
