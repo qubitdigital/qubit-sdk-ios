@@ -31,7 +31,7 @@ class QBSessionManager {
         self.currentSession = lastSession
         self.startNewSession()
     }
-    
+        
     private func startNewSession() {
         self.currentSession.sessionNumber += 1
         self.currentSession.sessionViewNumber = 0

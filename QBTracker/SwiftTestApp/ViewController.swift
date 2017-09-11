@@ -29,24 +29,13 @@ class ViewController: UIViewController {
         let deadlineTime2 = DispatchTime.now() + .milliseconds(600)
 
         DispatchQueue.main.asyncAfter(deadline: deadlineTime1) {
-            QubitSDK.sendEvent(type: "View", data: "ddd")
-            QubitSDK.sendEvent(type: "View", data: "ddd")
-            QubitSDK.sendEvent(type: "View", data: "ddd")
+            QubitSDK.sendEvent(type: "View", data: "{\"test_event\" : \"dupa\"}")
+            QubitSDK.sendEvent(type: "View", data: "{\"test_event\" : \"dupa\"")
+            QubitSDK.sendEvent(type: "View", data: "{\"test_event\" : \"dupa\"")
         }
         
         DispatchQueue.main.asyncAfter(deadline: deadlineTime2) {
-            QubitSDK.sendEvent(type: "Product", data: "ddd")
-            QubitSDK.sendEvent(type: "Product", data: "ddd")
-            QubitSDK.sendEvent(type: "Product", data: "ddd")
-            QubitSDK.sendEvent(type: "Product", data: "ddd")
-            QubitSDK.sendEvent(type: "Product", data: "ddd")
-            QubitSDK.sendEvent(type: "Product", data: "ddd")
-            QubitSDK.sendEvent(type: "Product", data: "ddd")
-            QubitSDK.sendEvent(type: "Product", data: "ddd")
-            QubitSDK.sendEvent(type: "Product", data: "ddd")
-            QubitSDK.sendEvent(type: "Product", data: "ddd")
-            QubitSDK.sendEvent(type: "Product", data: "ddd")
-            QubitSDK.sendEvent(type: "Product", data: "ddd")
+            QubitSDK.sendEvent(type: "Product", data: "{\"test_event\" : \"dupa\"")
         }
         print("tick")
     }
