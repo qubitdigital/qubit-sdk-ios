@@ -17,10 +17,11 @@ struct QBConfigurationEntity: Codable {
     let lookupEndpoint: String
     let lookupReloadInterval: Int
     let lookupRequestTimeout: Int
+    let vertical: String
     //  AO: If endpoint is defined then data_location should be ignored.
     let endpoint: String
     let dataLocation: String
-    
+
     // swiftlint:disable function_body_length
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -67,6 +68,12 @@ struct QBConfigurationEntity: Codable {
             self.lookupRequestTimeout = DefaultValues.lookupRequestTimeout
         }
         
+        if let vertical = try? values.decode(String.self, forKey: .vertical) {
+            self.vertical = vertical
+        } else {
+            self.vertical = DefaultValues.vertical
+        }
+        
         if let dataLocation = try? values.decode(String.self, forKey: .dataLocation) {
             self.dataLocation = dataLocation
         } else {
@@ -89,12 +96,13 @@ struct QBConfigurationEntity: Codable {
         self.disabled = DefaultValues.disabled
         self.configurationReloadInterval = DefaultValues.configurationReloadInterval
         self.queueTimeout = DefaultValues.queueTimeout
-        self.endpoint = DefaultValues.endpointEU
         self.namespace = DefaultValues.namespace
-        self.dataLocation = DefaultValues.dataLocation
         self.lookupEndpoint = DefaultValues.lookupEndpoint
         self.lookupReloadInterval = DefaultValues.lookupReloadInterval
         self.lookupRequestTimeout = DefaultValues.lookupRequestTimeout
+        self.vertical = DefaultValues.vertical
+        self.endpoint = DefaultValues.endpointEU
+        self.dataLocation = DefaultValues.dataLocation
     }
     
     private enum CodingKeys: String, CodingKey {
@@ -105,6 +113,7 @@ struct QBConfigurationEntity: Codable {
         case lookupEndpoint = "lookup_attribute_url"
         case lookupReloadInterval = "lookup_get_request_timeout"
         case lookupRequestTimeout = "lookup_cache_expire_time"
+        case vertical
         case endpoint
         case dataLocation = "data_location"
     }
@@ -120,6 +129,7 @@ extension QBConfigurationEntity {
         static let lookupEndpoint = "lookup.qubit.com"
         static let lookupReloadInterval = 60
         static let lookupRequestTimeout = 5
+        static let vertical = "ec"
         static let dataLocation = "EU"
         static let endpointEU = "gong-eb.qubit.com"
         static let endpointUS = "gong-gc.qubit.com"

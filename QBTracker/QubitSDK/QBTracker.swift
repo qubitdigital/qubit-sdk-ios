@@ -18,10 +18,6 @@ class QBTracker {
     private var eventManager: QBEventManager?
     private var sessionManager: QBSessionManager?
     
-    private var trackerAleradyStarted: Bool {
-        return configurationManager != nil && eventManager != nil && trackingId != nil && sessionManager != nil
-    }
-
     private init() {}
     
     func start(withTrackingId id: String, logLevel: QBLogLevel = QBLogLevel.disabled) {
@@ -41,25 +37,29 @@ class QBTracker {
     }
     
     func sendEvent(type: String, data: String) {
-        guard trackerAleradyStarted else {
-            print("Please call QubitSDK.start(withTrackingId: \"YOUR_TRACKING_ID\"), before sending events")
-            return
-        }
-        
         guard let trackingId = self.trackingId else {
-            QBLog.info("trakingId is nil")
+            QBLog.error("TrakingId is nil, Please call QubitSDK.start(withTrackingId: \"YOUR_TRACKING_ID\"), before sending events")
             return
         }
         
-        if let disabled = configurationManager?.configuration.disabled, disabled {
+        guard let configurationManager = self.configurationManager else {
+            QBLog.error("Please call QubitSDK.start(withTrackingId: \"YOUR_TRACKING_ID\"), before sending events")
+            return
+        }
+        
+        if configurationManager.configuration.disabled {
             QBLog.info("Sending events disabled in configuration")
             return
         }
         
+        let timestampInMs = Date().timeIntervalSince1970InMs
+        sessionManager?.eventAdded(type: QBEventType(type: type), timestampInMS: timestampInMs)
         if let session = sessionManager?.session {
             let context = QBContextEntity(withSession: session, lookup: lookupManager?.lookup)
             // TODO: fill batchTs, I think filling should be in QBEventManager
-            let meta = QBMetaEntity(id: NSUUID().uuidString, ts: Int(Date().timeIntervalSince1970), trackingId: trackingId, type: type, source: session.deviceInfo.getOsNameAndVersion(), seq: session.sequenceNumber, batchTs: 123)
+            let typeWithVertical = configurationManager.configuration.vertical + type
+            
+            let meta = QBMetaEntity(id: NSUUID().uuidString, ts: timestampInMs, trackingId: trackingId, type: typeWithVertical, source: session.deviceInfo.getOsNameAndVersion(), seq: session.sequenceEventNumber, batchTs: 123)
             let event = QBEventEntity(type: type, eventData: data, context: context, meta: meta, session: nil)
             eventManager?.addEventInQueue(event: event)
         }

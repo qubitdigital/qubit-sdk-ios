@@ -22,7 +22,7 @@ struct QBContextEntity: Codable {
     let conversionCycleNumber: Int? // lookup
     let lifetimeValue: QBLifetimeValue? // lookup
     
-    let timeZoneOffset: Int
+    let timezoneOffset: Int
     let viewTs: Int
     let sessionTs: Int
     
@@ -50,10 +50,9 @@ extension QBContextEntity {
         self.conversionNumber = lookup?.conversionNumber
         self.conversionCycleNumber = lookup?.conversionCycleNumber
         self.lifetimeValue = QBLifetimeValue(withValue: lookup?.lifetimeValue)
-        // TODO: set timezone offset
-        self.timeZoneOffset = 0
-        self.viewTs = Int(session.viewTimestamp)
-        self.sessionTs = Int(session.sessionStartTimestamp)
+        self.timezoneOffset = (TimeZone.current.secondsFromGMT() / 60)
+        self.viewTs = session.viewTimestampInMS
+        self.sessionTs = session.sessionStartTimestampInMS
     }
     
     func fillQBContextEvent(context: inout QBContextEvent) -> QBContextEvent {
@@ -72,7 +71,7 @@ extension QBContextEntity {
             context.lifetimeValue = NSNumber(value: lifetimeValue.value)
             context.lifetimeCurrency = lifetimeValue.currency
         }
-        context.timeZoneOffset = NSNumber(value: self.timeZoneOffset)
+        context.timeZoneOffset = NSNumber(value: self.timezoneOffset)
         context.viewTs = NSNumber(value: self.viewTs)
         context.sessionTs = NSNumber(value: self.sessionTs)
         return context
@@ -90,7 +89,7 @@ extension QBContextEntity {
             let sessionTs = context.sessionTs?.intValue
         else { return nil }
         
-        let contextEntity = QBContextEntity(id: id, sample: sample, viewNumber: viewNumber, sessionNumber: sessionNumber, sessionViewNumber: sessionViewNumber, conversionNumber: context.conversionNumber?.intValue, conversionCycleNumber: context.conversionCycleNumber?.intValue, lifetimeValue: QBLifetimeValue(withValue: context.lifetimeValue?.intValue), timeZoneOffset: timeZoneOffset, viewTs: viewTs, sessionTs: sessionTs)
+        let contextEntity = QBContextEntity(id: id, sample: sample, viewNumber: viewNumber, sessionNumber: sessionNumber, sessionViewNumber: sessionViewNumber, conversionNumber: context.conversionNumber?.intValue, conversionCycleNumber: context.conversionCycleNumber?.intValue, lifetimeValue: QBLifetimeValue(withValue: context.lifetimeValue?.intValue), timezoneOffset: timeZoneOffset, viewTs: viewTs, sessionTs: sessionTs)
         return contextEntity
     }
 }

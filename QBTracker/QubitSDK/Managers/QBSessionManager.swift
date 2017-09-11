@@ -20,7 +20,7 @@ class QBSessionManager {
     }
     
     private var currentSession: QBSessionEntity
-    private let sessionTime: Double = 1800
+    private let sessionTimeInMS = 1_800_000
     private var lookupManager: QBLookupManager?
     
     init() {
@@ -31,24 +31,17 @@ class QBSessionManager {
         self.currentSession = lastSession
         self.startNewSession()
     }
-    
-    func fillSessionProperties(fromLookup lookup: QBLookupEntity) {
-        // TODO
-    }
-    
+        
     private func startNewSession() {
         self.currentSession.sessionNumber += 1
         self.currentSession.sessionViewNumber = 0
-        self.currentSession.sequenceNumber = 0
+        self.currentSession.sequenceEventNumber = 0
         
 //      let oldTimeStamp = self.session.sessionTimestamp
-        let timestamp = Date().timeIntervalSince1970
-        let timestampString = NSNumber(value: timestamp).stringValue
-        let newSessionId = timestampString.md5
-        self.currentSession.sessionId = newSessionId
+        let timestampInMS = Date().timeIntervalSince1970InMs
         
-        self.currentSession.lastEventTimestamp = timestamp
-        self.currentSession.sessionStartTimestamp = timestamp
+        self.currentSession.lastEventTimestampInMS = timestampInMS
+        self.currentSession.sessionStartTimestampInMS = timestampInMS
         
         self.saveSession()
     }
@@ -58,24 +51,37 @@ class QBSessionManager {
     }
     
     private func isSessionValid() -> Bool {
-        let currentTimestamp = Date().timeIntervalSince1970
-        return currentTimestamp < self.currentSession.lastEventTimestamp + sessionTime
+        let currentTimestamp = Date().timeIntervalSince1970InMs
+        return currentTimestamp < self.currentSession.lastEventTimestampInMS + sessionTimeInMS
     }
     
-    func increaseViewNumber() {
-        self.currentSession.viewNumber += 1
-        self.currentSession.sessionViewNumber += 1
-        self.currentSession.viewTimestamp = Date().timeIntervalSince1970
+    func eventAdded(type: QBEventType, timestampInMS: Int) {
+        switch type {
+        case .session:
+            return
+        case .view:
+            self.currentSession.viewNumber += 1
+            self.currentSession.sessionViewNumber += 1
+            self.currentSession.viewTimestampInMS = timestampInMS
+            fallthrough
+        case .other:
+            self.currentSession.sequenceEventNumber += 1
+        }
+        self.saveSession()
+    }
+    
+    func fillSessionProperties(fromLookup lookup: QBLookupEntity) {
+        if let viewNumber = lookup.viewNumber {
+            self.currentSession.viewNumber = viewNumber
+        }
+        
+        if let sessionNumber = lookup.sessionNumber {
+            self.currentSession.viewNumber = sessionNumber
+        }
         self.saveSession()
     }
     
     func sendSessionEvent() {
         //TODO: send session event
     }
-    
-//    func newSequenceNumber() -> Int {
-//        sequenceNumber += 1
-//        return sequenceNumber
-//    }
-    
 }
