@@ -10,7 +10,7 @@ import Foundation
 
 struct QBLookupEntity: Codable {
     
-    let ipLocation: QBLocationIp?
+    let ipLocation: QBLocationIpEntity?
     let ipAddress: String?
     let viewNumber: Int?
     let sessionNumber: Int?
@@ -22,18 +22,4 @@ struct QBLookupEntity: Codable {
     let lastViewTs: Int?
     let firstConversionTs: Int?
     let lastConversionTs: Int?
-
-    struct QBLocationIp: Codable {
-        let city: String?
-        let cityCode: String?
-        let country: String?
-        let countryCode: String?
-        let latitude: Double?
-        let longitude: Double?
-        let area: String?
-        let areaCode: String?
-        let region: String?
-        let regionCode: String?
-    }
-    
 }

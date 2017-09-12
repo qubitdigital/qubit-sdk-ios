@@ -2,103 +2,97 @@
 //  QBSessionEntity.swift
 //  QubitSDK
 //
-//  Created by Pavlo Davydiuk on 04/09/2017.
+//  Created by Pavlo Davydiuk on 11/09/2017.
 //  Copyright © 2017 Qubit. All rights reserved.
 //
 
 import Foundation
-import UIKit
 
 struct QBSessionEntity: Codable {
-    var sessionId: String
-    var sessionNumber: Int
-    var lastEventTimestampInMS: Int
-    var sessionStartTimestampInMS: Int
-    var viewNumber: Int
-    var viewTimestampInMS: Int
-    var sessionViewNumber: Int
-    var sequenceEventNumber: Int
-    let deviceInfo: QBDeviceInfoEntity
+    let firstViewTs: Int?
+    let lastViewTs: Int?
+    let firstConversionTs: Int?
+    let lastConversionTs: Int?
     
-    // swiftlint:disable function_body_length
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        
-        if let sessionId = try? values.decode(String.self, forKey: .sessionId) {
-            self.sessionId = sessionId
-        } else {
-            self.sessionId = DefaultValues.sessionId
-        }
-        
-        if let sessionNumber = try? values.decode(Int.self, forKey: .sessionNumber) {
-            self.sessionNumber = sessionNumber
-        } else {
-            self.sessionNumber = DefaultValues.sessionNumber
-        }
-        
-        if let lastEventTimestampInMS = try? values.decode(Int.self, forKey: .lastEventTimestampInMS) {
-            self.lastEventTimestampInMS = lastEventTimestampInMS
-        } else {
-            self.lastEventTimestampInMS = DefaultValues.lastEventTimestampInMS
-        }
-        
-        if let sessionStartTimestampInMS = try? values.decode(Int.self, forKey: .sessionStartTimestampInMS) {
-            self.sessionStartTimestampInMS = sessionStartTimestampInMS
-        } else {
-            self.sessionStartTimestampInMS = DefaultValues.sessionStartTimestampInMS
-        }
-        
-        if let viewNumber = try? values.decode(Int.self, forKey: .viewNumber) {
-            self.viewNumber = viewNumber
-        } else {
-            self.viewNumber = DefaultValues.viewNumber
-        }
-        
-        if let viewTimestampInMS = try? values.decode(Int.self, forKey: .viewTimestampInMS) {
-            self.viewTimestampInMS = viewTimestampInMS
-        } else {
-            self.viewTimestampInMS = DefaultValues.viewTimestampInMS
-        }
-        
-        if let sessionViewNumber = try? values.decode(Int.self, forKey: .sessionViewNumber) {
-            self.sessionViewNumber = sessionViewNumber
-        } else {
-            self.sessionViewNumber = DefaultValues.sessionViewNumber
-        }
-        
-        if let sequenceEventNumber = try? values.decode(Int.self, forKey: .sequenceEventNumber) {
-            self.sequenceEventNumber = sequenceEventNumber
-        } else {
-            self.sequenceEventNumber = DefaultValues.sequenceEventNumber
-        }
-        
-        deviceInfo = QBDeviceInfoEntity()
-    }
-    // swiftlint:enable function_body_length
+    let ipLocation: QBLocationIpEntity?
+    let ipAddress: String?
     
-    init() {
-        sessionId = DefaultValues.sessionId
-        sessionNumber = DefaultValues.sessionNumber
-        lastEventTimestampInMS = DefaultValues.lastEventTimestampInMS
-        sessionStartTimestampInMS = DefaultValues.sessionStartTimestampInMS
-        viewNumber = DefaultValues.viewNumber
-        viewTimestampInMS = DefaultValues.viewTimestampInMS
-        sessionViewNumber = DefaultValues.sessionViewNumber
-        sequenceEventNumber = DefaultValues.sequenceEventNumber
-        deviceInfo = QBDeviceInfoEntity()
-    }
-}
+    let deviceType: String?
+    let deviceName: String?
+    let osName: String?
+    let osVersion: String?
+    let appType: String?
+    let appName: String?
+    let appVersion: String?
+    let screenWidth: String?
+    let screenHeight: String?
+    
+    func fillQBSessionEvent(session: inout QBSessionEvent) -> QBSessionEvent {
+        session.firstViewTs = firstViewTs?.optionalNumber
+        session.lastViewTs = lastViewTs?.optionalNumber
+        session.firstConversionTs = firstConversionTs?.optionalNumber
+        session.lastConversionTs = lastConversionTs?.optionalNumber
+        
+        if let ipLocation = self.ipLocation {
+            session.ipLocationCity = ipLocation.city
+            session.ipLocationCityCode = ipLocation.cityCode
+            session.ipLocationCountry = ipLocation.country
+            session.ipLocationCountryCode = ipLocation.countryCode
+            session.ipLocationRegion = ipLocation.region
+            session.ipLocationRegionCode = ipLocation.regionCode
+            session.ipLocationArea = ipLocation.area
+            session.ipLocationAreaCode = ipLocation.areaCode
+            session.ipLocationCity = ipLocation.city
+            session.ipLocationCityCode = ipLocation.cityCode
+            session.ipLocationLongitude = ipLocation.longitude?.optionalNumber
+            session.ipLocationLatitude = ipLocation.latitude?.optionalNumber
+        }
 
-// MARK: - Default values
-extension QBSessionEntity {
-    private struct DefaultValues {
-        static let sessionId = ""
-        static let sessionNumber = 0
-        static let lastEventTimestampInMS = 0
-        static let sessionStartTimestampInMS = 0
-        static let viewNumber = 0
-        static let viewTimestampInMS = 0
-        static let sessionViewNumber = 0
-        static let sequenceEventNumber = 0
+        session.ipAddress = self.ipAddress
+        session.deviceType = self.deviceType
+        session.deviceName = self.deviceName
+        session.osName = self.osName
+        session.osVersion = self.osVersion
+        session.appType = self.appType
+        session.appName = self.appName
+        session.appVersion = self.appVersion
+        session.screenWidth = self.screenWidth
+        session.screenHeight = self.screenHeight
+        
+        return session
+    }
+    
+    static func create(with session: QBSessionEvent?) -> QBSessionEntity? {
+        guard let session = session else {
+            return nil
+        }
+        
+        let locationIp = QBLocationIpEntity(city: session.ipLocationCity,
+                                            cityCode: session.ipLocationCityCode,
+                                            country: session.ipLocationCountry,
+                                            countryCode: session.ipLocationCountryCode,
+                                            latitude: session.ipLocationLatitude?.doubleValue,
+                                            longitude: session.ipLocationLongitude?.doubleValue,
+                                            area: session.ipLocationArea,
+                                            areaCode: session.ipLocationAreaCode,
+                                            region: session.ipLocationRegion,
+                                            regionCode: session.ipLocationRegionCode)
+        
+        let sessionEntity = QBSessionEntity(firstViewTs: session.firstViewTs?.intValue,
+                                            lastViewTs: session.lastViewTs?.intValue,
+                                            firstConversionTs: session.firstConversionTs?.intValue,
+                                            lastConversionTs: session.lastConversionTs?.intValue,
+                                            ipLocation: locationIp,
+                                            ipAddress: session.ipAddress,
+                                            deviceType: session.deviceType,
+                                            deviceName: session.deviceName,
+                                            osName: session.osName,
+                                            osVersion: session.osVersion,
+                                            appType: session.appType,
+                                            appName: session.appName,
+                                            appVersion: session.appVersion,
+                                            screenWidth: session.screenWidth,
+                                            screenHeight: session.screenHeight)
+        return sessionEntity
     }
 }

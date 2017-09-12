@@ -74,19 +74,22 @@ struct QBEventEntity: Codable {
 
 // MARK: - Bridges
 extension QBEventEntity {
-    func fillQBEvent(event: inout QBEvent, context: inout QBContextEvent, meta: inout QBMetaEvent) -> QBEvent {
+    func fillQBEvent(event: inout QBEvent, context: inout QBContextEvent, meta: inout QBMetaEvent, session: inout QBSessionEvent) -> QBEvent {
         event.data = self.eventData
         event.type = self.type
         event.dateAdded = NSDate()
         event.context = self.context?.fillQBContextEvent(context: &context)
         event.meta = self.meta?.fillQBMetaEvent(meta: &meta)
+        event.session = self.session?.fillQBSessionEvent(session: &session)
+        
         return event
     }
     
     static func create(with event: QBEvent) -> QBEventEntity? {
         guard let type = event.type, let context = event.context, let meta = event.meta else { return nil }
         guard let contextEntity = QBContextEntity.create(with: context), let metaEntity = QBMetaEntity.create(with: meta) else { return nil }
-        let eventEntity = QBEventEntity(type: type, eventData: "", context: contextEntity, meta: metaEntity, session: nil)
+        let session = QBSessionEntity.create(with: event.session)
+        let eventEntity = QBEventEntity(type: type, eventData: "", context: contextEntity, meta: metaEntity, session: session)
         return eventEntity
     }
 }

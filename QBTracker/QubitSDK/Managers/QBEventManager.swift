@@ -64,12 +64,13 @@ class QBEventManager {
 		backgroundCoreDataQueue?.sync { [weak self] in
 			guard var dbEvent = self?.databaseManager.insert(entityType: QBEvent.self),
                   var dbContext = self?.databaseManager.insert(entityType: QBContextEvent.self),
-                  var dbMeta = self?.databaseManager.insert(entityType: QBMetaEvent.self)
+                  var dbMeta = self?.databaseManager.insert(entityType: QBMetaEvent.self),
+                  var dbSession = self?.databaseManager.insert(entityType: QBSessionEvent.self)
                 else {
 				return
 			}
         
-            dbEvent = event.fillQBEvent(event: &dbEvent, context: &dbContext, meta: &dbMeta)
+            dbEvent = event.fillQBEvent(event: &dbEvent, context: &dbContext, meta: &dbMeta, session: &dbSession)
             
 			self?.databaseManager.save()
             self?.trySendEventsWhenFirstEventAdded()

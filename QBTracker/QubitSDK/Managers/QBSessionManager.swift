@@ -10,7 +10,7 @@ import Foundation
 
 class QBSessionManager {
 
-    var session: QBSessionEntity {
+    var session: QBSession {
         if self.isSessionValid() {
             return currentSession
         } else {
@@ -19,13 +19,13 @@ class QBSessionManager {
         }
     }
     
-    private var currentSession: QBSessionEntity
+    private var currentSession: QBSession
     private let sessionTimeInMS = 1_800_000
     private var lookupManager: QBLookupManager?
     
     init() {
         guard let lastSession = UserDefaults.standard.session else {
-            self.currentSession = QBSessionEntity()
+            self.currentSession = QBSession()
             return
         }
         self.currentSession = lastSession
