@@ -31,13 +31,19 @@ struct QBEventEntity: Codable {
     let type: String
     let eventData: String
     
-    var context: QBContextEntity?
-    var meta: QBMetaEntity?
-    var session: QBSessionEntity?
+    private var context: QBContextEntity?
+    private var meta: QBMetaEntity?
+    private var session: QBSessionEntity?
     
     init(type: String = "", eventData: String = "", context: QBContextEntity? = nil, meta: QBMetaEntity? = nil, session: QBSessionEntity? = nil) {
         self.type = type
         self.eventData = eventData
+        self.context = context
+        self.meta = meta
+        self.session = session
+    }
+    
+    mutating func add(context: QBContextEntity? = nil, meta: QBMetaEntity? = nil, session: QBSessionEntity? = nil) {
         self.context = context
         self.meta = meta
         self.session = session

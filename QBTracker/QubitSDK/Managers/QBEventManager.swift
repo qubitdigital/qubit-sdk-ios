@@ -61,6 +61,26 @@ class QBEventManager {
     
     // MARK: - Internal
     
+    static func createEvent(type: String, dictionary: [String: Any]) -> QBEventEntity? {
+        return QBEventEntity.event(type:type, dictionary: dictionary)
+    }
+    
+    func sendEvent(event: QBEventEntity) {
+        if configurationManager.configuration.disabled {
+            QBLog.info("Sending events disabled in configuration")
+            return
+        }
+        let timestampInMs = Date().timeIntervalSince1970InMs
+        sessionManager.eventAdded(type: QBEventType(type: event.type), timestampInMS: timestampInMs)
+        let context = QBContextEntity(withSession: sessionManager.session, lookup: lookupManager.lookup)
+
+        let meta = QBMetaEntity(id: NSUUID().uuidString, ts: timestampInMs, trackingId: self.configurationManager.trackingId, type: event.type, source: sessionManager.session.deviceInfo.getOsNameAndVersion(), seq: sessionManager.session.sequenceEventNumber, batchTs: 123)
+        
+        var event = event
+        event.add(context: context, meta: meta)
+        self.addEventInQueue(event: event)
+    }
+    
     func sendEvent(type: String, data: String) {
         if configurationManager.configuration.disabled {
             QBLog.info("Sending events disabled in configuration")

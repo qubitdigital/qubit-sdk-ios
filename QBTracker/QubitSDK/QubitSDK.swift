@@ -33,7 +33,29 @@ public class QubitSDK: NSObject {
     public class func sendEvent(type: String, data: String) {
         QBTracker.shared.sendEvent(type: type, data: data)
     }
+    
+    /// Send and event
+    ///
+    /// - Parameters:
+    ///   - type: eventType
+    ///   - event: QBEventEntity
+    @objc(sendEventWithEvent:)
+    public class func sendEvent(event: Any?) {
+        if let event = event as? QBEventEntity {
+            QBTracker.shared.sendEvent(event: event)
+        }
+    }
 	
+    /// Create event
+    ///
+    /// - Parameters:
+    ///   - type: eventType
+    ///   - event: QBEventEntity
+    @objc(createEventWithType:dictionary:)
+    public class func createEvent(type: String, dictionary: [String: Any]) -> AnyObject?{
+        return QBEventManager.createEvent(type: type, dictionary: dictionary) as AnyObject
+    }
+    
 	/// Stop tracking
 	@objc(stopTracking)
 	public class func stopTracking() {

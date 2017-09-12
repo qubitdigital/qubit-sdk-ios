@@ -30,4 +30,10 @@ class ViewController: UIViewController {
         QubitSDK.sendEvent(type: "abc", data: "{\"test_event\" : \"dupa\"}")
     }
     
+    @IBAction func tapOnCreateEventButton(_ sender: UIButton) {
+        let event =  QubitSDK.createEvent(type: "ownEvent", dictionary: ["test_event": "dupa"])
+        QubitSDK.sendEvent(event: event)
+    }
+    
+    
 }
