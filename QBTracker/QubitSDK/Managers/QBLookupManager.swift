@@ -15,7 +15,6 @@ protocol QBLookupManagerDelegate: class {
 
 class QBLookupManager {
     
-    weak var delegate: QBLookupManagerDelegate?
     var lookup: QBLookupEntity? {
         if let remoteLookup = self.remoteLookup {
             QBLog.verbose("used remote lookup")
@@ -45,19 +44,33 @@ class QBLookupManager {
         }
     }
     private let configurationManager: QBConfigurationManager
-    private let trackingId: String
     
-    init(withConfigurationManager configurationManager: QBConfigurationManager, withTrackingId trackingId: String) {
+    init(withConfigurationManager configurationManager: QBConfigurationManager) {
         self.configurationManager = configurationManager
-        self.trackingId = trackingId
         self.lastUpdateTimeStamp = 0
         downloadLookup()
+    }
+    
+    func configurationUpdated() {
+        if shouldUpdateLookup() {
+            downloadLookup()
+        }
     }
     
     private func downloadLookup() {
         QBLog.mark()
         
-        let lookupService = QBLookupServiceImp(withConfigurationManager: self.configurationManager, withTrackingId: self.trackingId)
+        guard configurationManager.isConfigurationLoaded else {
+            QBLog.info("Configuration is loading, so lookup will be loaded after load config")
+            return
+        }
+        
+        if configurationManager.configuration.disabled {
+            QBLog.info("Sending events disabled in configuration, so download lookup makes no sense")
+            return
+        }
+        
+        let lookupService = QBLookupServiceImp(withConfigurationManager: self.configurationManager)
         
         lookupService.getLookup(forDeviceId: QBDevice.getId()) { [weak self] result in
             guard let strongSelf = self else { return }
@@ -66,15 +79,17 @@ class QBLookupManager {
             case .success(let lookup):
                 QBLog.debug("userDefaults = \(UserDefaults.standard.lastSavedRemoteLookup.debugDescription)")
                 strongSelf.remoteLookup = lookup
-                strongSelf.delegate?.lookupUpdateSuccessful()
             case .failure(let error):
                 QBLog.error("error = \(error)")
-                strongSelf.delegate?.lookupUpdateFailed()
             }
         }
     }
     
     private func shouldUpdateLookup() -> Bool {
+        if self.remoteLookup == nil {
+            return true
+        }
+        
         let timestamp = NSDate().timeIntervalSince1970
         QBLog.verbose("lookup current timestamp = \(timestamp), last update timestamp = \(lastUpdateTimeStamp), diff = \(timestamp - lastUpdateTimeStamp)")
         if timestamp > lastUpdateTimeStamp + self.configurationManager.configuration.lookupReloadIntervalInSeconds() {

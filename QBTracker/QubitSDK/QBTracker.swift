@@ -14,7 +14,6 @@ class QBTracker {
     
     private var configurationManager: QBConfigurationManager?
     private var lookupManager: QBLookupManager?
-    private var trackingId: String?
     private var eventManager: QBEventManager?
     private var sessionManager: QBSessionManager?
     
@@ -30,46 +29,22 @@ class QBTracker {
             return
         }
         
-        trackingId = id
-        configurationManager = QBConfigurationManager(withTrackingId: id, withDeleagte: self)
-        eventManager = QBEventManager()
-        sessionManager = QBSessionManager()
+        let configurationManager = QBConfigurationManager(withTrackingId: id, withDeleagte: self)
+        self.configurationManager = configurationManager
+        let lookupManager = QBLookupManager(withConfigurationManager: configurationManager)
+        self.lookupManager = lookupManager
+        let sessionManager = QBSessionManager()
+        self.sessionManager = sessionManager
+        eventManager = QBEventManager(withConfigurationManager: configurationManager, sessionManager: sessionManager, lookupManager: lookupManager)
     }
     
     func sendEvent(type: String, data: String) {
-        guard let trackingId = self.trackingId else {
-            QBLog.error("TrakingId is nil, Please call QubitSDK.start(withTrackingId: \"YOUR_TRACKING_ID\"), before sending events")
-            return
-        }
-        
-        guard let configurationManager = self.configurationManager else {
+        guard let eventManager = self.eventManager else {
             QBLog.error("Please call QubitSDK.start(withTrackingId: \"YOUR_TRACKING_ID\"), before sending events")
             return
         }
         
-        if configurationManager.configuration.disabled {
-            QBLog.info("Sending events disabled in configuration")
-            return
-        }
-        
-        if data.isJSONValid() == false {
-            QBLog.error("Please check your `data: String` parameter has valid JSON format")
-            return
-        }
-        
-        let timestampInMs = Date().timeIntervalSince1970InMs
-        sessionManager?.eventAdded(type: QBEventType(type: type), timestampInMS: timestampInMs)
-        if let session = sessionManager?.session {
-            let context = QBContextEntity(withSession: session, lookup: lookupManager?.lookup)
-            // TODO: fill batchTs, I think filling should be in QBEventManager
-            let typeWithVertical = configurationManager.configuration.vertical + type
-            
-            let meta = QBMetaEntity(id: NSUUID().uuidString, ts: timestampInMs, trackingId: trackingId, type: typeWithVertical, source: session.deviceInfo.getOsNameAndVersion(), seq: session.sequenceEventNumber, batchTs: 123)
-            let event = QBEventEntity(type: type, eventData: data, context: context, meta: meta, session: nil)
-            eventManager?.addEventInQueue(event: event)
-        } else {
-            QBLog.info("Sending events disabled, session has not been established")
-        }
+        eventManager.sendEvent(type: type, data: data)
     }
 	
 	func stop() {
@@ -84,24 +59,7 @@ class QBTracker {
 
 extension QBTracker: QBConfigurationManagerDelegate {
     func configurationUpdated() {
-        if self.lookupManager == nil, let configurationManager = self.configurationManager, let trackingId = self.trackingId {
-            lookupManager = QBLookupManager(withConfigurationManager: configurationManager, withTrackingId: trackingId)
-            lookupManager?.delegate = self
-        }
-        eventManager?.configurationManager = self.configurationManager
+        eventManager?.configurationUpdated()
+        lookupManager?.configurationUpdated()
     }
-}
-
-extension QBTracker: QBLookupManagerDelegate {
-    func lookupUpdateSuccessful() {
-        if let lookup = lookupManager?.lookup {
-            sessionManager?.fillSessionProperties(fromLookup: lookup)
-            sessionManager?.sendSessionEvent()
-        }
-    }
-    
-    func lookupUpdateFailed() {
-        sessionManager?.sendSessionEvent()
-    }
-
 }

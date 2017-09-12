@@ -14,14 +14,12 @@ protocol QBLookupService {
 
 class QBLookupServiceImp: QBLookupService {
     private let configurationManager: QBConfigurationManager
-    private let trackingId: String
     private let apiClient: QBAPIClient = {
         return QBAPIClient()
     }()
     
-    init(withConfigurationManager configurationManager: QBConfigurationManager, withTrackingId trackingId: String) {
+    init(withConfigurationManager configurationManager: QBConfigurationManager) {
         self.configurationManager = configurationManager
-        self.trackingId = trackingId
     }
     
     func getLookup(forDeviceId id: String, completion: ((Result<QBLookupEntity>) -> Void)?) {
@@ -34,7 +32,7 @@ class QBLookupServiceImp: QBLookupService {
         }
         
         var urlWithPath = url
-        urlWithPath.appendPathComponent(trackingId)
+        urlWithPath.appendPathComponent(configurationManager.trackingId)
         urlWithPath.appendPathComponent(id)
         
         let request = URLRequest(url: urlWithPath)

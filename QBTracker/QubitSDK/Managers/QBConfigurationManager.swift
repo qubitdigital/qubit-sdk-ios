@@ -13,7 +13,7 @@ protocol QBConfigurationManagerDelegate: class {
 }
 
 class QBConfigurationManager {
-    // MARK: - Private properties
+    // MARK: - Internal properties
     let trackingId: String
     weak var delegate: QBConfigurationManagerDelegate?
     var configuration: QBConfigurationEntity {
@@ -27,15 +27,15 @@ class QBConfigurationManager {
             return lastSavedRemoteConfiguration
         }
         
+        assert(false, "WRONG!, default configuration should not be used")
         QBLog.error("used default configuration")
         return QBConfigurationEntity()
     }
-    
-    // MARK: - Internal properties
-    private var isConfigurationLoaded: Bool {
+
+    var isConfigurationLoaded: Bool {
         return self.remoteConfiguration != nil || UserDefaults.standard.lastSavedRemoteConfiguration != nil
     }
-
+    
     // MARK: - Private functions
     private var remoteConfiguration: QBConfigurationEntity? = nil {
         didSet {
