@@ -69,18 +69,7 @@ class QBSessionManager {
         }
         self.saveSession()
     }
-    
-    func fillSessionProperties(fromLookup lookup: QBLookupEntity) {
-        if let viewNumber = lookup.viewNumber {
-            self.currentSession.viewNumber = viewNumber
-        }
         
-        if let sessionNumber = lookup.sessionNumber {
-            self.currentSession.viewNumber = sessionNumber
-        }
-        self.saveSession()
-    }
-    
     func sendSessionEvent() {
         //TODO: send session event
     }

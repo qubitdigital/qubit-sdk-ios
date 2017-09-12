@@ -35,20 +35,21 @@ struct QBEventManagerConfig {
 }
 
 class QBEventManager {
-    var configurationManager: QBConfigurationManager? {
-        didSet {
-            startEventManager()
-        }
-    }
-    
     private var isSendingEvents: Bool = false
     private var config: QBEventManagerConfig = QBEventManagerConfig()
     private var databaseManager = QBDatabaseManager()
     private var connectionManager = QBConnectionManager()
     private var backgroundUploadQueue: DispatchQueue?
     private var backgroundCoreDataQueue: DispatchQueue?
+    
+    private let configurationManager: QBConfigurationManager
+    private let sessionManager: QBSessionManager
+    private let lookupManager: QBLookupManager
 
-    init() {
+    init(withConfigurationManager configurationManager: QBConfigurationManager, sessionManager: QBSessionManager, lookupManager: QBLookupManager) {
+        self.configurationManager = configurationManager
+        self.sessionManager = sessionManager
+        self.lookupManager = lookupManager
         startEventManager()
         NotificationCenter.default.addObserver(self, selector: #selector(self.startEventManager), name: NSNotification.Name(rawValue: QBConnectionManager.notificationKeyReachable), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.stopEventManager), name: NSNotification.Name(rawValue: QBConnectionManager.notificationKeyNotReachable), object: nil)
@@ -59,7 +60,35 @@ class QBEventManager {
     }
     
     // MARK: - Internal
-    func addEventInQueue(event: QBEventEntity) {
+    
+    func sendEvent(type: String, data: String) {
+        if configurationManager.configuration.disabled {
+            QBLog.info("Sending events disabled in configuration")
+            return
+        }
+        
+        if data.isJSONValid() == false {
+            QBLog.error("Please check your `data: String` parameter has valid JSON format")
+            return
+        }
+        
+        let timestampInMs = Date().timeIntervalSince1970InMs
+        sessionManager.eventAdded(type: QBEventType(type: type), timestampInMS: timestampInMs)
+        
+        let context = QBContextEntity(withSession: sessionManager.session, lookup: lookupManager.lookup)
+        // TODO: fill batchTs
+//        let typeWithVertical = configurationManager.configuration.vertical + type
+        
+        let meta = QBMetaEntity(id: NSUUID().uuidString, ts: timestampInMs, trackingId: self.configurationManager.trackingId, type: type, source: sessionManager.session.deviceInfo.getOsNameAndVersion(), seq: sessionManager.session.sequenceEventNumber, batchTs: 123)
+        let event = QBEventEntity(type: type, eventData: data, context: context, meta: meta, session: nil)
+        self.addEventInQueue(event: event)
+    }
+    
+    func configurationUpdated() {
+        startEventManager()
+    }
+    
+    private func addEventInQueue(event: QBEventEntity) {
         QBLog.mark()
 		backgroundCoreDataQueue?.sync { [weak self] in
 			guard var dbEvent = self?.databaseManager.insert(entityType: QBEvent.self),
@@ -77,27 +106,10 @@ class QBEventManager {
 		}
     }
     
-    func sendSessionEvent(start: TimeInterval, end: TimeInterval) {
-        var params: [String : Any] = ["ipAddress": "",
-                                      "deviceType": "mobile",
-                                      "osName": "iOS",
-                                      "osVersion": UIDevice.current.systemVersion,
-                                      "appType": "app"]
-        if start != 0 {
-            params["firstViewTs"] = start * 1000
-        }
-        
-        if end != 0 {
-            params["lastViewTs"] = end * 1000
-        }
-
-        sendEvent(type: "session", data: params)
-    }
-    
     // MARK: - Private
     @objc
     private func startEventManager() {
-        guard let configurationManager = configurationManager else {
+        guard configurationManager.isConfigurationLoaded else {
             QBLog.info("Configuration is loading, so timer don't started")
             stopEventManager()
             return
@@ -151,7 +163,7 @@ class QBEventManager {
     
     @objc
 	private func sendEvents() {
-        guard let configurationManager = configurationManager else {
+        guard configurationManager.isConfigurationLoaded else {
             QBLog.info("Configuration is loading, so events will be send after load config")
             return
         }
@@ -176,7 +188,7 @@ class QBEventManager {
                 
                 let events = self.convert(events: currentEventBatch)
                 
-                let eventService = QBEventServiceImp(withConfigurationManager: configurationManager)
+                let eventService = QBEventServiceImp(withConfigurationManager: self.configurationManager)
                 
                 self.isSendingEvents = true
                 eventService.sendEvents(events: events, dedupe: self.config.dedupeActive) { [weak self] (result) in
