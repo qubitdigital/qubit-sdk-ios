@@ -80,8 +80,8 @@ extension QBSessionEvent {
     @NSManaged var appType: String?
     @NSManaged var appName: String?
     @NSManaged var appVersion: String?
-    @NSManaged var screenWidth: String?
-    @NSManaged var screenHeight: String?
+    @NSManaged var screenWidth: NSNumber?
+    @NSManaged var screenHeight: NSNumber?
     
     @NSManaged var event: QBEvent?
 }

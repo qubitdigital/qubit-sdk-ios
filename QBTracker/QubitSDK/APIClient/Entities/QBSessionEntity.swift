@@ -24,8 +24,8 @@ struct QBSessionEntity: Codable {
     let appType: String?
     let appName: String?
     let appVersion: String?
-    let screenWidth: String?
-    let screenHeight: String?
+    let screenWidth: Int?
+    let screenHeight: Int?
     
     func fillQBSessionEvent(session: inout QBSessionEvent) -> QBSessionEvent {
         session.firstViewTs = firstViewTs?.optionalNumber
@@ -56,8 +56,8 @@ struct QBSessionEntity: Codable {
         session.appType = self.appType
         session.appName = self.appName
         session.appVersion = self.appVersion
-        session.screenWidth = self.screenWidth
-        session.screenHeight = self.screenHeight
+        session.screenWidth = self.screenWidth?.optionalNumber
+        session.screenHeight = self.screenHeight?.optionalNumber
         
         return session
     }
@@ -91,8 +91,8 @@ struct QBSessionEntity: Codable {
                                             appType: session.appType,
                                             appName: session.appName,
                                             appVersion: session.appVersion,
-                                            screenWidth: session.screenWidth,
-                                            screenHeight: session.screenHeight)
+                                            screenWidth: session.screenWidth?.intValue,
+                                            screenHeight: session.screenHeight?.intValue)
         return sessionEntity
     }
 }

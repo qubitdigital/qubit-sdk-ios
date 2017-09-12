@@ -34,7 +34,7 @@ extension String {
 
 extension String {
     func isJSONValid() -> Bool {
-        if data = self.data(using: .utf8) {
+        if let data = self.data(using: .utf8) {
             return (try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves)) != nil
         } else {
             return false
