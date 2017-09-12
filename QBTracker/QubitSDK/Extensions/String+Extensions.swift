@@ -31,3 +31,9 @@ extension String {
         return String(format: hash as String)
     }
 }
+
+extension String {
+    func isJSONValid() -> Bool {
+        return (try? JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)) != nil
+    }
+}
