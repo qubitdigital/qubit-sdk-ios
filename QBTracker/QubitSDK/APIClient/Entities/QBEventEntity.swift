@@ -15,7 +15,7 @@ enum QBEventType: String {
     
     public init(type: String) {
         switch type {
-        case "session":
+        case "qubit.session":
             self = .session
             break
         case "View":
@@ -43,10 +43,9 @@ struct QBEventEntity: Codable {
         self.session = session
     }
     
-    mutating func add(context: QBContextEntity? = nil, meta: QBMetaEntity? = nil, session: QBSessionEntity? = nil) {
+    mutating func add(context: QBContextEntity? = nil, meta: QBMetaEntity? = nil) {
         self.context = context
         self.meta = meta
-        self.session = session
     }
     
     func codable() -> [String : Any]? {
@@ -70,7 +69,9 @@ struct QBEventEntity: Codable {
                 jsonObject["meta"] =  convert(jsonData: metaData)
             }
             if let session: QBSessionEntity = self.session, let sessionData: Data = try? JSONEncoder().encode(session) {
-                jsonObject["session"] =  convert(jsonData: sessionData)
+                if let sessionDictonary = convert(jsonData: sessionData) as? [String : Any] {
+                    jsonObject += sessionDictonary
+                }
             }
             return jsonObject
         }
@@ -80,9 +81,18 @@ struct QBEventEntity: Codable {
 
 // MARK: Instance creation event
 extension QBEventEntity {
+    static func event(type: String, string: String) -> QBEventEntity? {
+        if string.isJSONValid() == false {
+            QBLog.error("Please check your `data: String` parameter has valid JSON format")
+            return nil
+        }
+        
+        return QBEventEntity(type: type, eventData: string)
+    }
+    
     static func event(type: String, dictionary: [String: Any]) -> QBEventEntity? {
         if let JSONData = try? JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted), let JSONString = String(data: JSONData, encoding: .utf8) {
-            let event = QBEventEntity(type: type, eventData: JSONString , context: nil, meta: nil, session: nil)
+            let event = QBEventEntity(type: type, eventData: JSONString)
             return event
         } else {
             return nil

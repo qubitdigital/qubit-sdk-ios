@@ -45,7 +45,7 @@ class QBEventManager {
     private let configurationManager: QBConfigurationManager
     private let sessionManager: QBSessionManager
     private let lookupManager: QBLookupManager
-
+    
     init(withConfigurationManager configurationManager: QBConfigurationManager, sessionManager: QBSessionManager, lookupManager: QBLookupManager) {
         self.configurationManager = configurationManager
         self.sessionManager = sessionManager
@@ -65,42 +65,49 @@ class QBEventManager {
         return QBEventEntity.event(type:type, dictionary: dictionary)
     }
     
-    func sendEvent(event: QBEventEntity) {
-        if configurationManager.configuration.disabled {
+    static func createEvent(type: String, data: String) -> QBEventEntity? {
+        return QBEventEntity.event(type: type, string: data)
+    }
+    
+    func sendSessionEvent() {
+        QBLog.mark()
+        let deviceInfo = sessionManager.session.deviceInfo
+        let session = QBSessionEntity(firstViewTs: lookupManager.lookup?.firstViewTs,
+                                      lastViewTs: lookupManager.lookup?.lastViewTs,
+                                      firstConversionTs: lookupManager.lookup?.firstConversionTs,
+                                      lastConversionTs: lookupManager.lookup?.lastConversionTs,
+                                      ipLocation: lookupManager.lookup?.ipLocation,
+                                      ipAddress: lookupManager.lookup?.ipAddress,
+                                      deviceType: deviceInfo.deviceType,
+                                      deviceName: deviceInfo.deviceType,
+                                      osName: deviceInfo.deviceType,
+                                      osVersion: deviceInfo.deviceType,
+                                      appType: deviceInfo.appType.rawValue,
+                                      appName: deviceInfo.appName,
+                                      appVersion: deviceInfo.appVersion,
+                                      screenWidth: deviceInfo.screenWidth,
+                                      screenHeight: deviceInfo.screenHeight)
+        
+        let event = QBEventEntity(type: "qubit.session", eventData: "", session: session)
+        self.sendEvent(event: event)
+    }
+    
+    func sendEvent(event: QBEventEntity) {        
+        if configurationManager.isConfigurationLoaded && configurationManager.configuration.disabled {
             QBLog.info("Sending events disabled in configuration")
             return
         }
+        
         let timestampInMs = Date().timeIntervalSince1970InMs
         sessionManager.eventAdded(type: QBEventType(type: event.type), timestampInMS: timestampInMs)
         let context = QBContextEntity(withSession: sessionManager.session, lookup: lookupManager.lookup)
-
+        // TODO: fill batchTs
+        // TODO: add vertical before sending
+        // let typeWithVertical = configurationManager.configuration.vertical + type
         let meta = QBMetaEntity(id: NSUUID().uuidString, ts: timestampInMs, trackingId: self.configurationManager.trackingId, type: event.type, source: sessionManager.session.deviceInfo.getOsNameAndVersion(), seq: sessionManager.session.sequenceEventNumber, batchTs: 123)
         
         var event = event
         event.add(context: context, meta: meta)
-        self.addEventInQueue(event: event)
-    }
-    
-    func sendEvent(type: String, data: String) {
-        if configurationManager.configuration.disabled {
-            QBLog.info("Sending events disabled in configuration")
-            return
-        }
-        
-        if data.isJSONValid() == false {
-            QBLog.error("Please check your `data: String` parameter has valid JSON format")
-            return
-        }
-        
-        let timestampInMs = Date().timeIntervalSince1970InMs
-        sessionManager.eventAdded(type: QBEventType(type: type), timestampInMS: timestampInMs)
-        
-        let context = QBContextEntity(withSession: sessionManager.session, lookup: lookupManager.lookup)
-        // TODO: fill batchTs
-//        let typeWithVertical = configurationManager.configuration.vertical + type
-        
-        let meta = QBMetaEntity(id: NSUUID().uuidString, ts: timestampInMs, trackingId: self.configurationManager.trackingId, type: type, source: sessionManager.session.deviceInfo.getOsNameAndVersion(), seq: sessionManager.session.sequenceEventNumber, batchTs: 123)
-        let event = QBEventEntity(type: type, eventData: data, context: context, meta: meta, session: nil)
         self.addEventInQueue(event: event)
     }
     
@@ -110,20 +117,20 @@ class QBEventManager {
     
     private func addEventInQueue(event: QBEventEntity) {
         QBLog.mark()
-		backgroundCoreDataQueue?.sync { [weak self] in
-			guard var dbEvent = self?.databaseManager.insert(entityType: QBEvent.self),
-                  var dbContext = self?.databaseManager.insert(entityType: QBContextEvent.self),
-                  var dbMeta = self?.databaseManager.insert(entityType: QBMetaEvent.self),
-                  var dbSession = self?.databaseManager.insert(entityType: QBSessionEvent.self)
+        backgroundCoreDataQueue?.sync { [weak self] in
+            guard var dbEvent = self?.databaseManager.insert(entityType: QBEvent.self),
+                var dbContext = self?.databaseManager.insert(entityType: QBContextEvent.self),
+                var dbMeta = self?.databaseManager.insert(entityType: QBMetaEvent.self),
+                var dbSession = self?.databaseManager.insert(entityType: QBSessionEvent.self)
                 else {
-				return
-			}
-        
+                    return
+            }
+            
             dbEvent = event.fillQBEvent(event: &dbEvent, context: &dbContext, meta: &dbMeta, session: &dbSession)
             
-			self?.databaseManager.save()
+            self?.databaseManager.save()
             self?.trySendEventsWhenFirstEventAdded()
-		}
+        }
     }
     
     // MARK: - Private
@@ -158,11 +165,11 @@ class QBEventManager {
         backgroundCoreDataQueue?.sync { [weak self] in
             guard let fetchLimit = self?.config.fetchLimit, let sendTimeFrameInterval = self?.config.sendTimeFrameInterval else { return }
             guard let `self` = self else { return }
-
+            
             let deadlineTime = DispatchTime.now() + .milliseconds(sendTimeFrameInterval)
             self.backgroundUploadQueue?.asyncAfter(deadline: deadlineTime) { [weak self] in
                 guard let `self` = self else { return }
-
+                
                 self.databaseManager.query(entityType: QBEvent.self, sortBy: "dateAdded", ascending: true, limit: fetchLimit) { results in
                     if !results.isEmpty {
                         self.sendEvents()
@@ -182,7 +189,7 @@ class QBEventManager {
     }
     
     @objc
-	private func sendEvents() {
+    private func sendEvents() {
         guard configurationManager.isConfigurationLoaded else {
             QBLog.info("Configuration is loading, so events will be send after load config")
             return
@@ -193,7 +200,7 @@ class QBEventManager {
             return
         }
         
-		backgroundUploadQueue?.sync { [weak self] in
+        backgroundUploadQueue?.sync { [weak self] in
             
             guard let `self` = self else { return }
             
@@ -228,13 +235,13 @@ class QBEventManager {
                     self.trySendEvents()
                 }
             }
-		}
-	}
+        }
+    }
     
     private func sendEvent(type: String, data: [AnyHashable : Any]) {
         
     }
-
+    
     private func convert(events: [QBEvent]) -> [QBEventEntity] {
         
         let convertedArray = events.flatMap { (event: QBEvent) -> QBEventEntity? in

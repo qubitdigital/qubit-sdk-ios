@@ -8,8 +8,14 @@
 
 import Foundation
 
+protocol QBSessionManagerDelegate: class {
+    func newSessionStarted()
+}
+
 class QBSessionManager {
 
+    weak var delegate: QBSessionManagerDelegate?
+    
     var session: QBSession {
         if self.isSessionValid() {
             return currentSession
@@ -21,29 +27,27 @@ class QBSessionManager {
     
     private var currentSession: QBSession
     private let sessionTimeInMS = 1_800_000
-    private var lookupManager: QBLookupManager?
     
-    init() {
+    init(withDeleagte delegate: QBSessionManagerDelegate) {
+        self.delegate = delegate
         guard let lastSession = UserDefaults.standard.session else {
             self.currentSession = QBSession()
             return
         }
         self.currentSession = lastSession
-        self.startNewSession()
     }
         
-    private func startNewSession() {
+    func startNewSession() {
         self.currentSession.sessionNumber += 1
         self.currentSession.sessionViewNumber = 0
         self.currentSession.sequenceEventNumber = 0
         
-//      let oldTimeStamp = self.session.sessionTimestamp
         let timestampInMS = Date().timeIntervalSince1970InMs
-        
         self.currentSession.lastEventTimestampInMS = timestampInMS
         self.currentSession.sessionStartTimestampInMS = timestampInMS
         
         self.saveSession()
+        self.delegate?.newSessionStarted()
     }
     
     private func saveSession() {
@@ -69,8 +73,5 @@ class QBSessionManager {
         }
         self.saveSession()
     }
-        
-    func sendSessionEvent() {
-        //TODO: send session event
-    }
+
 }

@@ -33,9 +33,10 @@ class QBTracker {
         self.configurationManager = configurationManager
         let lookupManager = QBLookupManager(withConfigurationManager: configurationManager)
         self.lookupManager = lookupManager
-        let sessionManager = QBSessionManager()
+        let sessionManager = QBSessionManager(withDeleagte: self)
         self.sessionManager = sessionManager
         eventManager = QBEventManager(withConfigurationManager: configurationManager, sessionManager: sessionManager, lookupManager: lookupManager)
+        sessionManager.startNewSession()
     }
     
     func sendEvent(type: String, data: String) {
@@ -43,7 +44,9 @@ class QBTracker {
             QBLog.error("Please call QubitSDK.start(withTrackingId: \"YOUR_TRACKING_ID\"), before sending events")
             return
         }
-        eventManager.sendEvent(type: type, data: data)
+        if let event = QBEventManager.createEvent(type: type, data: data) {
+            eventManager.sendEvent(event: event)
+        }
     }
     
     func sendEvent(event: QBEventEntity) {
@@ -67,5 +70,11 @@ extension QBTracker: QBConfigurationManagerDelegate {
     func configurationUpdated() {
         eventManager?.configurationUpdated()
         lookupManager?.configurationUpdated()
+    }
+}
+
+extension QBTracker: QBSessionManagerDelegate {
+    func newSessionStarted() {
+        eventManager?.sendSessionEvent()
     }
 }
