@@ -28,10 +28,10 @@ struct QBSessionEntity: Codable {
     let screenHeight: String?
     
     func fillQBSessionEvent(session: inout QBSessionEvent) -> QBSessionEvent {
-        session.firstViewTs = NSNumber.getOptionalNumber(fromInt: firstViewTs)
-        session.lastViewTs = NSNumber.getOptionalNumber(fromInt: lastViewTs)
-        session.firstConversionTs = NSNumber.getOptionalNumber(fromInt: firstConversionTs)
-        session.lastConversionTs = NSNumber.getOptionalNumber(fromInt: lastConversionTs)
+        session.firstViewTs = firstViewTs?.optionalNumber
+        session.lastViewTs = lastViewTs?.optionalNumber
+        session.firstConversionTs = firstConversionTs?.optionalNumber
+        session.lastConversionTs = lastConversionTs?.optionalNumber
         
         if let ipLocation = self.ipLocation {
             session.ipLocationCity = ipLocation.city
@@ -44,8 +44,8 @@ struct QBSessionEntity: Codable {
             session.ipLocationAreaCode = ipLocation.areaCode
             session.ipLocationCity = ipLocation.city
             session.ipLocationCityCode = ipLocation.cityCode
-            session.ipLocationLongitude = NSNumber.getOptionalNumber(fromDouble: ipLocation.longitude)
-            session.ipLocationLatitude = NSNumber.getOptionalNumber(fromDouble: ipLocation.latitude)
+            session.ipLocationLongitude = ipLocation.longitude?.optionalNumber
+            session.ipLocationLatitude = ipLocation.latitude?.optionalNumber
         }
 
         session.ipAddress = self.ipAddress

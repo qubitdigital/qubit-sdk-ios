@@ -61,12 +61,10 @@ extension QBContextEntity {
         context.viewNumber = NSNumber(value: self.viewNumber)
         context.sessionNumber = NSNumber(value: self.sessionNumber)
         context.sessionViewNumber = NSNumber(value: self.sessionViewNumber)
-        if let conversionNumber = self.conversionNumber {
-            context.conversionNumber = NSNumber(value: conversionNumber)
-        }
-        if let conversionCycleNumber = self.conversionCycleNumber {
-            context.conversionCycleNumber = NSNumber(value: conversionCycleNumber)
-        }
+        
+        context.conversionNumber = self.conversionNumber?.optionalNumber
+        context.conversionCycleNumber = self.conversionCycleNumber?.optionalNumber
+    
         if let lifetimeValue = self.lifetimeValue {
             context.lifetimeValue = NSNumber(value: lifetimeValue.value)
             context.lifetimeCurrency = lifetimeValue.currency

@@ -53,7 +53,6 @@ struct QBConfigurationEntity: Codable {
             }
         }
     }
-    // swiftlint:enable function_body_length
     
     init() {
         self.disabled = DefaultValues.disabled

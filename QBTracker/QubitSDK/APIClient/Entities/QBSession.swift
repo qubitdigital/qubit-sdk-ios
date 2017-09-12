@@ -20,61 +20,20 @@ struct QBSession: Codable {
     var sequenceEventNumber: Int
     let deviceInfo: QBDeviceInfoEntity
     
-    // swiftlint:disable function_body_length
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         
-        if let sessionId = try? values.decode(String.self, forKey: .sessionId) {
-            self.sessionId = sessionId
-        } else {
-            self.sessionId = DefaultValues.sessionId
-        }
-        
-        if let sessionNumber = try? values.decode(Int.self, forKey: .sessionNumber) {
-            self.sessionNumber = sessionNumber
-        } else {
-            self.sessionNumber = DefaultValues.sessionNumber
-        }
-        
-        if let lastEventTimestampInMS = try? values.decode(Int.self, forKey: .lastEventTimestampInMS) {
-            self.lastEventTimestampInMS = lastEventTimestampInMS
-        } else {
-            self.lastEventTimestampInMS = DefaultValues.lastEventTimestampInMS
-        }
-        
-        if let sessionStartTimestampInMS = try? values.decode(Int.self, forKey: .sessionStartTimestampInMS) {
-            self.sessionStartTimestampInMS = sessionStartTimestampInMS
-        } else {
-            self.sessionStartTimestampInMS = DefaultValues.sessionStartTimestampInMS
-        }
-        
-        if let viewNumber = try? values.decode(Int.self, forKey: .viewNumber) {
-            self.viewNumber = viewNumber
-        } else {
-            self.viewNumber = DefaultValues.viewNumber
-        }
-        
-        if let viewTimestampInMS = try? values.decode(Int.self, forKey: .viewTimestampInMS) {
-            self.viewTimestampInMS = viewTimestampInMS
-        } else {
-            self.viewTimestampInMS = DefaultValues.viewTimestampInMS
-        }
-        
-        if let sessionViewNumber = try? values.decode(Int.self, forKey: .sessionViewNumber) {
-            self.sessionViewNumber = sessionViewNumber
-        } else {
-            self.sessionViewNumber = DefaultValues.sessionViewNumber
-        }
-        
-        if let sequenceEventNumber = try? values.decode(Int.self, forKey: .sequenceEventNumber) {
-            self.sequenceEventNumber = sequenceEventNumber
-        } else {
-            self.sequenceEventNumber = DefaultValues.sequenceEventNumber
-        }
-        
+        self.sessionId = (try? values.decode(String.self, forKey: .sessionId)) ?? DefaultValues.sessionId
+        self.sessionNumber = (try? values.decode(Int.self, forKey: .sessionNumber)) ?? DefaultValues.sessionNumber
+        self.lastEventTimestampInMS = (try? values.decode(Int.self, forKey: .lastEventTimestampInMS)) ?? DefaultValues.lastEventTimestampInMS
+        self.sessionStartTimestampInMS = (try? values.decode(Int.self, forKey: .sessionStartTimestampInMS)) ?? DefaultValues.sessionStartTimestampInMS
+        self.viewNumber = (try? values.decode(Int.self, forKey: .viewNumber)) ?? DefaultValues.viewNumber
+        self.viewTimestampInMS = (try? values.decode(Int.self, forKey: .viewTimestampInMS)) ?? DefaultValues.viewTimestampInMS
+        self.sessionViewNumber = (try? values.decode(Int.self, forKey: .sessionViewNumber)) ?? DefaultValues.sessionViewNumber
+        self.sequenceEventNumber = (try? values.decode(Int.self, forKey: .sequenceEventNumber)) ?? DefaultValues.sequenceEventNumber
+    
         deviceInfo = QBDeviceInfoEntity()
     }
-    // swiftlint:enable function_body_length
     
     init() {
         sessionId = DefaultValues.sessionId
