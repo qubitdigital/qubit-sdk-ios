@@ -52,6 +52,11 @@ class QBTracker {
             return
         }
         
+        if data.isJSONValid() == false {
+            QBLog.error("Please check your `data: String` parameter has valid JSON format")
+            return
+        }
+        
         let timestampInMs = Date().timeIntervalSince1970InMs
         sessionManager?.eventAdded(type: QBEventType(type: type), timestampInMS: timestampInMs)
         if let session = sessionManager?.session {
@@ -62,6 +67,8 @@ class QBTracker {
             let meta = QBMetaEntity(id: NSUUID().uuidString, ts: timestampInMs, trackingId: trackingId, type: typeWithVertical, source: session.deviceInfo.getOsNameAndVersion(), seq: session.sequenceEventNumber, batchTs: 123)
             let event = QBEventEntity(type: type, eventData: data, context: context, meta: meta, session: nil)
             eventManager?.addEventInQueue(event: event)
+        } else {
+            QBLog.info("Sending events disabled, session has not been established")
         }
     }
 	
