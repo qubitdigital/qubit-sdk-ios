@@ -72,6 +72,18 @@ struct QBEventEntity: Codable {
     }
 }
 
+// MARK: Instance creation event
+extension QBEventEntity {
+    static func event(type: String, dictionary: [String: Any]) -> QBEventEntity? {
+        if let JSONData = try? JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted), let JSONString = String(data: JSONData, encoding: .utf8) {
+            let event = QBEventEntity(type: type, eventData: JSONString , context: nil, meta: nil, session: nil)
+            return event
+        } else {
+            return nil
+        }
+    }
+}
+
 // MARK: - Bridges
 extension QBEventEntity {
     func fillQBEvent(event: inout QBEvent, context: inout QBContextEvent, meta: inout QBMetaEvent, session: inout QBSessionEvent) -> QBEvent {

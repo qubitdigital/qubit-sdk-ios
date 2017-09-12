@@ -67,6 +67,7 @@
 		A0F372BE1F4C623F00283075 /* QBDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F372BD1F4C623F00283075 /* QBDatabase.swift */; };
 		A0F5BF591F4D7833009EFE8D /* QBDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A0F5BF571F4D7833009EFE8D /* QBDataModel.xcdatamodeld */; };
 		B905C8071F6177BC00A9A084 /* TimeInterval+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B905C8061F6177BC00A9A084 /* TimeInterval+Extensions.swift */; };
+		B9FF78FB1F680DC00051AA8E /* QBEventManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FF78FA1F680DC00051AA8E /* QBEventManagerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,6 +163,7 @@
 		A0F372BD1F4C623F00283075 /* QBDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBDatabase.swift; sourceTree = "<group>"; };
 		A0F5BF581F4D7833009EFE8D /* QBDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QBDataModel.xcdatamodel; sourceTree = "<group>"; };
 		B905C8061F6177BC00A9A084 /* TimeInterval+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extensions.swift"; sourceTree = "<group>"; };
+		B9FF78FA1F680DC00051AA8E /* QBEventManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBEventManagerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -279,6 +281,7 @@
 				42F0CD5E1F4AEE2B00BD9010 /* Info.plist */,
 				42F0CD7C1F4B182E00BD9010 /* QBConfigurationTest.swift */,
 				A08335D91F4EF13400F509D5 /* QBEventDatabaseTests.swift */,
+				B9FF78FA1F680DC00051AA8E /* QBEventManagerTests.swift */,
 			);
 			path = QBTrackerTests;
 			sourceTree = "<group>";
@@ -617,6 +620,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9FF78FB1F680DC00051AA8E /* QBEventManagerTests.swift in Sources */,
 				42F0CD7D1F4B182E00BD9010 /* QBConfigurationTest.swift in Sources */,
 				A08335DA1F4EF13400F509D5 /* QBEventDatabaseTests.swift in Sources */,
 			);
