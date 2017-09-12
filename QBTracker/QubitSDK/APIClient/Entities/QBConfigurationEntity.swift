@@ -22,64 +22,27 @@ struct QBConfigurationEntity: Codable {
     let endpoint: String
     let dataLocation: String
 
-    // swiftlint:disable function_body_length
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         
-        if let disabled = try? values.decode(Bool.self, forKey: .disabled) {
-            self.disabled = disabled
-        } else {
-            self.disabled = DefaultValues.disabled
-        }
+        self.disabled = (try? values.decode(Bool.self, forKey: .disabled)) ?? DefaultValues.disabled
         
-        if let configurationReloadInterval = try? values.decode(Int.self, forKey: .configurationReloadInterval) {
-            self.configurationReloadInterval = configurationReloadInterval
-        } else {
-            self.configurationReloadInterval = DefaultValues.configurationReloadInterval
-        }
-        
-        if let queueTimeout = try? values.decode(Int.self, forKey: .queueTimeout) {
-            self.queueTimeout = queueTimeout
-        } else {
-            self.queueTimeout = DefaultValues.queueTimeout
-        }
-        
-        if let namespace = try? values.decode(String.self, forKey: .namespace) {
-            self.namespace = namespace
-        } else {
-            self.namespace = DefaultValues.namespace
-        }
-        
-        if let lookupEndpoint = try? values.decode(String.self, forKey: .lookupEndpoint) {
-            self.lookupEndpoint = lookupEndpoint
-        } else {
-            self.lookupEndpoint = DefaultValues.lookupEndpoint
-        }
-        
-        if let lookupReloadInterval = try? values.decode(Int.self, forKey: .lookupReloadInterval) {
-            self.lookupReloadInterval = lookupReloadInterval
-        } else {
-            self.lookupReloadInterval = DefaultValues.lookupReloadInterval
-        }
-        
-        if let lookupRequestTimeout = try? values.decode(Int.self, forKey: .lookupRequestTimeout) {
-            self.lookupRequestTimeout = lookupRequestTimeout
-        } else {
-            self.lookupRequestTimeout = DefaultValues.lookupRequestTimeout
-        }
-        
-        if let vertical = try? values.decode(String.self, forKey: .vertical) {
-            self.vertical = vertical
-        } else {
-            self.vertical = DefaultValues.vertical
-        }
-        
-        if let dataLocation = try? values.decode(String.self, forKey: .dataLocation) {
-            self.dataLocation = dataLocation
-        } else {
-            self.dataLocation = DefaultValues.dataLocation
-        }
-        
+        self.configurationReloadInterval = (try? values.decode(Int.self, forKey: .configurationReloadInterval)) ?? DefaultValues.configurationReloadInterval
+
+        self.queueTimeout = (try? values.decode(Int.self, forKey: .queueTimeout)) ?? DefaultValues.queueTimeout
+
+        self.namespace = (try? values.decode(String.self, forKey: .namespace)) ?? DefaultValues.namespace
+
+        self.lookupEndpoint = (try? values.decode(String.self, forKey: .lookupEndpoint)) ?? DefaultValues.lookupEndpoint
+
+        self.lookupReloadInterval = (try? values.decode(Int.self, forKey: .lookupReloadInterval)) ?? DefaultValues.lookupReloadInterval
+
+        self.lookupRequestTimeout = (try? values.decode(Int.self, forKey: .lookupRequestTimeout)) ?? DefaultValues.lookupRequestTimeout
+
+        self.vertical = (try? values.decode(String.self, forKey: .vertical)) ?? DefaultValues.vertical
+
+        self.dataLocation = (try? values.decode(String.self, forKey: .dataLocation)) ?? DefaultValues.dataLocation
+
         if let endpoint = try? values.decode(String.self, forKey: .endpoint) {
             self.endpoint = endpoint
         } else {
