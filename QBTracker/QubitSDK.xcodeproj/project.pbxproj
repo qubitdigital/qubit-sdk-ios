@@ -35,10 +35,13 @@
 		423AEFE71F4C431500F6EF6D /* QBEventEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423AEFE61F4C431500F6EF6D /* QBEventEntity.swift */; };
 		423AEFE91F4C505300F6EF6D /* QBStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423AEFE81F4C505300F6EF6D /* QBStatusEntity.swift */; };
 		423D43D61F62D0200075A85B /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423D43D51F62D0200075A85B /* Date+Extensions.swift */; };
-		425215E51F5D98A400866D8E /* QBSessionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425215E41F5D98A400866D8E /* QBSessionEntity.swift */; };
+		425215E51F5D98A400866D8E /* QBSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425215E41F5D98A400866D8E /* QBSession.swift */; };
 		426EF6571F54106500FD3F10 /* QBLookupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426EF6561F54106500FD3F10 /* QBLookupManager.swift */; };
 		426EF6591F54160F00FD3F10 /* QBLookupEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426EF6581F54160F00FD3F10 /* QBLookupEntity.swift */; };
 		42D768B31F542AEE00FD7944 /* QBLookupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D768B21F542AEE00FD7944 /* QBLookupService.swift */; };
+		42ED6C2A1F66CF80006FD45C /* QBSessionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ED6C291F66CF80006FD45C /* QBSessionEntity.swift */; };
+		42ED6C2C1F67C2B2006FD45C /* QBLocationIpEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ED6C2B1F67C2B2006FD45C /* QBLocationIpEntity.swift */; };
+		42ED6C2E1F67D77F006FD45C /* NSNumber+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ED6C2D1F67D77F006FD45C /* NSNumber+Extensions.swift */; };
 		42F0CD581F4AEE2B00BD9010 /* QubitSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F0CD4E1F4AEE2B00BD9010 /* QubitSDK.framework */; };
 		42F0CD6C1F4B044F00BD9010 /* QBApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F0CD6B1F4B044F00BD9010 /* QBApiClient.swift */; };
 		42F0CD711F4B058500BD9010 /* QBConfigurationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F0CD701F4B058500BD9010 /* QBConfigurationEntity.swift */; };
@@ -116,10 +119,13 @@
 		423AEFE61F4C431500F6EF6D /* QBEventEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBEventEntity.swift; sourceTree = "<group>"; };
 		423AEFE81F4C505300F6EF6D /* QBStatusEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBStatusEntity.swift; sourceTree = "<group>"; };
 		423D43D51F62D0200075A85B /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
-		425215E41F5D98A400866D8E /* QBSessionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBSessionEntity.swift; sourceTree = "<group>"; };
+		425215E41F5D98A400866D8E /* QBSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBSession.swift; sourceTree = "<group>"; };
 		426EF6561F54106500FD3F10 /* QBLookupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBLookupManager.swift; sourceTree = "<group>"; };
 		426EF6581F54160F00FD3F10 /* QBLookupEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBLookupEntity.swift; sourceTree = "<group>"; };
 		42D768B21F542AEE00FD7944 /* QBLookupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBLookupService.swift; sourceTree = "<group>"; usesTabs = 0; };
+		42ED6C291F66CF80006FD45C /* QBSessionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBSessionEntity.swift; sourceTree = "<group>"; };
+		42ED6C2B1F67C2B2006FD45C /* QBLocationIpEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBLocationIpEntity.swift; sourceTree = "<group>"; };
+		42ED6C2D1F67D77F006FD45C /* NSNumber+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNumber+Extensions.swift"; sourceTree = "<group>"; };
 		42F0CD4E1F4AEE2B00BD9010 /* QubitSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QubitSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42F0CD521F4AEE2B00BD9010 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42F0CD571F4AEE2B00BD9010 /* QubitSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QubitSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -301,8 +307,10 @@
 				422370811F4C6B2B008D401E /* QBContextEntity.swift */,
 				422370831F4C6B3B008D401E /* QBMetaEntity.swift */,
 				426EF6581F54160F00FD3F10 /* QBLookupEntity.swift */,
-				425215E41F5D98A400866D8E /* QBSessionEntity.swift */,
+				425215E41F5D98A400866D8E /* QBSession.swift */,
 				422E54151F613B1700E37B7A /* QBDeviceInfoEntity.swift */,
+				42ED6C291F66CF80006FD45C /* QBSessionEntity.swift */,
+				42ED6C2B1F67C2B2006FD45C /* QBLocationIpEntity.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -345,7 +353,7 @@
 				420738751F4D9739005A0B9E /* UserDefaults+Extensions.swift */,
 				B905C8061F6177BC00A9A084 /* TimeInterval+Extensions.swift */,
 				423D43D51F62D0200075A85B /* Date+Extensions.swift */,
-				B900287C1F65DD5500F8D498 /* Dictionary+Extensions.swift */,
+				42ED6C2D1F67D77F006FD45C /* NSNumber+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -579,9 +587,11 @@
 				422370841F4C6B3B008D401E /* QBMetaEntity.swift in Sources */,
 				420743751F50440F0099E5BA /* String+md5.swift in Sources */,
 				42054D181F502C7A00386771 /* QBDevice.swift in Sources */,
-				425215E51F5D98A400866D8E /* QBSessionEntity.swift in Sources */,
+				425215E51F5D98A400866D8E /* QBSession.swift in Sources */,
+				42ED6C2A1F66CF80006FD45C /* QBSessionEntity.swift in Sources */,
 				422E54161F613B1700E37B7A /* QBDeviceInfoEntity.swift in Sources */,
 				42F0CD781F4B11D400BD9010 /* QBConfigurationService.swift in Sources */,
+				42ED6C2E1F67D77F006FD45C /* NSNumber+Extensions.swift in Sources */,
 				A08D69B91F54284E00CE2FD5 /* QBSessionManager.swift in Sources */,
 				A08D69B81F5426CE00CE2FD5 /* QBEventManager.swift in Sources */,
 				4207389A1F4F08E0005A0B9E /* QBLog.swift in Sources */,
@@ -591,6 +601,7 @@
 				42F0CD711F4B058500BD9010 /* QBConfigurationEntity.swift in Sources */,
 				423AEFE71F4C431500F6EF6D /* QBEventEntity.swift in Sources */,
 				A0431AE01F4AF77200FA85CF /* QBConnectionManager.swift in Sources */,
+				42ED6C2C1F67C2B2006FD45C /* QBLocationIpEntity.swift in Sources */,
 				A0F372BE1F4C623F00283075 /* QBDatabase.swift in Sources */,
 				A0431ADD1F4AF6F200FA85CF /* QBReachability.swift in Sources */,
 				A0A82A451F56E8D900252374 /* QBEvent+CoreDataProperties.swift in Sources */,

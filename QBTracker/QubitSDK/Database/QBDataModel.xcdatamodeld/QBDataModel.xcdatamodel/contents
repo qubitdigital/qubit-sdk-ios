@@ -22,6 +22,7 @@
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="context" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QBContextEvent" inverseName="event" inverseEntity="QBContextEvent" syncable="YES"/>
         <relationship name="meta" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QBMetaEvent" inverseName="event" inverseEntity="QBMetaEvent" syncable="YES"/>
+        <relationship name="session" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QBSessionEvent" inverseName="event" inverseEntity="QBSessionEvent" syncable="YES"/>
     </entity>
     <entity name="QBMetaEvent" representedClassName=".QBMetaEvent" syncable="YES">
         <attribute name="batchTs" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
@@ -33,9 +34,37 @@
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QBEvent" inverseName="meta" inverseEntity="QBEvent" syncable="YES"/>
     </entity>
+    <entity name="QBSessionEvent" representedClassName=".QBSessionEvent" syncable="YES">
+        <attribute name="appName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="appType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="appVersion" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deviceName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deviceType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstConversionTs" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="firstViewTs" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="ipAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ipLocationArea" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ipLocationAreaCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ipLocationCity" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ipLocationCityCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ipLocationCountry" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ipLocationCountryCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ipLocationLatitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="ipLocationLongitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="ipLocationRegion" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ipLocationRegionCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastConversionTs" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lastViewTs" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="osName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="osVersion" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="screenHeight" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="screenWidth" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QBEvent" inverseName="session" inverseEntity="QBEvent" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="QBContextEvent" positionX="-63" positionY="9" width="128" height="240"/>
-        <element name="QBEvent" positionX="-63" positionY="-18" width="128" height="135"/>
-        <element name="QBMetaEvent" positionX="-54" positionY="18" width="128" height="165"/>
+        <element name="QBContextEvent" positionX="-155" positionY="126" width="128" height="240"/>
+        <element name="QBEvent" positionX="-495" positionY="261" width="128" height="148"/>
+        <element name="QBMetaEvent" positionX="-146" positionY="396" width="128" height="165"/>
+        <element name="QBSessionEvent" positionX="-279" positionY="626" width="128" height="418"/>
     </elements>
 </model>

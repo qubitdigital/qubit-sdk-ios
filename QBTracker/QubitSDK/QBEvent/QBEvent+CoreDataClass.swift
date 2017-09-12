@@ -13,3 +13,4 @@ import CoreData
 class QBEvent: NSManagedObject {}
 class QBMetaEvent: NSManagedObject {}
 class QBContextEvent: NSManagedObject {}
+class QBSessionEvent: NSManagedObject {}

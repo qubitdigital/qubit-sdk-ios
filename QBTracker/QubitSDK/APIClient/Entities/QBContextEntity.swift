@@ -40,7 +40,7 @@ struct QBContextEntity: Codable {
 }
 
 extension QBContextEntity {
-    init(withSession session: QBSessionEntity, lookup: QBLookupEntity?) {
+    init(withSession session: QBSession, lookup: QBLookupEntity?) {
         self.id = QBDevice.getId()
         self.sample = String(QBDevice.getId().hashValue)
         self.viewNumber = session.viewNumber

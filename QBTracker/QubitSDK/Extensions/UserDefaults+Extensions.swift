@@ -41,9 +41,9 @@ extension UserDefaults {
         }
     }
     
-    var session: QBSessionEntity? {
+    var session: QBSession? {
         get {
-            if let sessionData = data(forKey: #function), let session = try? JSONDecoder().decode(QBSessionEntity.self, from: sessionData) {
+            if let sessionData = data(forKey: #function), let session = try? JSONDecoder().decode(QBSession.self, from: sessionData) {
                 return session
             }
             
