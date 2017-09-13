@@ -53,10 +53,13 @@ class QBEventManager {
         startEventManager()
         NotificationCenter.default.addObserver(self, selector: #selector(self.startEventManager), name: NSNotification.Name(rawValue: QBConnectionManager.notificationKeyReachable), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.stopEventManager), name: NSNotification.Name(rawValue: QBConnectionManager.notificationKeyNotReachable), object: nil)
+        backgroundCoreDataQueue = DispatchQueue(label: "EventCoreDataQueue", qos: .background, attributes: .concurrent)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+        backgroundCoreDataQueue = nil
+        backgroundUploadQueue = nil
     }
     
     // MARK: - Internal
@@ -79,9 +82,9 @@ class QBEventManager {
                                       ipLocation: lookupManager.lookup?.ipLocation,
                                       ipAddress: lookupManager.lookup?.ipAddress,
                                       deviceType: deviceInfo.deviceType,
-                                      deviceName: deviceInfo.deviceType,
-                                      osName: deviceInfo.deviceType,
-                                      osVersion: deviceInfo.deviceType,
+                                      deviceName: deviceInfo.deviceName,
+                                      osName: deviceInfo.osName,
+                                      osVersion: deviceInfo.osVersion,
                                       appType: deviceInfo.appType.rawValue,
                                       appName: deviceInfo.appName,
                                       appVersion: deviceInfo.appVersion,
@@ -148,16 +151,16 @@ class QBEventManager {
             return
         }
         
-        backgroundUploadQueue = DispatchQueue(label: "EventUploadingQueue", qos: .background, attributes: .concurrent)
-        backgroundCoreDataQueue = DispatchQueue(label: "EventCoreDataQueue", qos: .background, attributes: .concurrent)
-        trySendEvents()
+        if backgroundUploadQueue == nil {
+            backgroundUploadQueue = DispatchQueue(label: "EventUploadingQueue", qos: .background, attributes: .concurrent)
+            trySendEvents()
+        }
     }
     
     @objc
     private func stopEventManager() {
         QBLog.verbose("Connection lost.  Stopping timer.")
         backgroundUploadQueue = nil
-        backgroundCoreDataQueue = nil
     }
     
     @objc
@@ -237,11 +240,7 @@ class QBEventManager {
             }
         }
     }
-    
-    private func sendEvent(type: String, data: [AnyHashable : Any]) {
         
-    }
-    
     private func convert(events: [QBEvent]) -> [QBEventEntity] {
         
         let convertedArray = events.flatMap { (event: QBEvent) -> QBEventEntity? in

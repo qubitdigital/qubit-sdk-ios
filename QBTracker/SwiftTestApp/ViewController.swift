@@ -27,13 +27,11 @@ class ViewController: UIViewController {
         print("tick")
     }
     @IBAction func tapOnEventButton(_ sender: UIButton) {
-        QubitSDK.sendEvent(type: "abc", data: "{\"test_event\" : \"dupa\"}")
+        QubitSDK.sendEvent(type: "View", data: "{\"type\" : \"tapOnEventButton\"}")
     }
     
     @IBAction func tapOnCreateEventButton(_ sender: UIButton) {
-        let event =  QubitSDK.createEvent(type: "ownEvent", dictionary: ["test_event": "dupa"])
+        let event =  QubitSDK.createEvent(type: "Product", dictionary: ["eventType": "tapOnCreateEventButton"])
         QubitSDK.sendEvent(event: event)
     }
-    
-    
 }

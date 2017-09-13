@@ -52,7 +52,7 @@ public class QubitSDK: NSObject {
     ///   - type: eventType
     ///   - event: QBEventEntity
     @objc(createEventWithType:dictionary:)
-    public class func createEvent(type: String, dictionary: [String: Any]) -> AnyObject?{
+    public class func createEvent(type: String, dictionary: [String: Any]) -> AnyObject? {
         return QBEventManager.createEvent(type: type, dictionary: dictionary) as AnyObject
     }
     

@@ -27,8 +27,7 @@ class QBConfigurationManager {
             return lastSavedRemoteConfiguration
         }
         
-        assert(false, "WRONG!, default configuration should not be used")
-        QBLog.error("used default configuration")
+        QBLog.error("used default configuration, should be used only in first cold start")
         return QBConfigurationEntity()
     }
 
