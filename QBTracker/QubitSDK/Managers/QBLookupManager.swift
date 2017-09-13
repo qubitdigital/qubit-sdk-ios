@@ -33,7 +33,6 @@ class QBLookupManager {
         didSet {
             UserDefaults.standard.lastSavedRemoteLookup = self.remoteLookup
             self.lastUpdateTimeStamp = NSDate().timeIntervalSince1970
-            
             self.startTimer()
         }
     }

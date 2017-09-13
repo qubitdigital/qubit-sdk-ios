@@ -91,7 +91,7 @@ class QBEventManager {
                                       screenWidth: deviceInfo.screenWidth,
                                       screenHeight: deviceInfo.screenHeight)
         
-        let event = QBEventEntity(type: "qubit.session", eventData: "", session: session)
+        let event = QBEventEntity(type: QBEventType.session.rawValue, eventData: "", session: session)
         self.sendEvent(event: event)
     }
     
@@ -121,18 +121,20 @@ class QBEventManager {
     private func addEventInQueue(event: QBEventEntity) {
         QBLog.mark()
         backgroundCoreDataQueue?.sync { [weak self] in
-            guard var dbEvent = self?.databaseManager.insert(entityType: QBEvent.self),
-                var dbContext = self?.databaseManager.insert(entityType: QBContextEvent.self),
-                var dbMeta = self?.databaseManager.insert(entityType: QBMetaEvent.self),
-                var dbSession = self?.databaseManager.insert(entityType: QBSessionEvent.self)
-                else {
-                    return
+            self?.databaseManager.database?.managedObjectContext.performAndWait {
+                guard var dbEvent = self?.databaseManager.insert(entityType: QBEvent.self),
+                    var dbContext = self?.databaseManager.insert(entityType: QBContextEvent.self),
+                    var dbMeta = self?.databaseManager.insert(entityType: QBMetaEvent.self),
+                    var dbSession = self?.databaseManager.insert(entityType: QBSessionEvent.self)
+                    else {
+                        return
+                }
+                
+                dbEvent = event.fillQBEvent(event: &dbEvent, context: &dbContext, meta: &dbMeta, session: &dbSession)
+                
+                self?.databaseManager.save()
+                self?.trySendEventsWhenFirstEventAdded()
             }
-            
-            dbEvent = event.fillQBEvent(event: &dbEvent, context: &dbContext, meta: &dbMeta, session: &dbSession)
-            
-            self?.databaseManager.save()
-            self?.trySendEventsWhenFirstEventAdded()
         }
     }
     
@@ -185,7 +187,7 @@ class QBEventManager {
     @objc
     private func trySendEventsWhenFirstEventAdded() {
         self.databaseManager.query(entityType: QBEvent.self, sortBy: "dateAdded", ascending: true, limit: self.config.fetchLimit) { results in
-            if results.count == 1 && self.isSendingEvents == false {
+            if !results.isEmpty && self.isSendingEvents == false {
                 self.trySendEvents()
             }
         }

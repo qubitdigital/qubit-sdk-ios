@@ -12,6 +12,7 @@ import Foundation
 public class QubitSDK: NSObject {
     
     private override init() {
+        super.init()
     }
     
     /// Start the QubitSDK
@@ -21,6 +22,7 @@ public class QubitSDK: NSObject {
     ///   - logLevel: QBLogLevel, default = .disabled
     @objc(startWithTrackingId:logLevel:)
     public class func start(withTrackingId id: String, logLevel: QBLogLevel = QBLogLevel.disabled) {
+        QubitSDK.handleException()
         QBTracker.shared.start(withTrackingId: id, logLevel: logLevel)
     }
     
@@ -61,4 +63,30 @@ public class QubitSDK: NSObject {
 	public class func stopTracking() {
 		QBTracker.shared.stop()
 	}
+}
+
+private extension QubitSDK {
+    static func handleException() {
+        NSSetUncaughtExceptionHandler { (_) in
+            QBLog.error(Thread.callStackSymbols.joined(separator: "\n"))
+        }
+        signal(SIGABRT) { (_) in
+            QBLog.error(Thread.callStackSymbols.joined(separator: "\n"))
+        }
+        signal(SIGILL) { (_) in
+            QBLog.error(Thread.callStackSymbols.joined(separator: "\n"))
+        }
+        signal(SIGSEGV) { (_) in
+            QBLog.error(Thread.callStackSymbols.joined(separator: "\n"))
+        }
+        signal(SIGFPE) { (_) in
+            QBLog.error(Thread.callStackSymbols.joined(separator: "\n"))
+        }
+        signal(SIGBUS) { (_) in
+            QBLog.error(Thread.callStackSymbols.joined(separator: "\n"))
+        }
+        signal(SIGPIPE) { (_) in
+            QBLog.error(Thread.callStackSymbols.joined(separator: "\n"))
+        }
+    }
 }

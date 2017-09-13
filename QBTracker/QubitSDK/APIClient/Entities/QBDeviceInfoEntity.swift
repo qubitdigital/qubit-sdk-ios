@@ -13,7 +13,6 @@ struct QBDeviceInfoEntity: Codable {
     enum QBAppType: String, Codable {
         case app
     }
-    
     let deviceType: String
     let deviceName: String
     let osName: String

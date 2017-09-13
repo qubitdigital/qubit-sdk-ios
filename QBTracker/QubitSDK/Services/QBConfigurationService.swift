@@ -9,7 +9,7 @@
 import Foundation
 
 protocol QBConfigurationService {
-    func getConfigution(withCompletion completion: ((Result<QBConfigurationEntity>) -> Void)?)
+    func getConfigution(with completion: ((Result<QBConfigurationEntity>) -> Void)?)
 }
 
 class QBConfigurationServiceImp: QBConfigurationService {
@@ -17,9 +17,9 @@ class QBConfigurationServiceImp: QBConfigurationService {
     private let apiClient: QBAPIClient = {
         return QBAPIClient()
     }()
-    private let urlWithoutParameters = "https://s3-eu-west-1.amazonaws.com/qubit-mobile-config/"
+    private let baseUrl = "https://s3-eu-west-1.amazonaws.com/qubit-mobile-config/"
     private var url: URL? {
-        let urlString = self.urlWithoutParameters + self.trackingId + ".json"
+        let urlString = self.baseUrl + self.trackingId + ".json"
         return URL(string: urlString)
     }
     
@@ -27,7 +27,7 @@ class QBConfigurationServiceImp: QBConfigurationService {
         self.trackingId = trackingId
     }
     
-    func getConfigution(withCompletion completion: ((Result<QBConfigurationEntity>) -> Void)?) {
+    func getConfigution(with completion: ((Result<QBConfigurationEntity>) -> Void)?) {
         guard let url = self.url else {
             let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "URL for configuration is nil"]) as Error
             QBLog.error("URL for configuration is nil")
@@ -37,7 +37,6 @@ class QBConfigurationServiceImp: QBConfigurationService {
         }
         
         let request = URLRequest(url: url)
-        
         apiClient.dataTask(request: request, method: HTTPMethod.get, completion: completion)
     }
 }

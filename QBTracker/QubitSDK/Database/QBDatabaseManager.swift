@@ -71,8 +71,8 @@ class QBDatabaseManager {
             QBLog.error("Error saving changes to database \(error.localizedDescription)")
             }
         }
-        
     }
+    
     
     func deleteAll<T: NSManagedObject>(from entityType: T.Type) {
         guard let database = database else {
@@ -83,11 +83,13 @@ class QBDatabaseManager {
         let entityName = String(describing: entityType)
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: entityType))
         
-        do {
-            let results = try database.managedObjectContext.fetch(fetchRequest) as? [T] ?? []
-            delete(entries: results)
-        } catch {
-            QBLog.error("Error deleting all entries from entityName: \(entityName) error: \(error.localizedDescription)")
+        database.managedObjectContext.performAndWait {
+            do {
+                let results = try database.managedObjectContext.fetch(fetchRequest) as? [T] ?? []
+                delete(entries: results)
+            } catch {
+                QBLog.error("Error deleting all entries from entityName: \(entityName) error: \(error.localizedDescription)")
+            }
         }
     }
     
