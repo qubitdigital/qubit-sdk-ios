@@ -34,5 +34,4 @@ class ViewController: UIViewController {
         let event =  QubitSDK.createEvent(type: "Product", dictionary: ["eventType": "tapOnCreateEventButton"])
         QubitSDK.sendEvent(event: event)
     }
-    
 }
