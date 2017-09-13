@@ -27,9 +27,13 @@ enum QBEventType: String {
     }
 }
 
-struct QBEventEntity: Codable {
+struct QBEventEntity {
     let type: String
     let eventData: String
+    
+    var enumType: QBEventType {
+        return QBEventType(type: type)
+    }
     
     private var context: QBContextEntity?
     private var meta: QBMetaEntity?
@@ -113,18 +117,12 @@ extension QBEventEntity {
         return event
     }
     
-    static func create(with event: QBEvent) -> QBEventEntity? {
+    static func create(withEvent event: QBEvent, vertical: String) -> QBEventEntity? {
         guard let type = event.type, let context = event.context, let meta = event.meta else { return nil }
-        guard let contextEntity = QBContextEntity.create(with: context), let metaEntity = QBMetaEntity.create(with: meta) else { return nil }
+        let typeWithVertical = vertical + type
+        guard let contextEntity = QBContextEntity.create(with: context), let metaEntity = QBMetaEntity.create(withMeta: meta, verticalWithType: typeWithVertical) else { return nil }
         let session = QBSessionEntity.create(with: event.session)
-        let eventEntity = QBEventEntity(type: type, eventData: "", context: contextEntity, meta: metaEntity, session: session)
+        let eventEntity = QBEventEntity(type: type, eventData: event.data ?? "", context: contextEntity, meta: metaEntity, session: session)
         return eventEntity
-    }
-}
-
-// MARK: - Helpers
-extension QBEventEntity {
-    static func getEnumEventType(fromString string: String) -> QBEventType {
-        return QBEventType(type: string)
     }
 }

@@ -102,11 +102,9 @@ class QBEventManager {
         }
         
         let timestampInMs = Date().timeIntervalSince1970InMs
-        sessionManager.eventAdded(type: QBEventType(type: event.type), timestampInMS: timestampInMs)
+        sessionManager.eventAdded(type: event.enumType, timestampInMS: timestampInMs)
         let context = QBContextEntity(withSession: sessionManager.session, lookup: lookupManager.lookup)
         // TODO: fill batchTs
-        // TODO: add vertical before sending
-        // let typeWithVertical = configurationManager.configuration.vertical + type
         let meta = QBMetaEntity(id: NSUUID().uuidString, ts: timestampInMs, trackingId: self.configurationManager.trackingId, type: event.type, source: sessionManager.session.deviceInfo.getOsNameAndVersion(), seq: sessionManager.session.sequenceEventNumber, batchTs: 123)
         
         var event = event
@@ -244,7 +242,7 @@ class QBEventManager {
     private func convert(events: [QBEvent]) -> [QBEventEntity] {
         
         let convertedArray = events.flatMap { (event: QBEvent) -> QBEventEntity? in
-            let eventEntity = QBEventEntity.create(with: event)
+            let eventEntity = QBEventEntity.create(withEvent: event, vertical: self.configurationManager.configuration.vertical)
             return eventEntity
         }
         
