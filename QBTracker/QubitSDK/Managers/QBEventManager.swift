@@ -266,7 +266,7 @@ class QBEventManager {
             let seconds = TimeInterval(config.maxRetryIntervalSec)
             return seconds.millisecond
         } else {
-            let maxSecs: Int = 2 ^ (sendingAttemptsDone - 1) * config.expBackoffBaseTimeSec
+            let maxSecs: Int = 2 ^ (sendingAttemptsDone) * config.expBackoffBaseTimeSec
             return Int(min(arc4random_uniform(UInt32(maxSecs))+1, UInt32(config.maxRetryIntervalSec)))
         }
     }
