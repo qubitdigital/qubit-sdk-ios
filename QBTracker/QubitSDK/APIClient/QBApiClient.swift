@@ -42,7 +42,7 @@ class QBAPIClient {
             
             QBLog.debug("✅ Response = \(response?.description ?? "") \n")
             if let response = response as? HTTPURLResponse,
-               let statusError = self.check(statusCode: response.statusCode) {
+               let statusError = QBAPIClient.check(statusCode: response.statusCode) {
                 completion?(.failure(statusError))
                 return
             }
@@ -54,13 +54,13 @@ class QBAPIClient {
                 return
             }
             
-            self.parseResponse(with: data, completion: completion)
+            QBAPIClient.parseResponse(with: data, completion: completion)
         }
         
         task.resume()
     }
     
-    private func parseResponse<T: Decodable>(with data: Data, completion: ((Result<T>) -> Void)?) {
+    private static func parseResponse<T: Decodable>(with data: Data, completion: ((Result<T>) -> Void)?) {
         let responseString = String(data: data, encoding: .utf8)
         QBLog.debug("✅ ResponseString = \(responseString?.description ?? "") \n")
         
@@ -72,6 +72,7 @@ class QBAPIClient {
             if let statusEntity = decodedObject as? QBStatusEntity,
                let statusError = self.check(statusCode: statusEntity.status.code) {
                 completion?(.failure(statusError))
+                return
             }
             
             completion?(.success(decodedObject))
@@ -81,7 +82,7 @@ class QBAPIClient {
         }
     }
     
-    private func check(statusCode: Int) -> Error? {
+    private static func check(statusCode: Int) -> Error? {
         if 200...299 ~= statusCode {
             return nil
         }

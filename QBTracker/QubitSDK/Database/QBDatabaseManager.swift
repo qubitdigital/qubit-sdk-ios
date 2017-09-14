@@ -73,7 +73,6 @@ class QBDatabaseManager {
         }
     }
     
-    
     func deleteAll<T: NSManagedObject>(from entityType: T.Type) {
         guard let database = database else {
             QBLog.error("Database is not initialized")
