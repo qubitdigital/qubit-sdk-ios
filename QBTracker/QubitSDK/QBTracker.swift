@@ -16,7 +16,6 @@ class QBTracker {
     private var lookupManager: QBLookupManager?
     private var eventManager: QBEventManager?
     private var sessionManager: QBSessionManager?
-    
     private init() {}
     
     func start(withTrackingId id: String, logLevel: QBLogLevel = QBLogLevel.disabled) {

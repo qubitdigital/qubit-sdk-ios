@@ -11,9 +11,7 @@ import Foundation
 @objc
 public class QubitSDK: NSObject {
     
-    private override init() {
-        super.init()
-    }
+    private static var backgroundQubitQueue: DispatchQueue = DispatchQueue(label: "QubitSDKQueue", qos: .background, attributes: .concurrent)
     
     /// Start the QubitSDK
     ///
@@ -22,8 +20,7 @@ public class QubitSDK: NSObject {
     ///   - logLevel: QBLogLevel, default = .disabled
     @objc(startWithTrackingId:logLevel:)
     public class func start(withTrackingId id: String, logLevel: QBLogLevel = QBLogLevel.disabled) {
-        QubitSDK.handleException()
-        QBTracker.shared.start(withTrackingId: id, logLevel: logLevel)
+        runQueue(function: { QBTracker.shared.start(withTrackingId: id, logLevel: logLevel) })
     }
     
     /// Send and event
@@ -33,7 +30,7 @@ public class QubitSDK: NSObject {
     ///   - data: JSONString of event data
     @objc(sendEventWithType:data:)
     public class func sendEvent(type: String, data: String) {
-        QBTracker.shared.sendEvent(type: type, data: data)
+        runQueue(function: { QBTracker.shared.sendEvent(type: type, data: data) })
     }
     
     /// Send and event
@@ -44,7 +41,7 @@ public class QubitSDK: NSObject {
     @objc(sendEventWithEvent:)
     public class func sendEvent(event: Any?) {
         if let event = event as? QBEventEntity {
-            QBTracker.shared.sendEvent(event: event)
+            runQueue(function: { QBTracker.shared.sendEvent(event: event) })
         }
     }
 	
@@ -61,8 +58,12 @@ public class QubitSDK: NSObject {
 	/// Stop tracking
 	@objc(stopTracking)
 	public class func stopTracking() {
-		QBTracker.shared.stop()
+        runQueue(function: { QBTracker.shared.stop() })
 	}
+}
+
+private extension QubitSDK {
+    static func runQueue(function: () -> Void ) { backgroundQubitQueue.sync { function() } }
 }
 
 private extension QubitSDK {
