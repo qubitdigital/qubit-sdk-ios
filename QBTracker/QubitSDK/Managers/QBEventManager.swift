@@ -30,7 +30,7 @@ struct QBEventManagerConfig {
     mutating func increaseRetry(sendTimeInterval: Int, isTimeOutRelated: Bool) {
         sendTimeFrameInterval = sendTimeInterval
         sendingAttemptsDoneCount += 1
-        dedupeActive = true
+        dedupeActive = isTimeOutRelated
     }
 }
 
@@ -53,7 +53,7 @@ class QBEventManager {
         startEventManager()
         NotificationCenter.default.addObserver(self, selector: #selector(self.startEventManager), name: NSNotification.Name(rawValue: QBConnectionManager.notificationKeyReachable), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.stopEventManager), name: NSNotification.Name(rawValue: QBConnectionManager.notificationKeyNotReachable), object: nil)
-        backgroundCoreDataQueue = DispatchQueue(label: "EventCoreDataQueue", qos: .background, attributes: .concurrent)
+        backgroundCoreDataQueue = QBDispatchQueueService.create(type: .coredata)
     }
     
     deinit {
@@ -102,11 +102,9 @@ class QBEventManager {
         }
         
         let timestampInMs = Date().timeIntervalSince1970InMs
-        sessionManager.eventAdded(type: QBEventType(type: event.type), timestampInMS: timestampInMs)
+        sessionManager.eventAdded(type: event.enumType, timestampInMS: timestampInMs)
         let context = QBContextEntity(withSession: sessionManager.session, lookup: lookupManager.lookup)
         // TODO: fill batchTs
-        // TODO: add vertical before sending
-        // let typeWithVertical = configurationManager.configuration.vertical + type
         let meta = QBMetaEntity(id: NSUUID().uuidString, ts: timestampInMs, trackingId: self.configurationManager.trackingId, type: event.type, source: sessionManager.session.deviceInfo.getOsNameAndVersion(), seq: sessionManager.session.sequenceEventNumber, batchTs: 123)
         
         var event = event
@@ -154,7 +152,7 @@ class QBEventManager {
         }
         
         if backgroundUploadQueue == nil {
-            backgroundUploadQueue = DispatchQueue(label: "EventUploadingQueue", qos: .background, attributes: .concurrent)
+            backgroundUploadQueue = QBDispatchQueueService.create(type: .upload)
             trySendEvents()
         }
     }
@@ -246,7 +244,7 @@ class QBEventManager {
     private func convert(events: [QBEvent]) -> [QBEventEntity] {
         
         let convertedArray = events.flatMap { (event: QBEvent) -> QBEventEntity? in
-            let eventEntity = QBEventEntity.create(with: event)
+            let eventEntity = QBEventEntity.create(with: event, vertical: self.configurationManager.configuration.vertical)
             return eventEntity
         }
         
@@ -266,7 +264,7 @@ class QBEventManager {
             let seconds = TimeInterval(config.maxRetryIntervalSec)
             return seconds.millisecond
         } else {
-            let maxSecs: Int = 2 ^ (sendingAttemptsDone - 1) * config.expBackoffBaseTimeSec
+            let maxSecs: Int = 2 ^ (sendingAttemptsDone) * config.expBackoffBaseTimeSec
             return Int(min(arc4random_uniform(UInt32(maxSecs))+1, UInt32(config.maxRetryIntervalSec)))
         }
     }

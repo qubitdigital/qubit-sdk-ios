@@ -68,6 +68,7 @@
 		A0F372BE1F4C623F00283075 /* QBDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F372BD1F4C623F00283075 /* QBDatabase.swift */; };
 		A0F5BF591F4D7833009EFE8D /* QBDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A0F5BF571F4D7833009EFE8D /* QBDataModel.xcdatamodeld */; };
 		B905C8071F6177BC00A9A084 /* TimeInterval+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B905C8061F6177BC00A9A084 /* TimeInterval+Extensions.swift */; };
+		B9ABEC361F6AC49200C6217B /* QBDispatchQueueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9ABEC351F6AC49200C6217B /* QBDispatchQueueService.swift */; };
 		B9FF78FB1F680DC00051AA8E /* QBEventManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FF78FA1F680DC00051AA8E /* QBEventManagerTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -165,6 +166,7 @@
 		A0F372BD1F4C623F00283075 /* QBDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBDatabase.swift; sourceTree = "<group>"; };
 		A0F5BF581F4D7833009EFE8D /* QBDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QBDataModel.xcdatamodel; sourceTree = "<group>"; };
 		B905C8061F6177BC00A9A084 /* TimeInterval+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extensions.swift"; sourceTree = "<group>"; };
+		B9ABEC351F6AC49200C6217B /* QBDispatchQueueService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBDispatchQueueService.swift; sourceTree = "<group>"; };
 		B9FF78FA1F680DC00051AA8E /* QBEventManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBEventManagerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -231,6 +233,7 @@
 				42F0CD771F4B11D400BD9010 /* QBConfigurationService.swift */,
 				423AEFE21F4C41EF00F6EF6D /* QBEventService.swift */,
 				42D768B21F542AEE00FD7944 /* QBLookupService.swift */,
+				B9ABEC351F6AC49200C6217B /* QBDispatchQueueService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -584,6 +587,7 @@
 				426EF6591F54160F00FD3F10 /* QBLookupEntity.swift in Sources */,
 				420738741F4D8E2A005A0B9E /* QBConfigurationManager.swift in Sources */,
 				A0A82A441F56E8D900252374 /* QBEvent+CoreDataClass.swift in Sources */,
+				B9ABEC361F6AC49200C6217B /* QBDispatchQueueService.swift in Sources */,
 				423AEFE91F4C505300F6EF6D /* QBStatusEntity.swift in Sources */,
 				42F0CD6C1F4B044F00BD9010 /* QBApiClient.swift in Sources */,
 				42D768B31F542AEE00FD7944 /* QBLookupService.swift in Sources */,
