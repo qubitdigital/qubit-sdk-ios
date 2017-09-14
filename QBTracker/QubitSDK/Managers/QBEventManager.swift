@@ -53,7 +53,7 @@ class QBEventManager {
         startEventManager()
         NotificationCenter.default.addObserver(self, selector: #selector(self.startEventManager), name: NSNotification.Name(rawValue: QBConnectionManager.notificationKeyReachable), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.stopEventManager), name: NSNotification.Name(rawValue: QBConnectionManager.notificationKeyNotReachable), object: nil)
-        backgroundCoreDataQueue = DispatchQueue(label: "EventCoreDataQueue", qos: .background, attributes: .concurrent)
+        backgroundCoreDataQueue = QBDispatchQueueService.create(type: .coredata)
     }
     
     deinit {
@@ -154,7 +154,7 @@ class QBEventManager {
         }
         
         if backgroundUploadQueue == nil {
-            backgroundUploadQueue = DispatchQueue(label: "EventUploadingQueue", qos: .background, attributes: .concurrent)
+            backgroundUploadQueue = QBDispatchQueueService.create(type: .upload)
             trySendEvents()
         }
     }

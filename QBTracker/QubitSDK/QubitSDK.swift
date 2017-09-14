@@ -11,7 +11,7 @@ import Foundation
 @objc
 public class QubitSDK: NSObject {
     
-    private static var backgroundQubitQueue: DispatchQueue = DispatchQueue(label: "QubitSDKQueue", qos: .background, attributes: .concurrent)
+    private static var backgroundQubitQueue: DispatchQueue = QBDispatchQueueService.create(type: .qubit)
     
     /// Start the QubitSDK
     ///
