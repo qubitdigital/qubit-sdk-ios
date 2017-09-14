@@ -119,8 +119,8 @@ extension QBEventEntity {
     
     static func create(with event: QBEvent, vertical: String) -> QBEventEntity? {
         guard let type = event.type, let context = event.context, let meta = event.meta else { return nil }
-        let typeWithVertical = vertical + type
-        guard let contextEntity = QBContextEntity.create(with: context), let metaEntity = QBMetaEntity.create(with: meta, verticalWithType: typeWithVertical) else { return nil }
+        let verticalType = vertical + type
+        guard let contextEntity = QBContextEntity.create(with: context), let metaEntity = QBMetaEntity.create(with: meta, verticalType: verticalType) else { return nil }
         let session = QBSessionEntity.create(with: event.session)
         let eventEntity = QBEventEntity(type: type, eventData: event.data ?? "", context: contextEntity, meta: metaEntity, session: session)
         return eventEntity
