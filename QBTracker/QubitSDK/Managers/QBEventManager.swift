@@ -30,7 +30,7 @@ struct QBEventManagerConfig {
     mutating func increaseRetry(sendTimeInterval: Int, isTimeOutRelated: Bool) {
         sendTimeFrameInterval = sendTimeInterval
         sendingAttemptsDoneCount += 1
-        dedupeActive = true
+        dedupeActive = isTimeOutRelated
     }
 }
 
