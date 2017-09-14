@@ -30,7 +30,7 @@ extension QBMetaEntity {
         return meta
     }
     
-    static func create(withMeta meta: QBMetaEvent, verticalWithType: String) -> QBMetaEntity? {
+    static func create(with meta: QBMetaEvent, verticalWithType: String) -> QBMetaEntity? {
         guard
             let id = meta.id,
             let ts = meta.ts?.intValue,
