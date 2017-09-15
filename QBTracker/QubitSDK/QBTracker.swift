@@ -30,7 +30,7 @@ class QBTracker {
         
         let configurationManager = QBConfigurationManager(withTrackingId: id, delegate: self)
         self.configurationManager = configurationManager
-        let lookupManager = QBLookupManager(withConfigurationManager: configurationManager)
+        let lookupManager = QBLookupManager(configurationManager: configurationManager)
         self.lookupManager = lookupManager
         let sessionManager = QBSessionManager(delegate: self)
         self.sessionManager = sessionManager
