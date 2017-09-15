@@ -44,7 +44,7 @@ class QBLookupManager {
     }
     private let configurationManager: QBConfigurationManager
     
-    init(withConfigurationManager configurationManager: QBConfigurationManager) {
+    init(configurationManager: QBConfigurationManager) {
         self.configurationManager = configurationManager
         self.lastUpdateTimeStamp = 0
         downloadLookup()

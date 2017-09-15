@@ -1,0 +1,14 @@
+{
+    "configuration_reload_interval": 60,
+    "data_location": "EU",
+    "disabled": false,
+    "endpoint": "gong-eb.qubit.com",
+    "lookup_attribute_url": "lookup.qubit.com",
+    "lookup_cache_expire_time": 60,
+    "lookup_get_request_timeout": 5,
+    "namespace": null,
+    "property_id": 5010,
+    "queue_timeout": 30,
+    "tracking_id": "miquido",
+    "vertical": "ec"
+}
