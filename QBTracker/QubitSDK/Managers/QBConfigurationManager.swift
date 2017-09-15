@@ -81,7 +81,7 @@ class QBConfigurationManager {
     }
     
     // MARK: - Internal functions
-    init(withTrackingId trackingId: String, withDeleagte delegate: QBConfigurationManagerDelegate) {
+    init(withTrackingId trackingId: String, delegate: QBConfigurationManagerDelegate) {
         self.trackingId = trackingId
         self.delegate = delegate
         self.lastUpdateTimeStamp = 0

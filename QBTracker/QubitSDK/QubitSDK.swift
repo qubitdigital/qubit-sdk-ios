@@ -10,9 +10,7 @@ import Foundation
 
 @objc
 public class QubitSDK: NSObject {
-    
-    private static var backgroundQubitQueue: DispatchQueue = QBDispatchQueueService.create(type: .qubit)
-    
+        
     /// Start the QubitSDK
     ///
     /// - Parameters:
@@ -20,7 +18,7 @@ public class QubitSDK: NSObject {
     ///   - logLevel: QBLogLevel, default = .disabled
     @objc(startWithTrackingId:logLevel:)
     public class func start(withTrackingId id: String, logLevel: QBLogLevel = QBLogLevel.disabled) {
-        runQueue(function: { QBTracker.shared.start(withTrackingId: id, logLevel: logLevel) })
+        QBDispatchQueueService.runAsync(type: .qubit) { QBTracker.shared.start(withTrackingId: id, logLevel: logLevel) }
     }
     
     /// Send and event
@@ -30,7 +28,7 @@ public class QubitSDK: NSObject {
     ///   - data: JSONString of event data
     @objc(sendEventWithType:data:)
     public class func sendEvent(type: String, data: String) {
-        runQueue(function: { QBTracker.shared.sendEvent(type: type, data: data) })
+         QBDispatchQueueService.runAsync(type: .qubit) { QBTracker.shared.sendEvent(type: type, data: data) }
     }
     
     /// Send and event
@@ -41,10 +39,20 @@ public class QubitSDK: NSObject {
     @objc(sendEventWithEvent:)
     public class func sendEvent(event: Any?) {
         if let event = event as? QBEventEntity {
-            runQueue(function: { QBTracker.shared.sendEvent(event: event) })
+             QBDispatchQueueService.runAsync(type: .qubit) { QBTracker.shared.sendEvent(event: event) }
         }
     }
 	
+    /// Create event
+    ///
+    /// - Parameters:
+    ///   - type: eventType
+    ///   - data: json String
+    @objc(createEventWithType:data:)
+    public class func createEvent(type: String, data: String) -> AnyObject? {
+        return QBEventManager.createEvent(type: type, data: data) as AnyObject
+    }
+    
     /// Create event
     ///
     /// - Parameters:
@@ -58,12 +66,8 @@ public class QubitSDK: NSObject {
 	/// Stop tracking
 	@objc(stopTracking)
 	public class func stopTracking() {
-        runQueue(function: { QBTracker.shared.stop() })
+         QBDispatchQueueService.runAsync(type: .qubit) { QBTracker.shared.stop() }
 	}
-}
-
-private extension QubitSDK {
-    static func runQueue(function: () -> Void ) { backgroundQubitQueue.sync { function() } }
 }
 
 private extension QubitSDK {

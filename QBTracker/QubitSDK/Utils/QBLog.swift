@@ -78,7 +78,11 @@ class QBLog {
         case (QBLogLevel.verbose, _):
             fallthrough
         case (QBLogLevel.debug, _):
-            print("\(Date().toString()) \(type.rawValue)[\(sourceFileName(filePath: fileName)):\(line)] \(funcName) -> \(message)")
+            guard let queue = String(cString: __dispatch_queue_get_label(nil), encoding: .utf8) else {
+                print("\(Date().toString()) \(type.rawValue)[\(sourceFileName(filePath: fileName)):\(line)] \(funcName) -> \(message)")
+                return
+            }
+            print("[\(queue)] \(Date().toString()) \(type.rawValue)[\(sourceFileName(filePath: fileName)):\(line)] \(funcName) -> \(message)")
         case (_, _):
             break
         }
