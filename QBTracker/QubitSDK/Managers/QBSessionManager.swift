@@ -28,7 +28,7 @@ class QBSessionManager {
     private var currentSession: QBSession
     private let sessionTimeInMS = 1_800_000
     
-    init(withDeleagte delegate: QBSessionManagerDelegate) {
+    init(delegate: QBSessionManagerDelegate) {
         self.delegate = delegate
         guard let lastSession = UserDefaults.standard.session else {
             self.currentSession = QBSession()

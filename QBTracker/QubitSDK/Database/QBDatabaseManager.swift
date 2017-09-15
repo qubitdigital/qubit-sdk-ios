@@ -68,11 +68,10 @@ class QBDatabaseManager {
             do {
                 try database.managedObjectContext.save()
             } catch {
-            QBLog.error("Error saving changes to database \(error.localizedDescription)")
+                QBLog.error("Error saving changes to database \(error.localizedDescription)")
             }
         }
     }
-    
     
     func deleteAll<T: NSManagedObject>(from entityType: T.Type) {
         guard let database = database else {

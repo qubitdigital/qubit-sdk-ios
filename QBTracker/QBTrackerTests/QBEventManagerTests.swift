@@ -9,15 +9,29 @@
 import XCTest
 @testable import QubitSDK
 
-class QBEventManagerTests: XCTestCase {
+class QBEventManagerTests: XCTestCase, QBConfigurationManagerDelegate, QBSessionManagerDelegate {
     
-    var eventManager = QBEventManager()
-    var configurationManager = QBConfigurationManager()
-    
+    var eventManager: QBEventManager?
+    var configurationManager: QBConfigurationManager?
+    var sessionManager: QBSessionManager?
+    var lookupManager:QBLookupManager?
+    var expectation: XCTestExpectation?
     override func setUp() {
         super.setUp()
-        eventManager.configurationManager = configurationManager
+        expectation = XCTestExpectation(description: "setup event manager")
+        configurationManager = QBConfigurationManager(withTrackingId: "miquido", delegate: self)
+        sessionManager = QBSessionManager(delegate: self)
+        lookupManager = QBLookupManager(withConfigurationManager: configurationManager!)
+        eventManager = QBEventManager(withConfigurationManager: configurationManager!, sessionManager: sessionManager!, lookupManager: lookupManager!)
+        waitForExpectations(timeout: 2.0, handler: nil)
         // Put setup code here. This method is called before the invocation of each test method in the class.
+    }
+    
+    func newSessionStarted() {
+    }
+    func configurationUpdated() {
+        expectation?.fulfill()
+        testExample()
     }
     
     override func tearDown() {

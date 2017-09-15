@@ -36,11 +36,10 @@ struct QBEventManagerConfig {
 
 class QBEventManager {
     private var isSendingEvents: Bool = false
+    private var isEnabled: Bool = false
     private var config: QBEventManagerConfig = QBEventManagerConfig()
     private var databaseManager = QBDatabaseManager()
     private var connectionManager = QBConnectionManager()
-    private var backgroundUploadQueue: DispatchQueue?
-    private var backgroundCoreDataQueue: DispatchQueue?
     
     private let configurationManager: QBConfigurationManager
     private let sessionManager: QBSessionManager
@@ -53,13 +52,11 @@ class QBEventManager {
         startEventManager()
         NotificationCenter.default.addObserver(self, selector: #selector(self.startEventManager), name: NSNotification.Name(rawValue: QBConnectionManager.notificationKeyReachable), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.stopEventManager), name: NSNotification.Name(rawValue: QBConnectionManager.notificationKeyNotReachable), object: nil)
-        backgroundCoreDataQueue = QBDispatchQueueService.create(type: .coredata)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-        backgroundCoreDataQueue = nil
-        backgroundUploadQueue = nil
+        self.isEnabled = false
     }
     
     // MARK: - Internal
@@ -118,7 +115,8 @@ class QBEventManager {
     
     private func addEventInQueue(event: QBEventEntity) {
         QBLog.mark()
-        backgroundCoreDataQueue?.sync { [weak self] in
+        
+        QBDispatchQueueService.runSync(type: .coredata) { [weak self] in
             self?.databaseManager.database?.managedObjectContext.performAndWait {
                 guard var dbEvent = self?.databaseManager.insert(entityType: QBEvent.self),
                     var dbContext = self?.databaseManager.insert(entityType: QBContextEvent.self),
@@ -139,40 +137,44 @@ class QBEventManager {
     // MARK: - Private
     @objc
     private func startEventManager() {
-        guard configurationManager.isConfigurationLoaded else {
-            QBLog.info("Configuration is loading, so timer don't started")
-            stopEventManager()
-            return
-        }
-        
-        if configurationManager.configuration.disabled {
-            QBLog.info("Sending events disabled in configuration, so timer don't started")
-            stopEventManager()
-            return
-        }
-        
-        if backgroundUploadQueue == nil {
-            backgroundUploadQueue = QBDispatchQueueService.create(type: .upload)
-            trySendEvents()
+        QBDispatchQueueService.runSync(type: .qubit) { [weak self] in
+            guard let `self` = self else { return }
+            guard self.configurationManager.isConfigurationLoaded else {
+                QBLog.info("Configuration is loading, so timer don't started")
+                self.stopEventManager()
+                return
+            }
+            
+            if self.configurationManager.configuration.disabled {
+                QBLog.info("Sending events disabled in configuration, so timer don't started")
+                self.stopEventManager()
+                return
+            }
+            self.isEnabled = true
+            self.trySendEvents()
         }
     }
     
     @objc
     private func stopEventManager() {
-        QBLog.verbose("Connection lost.  Stopping timer.")
-        backgroundUploadQueue = nil
+        QBDispatchQueueService.runSync(type: .qubit) { [weak self] in
+            guard let `self` = self else { return }
+            self.isEnabled = false
+            QBLog.verbose("Connection lost.")
+        }
     }
     
     @objc
     private func trySendEvents() {
-        backgroundCoreDataQueue?.sync { [weak self] in
+        if isEnabled == false { return }
+        
+        QBDispatchQueueService.runSync(type: .coredata) { [weak self] in
             guard let fetchLimit = self?.config.fetchLimit, let sendTimeFrameInterval = self?.config.sendTimeFrameInterval else { return }
             guard let `self` = self else { return }
             
             let deadlineTime = DispatchTime.now() + .milliseconds(sendTimeFrameInterval)
-            self.backgroundUploadQueue?.asyncAfter(deadline: deadlineTime) { [weak self] in
+            QBDispatchQueueService.runAsync(type: .upload, deadline: deadlineTime) { [weak self] in
                 guard let `self` = self else { return }
-                
                 self.databaseManager.query(entityType: QBEvent.self, sortBy: "dateAdded", ascending: true, limit: fetchLimit) { results in
                     if !results.isEmpty {
                         self.sendEvents()
@@ -184,6 +186,7 @@ class QBEventManager {
     
     @objc
     private func trySendEventsWhenFirstEventAdded() {
+        if isEnabled == false { return }
         self.databaseManager.query(entityType: QBEvent.self, sortBy: "dateAdded", ascending: true, limit: self.config.fetchLimit) { results in
             if !results.isEmpty && self.isSendingEvents == false {
                 self.trySendEvents()
@@ -193,6 +196,8 @@ class QBEventManager {
     
     @objc
     private func sendEvents() {
+        if isEnabled == false { return }
+        
         guard configurationManager.isConfigurationLoaded else {
             QBLog.info("Configuration is loading, so events will be send after load config")
             return
@@ -202,22 +207,19 @@ class QBEventManager {
             QBLog.info("Sending events disabled in configuration")
             return
         }
-        
-        backgroundUploadQueue?.sync { [weak self] in
+        QBDispatchQueueService.runSync(type: .upload) { [weak self] in
             
             guard let `self` = self else { return }
             
             self.databaseManager.query(entityType: QBEvent.self, sortBy: "dateAdded", ascending: true, limit: self.config.fetchLimit) { [weak self] currentEventBatch in
-                
+
                 guard let `self` = self else { return }
-                
                 if currentEventBatch.isEmpty {
                     QBLog.debug("🔶 nothing to sent")
                     return
                 }
                 
                 let events = self.convert(events: currentEventBatch)
-                
                 let eventService = QBEventServiceImp(withConfigurationManager: self.configurationManager)
                 
                 self.isSendingEvents = true
