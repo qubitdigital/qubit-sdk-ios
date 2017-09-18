@@ -43,10 +43,12 @@ class QBLookupManager {
         }
     }
     private let configurationManager: QBConfigurationManager
+    private var reachability = QBReachability()
     
     init(configurationManager: QBConfigurationManager) {
         self.configurationManager = configurationManager
         self.lastUpdateTimeStamp = 0
+        try? reachability?.startNotifier()
         downloadLookup()
     }
     
@@ -66,6 +68,11 @@ class QBLookupManager {
         
         if configurationManager.configuration.disabled {
             QBLog.info("Sending events disabled in configuration, so download lookup makes no sense")
+            return
+        }
+        
+        if reachability?.isReachable == false {
+            QBLog.error("Not connected to the Internet")
             return
         }
         
