@@ -39,7 +39,14 @@ class QBAPIClient {
                 completion?(.failure(error))
                 return
             }
+            
             QBLog.debug("✅ Response = \(response?.description ?? "") \n")
+            if let response = response as? HTTPURLResponse,
+               let statusError = QBAPIClient.check(statusCode: response.statusCode) {
+                completion?(.failure(statusError))
+                return
+            }
+            
             guard let data = data else {
                 let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Data was not retrieved from request = \(request)"]) as Error
                 QBLog.error("Data was not retrieved from request = \(request) \n")
@@ -47,30 +54,41 @@ class QBAPIClient {
                 return
             }
             
-            let responseString = String(data: data, encoding: .utf8)
-            QBLog.debug("✅ ResponseString = \(responseString?.description ?? "") \n")
-            
-            if let response = response as? HTTPURLResponse {
-                guard 200...299 ~= response.statusCode else {
-                    let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Status code = \(response.statusCode) is not correct"]) as Error
-                    QBLog.error("Status code = \(response.statusCode), status is wrong \n")
-                    completion?(.failure(error))
-                    return
-                }
-                
-                do {
-                    let decoder = JSONDecoder()
-                    let config = try decoder.decode(T.self, from: data)
-                    QBLog.debug("✅ Decoded object = \(config)")
-                    completion?(.success(config))
-                } catch {
-                    QBLog.error("❗️ Error trying to convert data to JSON, error = \(error) \n")
-                    completion?(.failure(error))
-                }
-            }
+            QBAPIClient.parseResponse(with: data, completion: completion)
         }
         
         task.resume()
+    }
+    
+    private static func parseResponse<T: Decodable>(with data: Data, completion: ((Result<T>) -> Void)?) {
+        let responseString = String(data: data, encoding: .utf8)
+        QBLog.debug("✅ ResponseString = \(responseString?.description ?? "") \n")
+        
+        do {
+            let decoder = JSONDecoder()
+            let decodedObject = try decoder.decode(T.self, from: data)
+            
+            QBLog.debug("✅ Decoded object = \(decodedObject)")
+            if let statusEntity = decodedObject as? QBStatusEntity,
+               let statusError = self.check(statusCode: statusEntity.status.code) {
+                completion?(.failure(statusError))
+                return
+            }
+            
+            completion?(.success(decodedObject))
+        } catch {
+            QBLog.error("❗️ Error trying to convert data to JSON, error = \(error) \n")
+            completion?(.failure(error))
+        }
+    }
+    
+    private static func check(statusCode: Int) -> Error? {
+        if 200...299 ~= statusCode {
+            return nil
+        }
+        let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Status code = \(statusCode) is not correct"]) as Error
+        QBLog.error("Status code = \(statusCode), status is wrong \n")
+        return error
     }
     
 }

@@ -85,7 +85,7 @@ struct QBConfigurationEntity: Codable {
 extension QBConfigurationEntity {
     private struct DefaultValues {
         static let disabled = false
-        static let configurationReloadInterval = 2
+        static let configurationReloadInterval = 60
         static let queueTimeout = 60
         static let namespace = ""
         static let lookupEndpoint = "lookup.qubit.com"
