@@ -107,3 +107,100 @@ private extension QubitSDK {
         }
     }
 }
+
+@objc
+public class QBTrackerInit: NSObject {
+    
+    static let sharedInstance: QBTrackerInit = QBTrackerInit()
+    
+    func applicationDidFinishLaunching() {
+        
+    }
+    
+    func applicationEnterForeground() {
+        
+    }
+    
+    func initConfig(fromForeground: Bool, completion: (() -> Void)?) {
+        
+    }
+    
+    func invalidateConfigTimer() {
+        
+    }
+    
+    func validateConfigTimer() {
+        
+    }
+}
+
+@objc
+public class QBTrackerManager: NSObject {
+    
+    @objc
+    public static let sharedManager: QBTrackerManager = QBTrackerManager()
+
+    @objc(setTrackingId:)
+    public func setTrackingId(trackingId: String) {
+        
+    }
+    
+    @objc(setDebugEndpoint:)
+    public func setDebugEndpoint(endPointUrl: String) {
+        
+    }
+    @objc(unsubscribeToTracking)
+    public func unsubscribeToTracking() {
+        
+    }
+    
+    @objc(subscribeToTracking)
+    public func subscribeToTracking() {
+        
+    }
+    
+    @objc(dispatchEvent:withData:)
+    public func dispatchEvent(type: String, withData: [String: Any]) {
+        
+    }
+    
+    @objc(dispatchEvent:withStringData:)
+    public func dispatchEvent(type: String, withStringData: String) {
+        
+    }
+    
+    @objc(dispatchSessionEvent:withEnd:)
+    public func dispatchSessionEvent(startTimeStamp: TimeInterval, withEnd: TimeInterval) {
+        
+    }
+    
+    @objc(getUserID)
+    public func getUserID() -> String {
+        return ""
+    }
+    
+    @objc(setStashInfo:key:withCallback:)
+    public func setStashInfo(data: String, key: String, withCallback: (Int) -> Void) {
+        
+    }
+    
+    @objc(setStashInfo:withCallback:)
+    public func setStashInfo(key: String, withCallback: (Int, String) -> Void) {
+        
+    }
+    
+    @objc(setStashInfoMultiple:withCallback:)
+    public func setStashInfoMultiple(userkeys: [String], withCallback: (Int, [String: Any]) -> Void) {
+        
+    }
+    
+    @objc(getSegmentMembershipInfo:withCallback:)
+    public func getSegmentMembershipInfo(userId: String, withCallback: (Int, [String]) -> Void) {
+        
+    }
+    
+}
+
+public let qubit: QBTrackerManager = QBTrackerManager()
+
+
