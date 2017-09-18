@@ -35,6 +35,18 @@ public class QubitSDK: NSObject {
     ///
     /// - Parameters:
     ///   - type: eventType
+    ///   - dictionary: event representing by dictionary
+    @objc(sendEventWithType:dictionary:)
+    public class func sendEvent(type: String, dictionary: [String: Any]) {
+        if let event: QBEventEntity = QubitSDK.createEvent(type: type, dictionary: dictionary) as? QBEventEntity {
+            QBDispatchQueueService.runAsync(type: .qubit) { QBTracker.shared.sendEvent(event: event) }
+        }
+    }
+    
+    /// Send and event
+    ///
+    /// - Parameters:
+    ///   - type: eventType
     ///   - event: QBEventEntity
     @objc(sendEventWithEvent:)
     public class func sendEvent(event: Any?) {
