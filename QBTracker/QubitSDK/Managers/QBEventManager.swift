@@ -39,19 +39,24 @@ class QBEventManager {
     private var isEnabled: Bool = false
     private var config: QBEventManagerConfig = QBEventManagerConfig()
     private var databaseManager = QBDatabaseManager()
-    private var connectionManager = QBConnectionManager()
     
     private let configurationManager: QBConfigurationManager
     private let sessionManager: QBSessionManager
     private let lookupManager: QBLookupManager
+    private var reachability = QBReachability()
     
     init(withConfigurationManager configurationManager: QBConfigurationManager, sessionManager: QBSessionManager, lookupManager: QBLookupManager) {
         self.configurationManager = configurationManager
         self.sessionManager = sessionManager
         self.lookupManager = lookupManager
         startEventManager()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.startEventManager), name: NSNotification.Name(rawValue: QBConnectionManager.notificationKeyReachable), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.stopEventManager), name: NSNotification.Name(rawValue: QBConnectionManager.notificationKeyNotReachable), object: nil)
+        try? reachability?.startNotifier()
+        reachability?.whenReachable = { [weak self] (reachability) in
+            self?.startEventManager()
+        }
+        reachability?.whenUnreachable = { [weak self] (reachability) in
+            self?.stopEventManager()
+        }
     }
     
     deinit {
@@ -135,7 +140,6 @@ class QBEventManager {
     }
     
     // MARK: - Private
-    @objc
     private func startEventManager() {
         QBDispatchQueueService.runSync(type: .qubit) { [weak self] in
             guard let `self` = self else { return }
@@ -155,7 +159,6 @@ class QBEventManager {
         }
     }
     
-    @objc
     private func stopEventManager() {
         QBDispatchQueueService.runSync(type: .qubit) { [weak self] in
             guard let `self` = self else { return }
@@ -194,19 +197,34 @@ class QBEventManager {
         }
     }
     
-    @objc
-    private func sendEvents() {
-        if isEnabled == false { return }
-        
+    private func isCanSendEvents() -> Bool {
+        if isEnabled == false {
+            return false
+        }
+    
         guard configurationManager.isConfigurationLoaded else {
             QBLog.info("Configuration is loading, so events will be send after load config")
+            return false
+        }
+    
+        if configurationManager.configuration.disabled {
+            QBLog.info("Sending events disabled in configuration")
+            return false
+        }
+    
+        if reachability?.isReachable == false {
+            QBLog.error("Not connected to the Internet")
+            return false
+        }
+        
+        return true
+    }
+    
+    private func sendEvents() {
+        guard isCanSendEvents() else {
             return
         }
         
-        if configurationManager.configuration.disabled {
-            QBLog.info("Sending events disabled in configuration")
-            return
-        }
         QBDispatchQueueService.runSync(type: .upload) { [weak self] in
             
             guard let `self` = self else { return }

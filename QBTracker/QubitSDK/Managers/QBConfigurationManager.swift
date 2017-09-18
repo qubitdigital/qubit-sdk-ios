@@ -49,9 +49,16 @@ class QBConfigurationManager {
             QBLog.verbose("configuration lastUpdateTimeStamp updated = \(lastUpdateTimeStamp)")
         }
     }
+    private var reachability = QBReachability()
     
     private func downloadConfig() {
         QBLog.mark()
+        
+        if reachability?.isReachable == false {
+            QBLog.error("Not connected to the Internet")
+            return
+        }
+        
         let service = QBConfigurationServiceImp(withTrackingId: self.trackingId)
         service.getConfigution { [weak self] result in
             guard let strongSelf = self else { return }
@@ -85,6 +92,7 @@ class QBConfigurationManager {
         self.trackingId = trackingId
         self.delegate = delegate
         self.lastUpdateTimeStamp = 0
+        try? reachability?.startNotifier()
         downloadConfig()
     }
     
