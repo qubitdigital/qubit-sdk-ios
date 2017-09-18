@@ -35,7 +35,8 @@ class QBLookupServiceImp: QBLookupService {
         urlWithPath.appendPathComponent(configurationManager.trackingId)
         urlWithPath.appendPathComponent(id)
         
-        let request = URLRequest(url: urlWithPath)
+        var request = URLRequest(url: urlWithPath)
+        request.timeoutInterval = Double(configurationManager.configuration.lookupRequestTimeout)
         
         apiClient.dataTask(request: request, method: HTTPMethod.get, completion: completion)
     }
