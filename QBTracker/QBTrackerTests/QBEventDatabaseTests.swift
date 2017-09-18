@@ -11,7 +11,7 @@ import XCTest
 
 class QBEventDatabaseTests: XCTestCase {
     
-    let databaseManager = QBDatabaseManager.shared
+    let databaseManager = QBDatabaseManager.init()
     let eventType: String = "TestType"
     
     override func setUp() {
@@ -37,29 +37,32 @@ class QBEventDatabaseTests: XCTestCase {
         XCTAssert(event != nil, "Error inserting event into database")
 
         event?.type = self.eventType
-        let savedSuccessFully = self.databaseManager.save()
-
-        XCTAssert(savedSuccessFully, "Could not save event in the database)")
+        self.databaseManager.save()
     }
     
     func testEventQuery() {
-        let events = self.databaseManager.query(entityType: QBEvent.self)
+        weak var expectation = self.expectation(description: "Download configuration")
 
-        XCTAssert(!events.isEmpty, "Error querying events")
+        let events = self.databaseManager.query(entityType: QBEvent.self) { (events) in
+            XCTAssert(!events.isEmpty, "Error querying events")
+            let event = events.first
+            XCTAssert(event?.type == self.eventType, "Wrong event queried.  Event name is: \(event?.type), expecting: \(self.eventType)")
+            expectation?.fulfill()
 
-        let event = events.first
+        }
+        waitForExpectations(timeout: 1.0, handler: nil)
 
-        XCTAssert(event?.type == self.eventType, "Wrong event queried.  Event name is: \(event?.type), expecting: \(self.eventType)")
     }
 
     func testEventDeleteAll() {
-        let success = self.databaseManager.deleteAll(from: QBEvent.self)
+        weak var expectation = self.expectation(description: "Download configuration")
 
-        XCTAssert(success, "Error deleting all events")
-
-        let events = self.databaseManager.query(entityType: QBEvent.self)
-
-        XCTAssert(!events.isEmpty, "Did not delete all events from the database, even though method returned success")
+        self.databaseManager.deleteAll(from: QBEvent.self)
+        self.databaseManager.query(entityType: QBEvent.self) { (events) in
+            XCTAssert(events.isEmpty, "Did not delete all events from the database, even though method returned success")
+            expectation?.fulfill()
+        }
+        waitForExpectations(timeout: 1.0, handler: nil)
     }
     
 }

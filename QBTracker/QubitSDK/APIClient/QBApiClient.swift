@@ -34,27 +34,28 @@ class QBAPIClient {
         let session = URLSession(configuration: .default)
         
         let task = session.dataTask(with: request) { (data, response, error) in
-            if let error = error {
-                QBLog.error("Error = \(String(describing: error))")
-                completion?(.failure(error))
-                return
+            QBDispatchQueueService.runSync(type: .upload) {
+                if let error = error {
+                    QBLog.error("Error = \(String(describing: error))")
+                    completion?(.failure(error))
+                    return
+                }
+                
+                QBLog.debug("✅ Response = \(response?.description ?? "") \n")
+                if let response = response as? HTTPURLResponse,
+                   let statusError = QBAPIClient.check(statusCode: response.statusCode) {
+                    completion?(.failure(statusError))
+                    return
+                }
+                
+                guard let data = data else {
+                    let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Data was not retrieved from request = \(request)"]) as Error
+                    QBLog.error("Data was not retrieved from request = \(request) \n")
+                    completion?(.failure(error))
+                    return
+                }
+                QBAPIClient.parseResponse(with: data, completion: completion)
             }
-            
-            QBLog.debug("✅ Response = \(response?.description ?? "") \n")
-            if let response = response as? HTTPURLResponse,
-               let statusError = QBAPIClient.check(statusCode: response.statusCode) {
-                completion?(.failure(statusError))
-                return
-            }
-            
-            guard let data = data else {
-                let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Data was not retrieved from request = \(request)"]) as Error
-                QBLog.error("Data was not retrieved from request = \(request) \n")
-                completion?(.failure(error))
-                return
-            }
-            
-            QBAPIClient.parseResponse(with: data, completion: completion)
         }
         
         task.resume()

@@ -68,7 +68,7 @@ class QBDatabaseManager {
             do {
                 try database.managedObjectContext.save()
             } catch {
-            QBLog.error("Error saving changes to database \(error.localizedDescription)")
+                QBLog.error("Error saving changes to database \(error.localizedDescription)")
             }
         }
     }

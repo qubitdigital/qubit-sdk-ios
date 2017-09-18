@@ -38,7 +38,6 @@ class QBEventServiceImp: QBEventService {
                 arrayJson.append(json)
             }
         }
-//        let jsonData = try? JSONEncoder().encode(events)
         request.httpBody = try? JSONSerialization.data(withJSONObject: arrayJson, options: .prettyPrinted)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
