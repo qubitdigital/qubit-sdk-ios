@@ -1,0 +1,24 @@
+{
+    "segment": {
+        "state": null
+    },
+    "ipLocation": {
+        "city": "lodz",
+        "cityCode": "12167",
+        "country": "poland",
+        "countryCode": "PL",
+        "latitude": 51.75,
+        "longitude": 19.4687,
+        "area": "unknown",
+        "areaCode": "unknown",
+        "region": "lodzkie",
+        "regionCode": "14350"
+    },
+    "ipAddress": "31.183.46.224",
+    "viewNumber": 22,
+    "sessionNumber": 0,
+    "entranceNumber": 0,
+    "firstViewTs": 1505471698008,
+    "lastViewTs": 1505727458127,
+    "conversionCycleNumber": 1
+}

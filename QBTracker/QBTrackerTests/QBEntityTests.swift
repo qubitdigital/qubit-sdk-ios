@@ -29,4 +29,14 @@ class QBEntityTests: XCTestCase {
         XCTAssert(configuration != nil)
     }
     
+    func testLookupEntity() {
+        guard let path = Bundle(for: type(of: self)).path(forResource: "lookup_entity", ofType: "json"), let data = try? Data(contentsOf: URL.init(fileURLWithPath: path)) else {
+            XCTAssert(false)
+            return
+        }
+        let decoder = JSONDecoder()
+        let lookup: QBLookupEntity? = try? decoder.decode(QBLookupEntity.self, from: data)
+        XCTAssert(lookup != nil)
+    }
+    
 }

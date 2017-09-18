@@ -167,6 +167,7 @@
 		A0F372BD1F4C623F00283075 /* QBDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBDatabase.swift; sourceTree = "<group>"; };
 		A0F5BF581F4D7833009EFE8D /* QBDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QBDataModel.xcdatamodel; sourceTree = "<group>"; };
 		B905C8061F6177BC00A9A084 /* TimeInterval+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extensions.swift"; sourceTree = "<group>"; };
+		B983902C1F6FD3410002993F /* lookup_entity.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = lookup_entity.json; sourceTree = "<group>"; };
 		B9987B9F1F6C478800CA6AB7 /* configuration_entity.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = configuration_entity.json; sourceTree = "<group>"; };
 		B9987BA11F6C4D2A00CA6AB7 /* QBEntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBEntityTests.swift; sourceTree = "<group>"; };
 		B9ABEC351F6AC49200C6217B /* QBDispatchQueueService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBDispatchQueueService.swift; sourceTree = "<group>"; };
@@ -411,6 +412,7 @@
 		B9987B9E1F6C474100CA6AB7 /* json */ = {
 			isa = PBXGroup;
 			children = (
+				B983902C1F6FD3410002993F /* lookup_entity.json */,
 				B9987B9F1F6C478800CA6AB7 /* configuration_entity.json */,
 			);
 			path = json;
