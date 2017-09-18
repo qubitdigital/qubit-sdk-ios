@@ -60,7 +60,6 @@ class QBEventManager {
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self)
         self.isEnabled = false
     }
     
