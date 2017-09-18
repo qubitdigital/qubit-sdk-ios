@@ -197,10 +197,8 @@ class QBEventManager {
         }
     }
     
-    private func isCanSendEvents() -> Bool {
-        if isEnabled == false {
-            return false
-        }
+    private func canSendEvents() -> Bool {
+        if isEnabled == false { return false }
     
         guard configurationManager.isConfigurationLoaded else {
             QBLog.info("Configuration is loading, so events will be send after load config")
@@ -221,9 +219,7 @@ class QBEventManager {
     }
     
     private func sendEvents() {
-        guard isCanSendEvents() else {
-            return
-        }
+        guard canSendEvents() else { return }
         
         QBDispatchQueueService.runSync(type: .upload) { [weak self] in
             
