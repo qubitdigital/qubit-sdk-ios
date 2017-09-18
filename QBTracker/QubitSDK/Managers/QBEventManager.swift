@@ -27,10 +27,10 @@ struct QBEventManagerConfig {
         dedupeActive = false
     }
     
-    mutating func increaseRetry(sendTimeInterval: Int, isTimeOutRelated: Bool) {
+    mutating func increaseRetry(sendTimeInterval: Int, addDedupe: Bool) {
         sendTimeFrameInterval = sendTimeInterval
         sendingAttemptsDoneCount += 1
-        dedupeActive = isTimeOutRelated
+        dedupeActive = addDedupe
     }
 }
 
@@ -232,9 +232,8 @@ class QBEventManager {
                         self.config.reset()
                     case .failure(let error):
                         QBLog.info("⛔️ Error sending events \(error.localizedDescription)")
-                        let code = (error as NSError).code
                         self.markFailed(events: currentEventBatch)
-                        self.config.increaseRetry(sendTimeInterval: self.evaluateIntervalMsToNextRetry(sendingAttemptsDone: self.config.sendingAttemptsDoneCount), isTimeOutRelated: (code == NSURLErrorTimedOut || code == NSURLErrorNetworkConnectionLost))
+                        self.config.increaseRetry(sendTimeInterval: self.evaluateIntervalMsToNextRetry(sendingAttemptsDone: self.config.sendingAttemptsDoneCount), addDedupe: true)
                     }
                     self.isSendingEvents = false
                     self.trySendEvents()
