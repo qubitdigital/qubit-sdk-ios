@@ -68,6 +68,7 @@
 		A0F372BE1F4C623F00283075 /* QBDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F372BD1F4C623F00283075 /* QBDatabase.swift */; };
 		A0F5BF591F4D7833009EFE8D /* QBDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A0F5BF571F4D7833009EFE8D /* QBDataModel.xcdatamodeld */; };
 		B905C8071F6177BC00A9A084 /* TimeInterval+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B905C8061F6177BC00A9A084 /* TimeInterval+Extensions.swift */; };
+		B983902E1F7052790002993F /* QBTracker+Adapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B983902D1F7052790002993F /* QBTracker+Adapter.swift */; };
 		B9987BA01F6C478800CA6AB7 /* configuration_entity.json in Resources */ = {isa = PBXBuildFile; fileRef = B9987B9F1F6C478800CA6AB7 /* configuration_entity.json */; };
 		B9987BA41F6C4D7A00CA6AB7 /* QBEntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9987BA11F6C4D2A00CA6AB7 /* QBEntityTests.swift */; };
 		B9ABEC361F6AC49200C6217B /* QBDispatchQueueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9ABEC351F6AC49200C6217B /* QBDispatchQueueService.swift */; };
@@ -168,6 +169,7 @@
 		A0F5BF581F4D7833009EFE8D /* QBDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QBDataModel.xcdatamodel; sourceTree = "<group>"; };
 		B905C8061F6177BC00A9A084 /* TimeInterval+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extensions.swift"; sourceTree = "<group>"; };
 		B983902C1F6FD3410002993F /* lookup_entity.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = lookup_entity.json; sourceTree = "<group>"; };
+		B983902D1F7052790002993F /* QBTracker+Adapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QBTracker+Adapter.swift"; sourceTree = "<group>"; };
 		B9987B9F1F6C478800CA6AB7 /* configuration_entity.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = configuration_entity.json; sourceTree = "<group>"; };
 		B9987BA11F6C4D2A00CA6AB7 /* QBEntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBEntityTests.swift; sourceTree = "<group>"; };
 		B9ABEC351F6AC49200C6217B /* QBDispatchQueueService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBDispatchQueueService.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				420738961F4F08B6005A0B9E /* Utils */,
 				A099EE6C1F4C38C2007319A9 /* Extensions */,
 				A08D69BA1F556CE800CE2FD5 /* QBTracker.swift */,
+				B983902D1F7052790002993F /* QBTracker+Adapter.swift */,
 				A0D30B811F559F180029D3DC /* QubitSDK.swift */,
 				42F0CD521F4AEE2B00BD9010 /* Info.plist */,
 			);
@@ -607,6 +610,7 @@
 				42D768B31F542AEE00FD7944 /* QBLookupService.swift in Sources */,
 				B905C8071F6177BC00A9A084 /* TimeInterval+Extensions.swift in Sources */,
 				420738761F4D9739005A0B9E /* UserDefaults+Extensions.swift in Sources */,
+				B983902E1F7052790002993F /* QBTracker+Adapter.swift in Sources */,
 				42F62FF61F67E97700E444B5 /* Double+Extensions.swift in Sources */,
 				422370821F4C6B2B008D401E /* QBContextEntity.swift in Sources */,
 				A0F5BF591F4D7833009EFE8D /* QBDataModel.xcdatamodeld in Sources */,
