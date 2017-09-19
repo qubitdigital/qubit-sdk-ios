@@ -30,7 +30,7 @@ extension QBMetaEntity {
         return meta
     }
     
-    static func create(with meta: QBMetaEvent, verticalType: String) -> QBMetaEntity? {
+    static func create(with meta: QBMetaEvent, typeWithNamespaceAndVertical: String) -> QBMetaEntity? {
         guard
             let id = meta.id,
             let ts = meta.ts?.intValue,
@@ -40,7 +40,7 @@ extension QBMetaEntity {
             let batchTs = meta.batchTs?.intValue
             else { return nil }
         
-        let metaEntity = QBMetaEntity(id: id, ts: ts, trackingId: trackingId, type: verticalType, source: source, seq: seq, batchTs: batchTs)
+        let metaEntity = QBMetaEntity(id: id, ts: ts, trackingId: trackingId, type: typeWithNamespaceAndVertical, source: source, seq: seq, batchTs: batchTs)
         return metaEntity
     }
 }

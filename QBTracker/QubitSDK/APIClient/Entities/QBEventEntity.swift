@@ -117,10 +117,10 @@ extension QBEventEntity {
         return event
     }
     
-    static func create(with event: QBEvent, vertical: String) -> QBEventEntity? {
+    static func create(with event: QBEvent, configuration: QBConfigurationEntity) -> QBEventEntity? {
         guard let type = event.type, let context = event.context, let meta = event.meta else { return nil }
-        let verticalType = vertical + type
-        guard let contextEntity = QBContextEntity.create(with: context), let metaEntity = QBMetaEntity.create(with: meta, verticalType: verticalType) else { return nil }
+        let typeWithNamespaceAndVertical = QBEventTypeTransformer.transformEventType(eventType: type, configuration: configuration)
+        guard let contextEntity = QBContextEntity.create(with: context), let metaEntity = QBMetaEntity.create(with: meta, typeWithNamespaceAndVertical: typeWithNamespaceAndVertical) else { return nil }
         let session = QBSessionEntity.create(with: event.session)
         let eventEntity = QBEventEntity(type: type, eventData: event.data ?? "", context: contextEntity, meta: metaEntity, session: session)
         return eventEntity
