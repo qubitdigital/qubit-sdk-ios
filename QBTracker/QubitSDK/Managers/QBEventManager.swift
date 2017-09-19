@@ -92,7 +92,7 @@ class QBEventManager {
                                       screenWidth: deviceInfo.screenWidth,
                                       screenHeight: deviceInfo.screenHeight)
         
-        let event = QBEventEntity(type: QBEventType.session.rawValue, eventData: "", session: session)
+        let event = QBEventEntity(type: "qubit.session", eventData: "", session: session)
         self.sendEvent(event: event)
     }
     
@@ -258,7 +258,7 @@ class QBEventManager {
     private func convert(events: [QBEvent]) -> [QBEventEntity] {
         
         let convertedArray = events.flatMap { (event: QBEvent) -> QBEventEntity? in
-            let eventEntity = QBEventEntity.create(with: event, vertical: self.configurationManager.configuration.vertical)
+            let eventEntity = QBEventEntity.create(with: event, configuration: self.configurationManager.configuration)
             return eventEntity
         }
         
