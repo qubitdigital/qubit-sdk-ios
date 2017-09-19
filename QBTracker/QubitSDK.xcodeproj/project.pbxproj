@@ -67,6 +67,14 @@
 		A0F372BE1F4C623F00283075 /* QBDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F372BD1F4C623F00283075 /* QBDatabase.swift */; };
 		A0F5BF591F4D7833009EFE8D /* QBDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A0F5BF571F4D7833009EFE8D /* QBDataModel.xcdatamodeld */; };
 		B905C8071F6177BC00A9A084 /* TimeInterval+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B905C8061F6177BC00A9A084 /* TimeInterval+Extensions.swift */; };
+		B98390371F7059A50002993F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B98390361F7059A50002993F /* AppDelegate.m */; };
+		B983903A1F7059A50002993F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B98390391F7059A50002993F /* ViewController.m */; };
+		B983903D1F7059A50002993F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B983903B1F7059A50002993F /* Main.storyboard */; };
+		B983903F1F7059A50002993F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B983903E1F7059A50002993F /* Assets.xcassets */; };
+		B98390421F7059A50002993F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B98390401F7059A50002993F /* LaunchScreen.storyboard */; };
+		B98390451F7059A50002993F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B98390441F7059A50002993F /* main.m */; };
+		B98390491F7059EC0002993F /* QubitSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F0CD4E1F4AEE2B00BD9010 /* QubitSDK.framework */; };
+		B983904A1F7059EC0002993F /* QubitSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 42F0CD4E1F4AEE2B00BD9010 /* QubitSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B9987BA01F6C478800CA6AB7 /* configuration_entity.json in Resources */ = {isa = PBXBuildFile; fileRef = B9987B9F1F6C478800CA6AB7 /* configuration_entity.json */; };
 		B9987BA41F6C4D7A00CA6AB7 /* QBEntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9987BA11F6C4D2A00CA6AB7 /* QBEntityTests.swift */; };
 		B9ABEC361F6AC49200C6217B /* QBDispatchQueueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9ABEC351F6AC49200C6217B /* QBDispatchQueueService.swift */; };
@@ -94,6 +102,13 @@
 			remoteGlobalIDString = A0F372B31F4C45F700283075;
 			remoteInfo = CommonCrypto;
 		};
+		B983904B1F7059EC0002993F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 42F0CD451F4AEE2B00BD9010 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 42F0CD4D1F4AEE2B00BD9010;
+			remoteInfo = QubitSDK;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -104,6 +119,17 @@
 			dstSubfolderSpec = 10;
 			files = (
 				422E89CE1F6281A0007217D8 /* QubitSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B983904D1F7059EC0002993F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B983904A1F7059EC0002993F /* QubitSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -166,6 +192,16 @@
 		A0F5BF581F4D7833009EFE8D /* QBDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QBDataModel.xcdatamodel; sourceTree = "<group>"; };
 		B905C8061F6177BC00A9A084 /* TimeInterval+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extensions.swift"; sourceTree = "<group>"; };
 		B983902C1F6FD3410002993F /* lookup_entity.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = lookup_entity.json; sourceTree = "<group>"; };
+		B98390331F7059A40002993F /* ObjcTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ObjcTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B98390351F7059A50002993F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		B98390361F7059A50002993F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B98390381F7059A50002993F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		B98390391F7059A50002993F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		B983903C1F7059A50002993F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B983903E1F7059A50002993F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B98390411F7059A50002993F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B98390431F7059A50002993F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B98390441F7059A50002993F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B9987B9F1F6C478800CA6AB7 /* configuration_entity.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = configuration_entity.json; sourceTree = "<group>"; };
 		B9987BA11F6C4D2A00CA6AB7 /* QBEntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBEntityTests.swift; sourceTree = "<group>"; };
 		B9ABEC351F6AC49200C6217B /* QBDispatchQueueService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBDispatchQueueService.swift; sourceTree = "<group>"; };
@@ -192,6 +228,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0D30B7D1F5594410029D3DC /* QubitSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B98390301F7059A40002993F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B98390491F7059EC0002993F /* QubitSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +292,7 @@
 				A0F3729A1F4C418400283075 /* CommonCrypto */,
 				A0F372A51F4C418400283075 /* CommonCryptoTests */,
 				A024B5B71F4D7B83009748A1 /* SwiftTestApp */,
+				B98390341F7059A50002993F /* ObjcTestApp */,
 				42F0CD4F1F4AEE2B00BD9010 /* Products */,
 				A0F372911F4C40EA00283075 /* Frameworks */,
 			);
@@ -260,6 +305,7 @@
 				42F0CD4E1F4AEE2B00BD9010 /* QubitSDK.framework */,
 				42F0CD571F4AEE2B00BD9010 /* QubitSDKTests.xctest */,
 				A024B5B61F4D7B83009748A1 /* SwiftTestApp.app */,
+				B98390331F7059A40002993F /* ObjcTestApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -406,6 +452,22 @@
 			path = Database;
 			sourceTree = "<group>";
 		};
+		B98390341F7059A50002993F /* ObjcTestApp */ = {
+			isa = PBXGroup;
+			children = (
+				B98390351F7059A50002993F /* AppDelegate.h */,
+				B98390361F7059A50002993F /* AppDelegate.m */,
+				B98390381F7059A50002993F /* ViewController.h */,
+				B98390391F7059A50002993F /* ViewController.m */,
+				B983903B1F7059A50002993F /* Main.storyboard */,
+				B983903E1F7059A50002993F /* Assets.xcassets */,
+				B98390401F7059A50002993F /* LaunchScreen.storyboard */,
+				B98390431F7059A50002993F /* Info.plist */,
+				B98390441F7059A50002993F /* main.m */,
+			);
+			path = ObjcTestApp;
+			sourceTree = "<group>";
+		};
 		B9987B9E1F6C474100CA6AB7 /* json */ = {
 			isa = PBXGroup;
 			children = (
@@ -485,6 +547,25 @@
 			productReference = A024B5B61F4D7B83009748A1 /* SwiftTestApp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		B98390321F7059A40002993F /* ObjcTestApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B98390481F7059A50002993F /* Build configuration list for PBXNativeTarget "ObjcTestApp" */;
+			buildPhases = (
+				B983902F1F7059A40002993F /* Sources */,
+				B98390301F7059A40002993F /* Frameworks */,
+				B98390311F7059A40002993F /* Resources */,
+				B983904D1F7059EC0002993F /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B983904C1F7059EC0002993F /* PBXTargetDependency */,
+			);
+			name = ObjcTestApp;
+			productName = ObjcTestApp;
+			productReference = B98390331F7059A40002993F /* ObjcTestApp.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -509,6 +590,10 @@
 					A0F372B31F4C45F700283075 = {
 						CreatedOnToolsVersion = 9.0;
 					};
+					B98390321F7059A40002993F = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 42F0CD481F4AEE2B00BD9010 /* Build configuration list for PBXProject "QubitSDK" */;
@@ -528,6 +613,7 @@
 				42F0CD561F4AEE2B00BD9010 /* QubitSDKTests */,
 				A0F372B31F4C45F700283075 /* CommonCrypto */,
 				A024B5B51F4D7B83009748A1 /* SwiftTestApp */,
+				B98390321F7059A40002993F /* ObjcTestApp */,
 			);
 		};
 /* End PBXProject section */
@@ -555,6 +641,16 @@
 				A024B5C31F4D7B83009748A1 /* LaunchScreen.storyboard in Resources */,
 				A024B5C01F4D7B83009748A1 /* Assets.xcassets in Resources */,
 				A024B5BE1F4D7B83009748A1 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B98390311F7059A40002993F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B98390421F7059A50002993F /* LaunchScreen.storyboard in Resources */,
+				B983903F1F7059A50002993F /* Assets.xcassets in Resources */,
+				B983903D1F7059A50002993F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -653,6 +749,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B983902F1F7059A40002993F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B983903A1F7059A50002993F /* ViewController.m in Sources */,
+				B98390451F7059A50002993F /* main.m in Sources */,
+				B98390371F7059A50002993F /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -671,6 +777,11 @@
 			target = A0F372B31F4C45F700283075 /* CommonCrypto */;
 			targetProxy = A0F372B81F4C465800283075 /* PBXContainerItemProxy */;
 		};
+		B983904C1F7059EC0002993F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 42F0CD4D1F4AEE2B00BD9010 /* QubitSDK */;
+			targetProxy = B983904B1F7059EC0002993F /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -686,6 +797,22 @@
 			isa = PBXVariantGroup;
 			children = (
 				A024B5C21F4D7B83009748A1 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		B983903B1F7059A50002993F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B983903C1F7059A50002993F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B98390401F7059A50002993F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B98390411F7059A50002993F /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -949,6 +1076,36 @@
 			};
 			name = Release;
 		};
+		B98390461F7059A50002993F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HAWH5C9J75;
+				INFOPLIST_FILE = ObjcTestApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.qubit.ObjcTestApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B98390471F7059A50002993F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HAWH5C9J75;
+				INFOPLIST_FILE = ObjcTestApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.qubit.ObjcTestApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -993,6 +1150,15 @@
 			buildConfigurations = (
 				A0F372B51F4C45F700283075 /* Debug */,
 				A0F372B61F4C45F700283075 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B98390481F7059A50002993F /* Build configuration list for PBXNativeTarget "ObjcTestApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B98390461F7059A50002993F /* Debug */,
+				B98390471F7059A50002993F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

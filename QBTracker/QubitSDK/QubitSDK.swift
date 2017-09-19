@@ -18,6 +18,7 @@ public class QubitSDK: NSObject {
     ///   - logLevel: QBLogLevel, default = .disabled
     @objc(startWithTrackingId:logLevel:)
     public class func start(withTrackingId id: String, logLevel: QBLogLevel = QBLogLevel.disabled) {
+        QubitSDK.handleException()
         QBDispatchQueueService.runAsync(type: .qubit) { QBTracker.shared.start(withTrackingId: id, logLevel: logLevel) }
     }
     
@@ -81,6 +82,97 @@ public class QubitSDK: NSObject {
          QBDispatchQueueService.runAsync(type: .qubit) { QBTracker.shared.stop() }
 	}
 }
+
+@objc
+public class QBTrackerInit: NSObject {
+    
+    static let sharedInstance: QBTrackerInit = QBTrackerInit()
+    
+    @objc(applicationDidFinishLaunching)
+    @available(*, unavailable, message:"this method is unavailable at new version of SDK, please use [QubitSDK startWithTrackingId:logLevel:]")
+    func applicationDidFinishLaunching() {}
+    
+    @objc(applicationEnterForeground)
+    @available(*, unavailable, message:"this method is unavailable at new version of SDK")
+    func applicationEnterForeground() {}
+    
+    @objc(initConfig:completion:)
+    @available(*, unavailable, message:"this method is unavailable at new version of SDK")
+    func initConfig(fromForeground: Bool, completion: (() -> Void)?) {}
+    
+    @objc(invalidateConfigTimer)
+    @available(*, unavailable, message:"this method is unavailable at new version of SDK")
+    func invalidateConfigTimer() {}
+    
+    @objc(validateConfigTimer)
+    @available(*, unavailable, message:"this method is unavailable at new version of SDK")
+    func validateConfigTimer() {}
+}
+
+@objc
+public class QBTrackerManager: NSObject {
+    
+    @objc
+    @available(*, deprecated, message:"will be removed in next version")
+    public static let sharedManager: QBTrackerManager = QBTrackerManager()
+
+    @objc(setTrackingId:)
+    @available(*, unavailable, message:"this method is unavailable at new version of SDK, please use [QubitSDK startWithTrackingId:logLevel:]/QubitSDK.start(withTrackingId)")
+    public func setTrackingId(trackingId: String) {}
+    
+    @objc(setDebugEndpoint:)
+    @available(*, unavailable, message:"this method is unavailable at new version of SDK")
+    public func setDebugEndpoint(endPointUrl: String) {}
+    
+    @objc(unsubscribeToTracking)
+    @available(*, unavailable, message:"this method is unavailable at new version of SDK, please use [QubitSDK stopTracking]/QubitSDK.stopTracking()")
+    public func unsubscribeToTracking() {}
+    
+    @objc(subscribeToTracking)
+    @available(*, unavailable, message:"this method is unavailable at new version of SDK, please use [QubitSDK startWithTrackingId:logLevel:]/QubitSDK.start(withTrackingId)")
+    public func subscribeToTracking() {}
+    
+    @objc(dispatchEvent:withData:)
+    @available(*, deprecated, message:"will be removed in next version of SDK, please use [QubitSDK sendEventWithType:dictionary:]/QubitSDK.sendEvent(type,dictionary)")
+    public func dispatchEvent(type: String, withData: [String: Any]) {
+        QubitSDK.sendEvent(type: type, dictionary: withData)
+    }
+    
+    @objc(dispatchEvent:withStringData:)
+    @available(*, deprecated, message:"will be removed in next version of SDK, please use [QubitSDK sendEventWithType:data:]/QubitSDK.sendEvent(type,data)")
+    public func dispatchEvent(type: String, withStringData: String) {
+        QubitSDK.sendEvent(type: type, data: withStringData)
+    }
+    
+    @objc(dispatchSessionEvent:withEnd:)
+    @available(*, unavailable, message:"this method is unavailable at new version of SDK")
+    public func dispatchSessionEvent(startTimeStamp: TimeInterval, withEnd: TimeInterval) {}
+    
+    @objc(getUserID)
+    @available(*, unavailable, message:"this method is unavailable at new version of SDK")
+    public func getUserID() -> String {
+        return ""
+    }
+    
+    @objc(setStashInfo:key:withCallback:)
+    @available(*, unavailable, message:"this method is unavailable at new version of SDK")
+    public func setStashInfo(data: String, key: String, withCallback: (Int) -> Void) {}
+    
+    @objc(setStashInfo:withCallback:)
+    @available(*, unavailable, message:"this method is unavailable at new version of SDK")
+    public func setStashInfo(key: String, withCallback: (Int, String) -> Void) {}
+    
+    @objc(setStashInfoMultiple:withCallback:)
+    @available(*, unavailable, message:"this method is unavailable at new version of SDK")
+    public func setStashInfoMultiple(userkeys: [String], withCallback: (Int, [String: Any]) -> Void) {}
+    
+    @objc(getSegmentMembershipInfo:withCallback:)
+    @available(*, unavailable, message:"this method is unavailable at new version of SDK")
+    public func getSegmentMembershipInfo(userId: String, withCallback: (Int, [String]) -> Void) {}
+}
+
+@available(*, unavailable, message:"this method is unavailable at new version of SDK")
+public let qubit: QBTrackerManager = QBTrackerManager()
 
 private extension QubitSDK {
     static func handleException() {
