@@ -37,6 +37,8 @@ struct QBEventManagerConfig {
 class QBEventManager {
     private var isSendingEvents: Bool = false
     private var isEnabled: Bool = false
+    private var hasStopped: Bool = false
+
     private var config: QBEventManagerConfig = QBEventManagerConfig()
     private var databaseManager = QBDatabaseManager()
     
@@ -49,13 +51,14 @@ class QBEventManager {
         self.configurationManager = configurationManager
         self.sessionManager = sessionManager
         self.lookupManager = lookupManager
-        startEventManager()
         try? reachability?.startNotifier()
         reachability?.whenReachable = { [weak self] (reachability) in
-            self?.startEventManager()
+            guard let `self` = self else { return }
+            if self.hasStopped == true { self.startEventManager() }
         }
         reachability?.whenUnreachable = { [weak self] (reachability) in
-            self?.stopEventManager()
+            guard let `self` = self else { return }
+            self.stopEventManager()
         }
     }
     
@@ -162,6 +165,7 @@ class QBEventManager {
         QBDispatchQueueService.runSync(type: .qubit) { [weak self] in
             guard let `self` = self else { return }
             self.isEnabled = false
+            self.hasStopped = true
             QBLog.verbose("Connection lost.")
         }
     }

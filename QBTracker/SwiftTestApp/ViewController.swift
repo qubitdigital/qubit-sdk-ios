@@ -21,10 +21,6 @@ class ViewController: UIViewController {
     
     @IBAction func tapOnEventButton(_ sender: UIButton) {
         QubitSDK.sendEvent(type: "View", data: "{\"type\" : \"tapOnEventButton\"}")
-        
-        DispatchQueue.global(qos: .background).async {
-            QubitSDK.sendEvent(type: "View_Background", data: "{\"type\" : \"tapOnEventButton\"}")
-        }
     }
     
     @IBAction func tapOnCreateEventButton(_ sender: UIButton) {
