@@ -174,10 +174,9 @@ class QBEventManager {
     private func trySendEvents() {
         if isEnabled == false { return }
         
-        QBDispatchQueueService.runSync(type: .coredata) { [weak self] in
-            guard let fetchLimit = self?.config.fetchLimit, let sendTimeFrameInterval = self?.config.sendTimeFrameInterval else { return }
-            guard let `self` = self else { return }
-            
+            let fetchLimit = self.config.fetchLimit
+            let sendTimeFrameInterval = self.config.sendTimeFrameInterval
+        
             let deadlineTime = DispatchTime.now() + .milliseconds(sendTimeFrameInterval)
             QBDispatchQueueService.runAsync(type: .upload, deadline: deadlineTime) { [weak self] in
                 guard let `self` = self else { return }
@@ -187,7 +186,7 @@ class QBEventManager {
                     }
                 }
             }
-        }
+        
     }
     
     @objc

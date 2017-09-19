@@ -32,7 +32,7 @@ class QBDispatchQueueService {
     private static let backgroundQubitDispatchQueue = create(type: .qubit)
     
     private static func create(type: QBDispatchQueueType) -> DispatchQueue {
-        return DispatchQueue(label: type.rawValue, qos: .background, attributes: .concurrent)
+        return DispatchQueue(label: type.rawValue, qos: .background)
     }
     
     static func runAsync(type: QBDispatchQueueType, function: @escaping () -> Void ) { type.queue().async { function() } }
@@ -40,6 +40,6 @@ class QBDispatchQueueService {
         type.queue().asyncAfter(deadline: deadline, execute: { function() })
     }
     
-    static func runSync(type: QBDispatchQueueType, function: @escaping () -> Void ) { type.queue().sync { function() } }
+    static func runSync(type: QBDispatchQueueType, function: @escaping () -> Void ) { type.queue().async { function() } }
 
 }
