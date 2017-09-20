@@ -13,14 +13,24 @@ import QubitSDK
 class ViewController: UIViewController {
 
     var timer: Timer?
+    @IBOutlet weak var eventsLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         QubitSDK.start(withTrackingId: "miquido", logLevel: .verbose)
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (timer) in
+            QubitSDK.allEvents(completion: { (results) in
+                self.eventsLabel.text = "Events: \(results.count)"
+            })
+        }
     }
     
+    
+    
     @IBAction func tapOnEventButton(_ sender: UIButton) {
-        QubitSDK.sendEvent(type: "View", data: "{\"type\" : \"tapOnEventButton\"}")
+        for i in 0...10 {
+            QubitSDK.sendEvent(type: "View", data: "{\"type\" : \"tapOnEventButton\"}")
+        }
     }
     
     @IBAction func tapOnCreateEventButton(_ sender: UIButton) {
