@@ -33,7 +33,10 @@ class QBEventServiceImp: QBEventService {
         
         var request = URLRequest(url: url)
         var arrayJson = [[String: Any]]()
+        let batchTs = Int(Date.timeIntervalBetween1970AndReferenceDate)
         for event in events {
+            var event = event
+            event.setBatchTs(batchTs: batchTs)
             if let json = event.codable() {
                 arrayJson.append(json)
             }

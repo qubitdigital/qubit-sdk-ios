@@ -47,6 +47,10 @@ struct QBEventEntity {
         self.session = session
     }
     
+    mutating func setBatchTs(batchTs: Int) {
+        self.meta?.batchTs = batchTs
+    }
+    
     mutating func add(context: QBContextEntity? = nil, meta: QBMetaEntity? = nil) {
         self.context = context
         self.meta = meta
