@@ -297,12 +297,3 @@ class QBEventManager {
         }
     }
 }
-
-extension QBEventManager {
-    func allEvents(completion: @escaping ([QBEvent])->()) {
-        self.databaseManager.query(entityType: QBEvent.self) { (results) in
-            completion(results)
-        }
-    }
-    
-}

@@ -18,17 +18,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         QubitSDK.start(withTrackingId: "miquido", logLevel: .verbose)
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (timer) in
-            QubitSDK.allEvents(completion: { (results) in
-                self.eventsLabel.text = "Events: \(results.count)"
-            })
-        }
     }
     
-    
-    
     @IBAction func tapOnEventButton(_ sender: UIButton) {
-        for i in 0...10 {
+        for _ in 0...10 {
             QubitSDK.sendEvent(type: "View", data: "{\"type\" : \"tapOnEventButton\"}")
         }
     }

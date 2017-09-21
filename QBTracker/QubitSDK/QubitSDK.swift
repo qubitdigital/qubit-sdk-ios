@@ -81,13 +81,7 @@ public class QubitSDK: NSObject {
 	public class func stopTracking() {
          QBDispatchQueueService.runAsync(type: .qubit) { QBTracker.shared.stop() }
 	}
-    
-    @objc(allEventsCompletion:)
-    public class func allEvents(completion: @escaping ([AnyObject]) -> Void) {
-        QBTracker.shared.allEvents { (results) in
-            completion(results as [AnyObject])
-        }
-    }
+
 }
 
 @objc

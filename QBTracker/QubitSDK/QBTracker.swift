@@ -65,13 +65,6 @@ class QBTracker {
 	}
 }
 
-// TODO: This is only for testing should be removed
-extension QBTracker {
-    func allEvents(completion: @escaping ([QBEvent])->()) {
-        eventManager?.allEvents(completion: completion)
-    }
-}
-
 extension QBTracker: QBConfigurationManagerDelegate {
     func configurationUpdated() {
         eventManager?.configurationUpdated()
