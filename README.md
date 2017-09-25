@@ -1,7 +1,7 @@
 # Qubit Mobile
-Installation of the Qubit tracker library, to provide event tracking and lookup
+Installation of the QubitSDK, to provide event tracking and lookup
 
-Before you start the installation process, please [provide us](mailto:ios@qubit.com?subject=iOS%20Repository%20Permission) with your GitHub username. This will allow us to grant you access to the tracker’s repository and ensure that it can be easily managed alongside your other dependencies. 
+Before you start the installation process, please [provide us](mailto:ios@qubit.com?subject=iOS%20Repository%20Permission) with your GitHub username. This will allow us to grant you access to the QubitSDK repository and ensure that it can be easily managed alongside your other dependencies. 
 
 # Updates
 
@@ -14,20 +14,22 @@ Before you start the installation process, please [provide us](mailto:ios@qubit.
 | 0.2.4 | Update that fixes some scenarios that used this SDK in Swift |
 | 0.2.3 | Update segmentation functionality |
 | 0.2.2 | Update to use initWithData |
+| 0.3.0 | Update to use Swift 4.0
+
 
 # Installation
-## Swift compatibility
-When Swift is used in your application, our SDK is compatible through the use of Apple's _mix and match_ functionality. More information on [Apple's developer site](https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html).
 
 ## Cocoa Pods
-Cocoa pods are the de facto dependency management system for iOS. If you do not have cocoa pods configured, please read the installation documents on their website. If you use another dependency management system or do not wish to implement one, please contact us for alternative options.
+Cocoa pods are a dependency management system for iOS. If you do not have cocoa pods configured, please read the installation documents on their website (https://guides.cocoapods.org/using/getting-started.html). If you use another dependency management system or do not wish to implement one, please contact us for alternative options.
 
 Once you have cocoa pods installed, navigate to the Podfile in your app’s root directory. In the file, add the lines:
 
 ```
+use_frameworks!
+
 target :XXXXX do
-    pod "QBTracker", :git => 
-    "https://github.com/qubitdigital/ios-tracker.git"
+    pod "QubitSDK", :git => 
+    "https://github.com/qubitdigital/qubit-sdk-ios.git"
 end
 ```
 
@@ -39,66 +41,40 @@ pod install
 
 If you encounter permission issues, ensure the GitHub username step has been successfully completed. Please consult the cocoa pods documentation if you have any other issues with this step. If your process freezes on “Analysing dependencies”, try running *pod repo remove master*, *pod setup*, then *pod install* again.
 
-_Note: In order for the tool to function correctly, the app will need the appropriate permissions to access the internet. Additionally, if you wish to capture GPS data, location permissions will be required._
+_Note: In order for the tool to function correctly, the app will need the appropriate permissions to access the internet._
 
-## Tracking ID
-Setting your tracking ID will allow us to correctly identify your data. To set your tracking ID on application launch (preferably in your AppDelegate.m, within the applicationDidFinishLaunching method), use this method
+## Starting the QubitSDK
+Starting the QubitSDK with a tracking ID will allow us to correctly identify your data.  
+When starting the SDK, you can specify the log level of the SDK.  This will determine the amount of logging the SDK will produce.
+The log level options for Objective-C are: QBLogLevelDisabled, QBLogLevelError, QBLogLevelInfo, QBLogLevelDebug, QBLogLevelVerbose, QBLogLevelWarning
+The log level options for Swift are: .disabled, .error, .info, .debug, .verbose, .warning
 
-```objective-c
-[[QBTrackingManager sharedManager] setTrackingId: @"XXXXX"];
-[[QBTrackerInit sharedInstance] applicationDidFinishLaunching];
-```
+To start the QubitSDK (preferably in your AppDelegate didFinishLaunchingWithOptions) use the following method
 
-with QBTracker.h declared as an import. Here *XXXXX* is your Qubit Tracking ID, which is a unique string representing your account, and will have already been provided to you. If you haven’t received a tracking ID, or don’t know what yours is, please contact us. This declaration requires *QBTracker.h* to be declared as an import within the file.
-
-Additionally, if you wish to initialise tracking when your app reenters the foreground, you will need to modify your applicationWillEnterForeground method to contain the following declaration:
 
 ```objective-c
-[[QBTrackerInit sharedInstance] applicationEnterForeground];
-```
-## User ID
-Get visitor ID stored on this device.
-```objective-c
-#import "QBTrackingManager.h"
+#import "QubitSDK/QubitSDK.h"
 
-NSString * userID = [qubit getUserID];
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [QubitSDK startWithTrackingId: @"XXXXX" logLevel: QBLogLevelDisabled];
+    return YES;
+}
 ```
 
-## Stash Info
-### Retrieve - One data
-Get stash info from the server.
-```objective-c
-#import "QBTrackingManager.h"
+```swift
+import QubitSDK
 
-[qubit getStashInfo::@"keyname" withCallback:^(int status, NSString *data) {
-  //status : 200 OR 403 OR 404 OR ...
-  //data : stash data info
-}];
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    QubitSDK.start(withTrackingId: "XXXXX", logLevel: .disabled)
+    return true
+}
 ```
 
-### Retrieve - Multiple data
-Get stash info from the server as a batch.
-```objective-c
-#import "QBTrackingManager.h"
-
-[qubit getStashInfoMultiple:@[@"user1:key1",@"user2:key2", @"user3:key3"] withCallback:^(int status, NSDictionary *data) {
-  //status : 200 OR 403 OR 404 OR ...
-  //data : stash data info
-}];
-```
-
-### Set
-Set stash info.
-```objective-c
-#import "QBTrackingManager.h"
-
-[qubit setStashInfo:@"testvalue" key:@"testkey" withCallback:^(int status) {
-  //status : 200 OR 403 OR 404 OR ...
-}];
-```
+Here *XXXXX* is your Qubit Tracking ID, which is a unique string representing your account, and will have already been provided to you. If you haven’t received a tracking ID, or don’t know what yours is, please contact us. 
+Objective-C requires *QubitSDK/QubitSDK.h* to be declared as an import within the file.
+Swift requres QubitSDK to be declared as an import within the file.
 
 # Sending Events
-QProtocol is Qubit’s event based, extensible data layer. 
 
 Before you will be able to send events from inside the app, a config file will need to be generated by Qubit on S3.
 Here are the settings that can be set in the config:
@@ -117,66 +93,51 @@ Here are the settings that can be set in the config:
 - disabled
 ```
 
-To send a QProtocol event, call the *dispatchEvent* method (having imported , as per the following example, which sends a UV event on pressing of a “Buy Now” button. The following example emits a “User” event:
+To send an event, call the *sendEvent* method. The following example emits a “User” event:
 
 ```objective-c
-#import "QBTrackingManager.h"
+#import "QubitSDK/QubitSDK.h"
 
-[qubit dispatchEvent:@"User" withData:userJson];
-[qubit dispatchEvent:@"User" withStringData:userJsonString];
+[QubitSDK sendEventWithType:@"User" dictionary:userDictionary];
+[QubitSDK sendEventWithType:@"User" data:userJsonAsString];
 ```
 
-where userJson takes the form, as type NSDictionary:
+```swift
+import QubitSDK
+
+QubitSDK.sendEvent(type: "User", dictionary: userDictionary)
+QubitSDK.sendEvent(type: "User", data: userJsonAsString)
+```
+
+where userDictionary is of type NSDictionary in Objective-C, Dictionary in Swift, and takes the form:
 
 ```
 {
-  userId: "leonadeoliveira",
+  userId: "jsmith",
   currency: "USD",
-  email: "leona@gmail.com",
-  firstName: "Leona",
+  email: "jsmith@gmail.com",
+  firstName: "John",
   firstSession: false,
-  gender: "female",
+  gender: "Mr",
   hasTransacted: true,
-  lastName: "Deoliveira",
+  lastName: "Smith",
   language: "en-gb",
-  title: "Ms",
-  username: "leonadv"
+  title: "Mr",
+  username: "jsmith"
 }
 ```
-# Viewing Events
-In order to view the data being sent from your app while building out your events, trigger this method to set an endpoint you have visibility over:
+
+# Disabling Tracking
+If you would like to disable tracking, use the following method.
 
 ```objective-c
-[qubit setDebugEndpoint:"XXXXX"];
+#import "QubitSDK/QubitSDK.h"
+
+[QubitSDK stopTracking];   
 ```
 
-Where "XXXXX" should be set to your endpoint. If you do not have a local server set up, you can easily install a node package to do so through the command line:
+```swift
+import QubitSDK
 
+QubitSDK.stopTracking() 
 ```
-npm install log-requests
-log-requests --help
-```
-
-You can then run a server on your machine. An example command would be
-
-```
-log-requests -p 2345 -ub
-```
-which will run an echo server on port 2345 of your local machine, and give you visibility over the URL and body of the incoming requests. You can now see a live stream of events being fired from your app, and all data associated with them.
-
-This method only affects debug app builds, and has no effect on apps pushed to the App Store.
-#Enabling/Disabling Tracking
-If you would like to disable message dispatch on a particular event occurrence, use the following method, declared within *QBTrackingManager.h*
-
-```objective-c
-- (void)unsubscribeToTracking;   
-```
-
-To enable message dispatch on event occurrence use this method:
-
-```objective-c
-- (void)subscribeToTracking;  
-```
-
-# Testing
-A/B tests are created within the Apptimize UI. Detailed documentation on this can be found [here](http://apptimize.com/docs/configure/).
