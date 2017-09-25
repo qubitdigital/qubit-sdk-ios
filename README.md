@@ -8,13 +8,13 @@ Before you start the installation process, please [provide us](mailto:ios@qubit.
 
 | VERSION | UPDATES |
 |---|---|
+| 0.3.0 | Update to use Swift 4.0
 | 0.2.7 | Update to resolve potential reachability memory leak issues |
 | 0.2.6 | Removal of unused code with regards to automatic event generation and segment membership requests|
 | 0.2.5 | Update swizzling functionality|
 | 0.2.4 | Update that fixes some scenarios that used this SDK in Swift |
 | 0.2.3 | Update segmentation functionality |
 | 0.2.2 | Update to use initWithData |
-| 0.3.0 | Update to use Swift 4.0
 
 
 # Installation
@@ -39,7 +39,7 @@ where *XXXXX* is the name of your app target. If you access the repo via SSH as 
 pod install
 ```
 
-If you encounter permission issues, ensure the GitHub username step has been successfully completed. Please consult the cocoa pods documentation if you have any other issues with this step. If your process freezes on “Analysing dependencies”, try running *pod repo remove master*, *pod setup*, then *pod install* again.
+If you encounter permission issues, ensure the GitHub username step has been successfully completed. Please consult the cocoapods documentation if you have any other issues with this step. If your process freezes on “Analysing dependencies”, try running *pod repo remove master*, *pod setup*, then *pod install* again.
 
 _Note: In order for the tool to function correctly, the app will need the appropriate permissions to access the internet._
 
@@ -72,7 +72,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 
 Here *XXXXX* is your Qubit Tracking ID, which is a unique string representing your account, and will have already been provided to you. If you haven’t received a tracking ID, or don’t know what yours is, please contact us. 
 Objective-C requires *QubitSDK/QubitSDK.h* to be declared as an import within the file.
-Swift requres QubitSDK to be declared as an import within the file.
+Swift requires QubitSDK to be declared as an import within the file.
 
 # Sending Events
 
@@ -93,20 +93,20 @@ Here are the settings that can be set in the config:
 - disabled
 ```
 
-To send an event, call the *sendEvent* method. The following example emits a “User” event:
+To send an event, call the *sendEvent* method. The following example emits a “ecUser” event:
 
 ```objective-c
 #import "QubitSDK/QubitSDK.h"
 
-[QubitSDK sendEventWithType:@"User" dictionary:userDictionary];
-[QubitSDK sendEventWithType:@"User" data:userJsonAsString];
+[QubitSDK sendEventWithType:@"ecUser" dictionary:userDictionary];
+[QubitSDK sendEventWithType:@"ecUser" data:userJsonAsString];
 ```
 
 ```swift
 import QubitSDK
 
-QubitSDK.sendEvent(type: "User", dictionary: userDictionary)
-QubitSDK.sendEvent(type: "User", data: userJsonAsString)
+QubitSDK.sendEvent(type: "ecUser", dictionary: userDictionary)
+QubitSDK.sendEvent(type: "ecUser", data: userJsonAsString)
 ```
 
 where userDictionary is of type NSDictionary in Objective-C, Dictionary in Swift, and takes the form:
