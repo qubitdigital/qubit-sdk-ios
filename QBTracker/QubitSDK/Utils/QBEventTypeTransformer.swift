@@ -16,19 +16,9 @@ class QBEventTypeTransformer {
             return eventType
         }
         
-        let eventTypeWithVertical = addVertical(eventType: eventType, vertical: configuration.vertical)
-        let eventTypeWithNamespaceAndVertical = addNameSpace(eventType: eventTypeWithVertical, namespace: configuration.namespace)
+        let eventTypeWithNamespace = addNameSpace(eventType: eventType, namespace: configuration.namespace)
         
-        return eventTypeWithNamespaceAndVertical
-    }
-    
-    private static func addVertical(eventType: String, vertical: String) -> String {
-        if vertical.isEmpty || eventType.contains(dot) || eventType.starts(with: vertical) {
-            return eventType
-        }
-        let capitalizedEventType = String(eventType.characters.prefix(1)).uppercased() + String(eventType.characters.dropFirst())
-        
-        return vertical + capitalizedEventType
+        return eventTypeWithNamespace
     }
     
     private static func addNameSpace(eventType: String, namespace: String) -> String {

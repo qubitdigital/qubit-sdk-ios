@@ -41,8 +41,6 @@ pod install
 
 If you encounter permission issues, ensure the GitHub username step has been successfully completed. Please consult the cocoapods documentation if you have any other issues with this step. If your process freezes on “Analysing dependencies”, try running *pod repo remove master*, *pod setup*, then *pod install* again.
 
-_Note: In order for the tool to function correctly, the app will need the appropriate permissions to access the internet._
-
 ## Starting the QubitSDK
 Starting the QubitSDK with a tracking ID will allow us to correctly identify your data.  
 When starting the SDK, you can specify the log level of the SDK.  This will determine the amount of logging the SDK will produce.
