@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
 
   s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.0', "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES" => "YES" }
 
-  s.source       = { :git => "https://bitbucket.org/miquido/qubit-sdk-ios.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/qubitdigital/qubit-sdk-ios.git", :tag => "#{s.version}" }
 
   s.ios.vendored_frameworks = 'Framework/QubitSDK.framework'
 

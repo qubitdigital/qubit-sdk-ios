@@ -1,0 +1,4 @@
+framework module QubitSDK {
+    header "QubitSDK.h"
+    requires objc
+}
