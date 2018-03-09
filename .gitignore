@@ -75,3 +75,4 @@ xcuserdata
 *.xcuserstate
 Pods
 
+.DS_Store
