@@ -8,6 +8,7 @@ Before you start the installation process, please [provide us](mailto:ios@qubit.
 
 | VERSION | UPDATES |
 |---|---|
+| 0.3.1 | Update to use Swift 4.0.3
 | 0.3.0 | Update to use Swift 4.0
 | 0.2.7 | Update to resolve potential reachability memory leak issues |
 | 0.2.6 | Removal of unused code with regards to automatic event generation and segment membership requests|

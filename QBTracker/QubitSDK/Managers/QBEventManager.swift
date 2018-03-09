@@ -70,7 +70,7 @@ class QBEventManager {
     // MARK: - Internal
     
     static func createEvent(type: String, dictionary: [String: Any]) -> QBEventEntity? {
-        return QBEventEntity.event(type:type, dictionary: dictionary)
+        return QBEventEntity.event(type: , dictionary: dictionary)
     }
     
     static func createEvent(type: String, data: String) -> QBEventEntity? {
