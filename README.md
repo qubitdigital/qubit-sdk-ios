@@ -153,5 +153,7 @@ module CommonCrypto [system] {
 }
 ```
 * In Build Settings/ImportPaths add path for CommonCrypto folder
-* If still have missing CommonCrypto please verify the path to the CommonCrypto.h, it could be different than "/usr/include/CommonCrypto/CommonCrypto.h"
+* If still have missing CommonCrypto please verify the path to the CommonCrypto.h, it could be different than "/usr/include/CommonCrypto/CommonCrypto.h", like "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.2.sdk/usr/include/CommonCrypto/CommonCrypto.h" or similar to this. 
+
+* If still have a issue with adding this file: here is example CommonCryptoExampleApp folder
 
