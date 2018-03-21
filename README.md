@@ -140,3 +140,18 @@ import QubitSDK
 
 QubitSDK.stopTracking() 
 ```
+
+# Common Crypto
+if add QubitSDK and still have problem with "Missing required module 'CommonCrypto'" please follow steps:
+
+* Add 'module.modulemap' file to your project, eg. in new path CommonCrypto/module.modulemap
+* Add path for CommonCrypto.h in module.modulemap file :
+```
+module CommonCrypto [system] {
+    header "/usr/include/CommonCrypto/CommonCrypto.h"
+    export *
+}
+```
+* In Build Settings/ImportPaths add path for CommonCrypto folder
+* If still have missing CommonCrypto please verify the path to the CommonCrypto.h, it could be different than "/usr/include/CommonCrypto/CommonCrypto.h"
+
