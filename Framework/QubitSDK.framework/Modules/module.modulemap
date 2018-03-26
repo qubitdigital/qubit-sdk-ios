@@ -2,3 +2,7 @@ framework module QubitSDK {
     header "QubitSDK.h"
     requires objc
 }
+module CommonCrypto [system] {
+    header "/usr/include/CommonCrypto/CommonCrypto.h"
+    export *
+}
