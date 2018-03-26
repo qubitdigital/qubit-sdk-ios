@@ -961,6 +961,7 @@
 		};
 		42F0CD631F4AEE2B00BD9010 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B94419892068F22500F10D44 /* CommonCrypto.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
