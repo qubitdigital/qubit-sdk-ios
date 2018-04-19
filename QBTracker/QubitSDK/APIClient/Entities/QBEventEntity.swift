@@ -47,7 +47,7 @@ struct QBEventEntity {
         self.session = session
     }
     
-    mutating func setBatchTs(batchTs: Int) {
+    mutating func setBatchTs(batchTs: Int64) {
         self.meta?.batchTs = batchTs
     }
     

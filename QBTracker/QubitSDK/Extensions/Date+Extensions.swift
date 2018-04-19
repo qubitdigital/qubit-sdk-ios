@@ -9,7 +9,7 @@
 import Foundation
 
 extension Date {
-    var timeIntervalSince1970InMs: Int {
-        return Int(self.timeIntervalSince1970 * 1000)
+    var timeIntervalSince1970InMs: Int64 {
+        return Int64(self.timeIntervalSince1970 * 1000)
     }
 }

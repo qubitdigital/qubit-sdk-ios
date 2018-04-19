@@ -33,7 +33,7 @@ class QBEventServiceImp: QBEventService {
         
         var request = URLRequest(url: url)
         var arrayJson = [[String: Any]]()
-        let batchTs = Int(Date().timeIntervalSince1970)
+        let batchTs = Int64(Date().timeIntervalSince1970)
         for event in events {
             var event = event
             event.setBatchTs(batchTs: batchTs)
