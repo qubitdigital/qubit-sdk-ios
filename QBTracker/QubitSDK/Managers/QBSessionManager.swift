@@ -56,10 +56,10 @@ class QBSessionManager {
     
     private func isSessionValid() -> Bool {
         let currentTimestamp = Date().timeIntervalSince1970InMs
-        return currentTimestamp < self.currentSession.lastEventTimestampInMS + sessionTimeInMS
+        return currentTimestamp < Int64(self.currentSession.lastEventTimestampInMS) + Int64(sessionTimeInMS)
     }
     
-    func eventAdded(type: QBEventType, timestampInMS: Int) {
+    func eventAdded(type: QBEventType, timestampInMS: Int64) {
         switch type {
         case .session:
             return

@@ -10,7 +10,7 @@ import Foundation
 
 struct QBMetaEntity: Codable {
     let id: String
-    let ts: Int
+    let ts: Int64
     let trackingId: String
     let type: String
     let source: String
@@ -33,14 +33,14 @@ extension QBMetaEntity {
     static func create(with meta: QBMetaEvent, typeWithNamespaceAndVertical: String) -> QBMetaEntity? {
         guard
             let id = meta.id,
-            let ts = meta.ts?.intValue,
+            let ts = meta.ts?.int64Value,
             let trackingId = meta.trackingId,
             let source = meta.source,
             let seq = meta.seq?.intValue,
             let batchTs = meta.batchTs?.intValue
             else { return nil }
         
-        let metaEntity = QBMetaEntity(id: id, ts: ts, trackingId: trackingId, type: typeWithNamespaceAndVertical, source: source, seq: seq, batchTs: batchTs)
+        let metaEntity = QBMetaEntity(id: id, ts: ts, trackingId: trackingId, type: typeWithNamespaceAndVertical, source: source, seq: seq, batchTs: Int64(batchTs))
         return metaEntity
     }
 }

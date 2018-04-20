@@ -23,8 +23,8 @@ struct QBContextEntity: Codable {
     let lifetimeValue: QBLifetimeValue? // lookup
     
     let timezoneOffset: Int
-    let viewTs: Int
-    let sessionTs: Int
+    let viewTs: Int64
+    let sessionTs: Int64
     
     struct QBLifetimeValue: Codable {
         let value: Int
@@ -83,8 +83,8 @@ extension QBContextEntity {
             let sessionNumber = context.sessionNumber?.intValue,
             let sessionViewNumber = context.sessionViewNumber?.intValue,
             let timeZoneOffset = context.timeZoneOffset?.intValue,
-            let viewTs = context.viewTs?.intValue,
-            let sessionTs = context.sessionTs?.intValue
+            let viewTs = context.viewTs?.int64Value,
+            let sessionTs = context.sessionTs?.int64Value
         else { return nil }
         
         let contextEntity = QBContextEntity(id: id, sample: sample, viewNumber: viewNumber, sessionNumber: sessionNumber, sessionViewNumber: sessionViewNumber, conversionNumber: context.conversionNumber?.intValue, conversionCycleNumber: context.conversionCycleNumber?.intValue, lifetimeValue: QBLifetimeValue(withValue: context.lifetimeValue?.intValue), timezoneOffset: timeZoneOffset, viewTs: viewTs, sessionTs: sessionTs)
