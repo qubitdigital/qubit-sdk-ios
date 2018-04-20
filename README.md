@@ -8,6 +8,7 @@ Before you start the installation process, please [provide us](mailto:ios@qubit.
 
 | VERSION | UPDATES |
 |---|---|
+| 0.3.3 | Fix crash for old devices with 32-bit architecture
 | 0.3.2 | Fix Common Crypto issues
 | 0.3.1 | Update to use Swift 4.0.3
 | 0.3.0 | Update to use Swift 4.0
