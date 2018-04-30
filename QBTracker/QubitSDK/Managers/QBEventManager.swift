@@ -184,6 +184,7 @@ class QBEventManager {
                 guard let `self` = self else { return }
                 self.databaseManager.query(entityType: QBEvent.self, sortBy: "dateAdded", ascending: true, limit: fetchLimit) { results in
                     if !results.isEmpty {
+                        QBLog.info("Sending events count -> \(results.count)")
                         self.sendEvents()
                     }
                 }
@@ -196,6 +197,7 @@ class QBEventManager {
         if isEnabled == false { return }
         self.databaseManager.query(entityType: QBEvent.self, sortBy: "dateAdded", ascending: true, limit: self.config.fetchLimit) { results in
             if !results.isEmpty && self.isSendingEvents == false {
+                self.isSendingEvents = true
                 self.trySendEvents()
             }
         }
@@ -224,7 +226,6 @@ class QBEventManager {
     
     private func sendEvents() {
         guard canSendEvents() else { return }
-        
         QBDispatchQueueService.runSync(type: .upload) { [weak self] in
             
             guard let `self` = self else { return }
@@ -240,7 +241,6 @@ class QBEventManager {
                 let events = self.convert(events: currentEventBatch)
                 let eventService = QBEventServiceImp(withConfigurationManager: self.configurationManager)
                 
-                self.isSendingEvents = true
                 eventService.sendEvents(events: events, dedupe: self.config.dedupeActive) { [weak self] (result) in
                     guard let `self` = self else { return }
                     switch result {
