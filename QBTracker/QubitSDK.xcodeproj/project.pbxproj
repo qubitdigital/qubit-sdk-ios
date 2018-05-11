@@ -65,6 +65,7 @@
 		B9987BA01F6C478800CA6AB7 /* configuration_entity.json in Resources */ = {isa = PBXBuildFile; fileRef = B9987B9F1F6C478800CA6AB7 /* configuration_entity.json */; };
 		B9987BA41F6C4D7A00CA6AB7 /* QBEntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9987BA11F6C4D2A00CA6AB7 /* QBEntityTests.swift */; };
 		B9ABEC361F6AC49200C6217B /* QBDispatchQueueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9ABEC351F6AC49200C6217B /* QBDispatchQueueService.swift */; };
+		B9D13A7320A37DB9004568BF /* JSONQuibitSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D13A7220A37DB9004568BF /* JSONQuibitSerialization.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -183,6 +184,7 @@
 		B9987B9F1F6C478800CA6AB7 /* configuration_entity.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = configuration_entity.json; sourceTree = "<group>"; };
 		B9987BA11F6C4D2A00CA6AB7 /* QBEntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBEntityTests.swift; sourceTree = "<group>"; };
 		B9ABEC351F6AC49200C6217B /* QBDispatchQueueService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBDispatchQueueService.swift; sourceTree = "<group>"; };
+		B9D13A7220A37DB9004568BF /* JSONQuibitSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONQuibitSerialization.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -391,6 +393,7 @@
 				42F62FF41F67E97700E444B5 /* Double+Extensions.swift */,
 				42F62FF51F67E97700E444B5 /* Int+Extensions.swift */,
 				42BCDF891F68294800416B2F /* Dictonary+Extension.swift */,
+				B9D13A7220A37DB9004568BF /* JSONQuibitSerialization.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -657,6 +660,7 @@
 				423D43D61F62D0200075A85B /* Date+Extensions.swift in Sources */,
 				422370841F4C6B3B008D401E /* QBMetaEntity.swift in Sources */,
 				420743751F50440F0099E5BA /* String+Extensions.swift in Sources */,
+				B9D13A7320A37DB9004568BF /* JSONQuibitSerialization.swift in Sources */,
 				42054D181F502C7A00386771 /* QBDevice.swift in Sources */,
 				425215E51F5D98A400866D8E /* QBSession.swift in Sources */,
 				42ED6C2A1F66CF80006FD45C /* QBSessionEntity.swift in Sources */,

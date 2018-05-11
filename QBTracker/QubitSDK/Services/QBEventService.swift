@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreFoundation
 
 protocol QBEventService {
     func sendEvents(events: [QBEventEntity], dedupe: Bool, completion: ((Result<QBStatusEntity>) -> Void)?)
@@ -41,7 +42,8 @@ class QBEventServiceImp: QBEventService {
                 arrayJson.append(json)
             }
         }
-        request.httpBody = try? JSONSerialization.data(withJSONObject: arrayJson, options: .prettyPrinted)
+        let jsonData = try? JSONQubitSerialization.data(withJSONObject: arrayJson, options: .prettyPrinted)
+        request.httpBody = jsonData
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         apiClient.dataTask(request: request, method: HTTPMethod.post, completion: completion)
