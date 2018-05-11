@@ -8,6 +8,7 @@ Before you start the installation process, please [provide us](mailto:ios@qubit.
 
 | VERSION | UPDATES |
 |---|---|
+| 0.3.5 | JSONSerialization fixed in value precisions for 
 | 0.3.4 | Fix issue with sending events
 | 0.3.3 | Fix crash for old devices with 32-bit architecture
 | 0.3.2 | Fix Common Crypto issues
