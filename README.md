@@ -1,7 +1,5 @@
 # Qubit Mobile
-Installation of the QubitSDK, to provide event tracking and lookup
-
-Before you start the installation process, please [provide us](mailto:ios@qubit.com?subject=iOS%20Repository%20Permission) with your GitHub username. This will allow us to grant you access to the QubitSDK repository and ensure that it can be easily managed alongside your other dependencies. 
+Installation of the QubitSDK, to provide event tracking and lookup. To make use of this SDK, please contact your Qubit Customer Success representative.
 
 # Updates
 
