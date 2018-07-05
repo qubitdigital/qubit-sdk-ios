@@ -10,7 +10,7 @@
 import Foundation
 import CoreData
 
-class QBEvent: NSManagedObject {}
-class QBMetaEvent: NSManagedObject {}
-class QBContextEvent: NSManagedObject {}
-class QBSessionEvent: NSManagedObject {}
+@objc(QBEvent) class QBEvent: NSManagedObject {}
+@objc(QBMetaEvent) class QBMetaEvent: NSManagedObject {}
+@objc(QBContextEvent) class QBContextEvent: NSManagedObject {}
+@objc(QBSessionEvent) class QBSessionEvent: NSManagedObject {}

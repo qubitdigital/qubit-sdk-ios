@@ -262,7 +262,7 @@ class QBEventManager {
         
     private func convert(events: [QBEvent]) -> [QBEventEntity] {
         
-        let convertedArray = events.flatMap { (event: QBEvent) -> QBEventEntity? in
+        let convertedArray = events.compactMap { (event: QBEvent) -> QBEventEntity? in
             let eventEntity = QBEventEntity.create(with: event, configuration: self.configurationManager.configuration)
             return eventEntity
         }
