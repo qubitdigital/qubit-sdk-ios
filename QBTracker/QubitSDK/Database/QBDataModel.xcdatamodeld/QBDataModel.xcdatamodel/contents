@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17E199" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="QBContextEvent" representedClassName=".QBContextEvent" syncable="YES">
+    <entity name="QBContextEvent" representedClassName="QBContextEvent" syncable="YES">
         <attribute name="conversionCycleNumber" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="conversionNumber" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
@@ -15,7 +15,7 @@
         <attribute name="viewTs" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QBEvent" inverseName="context" inverseEntity="QBEvent" syncable="YES"/>
     </entity>
-    <entity name="QBEvent" representedClassName=".QBEvent" syncable="YES">
+    <entity name="QBEvent" representedClassName="QBEvent" syncable="YES">
         <attribute name="data" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="dateAdded" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="sendFailed" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
@@ -24,7 +24,7 @@
         <relationship name="meta" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QBMetaEvent" inverseName="event" inverseEntity="QBMetaEvent" syncable="YES"/>
         <relationship name="session" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QBSessionEvent" inverseName="event" inverseEntity="QBSessionEvent" syncable="YES"/>
     </entity>
-    <entity name="QBMetaEvent" representedClassName=".QBMetaEvent" syncable="YES">
+    <entity name="QBMetaEvent" representedClassName="QBMetaEvent" syncable="YES">
         <attribute name="batchTs" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="seq" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
@@ -34,7 +34,7 @@
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QBEvent" inverseName="meta" inverseEntity="QBEvent" syncable="YES"/>
     </entity>
-    <entity name="QBSessionEvent" representedClassName=".QBSessionEvent" syncable="YES">
+    <entity name="QBSessionEvent" representedClassName="QBSessionEvent" syncable="YES">
         <attribute name="appName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="appType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="appVersion" optional="YES" attributeType="String" syncable="YES"/>
@@ -65,6 +65,6 @@
         <element name="QBContextEvent" positionX="-155" positionY="126" width="128" height="240"/>
         <element name="QBEvent" positionX="-495" positionY="261" width="128" height="150"/>
         <element name="QBMetaEvent" positionX="-146" positionY="396" width="128" height="165"/>
-        <element name="QBSessionEvent" positionX="-279" positionY="626" width="128" height="418"/>
+        <element name="QBSessionEvent" positionX="-279" positionY="626" width="128" height="420"/>
     </elements>
 </model>
