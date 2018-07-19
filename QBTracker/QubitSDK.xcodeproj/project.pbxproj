@@ -52,7 +52,6 @@
 		A0D30B7D1F5594410029D3DC /* QubitSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F0CD4E1F4AEE2B00BD9010 /* QubitSDK.framework */; };
 		A0D30B821F559F180029D3DC /* QubitSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D30B811F559F180029D3DC /* QubitSDK.swift */; };
 		A0F372BE1F4C623F00283075 /* QBDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F372BD1F4C623F00283075 /* QBDatabase.swift */; };
-		A0F5BF591F4D7833009EFE8D /* QBDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A0F5BF571F4D7833009EFE8D /* QBDataModel.xcdatamodeld */; };
 		B905C8071F6177BC00A9A084 /* TimeInterval+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B905C8061F6177BC00A9A084 /* TimeInterval+Extensions.swift */; };
 		B98390371F7059A50002993F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B98390361F7059A50002993F /* AppDelegate.m */; };
 		B983903A1F7059A50002993F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B98390391F7059A50002993F /* ViewController.m */; };
@@ -65,6 +64,7 @@
 		B9987BA01F6C478800CA6AB7 /* configuration_entity.json in Resources */ = {isa = PBXBuildFile; fileRef = B9987B9F1F6C478800CA6AB7 /* configuration_entity.json */; };
 		B9987BA41F6C4D7A00CA6AB7 /* QBEntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9987BA11F6C4D2A00CA6AB7 /* QBEntityTests.swift */; };
 		B9ABEC361F6AC49200C6217B /* QBDispatchQueueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9ABEC351F6AC49200C6217B /* QBDispatchQueueService.swift */; };
+		B9AEA11821008780009812C0 /* QBDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A0F5BF571F4D7833009EFE8D /* QBDataModel.xcdatamodeld */; };
 		B9D13A7320A37DB9004568BF /* JSONQuibitSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D13A7220A37DB9004568BF /* JSONQuibitSerialization.swift */; };
 /* End PBXBuildFile section */
 
@@ -655,8 +655,8 @@
 				420738761F4D9739005A0B9E /* UserDefaults+Extensions.swift in Sources */,
 				42F62FF61F67E97700E444B5 /* Double+Extensions.swift in Sources */,
 				422370821F4C6B2B008D401E /* QBContextEntity.swift in Sources */,
-				A0F5BF591F4D7833009EFE8D /* QBDataModel.xcdatamodeld in Sources */,
 				A0D30B821F559F180029D3DC /* QubitSDK.swift in Sources */,
+				B9AEA11821008780009812C0 /* QBDataModel.xcdatamodeld in Sources */,
 				423D43D61F62D0200075A85B /* Date+Extensions.swift in Sources */,
 				422370841F4C6B3B008D401E /* QBMetaEntity.swift in Sources */,
 				420743751F50440F0099E5BA /* String+Extensions.swift in Sources */,
@@ -893,7 +893,7 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
-				DEFINES_MODULE = YES;
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = HAWH5C9J75;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -906,7 +906,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qubit.QBTracker;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_MODULE_NAME = QubitSDK;
+				PRODUCT_NAME = QubitSDK;
 				SKIP_INSTALL = NO;
 				SWIFT_INCLUDE_PATHS = "${SRCROOT}/QubitSDK/CommonCrypto";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -926,7 +927,7 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
-				DEFINES_MODULE = YES;
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = HAWH5C9J75;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -939,7 +940,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qubit.QBTracker;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_MODULE_NAME = QubitSDK;
+				PRODUCT_NAME = QubitSDK;
 				SKIP_INSTALL = NO;
 				SWIFT_INCLUDE_PATHS = "${SRCROOT}/QubitSDK/CommonCrypto";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
