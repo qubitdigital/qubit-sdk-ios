@@ -10,7 +10,7 @@
 import Foundation
 import CoreData
 
-@objc(QBEvent) extension QBEvent {
+extension QBEvent {
 
     @nonobjc class func fetchRequest() -> NSFetchRequest<QBEvent> {
         return NSFetchRequest<QBEvent>(entityName: "QBEvent")
@@ -26,7 +26,7 @@ import CoreData
     
 }
 
-@objc(QBContextEvent) extension QBContextEvent {
+extension QBContextEvent {
     
     @NSManaged var id: String?
     @NSManaged var sample: String?
@@ -45,7 +45,7 @@ import CoreData
     
 }
 
-@objc(QBMetaEvent) extension QBMetaEvent {
+extension QBMetaEvent {
     @NSManaged var id: String?
     @NSManaged var source: String?
     @NSManaged var trackingId: String?
@@ -57,7 +57,7 @@ import CoreData
     @NSManaged var event: QBEvent?
 }
 
-@objc(QBSessionEvent) extension QBSessionEvent {
+extension QBSessionEvent {
     @NSManaged var firstViewTs: NSNumber?
     @NSManaged var lastViewTs: NSNumber?
     @NSManaged var firstConversionTs: NSNumber?
