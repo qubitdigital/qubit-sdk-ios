@@ -6,6 +6,7 @@ Installation of the QubitSDK, to provide event tracking and lookup. To make use 
 
 | VERSION | UPDATES |
 |---|---|
+| 0.3.7 | Fixes
 | 0.3.6 | CoreData updated
 | 0.3.5 | JSONSerialization fixed in value precisions for 
 | 0.3.4 | Fix issue with sending events
