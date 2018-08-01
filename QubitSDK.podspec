@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
 s.name         = "QubitSDK"
 
-s.version      = "0.3.6"
+s.version      = "0.3.7"
 
 s.summary      = "User activity tracking for iOS"
 
