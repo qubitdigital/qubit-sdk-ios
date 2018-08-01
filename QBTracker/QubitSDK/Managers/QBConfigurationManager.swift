@@ -51,7 +51,7 @@ class QBConfigurationManager {
     }
     private var reachability = QBReachability()
     
-    private func downloadConfig() {
+    internal func downloadConfig() {
         QBLog.mark()
         
         if reachability?.isReachable == false {
@@ -93,7 +93,6 @@ class QBConfigurationManager {
         self.delegate = delegate
         self.lastUpdateTimeStamp = 0
         try? reachability?.startNotifier()
-        downloadConfig()
     }
     
     func getEventsEndpoint() -> URL? {

@@ -36,6 +36,7 @@ class QBTracker {
         self.sessionManager = sessionManager
         eventManager = QBEventManager(withConfigurationManager: configurationManager, sessionManager: sessionManager, lookupManager: lookupManager)
         sessionManager.startNewSession()
+        configurationManager.downloadConfig()
     }
     
     func sendEvent(type: String, data: String) {
