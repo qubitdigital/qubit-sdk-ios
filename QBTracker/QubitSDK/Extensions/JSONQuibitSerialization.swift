@@ -159,6 +159,8 @@ private struct JSONWriter {
         switch (obj) {
         case let str as String:
             try serializeString(str)
+        case let number as NSNumber:
+            try serializeNumber(number)
         case let boolValue as Bool:
             serializeBool(boolValue)
         case let array as Array<Any>:
