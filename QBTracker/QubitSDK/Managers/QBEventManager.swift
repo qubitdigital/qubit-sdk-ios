@@ -159,6 +159,7 @@ class QBEventManager {
             }
             self.isEnabled = true
             self.tryRemoveOldEvents()
+            self.tryRemoveFailedEvents()
             self.trySendEvents()
         }
     }
@@ -174,6 +175,7 @@ class QBEventManager {
     
     @objc
     private func trySendEvents() {
+        tryRemoveFailedEvents()
         if isEnabled == false { return }
         
             let fetchLimit = self.config.fetchLimit
@@ -273,6 +275,7 @@ class QBEventManager {
     private func markFailed(events: [QBEvent]) {
         events.forEach { (event) in
             event.sendFailed = true
+            event.errorRetryCount = NSNumber(value: (event.errorRetryCount?.intValue ?? 0) + 1)
         }
         
         databaseManager.save()
@@ -281,6 +284,15 @@ class QBEventManager {
     private func tryRemoveOldEvents() {
         let removeOldEventsTime = self.configurationManager.configuration.queueTimeout
         let predicate = NSPredicate(format: "dateAdded > %@", Date().addingTimeInterval(TimeInterval(-removeOldEventsTime)) as CVarArg)
+        self.databaseManager.query(entityType: QBEvent.self, predicate: predicate, ascending: true, limit: 0) { (results) in
+            QBLog.info("Remove oldest events from database")
+            self.databaseManager.delete(entries: results)
+        }
+    }
+    
+    private func tryRemoveFailedEvents() {
+        let maxErrorRetryCount = self.configurationManager.maxErrorRetryCount
+        let predicate = NSPredicate(format: "errorRetryCount > %d", maxErrorRetryCount)
         self.databaseManager.query(entityType: QBEvent.self, predicate: predicate, ascending: true, limit: 0) { (results) in
             QBLog.info("Remove oldest events from database")
             self.databaseManager.delete(entries: results)

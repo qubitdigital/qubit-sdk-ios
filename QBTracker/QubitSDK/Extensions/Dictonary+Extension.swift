@@ -10,8 +10,8 @@ import Foundation
 
 extension Dictionary {
     static func += (lhs: inout Dictionary, rhs: Dictionary) {
-        for (k, v) in rhs {
-            lhs[k] = v
+        for (key, value) in rhs {
+            lhs[key] = value
         }
     }
 }

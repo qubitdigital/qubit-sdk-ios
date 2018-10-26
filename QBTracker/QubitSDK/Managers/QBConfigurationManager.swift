@@ -14,7 +14,9 @@ protocol QBConfigurationManagerDelegate: class {
 
 class QBConfigurationManager {
     // MARK: - Internal properties
+
     let trackingId: String
+    let maxErrorRetryCount = 3
     weak var delegate: QBConfigurationManagerDelegate?
     var configuration: QBConfigurationEntity {
         if let remoteConfiguration = self.remoteConfiguration {

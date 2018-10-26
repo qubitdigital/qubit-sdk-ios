@@ -26,10 +26,10 @@ class QBDatabase {
         }
         
         let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
-        
         managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
-        
+        let options = [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true]
+
         guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else {
             QBLog.error("FatalError: Unable to resolve document directory")
             return nil
@@ -38,7 +38,7 @@ class QBDatabase {
         let databaseName = modelName + ".sqlite"
         let persistentStoreUrl = documentsUrl.appendingPathComponent(databaseName)
         do {
-            try persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: persistentStoreUrl, options: nil)
+            try persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: persistentStoreUrl, options: options)
         } catch {
             QBLog.error("FatalError adding persistent store: \(error)")
             return nil

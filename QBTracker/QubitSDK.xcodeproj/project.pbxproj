@@ -169,7 +169,7 @@
 		A0F372BD1F4C623F00283075 /* QBDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBDatabase.swift; sourceTree = "<group>"; };
 		A0F5BF581F4D7833009EFE8D /* QBDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QBDataModel.xcdatamodel; sourceTree = "<group>"; };
 		B905C8061F6177BC00A9A084 /* TimeInterval+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extensions.swift"; sourceTree = "<group>"; };
-		B937E702206A59140027D8D0 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		B96C5A3F21837ADA00CF056D /* QBDataModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "QBDataModel 2.xcdatamodel"; sourceTree = "<group>"; };
 		B983902C1F6FD3410002993F /* lookup_entity.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = lookup_entity.json; sourceTree = "<group>"; };
 		B98390331F7059A40002993F /* ObjcTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ObjcTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B98390351F7059A50002993F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -292,7 +292,6 @@
 		42F0CD501F4AEE2B00BD9010 /* QubitSDK */ = {
 			isa = PBXGroup;
 			children = (
-				B937E701206A59140027D8D0 /* CommonCrypto */,
 				A08D69B61F54269D00CE2FD5 /* QBEvent */,
 				A0F372BC1F4C61F000283075 /* Database */,
 				4215A1EB1F4C2C2000B7732E /* Services */,
@@ -413,14 +412,6 @@
 				A01CC8561F4D8D29009336F8 /* QBDatabaseManager.swift */,
 			);
 			path = Database;
-			sourceTree = "<group>";
-		};
-		B937E701206A59140027D8D0 /* CommonCrypto */ = {
-			isa = PBXGroup;
-			children = (
-				B937E702206A59140027D8D0 /* module.modulemap */,
-			);
-			path = CommonCrypto;
 			sourceTree = "<group>";
 		};
 		B98390341F7059A50002993F /* ObjcTestApp */ = {
@@ -634,7 +625,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\ncd $SRCROOT/..\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\ncd $SRCROOT/..\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -917,7 +908,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME).h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				SYSTEM_FRAMEWORK_SEARCH_PATHS = "";
 				SYSTEM_HEADER_SEARCH_PATHS = /usr/include/CommonCrypto;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -950,7 +941,7 @@
 				SWIFT_INCLUDE_PATHS = "${SRCROOT}/QubitSDK/CommonCrypto";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME).h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				SYSTEM_FRAMEWORK_SEARCH_PATHS = "";
 				SYSTEM_HEADER_SEARCH_PATHS = /usr/include/CommonCrypto;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1102,9 +1093,10 @@
 		A0F5BF571F4D7833009EFE8D /* QBDataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				B96C5A3F21837ADA00CF056D /* QBDataModel 2.xcdatamodel */,
 				A0F5BF581F4D7833009EFE8D /* QBDataModel.xcdatamodel */,
 			);
-			currentVersion = A0F5BF581F4D7833009EFE8D /* QBDataModel.xcdatamodel */;
+			currentVersion = B96C5A3F21837ADA00CF056D /* QBDataModel 2.xcdatamodel */;
 			path = QBDataModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

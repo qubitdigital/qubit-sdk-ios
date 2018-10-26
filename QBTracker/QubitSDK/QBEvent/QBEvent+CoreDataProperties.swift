@@ -19,6 +19,7 @@ import CoreData
     @NSManaged var data: String?
     @NSManaged var dateAdded: NSDate?
     @NSManaged var sendFailed: Bool
+    @NSManaged var errorRetryCount: NSNumber?
     @NSManaged var type: String?
     @NSManaged var context: QBContextEvent?
     @NSManaged var meta: QBMetaEvent?

@@ -22,8 +22,8 @@ extension String {
         CC_MD5(str, strLen, result)
 
         let hash = NSMutableString()
-        for i in 0..<digestLen {
-            hash.appendFormat("%02x", result[i])
+        for index in 0..<digestLen {
+            hash.appendFormat("%02x", result[index])
         }
 
         result.deallocate(capacity: digestLen)

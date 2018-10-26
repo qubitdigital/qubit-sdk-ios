@@ -17,10 +17,8 @@ enum QBEventType: String {
         switch type {
         case "qubit.session":
             self = .session
-            break
         case "View":
             self = .view
-            break
         default:
             self = .other
         }
@@ -56,7 +54,7 @@ struct QBEventEntity {
         self.meta = meta
     }
     
-    func codable() -> [String : Any]? {
+    func codable() -> [String: Any]? {
         
         func convert(jsonData: Data?) -> Any? {
             if let data = jsonData {
@@ -68,7 +66,7 @@ struct QBEventEntity {
             return nil
         }
         
-        if let data = eventData.data(using: .utf8), let jsonObjectRef = (try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String : Any]) ?? [String: Any]() {
+        if let data = eventData.data(using: .utf8), let jsonObjectRef = (try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String: Any]) ?? [String: Any]() {
             var jsonObject = jsonObjectRef
             if let context: QBContextEntity = self.context, let contextData: Data = try? JSONEncoder().encode(context) {
                 jsonObject["context"] =  convert(jsonData: contextData)
@@ -77,7 +75,7 @@ struct QBEventEntity {
                 jsonObject["meta"] =  convert(jsonData: metaData)
             }
             if let session: QBSessionEntity = self.session, let sessionData: Data = try? JSONEncoder().encode(session) {
-                if let sessionDictonary = convert(jsonData: sessionData) as? [String : Any] {
+                if let sessionDictonary = convert(jsonData: sessionData) as? [String: Any] {
                     jsonObject += sessionDictonary
                 }
             }
