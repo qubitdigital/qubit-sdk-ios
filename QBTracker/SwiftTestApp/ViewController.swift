@@ -18,6 +18,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         QubitSDK.start(withTrackingId: "miquido", logLevel: .verbose)
+        print(QubitSDK.trackingId)
+        print(QubitSDK.deviceId)
     }
     
     @IBAction func tapOnEventButton(_ sender: UIButton) {

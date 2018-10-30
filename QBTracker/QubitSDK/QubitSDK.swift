@@ -12,7 +12,7 @@ import Foundation
 public class QubitSDK: NSObject {
     
     /// Return current tracking ID
-    public static var trackingId: String?
+    public static var trackingId: String = "Unknown. Call QubitSDK.start(...) before any other call."
     
     /// Return current device ID
     public static var deviceId: String {
