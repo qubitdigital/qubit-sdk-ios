@@ -10,7 +10,15 @@ import Foundation
 
 @objc
 public class QubitSDK: NSObject {
-        
+    
+    /// Return current tracking ID
+    public static var trackingId: String?
+    
+    /// Return current device ID
+    public static var deviceId: String {
+        return QBDevice.getId()
+    }
+    
     /// Start the QubitSDK
     ///
     /// - Parameters:
@@ -19,6 +27,7 @@ public class QubitSDK: NSObject {
     @objc(startWithTrackingId:logLevel:)
     public class func start(withTrackingId id: String, logLevel: QBLogLevel = QBLogLevel.disabled) {
         QubitSDK.handleException()
+        trackingId = id
         QBDispatchQueueService.runAsync(type: .qubit) { QBTracker.shared.start(withTrackingId: id, logLevel: logLevel) }
     }
     

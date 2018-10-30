@@ -56,6 +56,10 @@ class QBTracker {
         }
         eventManager.sendEvent(event: event)
     }
+    
+    func getCurrentTrackingId() -> String? {
+        return configurationManager?.trackingId
+    }
 	
 	func stop() {
 		eventManager = nil

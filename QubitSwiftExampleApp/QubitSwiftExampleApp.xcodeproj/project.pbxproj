@@ -184,7 +184,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-QubitSwiftExampleApp/Pods-QubitSwiftExampleApp-frameworks.sh",
-				"${PODS_ROOT}/../../Framework/QubitSDK.framework",
+				"${BUILT_PRODUCTS_DIR}/QubitSDK/QubitSDK.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
