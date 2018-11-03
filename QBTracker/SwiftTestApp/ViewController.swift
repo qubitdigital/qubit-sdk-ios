@@ -8,7 +8,6 @@
 
 import UIKit
 import QubitSDK
-//@testable import QBTracker
 
 class ViewController: UIViewController {
 
@@ -16,10 +15,17 @@ class ViewController: UIViewController {
     @IBOutlet weak var eventsLabel: UILabel!
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         QubitSDK.start(withTrackingId: "miquido", logLevel: .verbose)
+        super.viewDidLoad()
         print(QubitSDK.trackingId)
         print(QubitSDK.deviceId)
+        
+        QubitSDK.fetchExperiences(withIds: [139731], onSuccess: { (experiences) in
+            print("EXPY \(experiences.count)")
+            experiences.first?.shown()
+        }, onError: { (error) in
+            print("ERROR \(error.localizedDescription)")
+        })
     }
     
     @IBAction func tapOnEventButton(_ sender: UIButton) {

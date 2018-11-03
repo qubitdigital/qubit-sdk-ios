@@ -41,6 +41,39 @@ extension UserDefaults {
         }
     }
     
+    var lastSavedRemoteExperiences: QBExperiencesEntity? {
+        get {
+            guard let experiencesData = data(forKey: #function),
+                let experiences = try? JSONDecoder().decode(QBExperiencesEntity.self, from: experiencesData) else {
+                return nil
+            }
+            
+            return experiences
+        }
+        
+        set {
+            if let encoded = try? JSONEncoder().encode(newValue) {
+                set(encoded, forKey: #function)
+                synchronize()
+            }
+        }
+    }
+    
+    var lastExperienceCacheTime: Double? {
+        get {
+            guard let time = object(forKey: #function) as? Double else {
+                return nil
+            }
+            
+            return time
+        }
+        
+        set {
+            set(newValue, forKey: #function)
+            synchronize()
+        }
+    }
+    
     var session: QBSession? {
         get {
             if let sessionData = data(forKey: #function), let session = try? JSONDecoder().decode(QBSession.self, from: sessionData) {

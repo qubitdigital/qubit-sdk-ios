@@ -20,6 +20,11 @@ enum HTTPMethod: String {
     case delete = "DELETE"
 }
 
+protocol DictionaryInitializable {
+    
+    init(withDict dict: [String: Any])
+}
+
 class QBAPIClient {
     
     func setup(request: URLRequest, method: HTTPMethod) -> URLRequest {
@@ -29,32 +34,70 @@ class QBAPIClient {
         return request
     }
     
-    func dataTask<T: Decodable>(request: URLRequest, method: HTTPMethod, completion: ((Result<T>) -> Void)?) {
-        let request = setup(request: request, method: method)
+    func makeRequestAndDeserialize<T: DictionaryInitializable>(_ request: URLRequest, withMethod: HTTPMethod, then: ((Result<T>) -> Void)?) {
+        let request = setup(request: request, method: withMethod)
         let session = URLSession(configuration: .default)
         
         let task = session.dataTask(with: request) { (data, response, error) in
             QBDispatchQueueService.runSync(type: .upload) {
                 if let error = error {
                     QBLog.error("Error = \(String(describing: error))")
-                    completion?(.failure(error))
+                    then?(.failure(error))
+                    return
+                }
+                
+                QBLog.debug("✅ Response = \(response?.description ?? "") \n")
+                if let response = response as? HTTPURLResponse,
+                    let statusError = QBAPIClient.check(statusCode: response.statusCode) {
+                    then?(.failure(statusError))
+                    return
+                }
+                
+                
+                guard let data = data,
+                      let deserializedObject = try? JSONSerialization.jsonObject(with: data, options: .allowFragments),
+                      let jsonDict = deserializedObject as? [String: Any] else {
+                    let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Data was not retrieved from request = \(request)"]) as Error
+                    QBLog.error("Data was not retrieved from request = \(request) \n")
+                    then?(.failure(error))
+                    return
+                }
+                
+                QBLog.debug("✅ Deserialized object = \(jsonDict.debugDescription)")
+                then?(.success(T(withDict: jsonDict)))
+            }
+        }
+        
+        task.resume()
+    }
+    
+    func makeRequestAndDecode<T: Decodable>(_ request: URLRequest, withMethod: HTTPMethod, then: ((Result<T>) -> Void)?) {
+        let request = setup(request: request, method: withMethod)
+        let session = URLSession(configuration: .default)
+        
+        let task = session.dataTask(with: request) { (data, response, error) in
+            QBDispatchQueueService.runSync(type: .upload) {
+                if let error = error {
+                    QBLog.error("Error = \(String(describing: error))")
+                    then?(.failure(error))
                     return
                 }
                 
                 QBLog.debug("✅ Response = \(response?.description ?? "") \n")
                 if let response = response as? HTTPURLResponse,
                    let statusError = QBAPIClient.check(statusCode: response.statusCode) {
-                    completion?(.failure(statusError))
+                    then?(.failure(statusError))
                     return
                 }
                 
                 guard let data = data else {
                     let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Data was not retrieved from request = \(request)"]) as Error
                     QBLog.error("Data was not retrieved from request = \(request) \n")
-                    completion?(.failure(error))
+                    then?(.failure(error))
                     return
                 }
-                QBAPIClient.parseResponse(with: data, completion: completion)
+                
+                QBAPIClient.parseResponse(with: data, completion: then)
             }
         }
         
