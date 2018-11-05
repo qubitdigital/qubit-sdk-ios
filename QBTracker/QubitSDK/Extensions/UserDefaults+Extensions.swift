@@ -43,19 +43,17 @@ extension UserDefaults {
     
     var lastSavedRemoteExperiences: QBExperiencesEntity? {
         get {
-            guard let experiencesData = data(forKey: #function),
-                let experiences = try? JSONDecoder().decode(QBExperiencesEntity.self, from: experiencesData) else {
+            guard let data = object(forKey: #function) as? Data,
+                let unarchivedData = NSKeyedUnarchiver.unarchiveObject(with: data) as? QBExperiencesEntity else {
                 return nil
             }
             
-            return experiences
+            return unarchivedData
         }
         
         set {
-            if let encoded = try? JSONEncoder().encode(newValue) {
-                set(encoded, forKey: #function)
-                synchronize()
-            }
+            let data = NSKeyedArchiver.archivedData(withRootObject: newValue as Any)
+            set(data, forKey: #function)
         }
     }
     

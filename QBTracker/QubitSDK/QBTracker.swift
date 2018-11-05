@@ -103,11 +103,11 @@ class QBTracker {
     }
 }
 
-// TODO: do this for experiences?
 extension QBTracker: QBConfigurationManagerDelegate {
     func configurationUpdated() {
         eventManager?.configurationUpdated()
         lookupManager?.configurationUpdated()
+        experiencesManager?.configurationUpdated()
     }
 }
 

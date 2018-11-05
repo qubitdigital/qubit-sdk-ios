@@ -66,7 +66,7 @@ class QBExperiencesServiceImp: QBExperiencesService {
         }
         
         let request = URLRequest(url: url)
-        apiClient.makeRequestAndDecode(request, withMethod: HTTPMethod.get, then: then)
+        apiClient.makeRequestAndDeserialize(request, withMethod: HTTPMethod.get, then: then)
     }
 }
 

@@ -34,13 +34,24 @@ class QBExperiencesManager {
     private var reachability = QBReachability()
     private let experiencesService: QBExperiencesService
     
+    init(configurationManager: QBConfigurationManager) {
+        self.configurationManager = configurationManager
+        self.experiencesService = QBExperiencesServiceImp(withConfigurationManager: self.configurationManager)
+        try? reachability?.startNotifier()
+    }
+    
+    internal func configurationUpdated() {
+        refreshCacheIfNeede()
+    }
+    
     internal func fetchExperiences(with ids: [Int],
                                    completion: @escaping ([QBExperienceEnity]?, Error?) -> Void) {
-        let shouldBypassCache = (downloadParams.preview == true)
+        let shouldBypassCache = (downloadParams.preview || downloadParams.ignoreSegments || downloadParams.variation != nil)
         let shouldDownloadExperiences = (shouldBypassCache || shouldRefreshExperiencesCache)
         
         if shouldDownloadExperiences {
             QBLog.info("Downloading experiences")
+            
             downloadExperiences { [weak self] (experiences, error) in
                 if let experiences = experiences {
                     completion(self?.filterExperiences(experiences, by: ids), nil)
@@ -113,10 +124,22 @@ class QBExperiencesManager {
         return false
     }
     
-    init(configurationManager: QBConfigurationManager) {
-        self.configurationManager = configurationManager
-        self.experiencesService = QBExperiencesServiceImp(withConfigurationManager: self.configurationManager)
-        try? reachability?.startNotifier()
+    private func refreshCacheIfNeede() {
+        if self.shouldRefreshExperiencesCache {
+            QBLog.debug("Experiences are outdated")
+            
+            self.downloadExperiences { (experiences, error) in
+                if experiences != nil {
+                    QBLog.info("Experiences cache refreshed")
+                }
+                
+                if let error = error {
+                    QBLog.error("Error while refreshing experiences cache: \(error)")
+                }
+            }
+        } else {
+            QBLog.debug("Experience cache is actual")
+        }
     }
 }
 

@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         print(QubitSDK.deviceId)
         
         QubitSDK.fetchExperiences(withIds: [139731], onSuccess: { (experiences) in
-            print("EXPY \(experiences.count)")
+            print("EXPERIENCES \(experiences.count)")
             experiences.first?.shown()
         }, onError: { (error) in
             print("ERROR \(error.localizedDescription)")

@@ -116,32 +116,6 @@ public class QubitSDK: NSObject {
                                               variation: variation)
         }
     }
-    
-    /// Download experience
-    ///
-    /// - Parameters:
-    ///   - id: experience id to filter
-    ///   - onSuccess: callback when the download succeeds
-    ///   - onError: callback when the download fails
-    ///   - preview: when 'true', the latest unpublished interation of experience is used
-    ///   - ignoreSegments: when 'true', the payloads for all of the experiences will be returned
-    ///   - variation: variation of experience to return
-//    @objc(downloadExperiencesWithId:onSuccess:onError:preview:variation:ignoreSegments:)
-//    public class func downloadExperience(with id: Int,
-//                                         onSuccess: @escaping (QBExperienceEnity) -> Void,
-//                                         onError: @escaping (Error) -> Void,
-//                                         preview: Bool = false,
-//                                         ignoreSegments: Bool = false,
-//                                         variation: NSNumber? = nil) {
-//        QBDispatchQueueService.runAsync(type: .qubit) {
-//            QBTracker.shared.fetchExperiences(with: id,
-//                                              onSuccess: onSuccess,
-//                                              onError: onError,
-//                                              preview: preview,
-//                                              ignoreSegments: ignoreSegments,
-//                                              variation: variation)
-//        }
-//    }
 }
 
 @objc
