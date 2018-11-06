@@ -18,7 +18,7 @@ final class QBExperiencesEntity: NSObject, DictionaryInitializable, NSCoding {
     var experiencePayloads: [QBExperienceEnity]
     
     init(withDict dict: [String : Any]) throws {
-        guard let experienceEntitiesDicts = dict[Constants.experiencePayloadsKey] as? [[String: Any]] else {
+        guard let experienceEntitiesDicts = dict[Keys.experiencePayloads] as? [[String: Any]] else {
             self.experiencePayloads = []
             return
         }
@@ -26,11 +26,11 @@ final class QBExperiencesEntity: NSObject, DictionaryInitializable, NSCoding {
         self.experiencePayloads = [QBExperienceEnity]()
         
         for experienceEntityDict in experienceEntitiesDicts {
-            guard let callback = experienceEntityDict[Constants.callbackKey] as? String,
-                let isControl = experienceEntityDict[Constants.isControlKey] as? Bool,
-                let experienceId = experienceEntityDict[Constants.experienceIdKey] as? Int,
-                let variationId = experienceEntityDict[Constants.variationIdKey] as? Int,
-                let payload = experienceEntityDict[Constants.payloadKey] as? [String: Any] else {
+            guard let callback = experienceEntityDict[Keys.callback] as? String,
+                let isControl = experienceEntityDict[Keys.isControl] as? Bool,
+                let experienceId = experienceEntityDict[Keys.experienceId] as? Int,
+                let variationId = experienceEntityDict[Keys.variationId] as? Int,
+                let payload = experienceEntityDict[Keys.payload] as? [String: Any] else {
                     throw QBExperienceError.initFromDictionaryError
             }
             
@@ -39,11 +39,11 @@ final class QBExperiencesEntity: NSObject, DictionaryInitializable, NSCoding {
     }
     
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(experiencePayloads, forKey: Constants.experiencePayloadsKey)
+        aCoder.encode(experiencePayloads, forKey: Keys.experiencePayloads)
     }
     
     init?(coder aDecoder: NSCoder) {
-        guard let experiencePayloads = aDecoder.decodeObject(forKey: Constants.experiencePayloadsKey) as? [QBExperienceEnity] else {
+        guard let experiencePayloads = aDecoder.decodeObject(forKey: Keys.experiencePayloads) as? [QBExperienceEnity] else {
             return nil
         }
         
@@ -68,28 +68,28 @@ public final class QBExperienceEnity: NSObject, NSCoding {
     }
     
     public func encode(with aCoder: NSCoder) {
-        aCoder.encode(callback, forKey: Constants.callbackKey)
-        aCoder.encode(isControl, forKey: Constants.isControlKey)
-        aCoder.encode(experienceId, forKey: Constants.experienceIdKey)
-        aCoder.encode(variationId, forKey: Constants.variationIdKey)
-        aCoder.encode(payload, forKey: Constants.payloadKey)
+        aCoder.encode(callback, forKey: Keys.callback)
+        aCoder.encode(isControl, forKey: Keys.isControl)
+        aCoder.encode(experienceId, forKey: Keys.experienceId)
+        aCoder.encode(variationId, forKey: Keys.variationId)
+        aCoder.encode(payload, forKey: Keys.payload)
     }
     
     public convenience init?(coder aDecoder: NSCoder) {
-        guard let callback = aDecoder.decodeObject(forKey: Constants.callbackKey) as? String,
-            let payload = aDecoder.decodeObject(forKey: Constants.payloadKey) as? [String: Any] else {
+        guard let callback = aDecoder.decodeObject(forKey: Keys.callback) as? String,
+            let payload = aDecoder.decodeObject(forKey: Keys.payload) as? [String: Any] else {
             return nil
         }
         
         self.init(callback: callback,
-                  isControl: aDecoder.decodeBool(forKey: Constants.isControlKey),
-                  experienceId: aDecoder.decodeInteger(forKey: Constants.experienceIdKey),
-                  variationId: aDecoder.decodeInteger(forKey: Constants.variationIdKey),
+                  isControl: aDecoder.decodeBool(forKey: Keys.isControl),
+                  experienceId: aDecoder.decodeInteger(forKey: Keys.experienceId),
+                  variationId: aDecoder.decodeInteger(forKey: Keys.variationId),
                   payload: payload)
     }
 }
 
-// MARK: - Invoking callback
+// MARK: - Invoking callback URL
 
 extension QBExperienceEnity {
     
@@ -113,12 +113,12 @@ extension QBExperienceEnity {
 
 // MARK: - Constants
 
-private struct Constants {
+private struct Keys {
     
-    static let callbackKey = "callback"
-    static let isControlKey = "isControl"
-    static let experienceIdKey = "id"
-    static let variationIdKey = "variation"
-    static let payloadKey = "payload"
-    static let experiencePayloadsKey = "experiencePayloads"
+    static let callback = "callback"
+    static let isControl = "isControl"
+    static let experienceId = "id"
+    static let variationId = "variation"
+    static let payload = "payload"
+    static let experiencePayloads = "experiencePayloads"
 }

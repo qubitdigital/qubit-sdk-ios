@@ -54,21 +54,21 @@ class QBExperiencesManager {
             
             downloadExperiences { [weak self] (experiences, error) in
                 if let experiences = experiences {
-                    completion(self?.filterExperiences(experiences, by: ids), nil)
+                    completion(self?.getFilteredExperiences(experiences, by: ids), nil)
                 } else if let error = error {
                     completion(nil, error)
                 }
             }
         } else if let cachedExperiences = cachedExperiences {
             QBLog.info("Using cached experiences")
-            completion(filterExperiences(cachedExperiences.experiencePayloads, by: ids), nil)
+            completion(getFilteredExperiences(cachedExperiences.experiencePayloads, by: ids), nil)
         } else {
             QBLog.error("There was a problem while retrieving experiences")
         }
     }
     
-    private func filterExperiences(_ experiences: [QBExperienceEnity], by ids: [Int]) -> [QBExperienceEnity] {
-        return experiences.filter { ids.contains($0.experienceId) }
+    private func getFilteredExperiences(_ experiences: [QBExperienceEnity], by ids: [Int]) -> [QBExperienceEnity] {
+        return ids.isEmpty ? experiences : experiences.filter { ids.contains($0.experienceId) }
     }
     
     private func downloadExperiences(completion: @escaping ([QBExperienceEnity]?, Error?) -> Void) {
