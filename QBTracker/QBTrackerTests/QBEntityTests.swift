@@ -65,13 +65,15 @@ class QBEntityTests: XCTestCase {
         }
         
         guard let stringFieldFromPayload = firstExperience.payload["stringField"] as? String,
-            let intFieldFromPayload = firstExperience.payload["intField"] as? Int else {
+            let intFieldFromPayload = firstExperience.payload["intField"] as? Int,
+            let boolFieldFromPayload = firstExperience.payload["boolField"] as? Bool else {
                 XCTFail("Payload fields not deserialized properly")
                 return
         }
         
         XCTAssertEqual(stringFieldFromPayload, "string")
         XCTAssertEqual(intFieldFromPayload, 1)
+        XCTAssertTrue(boolFieldFromPayload)
     }
     
 }
