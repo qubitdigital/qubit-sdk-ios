@@ -17,20 +17,30 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         QubitSDK.start(withTrackingId: "miquido", logLevel: .verbose)
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        printCurrentContext()
+        fetchExperiences()
+    }
+    
+    private func printCurrentContext() {
         print(QubitSDK.trackingId)
         print(QubitSDK.deviceId)
-        
+    }
+    
+    private func fetchExperiences() {
         QubitSDK.fetchExperiences(withIds: [139731], onSuccess: { (experiences) in
-            print("EXPERIENCES \(experiences.count)")
             experiences.first?.shown()
         }, onError: { (error) in
-            print("ERROR \(error.localizedDescription)")
+            print("Got error: \(error.localizedDescription)")
         })
     }
     
     @IBAction func tapOnEventButton(_ sender: UIButton) {
         for _ in 0...10 {
-            QubitSDK.sendEvent(type: "View", data: "{\"type\" : \"tapOnEventButton\"}")
+            QubitSDK.sendEvent(type: "View", data: "{\"type\" : \"tapOnEventButton\", \"decimal\" : 2,0 }")
         }
     }
     

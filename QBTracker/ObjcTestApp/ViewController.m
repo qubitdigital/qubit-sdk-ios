@@ -26,8 +26,10 @@
 }
 
 - (void)fetchExperiences {
-    [QubitSDK fetchExperiencesWithIds:@[@143401] onSuccess:^(NSArray<QBExperienceEnity *> * _Nonnull experiences) {
+    [QubitSDK fetchExperiencesWithIds:@[@143401] onSuccess:^(NSArray<QBExperienceEntity *> * _Nonnull experiences) {
         NSLog(@"Fetched %lu Experiences", experiences.count);
+        QBExperienceEntity* firstEntity = experiences.firstObject;
+        [firstEntity shown];
     } onError:^(NSError * _Nonnull error) {
         NSLog(@"%@", error.description);
     } preview:false variation:false ignoreSegments:false];
