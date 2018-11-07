@@ -79,7 +79,7 @@ class QBTracker {
 	}
     
     internal func fetchExperiences(with ids: [Int],
-                             onSuccess: @escaping ([QBExperienceEnity]) -> Void,
+                             onSuccess: @escaping ([QBExperienceEntity]) -> Void,
                              onError: @escaping (Error) -> Void,
                              preview: Bool = false,
                              ignoreSegments: Bool = false,

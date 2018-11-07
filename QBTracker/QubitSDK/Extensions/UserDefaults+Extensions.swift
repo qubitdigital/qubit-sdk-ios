@@ -41,10 +41,10 @@ extension UserDefaults {
         }
     }
     
-    var lastSavedRemoteExperiences: QBExperiencesEntity? {
+    var lastSavedRemoteExperiences: [QBExperienceEntity]? {
         get {
             guard let data = object(forKey: #function) as? Data,
-                let unarchivedData = NSKeyedUnarchiver.unarchiveObject(with: data) as? QBExperiencesEntity else {
+                let unarchivedData = NSKeyedUnarchiver.unarchiveObject(with: data) as? [QBExperienceEntity] else {
                 return nil
             }
             

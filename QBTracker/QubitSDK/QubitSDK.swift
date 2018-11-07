@@ -94,7 +94,7 @@ public class QubitSDK: NSObject {
     /// Fetch experiences
     ///
     /// - Parameters:
-    ///   - ids: experience ids to filter
+    ///   - ids: experience ids to filter. When empty list, all experiences will be returned.
     ///   - onSuccess: callback when the download succeeds
     ///   - onError: callback when the download fails
     ///   - preview: when 'true', the latest unpublished interation of experience is used
@@ -102,7 +102,7 @@ public class QubitSDK: NSObject {
     ///   - variation: variation of experience to return
     @objc(fetchExperiencesWithIds:onSuccess:onError:preview:variation:ignoreSegments:)
     public class func fetchExperiences(withIds ids: [Int],
-                                       onSuccess: @escaping ([QBExperienceEnity]) -> Void,
+                                       onSuccess: @escaping ([QBExperienceEntity]) -> Void,
                                        onError: @escaping (Error) -> Void,
                                        preview: Bool = false,
                                        ignoreSegments: Bool = false,

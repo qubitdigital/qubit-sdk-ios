@@ -13,9 +13,9 @@ enum QBExperienceError: Error {
     case initFromDictionaryError
 }
 
-final class QBExperiencesEntity: NSObject, DictionaryInitializable, NSCoding {
+final class QBExperiencesEntity: DictionaryInitializable {
     
-    var experiencePayloads: [QBExperienceEnity]
+    var experiencePayloads: [QBExperienceEntity]
     
     init(withDict dict: [String : Any]) throws {
         guard let experienceEntitiesDicts = dict[Keys.experiencePayloads] as? [[String: Any]] else {
@@ -23,7 +23,7 @@ final class QBExperiencesEntity: NSObject, DictionaryInitializable, NSCoding {
             return
         }
         
-        self.experiencePayloads = [QBExperienceEnity]()
+        self.experiencePayloads = [QBExperienceEntity]()
         
         for experienceEntityDict in experienceEntitiesDicts {
             guard let callback = experienceEntityDict[Keys.callback] as? String,
@@ -34,24 +34,12 @@ final class QBExperiencesEntity: NSObject, DictionaryInitializable, NSCoding {
                     throw QBExperienceError.initFromDictionaryError
             }
             
-            self.experiencePayloads.append(QBExperienceEnity(callback: callback, isControl: isControl, experienceId: experienceId, variationId: variationId, payload: payload))
+            self.experiencePayloads.append(QBExperienceEntity(callback: callback, isControl: isControl, experienceId: experienceId, variationId: variationId, payload: payload))
         }
-    }
-    
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(experiencePayloads, forKey: Keys.experiencePayloads)
-    }
-    
-    init?(coder aDecoder: NSCoder) {
-        guard let experiencePayloads = aDecoder.decodeObject(forKey: Keys.experiencePayloads) as? [QBExperienceEnity] else {
-            return nil
-        }
-        
-        self.experiencePayloads = experiencePayloads
     }
 }
 
-public final class QBExperienceEnity: NSObject, NSCoding {
+public final class QBExperienceEntity: NSObject, NSCoding {
 
     let callback: String
     let isControl: Bool
@@ -91,8 +79,9 @@ public final class QBExperienceEnity: NSObject, NSCoding {
 
 // MARK: - Invoking callback URL
 
-extension QBExperienceEnity {
+extension QBExperienceEntity {
     
+    @objc(shown)
     public func shown() {
         QBDispatchQueueService.runAsync(type: .experiences) { [weak self] in
             guard let self = self else { return }

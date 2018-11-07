@@ -10,7 +10,7 @@ import Foundation
 
 class QBExperiencesManager {
     
-    var cachedExperiences: QBExperiencesEntity? {
+    var cachedExperiences: [QBExperienceEntity]? {
         get {
             if let lastSavedRemoteExperiences = UserDefaults.standard.lastSavedRemoteExperiences {
                 QBLog.verbose("used last saved remote experiences")
@@ -45,7 +45,7 @@ class QBExperiencesManager {
     }
     
     internal func fetchExperiences(with ids: [Int],
-                                   completion: @escaping ([QBExperienceEnity]?, Error?) -> Void) {
+                                   completion: @escaping ([QBExperienceEntity]?, Error?) -> Void) {
         let shouldBypassCache = (downloadParams.preview || downloadParams.ignoreSegments || downloadParams.variation != nil)
         let shouldDownloadExperiences = (shouldBypassCache || shouldRefreshExperiencesCache)
         
@@ -61,17 +61,17 @@ class QBExperiencesManager {
             }
         } else if let cachedExperiences = cachedExperiences {
             QBLog.info("Using cached experiences")
-            completion(getFilteredExperiences(cachedExperiences.experiencePayloads, by: ids), nil)
+            completion(getFilteredExperiences(cachedExperiences, by: ids), nil)
         } else {
             QBLog.error("There was a problem while retrieving experiences")
         }
     }
     
-    private func getFilteredExperiences(_ experiences: [QBExperienceEnity], by ids: [Int]) -> [QBExperienceEnity] {
+    private func getFilteredExperiences(_ experiences: [QBExperienceEntity], by ids: [Int]) -> [QBExperienceEntity] {
         return ids.isEmpty ? experiences : experiences.filter { ids.contains($0.experienceId) }
     }
     
-    private func downloadExperiences(completion: @escaping ([QBExperienceEnity]?, Error?) -> Void) {
+    private func downloadExperiences(completion: @escaping ([QBExperienceEntity]?, Error?) -> Void) {
         QBLog.mark()
         
         guard configurationManager.isConfigurationLoaded else {
@@ -97,7 +97,7 @@ class QBExperiencesManager {
             
             switch result {
             case .success(let experiences):
-                self.cachedExperiences = experiences
+                self.cachedExperiences = experiences.experiencePayloads
                 completion(experiences.experiencePayloads, nil)
                 QBLog.debug("userDefaults = \(UserDefaults.standard.lastSavedRemoteExperiences.debugDescription)")
             case .failure(let error):
