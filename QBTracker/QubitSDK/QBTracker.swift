@@ -13,6 +13,7 @@ class QBTracker {
     static let shared: QBTracker = QBTracker()
     
     private var configurationManager: QBConfigurationManager?
+    private var experiencesManager: QBExperiencesManager?
     private var lookupManager: QBLookupManager?
     private var eventManager: QBEventManager?
     private var sessionManager: QBSessionManager?
@@ -30,11 +31,18 @@ class QBTracker {
         
         let configurationManager = QBConfigurationManager(withTrackingId: id, delegate: self)
         self.configurationManager = configurationManager
+        
+        let experiencesManager = QBExperiencesManager(configurationManager: configurationManager)
+        self.experiencesManager = experiencesManager
+        
         let lookupManager = QBLookupManager(configurationManager: configurationManager)
         self.lookupManager = lookupManager
+        
         let sessionManager = QBSessionManager(delegate: self)
         self.sessionManager = sessionManager
+        
         eventManager = QBEventManager(withConfigurationManager: configurationManager, sessionManager: sessionManager, lookupManager: lookupManager)
+        
         sessionManager.startNewSession()
         configurationManager.downloadConfig()
     }
@@ -66,14 +74,40 @@ class QBTracker {
 		configurationManager = nil
 		lookupManager = nil
         sessionManager = nil
+        experiencesManager = nil
         QBLog.info("tracker stoped")
 	}
+    
+    internal func fetchExperiences(with ids: [Int],
+                             onSuccess: @escaping ([QBExperienceEntity]) -> Void,
+                             onError: @escaping (Error) -> Void,
+                             preview: Bool = false,
+                             ignoreSegments: Bool = false,
+                             variation: NSNumber? = nil) {
+        guard let experiencesManager = experiencesManager else {
+            QBLog.error("experiencesManager is null")
+            return
+        }
+        
+        experiencesManager.downloadParams = (preview: preview,
+                                             ignoreSegments: ignoreSegments,
+                                             variation: variation?.intValue)
+        
+        experiencesManager.fetchExperiences(with: ids) { (experiences, error) in
+            if let experiences = experiences {
+                onSuccess(experiences)
+            } else if let error = error {
+                onError(error)
+            }
+        }
+    }
 }
 
 extension QBTracker: QBConfigurationManagerDelegate {
     func configurationUpdated() {
         eventManager?.configurationUpdated()
         lookupManager?.configurationUpdated()
+        experiencesManager?.configurationUpdated()
     }
 }
 

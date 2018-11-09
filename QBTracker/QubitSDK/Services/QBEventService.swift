@@ -46,6 +46,6 @@ class QBEventServiceImp: QBEventService {
         request.httpBody = jsonData
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        apiClient.dataTask(request: request, method: HTTPMethod.post, completion: completion)
+        apiClient.makeRequestAndDecode(request, withMethod: HTTPMethod.post, then: completion)
     }
 }

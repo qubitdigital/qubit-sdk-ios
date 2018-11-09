@@ -18,6 +18,9 @@ struct QBConfigurationEntity: Codable {
     let lookupReloadInterval: Int
     let lookupRequestTimeout: Int
     let vertical: String
+    let experienceEndpoint: String
+    let experienceCacheTimeout: Int
+    
     //  AO: If endpoint is defined then data_location should be ignored.
     let endpoint: String
     let dataLocation: String
@@ -26,22 +29,16 @@ struct QBConfigurationEntity: Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         
         self.disabled = (try? values.decode(Bool.self, forKey: .disabled)) ?? DefaultValues.disabled
-        
         self.configurationReloadInterval = (try? values.decode(Int.self, forKey: .configurationReloadInterval)) ?? DefaultValues.configurationReloadInterval
-
         self.queueTimeout = (try? values.decode(Int.self, forKey: .queueTimeout)) ?? DefaultValues.queueTimeout
-
         self.namespace = (try? values.decode(String.self, forKey: .namespace)) ?? DefaultValues.namespace
-
         self.lookupEndpoint = (try? values.decode(String.self, forKey: .lookupEndpoint)) ?? DefaultValues.lookupEndpoint
-
         self.lookupReloadInterval = (try? values.decode(Int.self, forKey: .lookupReloadInterval)) ?? DefaultValues.lookupReloadInterval
-
         self.lookupRequestTimeout = (try? values.decode(Int.self, forKey: .lookupRequestTimeout)) ?? DefaultValues.lookupRequestTimeout
-
         self.vertical = (try? values.decode(String.self, forKey: .vertical)) ?? DefaultValues.vertical
-
         self.dataLocation = (try? values.decode(String.self, forKey: .dataLocation)) ?? DefaultValues.dataLocation
+        self.experienceEndpoint = (try? values.decode(String.self, forKey: .experienceEndpoint)) ?? DefaultValues.experienceEndpoint
+        self.experienceCacheTimeout = (try? values.decode(Int.self, forKey: .experienceCacheTimeout)) ?? DefaultValues.experienceCacheTimeout
 
         if let endpoint = try? values.decode(String.self, forKey: .endpoint) {
             self.endpoint = endpoint
@@ -65,6 +62,8 @@ struct QBConfigurationEntity: Codable {
         self.vertical = DefaultValues.vertical
         self.endpoint = DefaultValues.endpointEU
         self.dataLocation = DefaultValues.dataLocation
+        self.experienceEndpoint = DefaultValues.experienceEndpoint
+        self.experienceCacheTimeout = DefaultValues.experienceCacheTimeout
     }
     
     private enum CodingKeys: String, CodingKey {
@@ -78,6 +77,8 @@ struct QBConfigurationEntity: Codable {
         case vertical
         case endpoint
         case dataLocation = "data_location"
+        case experienceEndpoint = "experience_api_host"
+        case experienceCacheTimeout = "experience_api_cache_expire_time"
     }
 }
 
@@ -95,6 +96,8 @@ extension QBConfigurationEntity {
         static let dataLocation = "EU"
         static let endpointEU = "gong-eb.qubit.com"
         static let endpointUS = "gong-gc.qubit.com"
+        static let experienceEndpoint = "sse.qubit.com"
+        static let experienceCacheTimeout = 300
     }
     
 }
@@ -107,6 +110,10 @@ extension QBConfigurationEntity {
     
     func lookupReloadIntervalInSeconds() -> Double {
         return Double(lookupReloadInterval * 60)
+    }
+    
+    func experienceEndpointUrl() -> URL? {
+        return self.urlFrom(stringUrl: self.experienceEndpoint)
     }
     
     func lookupEndpointUrl() -> URL? {

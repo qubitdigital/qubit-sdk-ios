@@ -91,6 +91,31 @@ public class QubitSDK: NSObject {
          QBDispatchQueueService.runAsync(type: .qubit) { QBTracker.shared.stop() }
 	}
 
+    /// Fetch experiences
+    ///
+    /// - Parameters:
+    ///   - ids: experience ids to filter. When empty list, all experiences will be returned.
+    ///   - onSuccess: callback when the download succeeds
+    ///   - onError: callback when the download fails
+    ///   - preview: when 'true', the latest unpublished interation of experience is used
+    ///   - ignoreSegments: when 'true', the payloads for all of the experiences will be returned
+    ///   - variation: variation of experience to return
+    @objc(fetchExperiencesWithIds:onSuccess:onError:preview:variation:ignoreSegments:)
+    public class func fetchExperiences(withIds ids: [Int],
+                                       onSuccess: @escaping ([QBExperienceEntity]) -> Void,
+                                       onError: @escaping (Error) -> Void,
+                                       preview: Bool = false,
+                                       ignoreSegments: Bool = false,
+                                       variation: NSNumber? = nil) {
+        QBDispatchQueueService.runAsync(type: .qubit) {
+            QBTracker.shared.fetchExperiences(with: ids,
+                                              onSuccess: onSuccess,
+                                              onError: onError,
+                                              preview: preview,
+                                              ignoreSegments: ignoreSegments,
+                                              variation: variation)
+        }
+    }
 }
 
 @objc

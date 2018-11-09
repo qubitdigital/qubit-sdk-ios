@@ -8,11 +8,6 @@
 
 import Foundation
 
-protocol QBLookupManagerDelegate: class {
-    func lookupUpdateSuccessful()
-    func lookupUpdateFailed()
-}
-
 class QBLookupManager {
     
     var lookup: QBLookupEntity? {
@@ -79,12 +74,12 @@ class QBLookupManager {
         let lookupService = QBLookupServiceImp(withConfigurationManager: self.configurationManager)
         
         lookupService.getLookup(forDeviceId: QBDevice.getId()) { [weak self] result in
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
             case .success(let lookup):
                 QBLog.debug("userDefaults = \(UserDefaults.standard.lastSavedRemoteLookup.debugDescription)")
-                strongSelf.remoteLookup = lookup
+                self.remoteLookup = lookup
             case .failure(let error):
                 QBLog.error("error = \(error)")
             }

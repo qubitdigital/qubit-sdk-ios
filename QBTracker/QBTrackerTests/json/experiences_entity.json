@@ -1,0 +1,14 @@
+
+{
+    "experiencePayloads": [{
+        "payload": {
+            "stringField": "string",
+            "intField": 1,
+            "boolField": true
+        },
+        "callback": "https://sse.qubit.com/v1/callback?data=6AGAeyJFeHBlcmllbmNlSWQiOjEzOTczMSwiSXRlcmF0aW9uARUsMzc3NDE0LCJWYXJpFRUUODU1NjExHRUUTWFzdGVyATCQODI2OTg2LCJJc0NvbnRyb2wiOnRydWUsIlRyYWZmaWNBbGxvYwVJRCI6MC41LCJQcm9iYWJpbGl0eQESUDQzMzYwNDM4Njk1Nzg2ODgsIlBpZFYZABhUZW1wbGF0BbwQbnVsbCwBZEhja2luZ0lkIjoibWlxdWlkbyJ9",
+        "id": 139731,
+        "isControl": true,
+        "variation": 826986
+    }]
+}

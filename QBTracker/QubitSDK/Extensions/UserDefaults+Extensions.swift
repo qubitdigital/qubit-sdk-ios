@@ -41,6 +41,37 @@ extension UserDefaults {
         }
     }
     
+    var lastSavedRemoteExperiences: [QBExperienceEntity]? {
+        get {
+            guard let data = object(forKey: #function) as? Data,
+                let unarchivedData = NSKeyedUnarchiver.unarchiveObject(with: data) as? [QBExperienceEntity] else {
+                return nil
+            }
+            
+            return unarchivedData
+        }
+        
+        set {
+            let data = NSKeyedArchiver.archivedData(withRootObject: newValue as Any)
+            set(data, forKey: #function)
+        }
+    }
+    
+    var lastExperienceCacheTime: Double? {
+        get {
+            guard let time = object(forKey: #function) as? Double else {
+                return nil
+            }
+            
+            return time
+        }
+        
+        set {
+            set(newValue, forKey: #function)
+            synchronize()
+        }
+    }
+    
     var session: QBSession? {
         get {
             if let sessionData = data(forKey: #function), let session = try? JSONDecoder().decode(QBSession.self, from: sessionData) {
