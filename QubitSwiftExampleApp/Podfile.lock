@@ -1,5 +1,5 @@
 PODS:
-  - QubitSDK (0.3.10)
+  - QubitSDK (0.3.11)
 
 DEPENDENCIES:
   - QubitSDK (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  QubitSDK: daa7897b3e3f5378678f564ecacc2ba7867bf8bc
+  QubitSDK: bb8e755e3b9410b39ecc4059f3fe4a64532f5ef5
 
 PODFILE CHECKSUM: 170002fff680cbaacc74b6ea62c01bd155c2cf20
 
