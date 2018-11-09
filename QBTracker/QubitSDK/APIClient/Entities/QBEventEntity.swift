@@ -96,9 +96,13 @@ extension QBEventEntity {
         return QBEventEntity(type: type, eventData: string)
     }
     
-    static func event(type: String, dictionary: [String: Any]) -> QBEventEntity? {
-        if let JSONData = try? JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted), let JSONString = String(data: JSONData, encoding: .utf8) {
-            let event = QBEventEntity(type: type, eventData: JSONString)
+    static func event(type: String, dictionary: [String: Any],
+                      dictConverter: QBDictionaryConverting = QBDecimalsWithDotConverter()) -> QBEventEntity? {
+        let dictForSerialization = dictConverter.convert(dictionary)
+        
+        if let jsonData = try? JSONSerialization.data(withJSONObject: dictForSerialization, options: .prettyPrinted),
+           let jsonString = String(data: jsonData, encoding: .utf8) {
+            let event = QBEventEntity(type: type, eventData: jsonString)
             return event
         } else {
             return nil

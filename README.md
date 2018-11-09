@@ -6,6 +6,7 @@ Installation of the QubitSDK, to provide event tracking and lookup. To make use 
 
 | VERSION | UPDATES |
 |---|---|
+| 0.3.10 | Added trackerID and deviceID to the QubitSDK
 | 0.3.9 | Xcode 10 supported, Fix loop cycle for sending events
 | 0.3.8 | Fix JSONSerialization for boolean values
 | 0.3.7 | Fixes

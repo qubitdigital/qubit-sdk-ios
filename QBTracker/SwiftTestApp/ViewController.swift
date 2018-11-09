@@ -40,12 +40,12 @@ class ViewController: UIViewController {
     
     @IBAction func tapOnEventButton(_ sender: UIButton) {
         for _ in 0...10 {
-            QubitSDK.sendEvent(type: "View", data: "{\"type\" : \"tapOnEventButton\", \"decimal\" : 2,0 }")
+            QubitSDK.sendEvent(type: "View", data: "{\"type\" : \"tapOnEventButton\", \"number\":2.2}")
         }
     }
     
     @IBAction func tapOnCreateEventButton(_ sender: UIButton) {
-        let event =  QubitSDK.createEvent(type: "Product", dictionary: ["eventType": "tapOnCreateEventButton"])
+        let event = QubitSDK.createEvent(type: "Product", dictionary: ["eventType": "tapOnCreateEventButton", "number": 2.2])
         QubitSDK.sendEvent(event: event)
     }
 }
