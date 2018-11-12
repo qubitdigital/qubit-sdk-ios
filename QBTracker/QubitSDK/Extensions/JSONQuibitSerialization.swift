@@ -178,8 +178,7 @@ private struct JSONWriter {
     }
     
     func serializeString(_ str: String) throws {
-        writer("\"")
-        for scalar in str.unicodeScalars {
+        for scalar in str.prefix(256).unicodeScalars {
             switch scalar {
             case "\"":
                 writer("\\\"") // U+0022 quotation mark
