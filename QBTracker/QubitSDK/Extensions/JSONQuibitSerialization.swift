@@ -180,7 +180,7 @@ private struct JSONWriter {
     }
     
     func serializeString(_ str: String) throws {
-        for scalar in str.prefix(256).unicodeScalars {
+        for scalar in str.prefix(256).unicodeScalars { // limit to 256 characters
             switch scalar {
             case "\"":
                 writer("\\\"") // U+0022 quotation mark
@@ -239,7 +239,7 @@ private struct JSONWriter {
         }
         
         var first = true
-        for elem in array.prefix(10) { //take first 10 only
+        for elem in array.prefix(10) { // take first 10 only
             if first {
                 first = false
             } else if pretty {
