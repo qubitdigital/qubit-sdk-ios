@@ -143,7 +143,9 @@ private struct JSONWriter {
     private lazy var _numberformatter: CFNumberFormatter = {
         let formatter: CFNumberFormatter
         formatter = CFNumberFormatterCreate(nil, CFLocaleCopyCurrent(), CFNumberFormatterStyle.noStyle)
+        // Decimals should always be 2dp
         CFNumberFormatterSetProperty(formatter, CFNumberFormatterKey.maxFractionDigits, NSNumber(value: 2))
+        //[SR-6631] https://bugs.swift.org/browse/SR-6631
         CFNumberFormatterSetProperty(formatter, CFNumberFormatterKey.decimalSeparator, ".".qb_cfObject)
         CFNumberFormatterSetFormat(formatter, "0.##".qb_cfObject)
         return formatter
@@ -237,7 +239,7 @@ private struct JSONWriter {
         }
         
         var first = true
-        for elem in array {
+        for elem in array.prefix(10) { //take first 10 only
             if first {
                 first = false
             } else if pretty {
