@@ -180,6 +180,7 @@ private struct JSONWriter {
     }
     
     func serializeString(_ str: String) throws {
+        writer("\"")
         for scalar in str.prefix(256).unicodeScalars { // limit to 256 characters
             switch scalar {
             case "\"":
