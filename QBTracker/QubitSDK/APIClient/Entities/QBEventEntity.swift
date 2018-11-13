@@ -97,9 +97,9 @@ extension QBEventEntity {
     }
     
     static func event(type: String, dictionary: [String: Any]) -> QBEventEntity? {
-        if let JSONData = try? JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted),
-            let JSONString = String(data: JSONData, encoding: .utf8) {
-            return QBEventEntity(type: type, eventData: JSONString)
+        if let JSONData = try? JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted), let JSONString = String(data: JSONData, encoding: .utf8) {
+            let event = QBEventEntity(type: type, eventData: JSONString)
+            return event
         } else {
             return nil
         }

@@ -143,8 +143,11 @@ private struct JSONWriter {
     private lazy var _numberformatter: CFNumberFormatter = {
         let formatter: CFNumberFormatter
         formatter = CFNumberFormatterCreate(nil, CFLocaleCopyCurrent(), CFNumberFormatterStyle.noStyle)
-        CFNumberFormatterSetProperty(formatter, CFNumberFormatterKey.maxFractionDigits, NSNumber(value: 15))
-        CFNumberFormatterSetFormat(formatter, "0.###############".qb_cfObject)
+        // Decimals should always be 2dp
+        CFNumberFormatterSetProperty(formatter, CFNumberFormatterKey.maxFractionDigits, NSNumber(value: 2))
+        //[SR-6631] https://bugs.swift.org/browse/SR-6631
+        CFNumberFormatterSetProperty(formatter, CFNumberFormatterKey.decimalSeparator, ".".qb_cfObject)
+        CFNumberFormatterSetFormat(formatter, "0.##".qb_cfObject)
         return formatter
     }()
     
@@ -178,7 +181,7 @@ private struct JSONWriter {
     
     func serializeString(_ str: String) throws {
         writer("\"")
-        for scalar in str.unicodeScalars {
+        for scalar in str.prefix(256).unicodeScalars { // limit to 256 characters
             switch scalar {
             case "\"":
                 writer("\\\"") // U+0022 quotation mark
@@ -237,7 +240,7 @@ private struct JSONWriter {
         }
         
         var first = true
-        for elem in array {
+        for elem in array.prefix(10) { // take first 10 only
             if first {
                 first = false
             } else if pretty {
