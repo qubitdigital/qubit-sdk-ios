@@ -38,6 +38,6 @@ class QBLookupServiceImp: QBLookupService {
         var request = URLRequest(url: urlWithPath)
         request.timeoutInterval = Double(configurationManager.configuration.lookupRequestTimeout)
         
-        apiClient.dataTask(request: request, method: HTTPMethod.get, completion: completion)
+        apiClient.makeRequestAndDecode(request, withMethod: HTTPMethod.get, then: completion)
     }
 }
