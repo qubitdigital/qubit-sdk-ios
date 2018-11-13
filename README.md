@@ -6,6 +6,7 @@ Installation of the QubitSDK, to provide event tracking and lookup. To make use 
 
 | VERSION | UPDATES |
 |---|---|
+| 0.3.13 | Fixed issue with serializing nested dictionaries in Events
 | 0.3.12 | Experiences added to the SDK
 | 0.3.11 | Fix for serializing decimals in JSON
 | 0.3.10 | Added trackerID and deviceID to the QubitSDK
