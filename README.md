@@ -140,6 +140,26 @@ where userDictionary is of type NSDictionary in Objective-C, Dictionary in Swift
 # Experiences
 SDK contains methods to fetch Experiences. This can be achieved by:
 
+Swift
+```swift
+// Fetch an experience by ID (143640 in this example)
+// This is calling for live experiences only
+QubitSDK.fetchExperiences(withIds: [143640], onSuccess: { (experiences) in
+    if let exp = experiences.first {
+        // list out the payload values
+        print("Got experience - payload:")
+        for (key, value) in exp.payload {
+            print("\(key) -> \(value)")
+        }
+        // mark the experience as shown
+        exp.shown()
+    }
+}, onError: { (error) in
+    print("Got error: \(error.localizedDescription)")
+}, preview: false, ignoreSegments: false, variation: nil)
+```
+
+Objective-C
 ```objective-c
 [QubitSDK fetchExperiencesWithIds:@[@1] onSuccess:^(NSArray<QBExperienceEntity *> * _Nonnull experiences) {
     QBExperienceEntity* firstEntity = experiences.firstObject;
@@ -147,14 +167,6 @@ SDK contains methods to fetch Experiences. This can be achieved by:
 } onError:^(NSError * _Nonnull error) {
     NSLog(@"%@", error.description);
 } preview:false variation:false ignoreSegments:false];
-```
-
-```swift
-QubitSDK.fetchExperiences(withIds: [1], onSuccess: { (experiences) in
-    experiences.first?.shown() // make a POST call to the returned callback URL
-}, onError: { (error) in
-    print("Got error: \(error.localizedDescription)")
-})
 ```
 
 Above call takes optional parameters like `preview`, `ignoreSegments` and `variation`. 

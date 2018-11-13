@@ -31,11 +31,17 @@ class ViewController: UIViewController {
     }
     
     private func fetchExperiences() {
-        QubitSDK.fetchExperiences(withIds: [], onSuccess: { (experiences) in
-            experiences.first?.shown()
+        QubitSDK.fetchExperiences(withIds: [143640], onSuccess: { (experiences) in
+            if let exp = experiences.first {
+                print("Got experience - payload:")
+                for (key, value) in exp.payload {
+                    print("\(key) -> \(value)")
+                }
+                exp.shown()
+            }
         }, onError: { (error) in
             print("Got error: \(error.localizedDescription)")
-        })
+        }, preview: false, ignoreSegments: false, variation: nil)
     }
     
     @IBAction func tapOnEventButton(_ sender: UIButton) {
