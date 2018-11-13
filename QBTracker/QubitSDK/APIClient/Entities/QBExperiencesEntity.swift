@@ -93,8 +93,15 @@ extension QBExperienceEntity {
             
             var request = URLRequest(url: url)
             request.httpMethod = HTTPMethod.post.rawValue
-            URLSession.shared.dataTask(with: request).resume()
             
+            let jsonDict: [String: Any] = ["id": QBDevice.getId()]
+            guard let jsonData = try? JSONSerialization.data(withJSONObject: jsonDict) else {
+                QBLog.error("Could not attach deviceId to callback request: \(self.callback)")
+                return
+            }
+            
+            request.httpBody = jsonData
+            URLSession.shared.dataTask(with: request).resume()
             QBLog.info("Callback URL: \(self.callback) was invoked")
         }
     }

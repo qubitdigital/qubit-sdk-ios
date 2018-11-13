@@ -31,7 +31,7 @@ class ViewController: UIViewController {
     }
     
     private func fetchExperiences() {
-        QubitSDK.fetchExperiences(withIds: [139731], onSuccess: { (experiences) in
+        QubitSDK.fetchExperiences(withIds: [], onSuccess: { (experiences) in
             experiences.first?.shown()
         }, onError: { (error) in
             print("Got error: \(error.localizedDescription)")
