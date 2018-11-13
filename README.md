@@ -6,6 +6,7 @@ Installation of the QubitSDK, to provide event tracking and lookup. To make use 
 
 | VERSION | UPDATES |
 |---|---|
+| 0.3.12 | Experiences added to the SDK
 | 0.3.11 | Fix for serializing decimals in JSON
 | 0.3.10 | Added trackerID and deviceID to the QubitSDK
 | 0.3.9 | Xcode 10 supported, Fix loop cycle for sending events
@@ -133,6 +134,28 @@ where userDictionary is of type NSDictionary in Objective-C, Dictionary in Swift
   username: "jsmith"
 }
 ```
+
+# Experiences
+SDK contains methods to fetch Experiences. This can be achieved by:
+
+```objective-c
+[QubitSDK fetchExperiencesWithIds:@[@1] onSuccess:^(NSArray<QBExperienceEntity *> * _Nonnull experiences) {
+    QBExperienceEntity* firstEntity = experiences.firstObject;
+    [firstEntity shown]; // make a POST call to the returned callback URL
+} onError:^(NSError * _Nonnull error) {
+    NSLog(@"%@", error.description);
+} preview:false variation:false ignoreSegments:false];
+```
+
+```swift
+QubitSDK.fetchExperiences(withIds: [1], onSuccess: { (experiences) in
+    experiences.first?.shown() // make a POST call to the returned callback URL
+}, onError: { (error) in
+    print("Got error: \(error.localizedDescription)")
+})
+```
+
+Above call takes optional parameters like `preview`, `ignoreSegments` and `variation`. 
 
 # Disabling Tracking
 If you would like to disable tracking, use the following method.
