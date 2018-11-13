@@ -6,6 +6,7 @@ Installation of the QubitSDK, to provide event tracking and lookup. To make use 
 
 | VERSION | UPDATES |
 |---|---|
+| 1.0.0 | V1 Release including Native Experiences
 | 0.3.14 | Fixed accessing experience entity properties
 | 0.3.13 | Fixed issue with serializing nested dictionaries in Events
 | 0.3.12 | Experiences added to the SDK
