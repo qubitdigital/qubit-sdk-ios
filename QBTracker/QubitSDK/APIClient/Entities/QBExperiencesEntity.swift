@@ -41,11 +41,12 @@ final class QBExperiencesEntity: DictionaryInitializable {
 
 public final class QBExperienceEntity: NSObject, NSCoding {
 
+    public let isControl: Bool
+    public let experienceId: Int
+    public let variationId: Int
+    public let payload: [String: Any]
+    
     let callback: String
-    let isControl: Bool
-    let experienceId: Int
-    let variationId: Int
-    let payload: [String: Any]
     
     init(callback: String, isControl: Bool, experienceId: Int, variationId: Int, payload: [String: Any]) {
         self.callback = callback
