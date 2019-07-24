@@ -163,7 +163,12 @@ private struct JSONWriter {
         case let str as String:
             try serializeString(str)
         case let number as NSNumber:
-            try serializeNumber(number)
+            if isBoolNumber(num: number) {
+                serializeBool(number)
+            }
+            else {
+                try serializeNumber(number)
+            }
         case let boolValue as Bool:
             serializeBool(boolValue)
         case let array as Array<Any>:
@@ -177,6 +182,13 @@ private struct JSONWriter {
         default:
             throw NSError(domain: NSCocoaErrorDomain, code: CocoaError.propertyListReadCorrupt.rawValue, userInfo: ["NSDebugDescription" : "Invalid object cannot be serialized"])
         }
+    }
+    
+    func isBoolNumber(num:NSNumber) -> Bool
+    {
+        let boolID = CFBooleanGetTypeID() // the type ID of CFBoolean
+        let numID = CFGetTypeID(num) // the type ID of num
+        return numID == boolID
     }
     
     func serializeString(_ str: String) throws {
@@ -216,6 +228,10 @@ private struct JSONWriter {
         case false:
             writer("false")
         }
+    }
+    
+    func serializeBool(_ number: NSNumber) {
+        number == 1 ? writer("true") : writer("false")
     }
     
     mutating func serializeNumber(_ num: NSNumber) throws {
@@ -572,9 +588,9 @@ private struct JSONReader {
                 
                 let startPointer = buffer.baseAddress!
                 let intEndPointer = UnsafeMutablePointer<UnsafeMutablePointer<Int8>?>.allocate(capacity: 1)
-                defer { intEndPointer.deallocate(capacity: 1) }
+                defer { intEndPointer.deallocate() }
                 let doubleEndPointer = UnsafeMutablePointer<UnsafeMutablePointer<Int8>?>.allocate(capacity: 1)
-                defer { doubleEndPointer.deallocate(capacity: 1) }
+                defer { doubleEndPointer.deallocate() }
                 
                 let intResult = strtol(startPointer, intEndPointer, 10)
                 let intDistance = startPointer.distance(to: intEndPointer[0]!)

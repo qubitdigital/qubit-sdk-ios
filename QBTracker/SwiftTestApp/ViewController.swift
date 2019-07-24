@@ -15,7 +15,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var eventsLabel: UILabel!
     
     override func viewDidLoad() {
-        QubitSDK.start(withTrackingId: "miquido", logLevel: .verbose)
         super.viewDidLoad()
     }
     
