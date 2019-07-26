@@ -26,7 +26,9 @@ public class QubitSDK: NSObject {
     ///   - logLevel: QBLogLevel, default = .disabled
     @objc(startWithTrackingId:logLevel:)
     public class func start(withTrackingId id: String, logLevel: QBLogLevel = QBLogLevel.disabled) {
-        QubitSDK.handleException()
+        if logLevel != .disabled {
+            QubitSDK.handleException()
+        }
         trackingId = id
         QBDispatchQueueService.runAsync(type: .qubit) { QBTracker.shared.start(withTrackingId: id, logLevel: logLevel) }
     }
