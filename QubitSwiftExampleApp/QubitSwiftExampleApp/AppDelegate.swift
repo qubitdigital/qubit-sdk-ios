@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import QubitSDK
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        QubitSDK.start(withTrackingId: "miquido", logLevel: .verbose)
         return true
     }
 
