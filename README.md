@@ -6,6 +6,7 @@ Installation of the QubitSDK, to provide event tracking and lookup. To make use 
 
 | VERSION | UPDATES |
 |---|---|
+| 1.0.1 | Fixed issue where Boolean values inside events were lost. Fixed various iOS warnings. Prevented log writing in _HandleException_ if loglevel=disabled |
 | 1.0.0 | V1 Release including Native Experiences
 | 0.3.14 | Fixed accessing experience entity properties
 | 0.3.13 | Fixed issue with serializing nested dictionaries in Events
@@ -42,11 +43,13 @@ use_frameworks!
 
 target :XXXXX do
     pod "QubitSDK", :git => 
-    "https://github.com/qubitdigital/qubit-sdk-ios.git"
+    "https://github.com/qubitdigital/qubit-sdk-ios.git", :tag => "1.0.1"
 end
 ```
 
-where *XXXXX* is the name of your app target. If you access the repo via SSH as opposed to HTTPS, the target URL will be *git@github.com:qubitdigital/ios-tracker.git*. Then, from your command line, run
+where *XXXXX* is the name of your app target. Specify a GitHub *tag* to ensure you only opt-in to new releases of this SDK.
+
+If you access the repo via SSH as opposed to HTTPS, the target URL will be *git@github.com:qubitdigital/qubit-sdk-ios.git*. Then, from your command line, run
 
 ```
 pod install
