@@ -67,8 +67,7 @@ struct QBEventEntity {
         }
         
         if let data = eventData.data(using: .utf8) {
-            let jsonObjectRef = (try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String: Any]) ?? [:]
-            var jsonObject = jsonObjectRef
+            var jsonObject = (try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String: Any]) ?? [:]
             if let context: QBContextEntity = self.context, let contextData: Data = try? JSONEncoder().encode(context) {
                 jsonObject["context"] =  convert(jsonData: contextData)
             }

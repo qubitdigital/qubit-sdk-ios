@@ -6,6 +6,7 @@ Installation of the QubitSDK, to provide event tracking and lookup. To make use 
 
 | VERSION | UPDATES |
 |---|---|
+| 1.0.3 | Updated framework for Swift 5. |
 | 1.0.2 | Fixed issue where Boolean values inside events were lost. Fixed various iOS warnings. Prevented log writing in _HandleException_ if loglevel=disabled |
 | 1.0.0 | V1 Release including Native Experiences
 | 0.3.14 | Fixed accessing experience entity properties
@@ -17,7 +18,7 @@ Installation of the QubitSDK, to provide event tracking and lookup. To make use 
 | 0.3.8 | Fix JSONSerialization for boolean values
 | 0.3.7 | Fixes
 | 0.3.6 | CoreData updated
-| 0.3.5 | JSONSerialization fixed in value precisions for 
+| 0.3.5 | JSONSerialization fixed in value precisions for
 | 0.3.4 | Fix issue with sending events
 | 0.3.3 | Fix crash for old devices with 32-bit architecture
 | 0.3.2 | Fix Common Crypto issues
@@ -42,7 +43,7 @@ Once you have cocoa pods installed, navigate to the Podfile in your app’s root
 use_frameworks!
 
 target :XXXXX do
-    pod "QubitSDK", :git => 
+    pod "QubitSDK", :git =>
     "https://github.com/qubitdigital/qubit-sdk-ios.git", :tag => "1.0.2"
 end
 ```
@@ -84,7 +85,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 }
 ```
 
-Here *XXXXX* is your Qubit Tracking ID, which is a unique string representing your account, and will have already been provided to you. If you haven’t received a tracking ID, or don’t know what yours is, please contact us. 
+Here *XXXXX* is your Qubit Tracking ID, which is a unique string representing your account, and will have already been provided to you. If you haven’t received a tracking ID, or don’t know what yours is, please contact us.
 Objective-C requires *QubitSDK/QubitSDK.h* to be declared as an import within the file.
 Swift requires QubitSDK to be declared as an import within the file.
 
@@ -173,7 +174,7 @@ Objective-C
 } preview:false variation:false ignoreSegments:false];
 ```
 
-Above call takes optional parameters like `preview`, `ignoreSegments` and `variation`. 
+Above call takes optional parameters like `preview`, `ignoreSegments` and `variation`.
 
 # Disabling Tracking
 If you would like to disable tracking, use the following method.
@@ -187,7 +188,7 @@ If you would like to disable tracking, use the following method.
 ```swift
 import QubitSDK
 
-QubitSDK.stopTracking() 
+QubitSDK.stopTracking()
 ```
 
 # Common Crypto Issue
@@ -197,4 +198,3 @@ if add QubitSDK and still have problem with "Missing required module 'CommonCryp
 xcode-select --install
 ```
 after installation please build project again
-
