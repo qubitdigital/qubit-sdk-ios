@@ -35,6 +35,14 @@ class QBDatabase {
             return nil
         }
         
+        #if targetEnvironment(simulator)
+        // Documents folder missing on simulator from iOS 11
+        // See -> https://stackoverflow.com/questions/50133212/ios-document-folder-is-not-a-directory-and-or-is-missing
+        if !FileManager.default.fileExists(atPath: documentsUrl.path) {
+            try? FileManager.default.createDirectory(at: documentsUrl, withIntermediateDirectories: true, attributes: nil)
+        }
+        #endif
+        
         let databaseName = modelName + ".sqlite"
         let persistentStoreUrl = documentsUrl.appendingPathComponent(databaseName)
         do {
