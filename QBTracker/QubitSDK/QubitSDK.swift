@@ -33,6 +33,15 @@ public class QubitSDK: NSObject {
         QBDispatchQueueService.runAsync(type: .qubit) { QBTracker.shared.start(withTrackingId: id, logLevel: logLevel) }
     }
     
+    /// Pauses or resumes event tracking
+    ///
+    /// - Parameters:
+    /// - enable: default: enabled
+    @objc(enable:)
+    public class func enableTracker(enable: Bool) {
+        QBDispatchQueueService.runAsync(type: .qubit) { QBTracker.shared.enableTracker(enable: enable) }
+    }
+    
     /// Send and event
     ///
     /// - Parameters:
@@ -117,6 +126,14 @@ public class QubitSDK: NSObject {
                                               ignoreSegments: ignoreSegments,
                                               variation: variation)
         }
+    }
+    
+    /// Fetch current lookup entity,
+    ///
+    /// - Returns: nil if there is no lookup yet, entity otherwise
+    @objc(getLookupData)
+    public class func getLookupData() -> QBLookupEntity? {
+        return QBTracker.shared.getLookup()
     }
 }
 
