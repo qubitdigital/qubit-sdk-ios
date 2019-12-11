@@ -108,6 +108,24 @@ extension QBExperienceEntity {
     }
 }
 
+// MARK: - Abstraction over QBExperienceEntity
+// This is used basically to run shown() callback, having only callbackURL.
+// The rest of fields are obsolete in this case and can be placeholders.
+public final class QBExperienceEntityCallback: NSObject {
+    
+    private let expEntity: QBExperienceEntity
+    
+    public init(callback: String) {
+        self.expEntity = QBExperienceEntity(callback: callback, isControl: false, experienceId: 0, variationId: 0, payload: [:])
+    }
+    
+    @objc(shown)
+    public func shown() {
+        expEntity.shown()
+    }
+    
+}
+
 // MARK: - Constants
 
 private struct Keys {
