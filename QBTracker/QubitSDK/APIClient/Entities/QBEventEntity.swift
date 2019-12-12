@@ -67,19 +67,24 @@ struct QBEventEntity {
         }
         
         if let data = eventData.data(using: .utf8) {
-            var jsonObject = (try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String: Any]) ?? [:]
-            if let context: QBContextEntity = self.context, let contextData: Data = try? JSONEncoder().encode(context) {
-                jsonObject["context"] =  convert(jsonData: contextData)
-            }
-            if let meta: QBMetaEntity = self.meta, let metaData: Data = try? JSONEncoder().encode(meta) {
-                jsonObject["meta"] =  convert(jsonData: metaData)
-            }
-            if let session: QBSessionEntity = self.session, let sessionData: Data = try? JSONEncoder().encode(session) {
-                if let sessionDictonary = convert(jsonData: sessionData) as? [String: Any] {
-                    jsonObject += sessionDictonary
+            do {
+                guard var jsonObject = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String: Any] else { return nil }
+                if let context: QBContextEntity = self.context, let contextData: Data = try? JSONEncoder().encode(context) {
+                    jsonObject["context"] =  convert(jsonData: contextData)
                 }
+                if let meta: QBMetaEntity = self.meta, let metaData: Data = try? JSONEncoder().encode(meta) {
+                    jsonObject["meta"] =  convert(jsonData: metaData)
+                }
+                if let session: QBSessionEntity = self.session, let sessionData: Data = try? JSONEncoder().encode(session) {
+                    if let sessionDictonary = convert(jsonData: sessionData) as? [String: Any] {
+                        jsonObject += sessionDictonary
+                    }
+                }
+                return jsonObject
+            } catch {
+                return nil
             }
-            return jsonObject
+            
         }
         return nil
     }
