@@ -19,6 +19,8 @@ class QBTracker {
     private var sessionManager: QBSessionManager?
     private init() {}
     
+    private var isTrackingEnabled = true
+    
     func start(withTrackingId id: String, logLevel: QBLogLevel = QBLogLevel.disabled) {
         QBLog.logLevel = logLevel
         QBLog.info("QBTracker Initalization...")
@@ -47,9 +49,18 @@ class QBTracker {
         configurationManager.downloadConfig()
     }
     
+    func enableTracker(enable: Bool) {
+        self.isTrackingEnabled = enable
+        QBLog.info("Tracker enabled status switched to \(enable)")
+    }
+    
     func sendEvent(type: String, data: String) {
         guard let eventManager = self.eventManager else {
             QBLog.error("Please call QubitSDK.start(withTrackingId: \"YOUR_TRACKING_ID\"), before sending events")
+            return
+        }
+        guard isTrackingEnabled else {
+            QBLog.warning("The tracking is currently disabled. You have to enable it before sending any event")
             return
         }
         if let event = QBEventManager.createEvent(type: type, data: data) {
@@ -60,6 +71,10 @@ class QBTracker {
     func sendEvent(event: QBEventEntity) {
         guard let eventManager = self.eventManager else {
             QBLog.error("Please call QubitSDK.start(withTrackingId: \"YOUR_TRACKING_ID\"), before sending events")
+            return
+        }
+        guard isTrackingEnabled else {
+            QBLog.warning("The tracking is currently disabled. You have to enable it before sending any event")
             return
         }
         eventManager.sendEvent(event: event)
@@ -100,6 +115,14 @@ class QBTracker {
                 onError(error)
             }
         }
+    }
+    
+    internal func getLookup() -> QBLookupEntity? {
+        guard let lookupManager = lookupManager else {
+            QBLog.error("lookupManager is null")
+            return nil
+        }
+        return lookupManager.lookup
     }
 }
 

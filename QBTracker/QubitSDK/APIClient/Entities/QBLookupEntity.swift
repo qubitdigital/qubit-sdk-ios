@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct QBLookupEntity: Codable {
+public class QBLookupEntity: NSObject, Codable {
     
     let ipLocation: QBLocationIpEntity?
     let ipAddress: String?
