@@ -25,5 +25,6 @@ s.source       = { :git => "https://github.com/qubitdigital/qubit-sdk-ios.git", 
 s.source_files = 'QBTracker/QubitSDK/**/*.{swift}'
 s.resources = 'QBTracker/QubitSDK/Database/*.{xcdatamodeld}'
 s.framework  = "CoreData"
+s.swift_versions = ['4.0', '4.1', '4.2', '5.0']
 
 end
