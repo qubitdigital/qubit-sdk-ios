@@ -6,6 +6,7 @@ Installation of the QubitSDK, to provide event tracking and lookup. To make use 
 
 | VERSION | UPDATES |
 |---|---|
+| 1.0.6 | SWIFT_VERSION support for pod installations
 | 1.0.4 | Added possibility of temporary disabling and enabling tracker.
 | 1.0.3 | Updated framework for Swift 5. |
 | 1.0.2 | Fixed issue where Boolean values inside events were lost. Fixed various iOS warnings. Prevented log writing in _HandleException_ if loglevel=disabled |
