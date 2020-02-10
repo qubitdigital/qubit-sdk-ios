@@ -55,7 +55,7 @@ public final class QBExperienceEntity: NSObject, NSCoding {
         dict[Keys.isControl] = isControl
         dict[Keys.variationId] = variationId
         dict[Keys.payload] = payload
-        
+        return dict
     }
     
     init(callback: String, isControl: Bool, experienceId: Int, variationId: Int, payload: [String: Any]) {
