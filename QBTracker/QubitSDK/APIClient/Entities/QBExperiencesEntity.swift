@@ -48,6 +48,16 @@ public final class QBExperienceEntity: NSObject, NSCoding {
     
     let callback: String
     
+    public var asDictionary: [String: Any] {
+        var dict = [String: Any]()
+        dict[Keys.callback] = callback
+        dict[Keys.experienceId] = experienceId
+        dict[Keys.isControl] = isControl
+        dict[Keys.variationId] = variationId
+        dict[Keys.payload] = payload
+        return dict
+    }
+    
     init(callback: String, isControl: Bool, experienceId: Int, variationId: Int, payload: [String: Any]) {
         self.callback = callback
         self.isControl = isControl
