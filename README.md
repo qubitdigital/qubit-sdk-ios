@@ -6,6 +6,7 @@ Installation of the QubitSDK, to provide event tracking and lookup. To make use 
 
 | VERSION | UPDATES |
 |---|---|
+| 1.0.8 | Updated framework files
 | 1.0.7 | Upgrades to support React Native SDK
 | 1.0.6 | SWIFT_VERSION support for pod installations
 | 1.0.4 | Added possibility of temporary disabling and enabling tracker.
@@ -38,7 +39,7 @@ Installation of the QubitSDK, to provide event tracking and lookup. To make use 
 # Installation
 
 ## Cocoa Pods
-Cocoa pods are a dependency management system for iOS. If you do not have cocoa pods configured, please read the installation documents on their website (https://guides.cocoapods.org/using/getting-started.html). If you use another dependency management system or do not wish to implement one, please contact us for alternative options.
+Cocoa pods are a dependency management system for iOS. If you do not have cocoa pods configured, please read the installation documents on their website (https://guides.cocoapods.org/using/getting-started.html). If you use another dependency management system, please contact us for alternative options. If you do not wish to implement one, please read "Using Framework Files" section.
 
 Once you have cocoa pods installed, navigate to the Podfile in your app’s root directory. In the file, add the lines:
 
@@ -60,6 +61,12 @@ pod install
 ```
 
 If you encounter permission issues, ensure the GitHub username step has been successfully completed. Please consult the cocoapods documentation if you have any other issues with this step. If your process freezes on “Analysing dependencies”, try running *pod repo remove master*, *pod setup*, then *pod install* again.
+
+## Usign Framework Files
+
+If you want to use QubitSDK without a package manager, you can do so by adding QubitSDK.framework files to your project. We prepared two versions of the framework for each configuration build - debug and release. FrameworkDebug contains files needed to run the SDK on devices and simulators (arm64, arm7, i384, and x86_64 architectures). FrameworkRelease contains files only for device architectures (arm, arm7, arm64). 
+
+To add QubitSDK to your project, open Xcode, and right-click on your project. Select "Add Files to <Your Project Name>". Select QubitSDK.framework and press Add. SDK will be added and linked to your project. Please refer to our two example projects - QubitSwiftFrameworkDebugExampleApp and QubitSwiftFrameworkReleaseExampleApp. 
 
 ## Starting the QubitSDK
 Starting the QubitSDK with a tracking ID will allow us to correctly identify your data.  
