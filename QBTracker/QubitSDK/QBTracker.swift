@@ -14,6 +14,7 @@ class QBTracker {
     
     private var configurationManager: QBConfigurationManager?
     private var experiencesManager: QBExperiencesManager?
+    private var placementManager: QBPlacementManager?
     private var lookupManager: QBLookupManager?
     private var eventManager: QBEventManager?
     private var sessionManager: QBSessionManager?
@@ -44,6 +45,8 @@ class QBTracker {
         self.sessionManager = sessionManager
         
         eventManager = QBEventManager(withConfigurationManager: configurationManager, sessionManager: sessionManager, lookupManager: lookupManager)
+
+        self.placementManager = QBPlacementManager(configurationManager: configurationManager, eventManager: eventManager)
         
         sessionManager.startNewSession()
         configurationManager.downloadConfig()
@@ -91,14 +94,14 @@ class QBTracker {
         sessionManager = nil
         experiencesManager = nil
         QBLog.info("tracker stoped")
-	}
+    }
     
     internal func fetchExperiences(with ids: [Int],
-                             onSuccess: @escaping ([QBExperienceEntity]) -> Void,
-                             onError: @escaping (Error) -> Void,
-                             preview: Bool = false,
-                             ignoreSegments: Bool = false,
-                             variation: NSNumber? = nil) {
+                                   onSuccess: @escaping ([QBExperienceEntity]) -> Void,
+                                   onError: @escaping (Error) -> Void,
+                                   preview: Bool = false,
+                                   ignoreSegments: Bool = false,
+                                   variation: NSNumber? = nil) {
         guard let experiencesManager = experiencesManager else {
             QBLog.error("experiencesManager is null")
             return
@@ -111,6 +114,39 @@ class QBTracker {
         experiencesManager.fetchExperiences(with: ids) { (experiences, error) in
             if let experiences = experiences {
                 onSuccess(experiences)
+            } else if let error = error {
+                onError(error)
+            }
+        }
+    }
+
+    internal func getPlacement(with mode: String? = nil,
+                               placementId: String,
+                               attributes: String? = nil,
+                               campaignId: String? = nil,
+                               experienceId: String? = nil,
+                               resolveVisitorState: Bool = true,
+                               onSuccess: @escaping (QBPlacementEntity) -> Void,
+                               onError: @escaping (Error) -> Void) {
+
+        guard let placementManager = placementManager else {
+            QBLog.error("placementManager is null")
+            return
+        }
+
+        var attributesDict: [String: Any]?
+        if let data = attributes?.data(using: .utf8) {
+            attributesDict = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+        }
+
+        placementManager.getPlacement(with: mode,
+                                      placementId: placementId,
+                                      attributes: attributesDict,
+                                      campaignId: campaignId,
+                                      experienceId: experienceId,
+                                      resolveVisitorState: resolveVisitorState) { (placement, error) in
+            if let placement = placement {
+                onSuccess(placement)
             } else if let error = error {
                 onError(error)
             }

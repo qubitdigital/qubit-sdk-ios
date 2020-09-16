@@ -6,7 +6,8 @@ Installation of the QubitSDK, to provide event tracking and lookup. To make use 
 
 | VERSION | UPDATES |
 |---|---|
-| 1.0.10 | Bug fixes for Objective-C and Swift. New QuibitSDK.xcframework released.
+| 1.0.11 | Placements support
+| 1.0.10 | Bug fixes. New QuibitSDK.xcframework
 | 1.0.9 | Updated framework files to support iOS 14
 | 1.0.8 | Updated framework files
 | 1.0.7 | Upgrades to support React Native SDK
@@ -64,19 +65,11 @@ pod install
 
 If you encounter permission issues, ensure the GitHub username step has been successfully completed. Please consult the cocoapods documentation if you have any other issues with this step. If your process freezes on “Analysing dependencies”, try running *pod repo remove master*, *pod setup*, then *pod install* again.
 
-## Deploying without CocoaPods - using a framework
+## Usign Framework Files
 
-**Recommended approach**
+If you want to use QubitSDK without a package manager, you can do so by adding QubitSDK.framework files to your project. We prepared two versions of the framework for each configuration build - debug and release. FrameworkDebug contains files needed to run the SDK on devices and simulators (arm64, arm7, i384, and x86_64 architectures). FrameworkRelease contains files only for device architectures (arm, arm7, arm64). 
 
-If you wish to use QubitSDK without a package manager such as CocoaPods, you can do so by importing the `QubitSDK.xcframework` framework files to your project. This enables both debugging in the simulator and executing code on the iOS platform.
-
-To add QubitSDK to your project, open Xcode, and right-click on your project. Select "Add Files to <Your Project Name>". Select framework and press Add. The SDK will be added and linked to your project. 
-
-
-**Legacy framework files - to be deprecated in a future release**
-
-We prepared two versions of the framework for each configuration build - debug and release. FrameworkDebug contains files needed to run the SDK on devices and simulators (arm64, arm7, i384, and x86_64 architectures). FrameworkRelease contains files only for device architectures (arm, arm7, arm64). Please refer to our two example projects - QubitSwiftFrameworkDebugExampleApp and QubitSwiftFrameworkReleaseExampleApp. 
-
+To add QubitSDK to your project, open Xcode, and right-click on your project. Select "Add Files to <Your Project Name>". Select QubitSDK.framework and press Add. SDK will be added and linked to your project. Please refer to our two example projects - QubitSwiftFrameworkDebugExampleApp and QubitSwiftFrameworkReleaseExampleApp. 
 
 ## Starting the QubitSDK
 Starting the QubitSDK with a tracking ID will allow us to correctly identify your data.  
@@ -195,6 +188,38 @@ Objective-C
 ```
 
 Above call takes optional parameters like `preview`, `ignoreSegments` and `variation`.
+
+# Placements
+SDK contains methods to fetch placements. This can be achieved by:
+
+Swift
+```swift
+// Fetch a placement by ID ("143640" in this example)
+QubitSDK.getPlacement(withId: "143640", onSuccess: { (placement) in
+    if let placement = placement {
+        // list out the payload values
+        print("Got placement - content:")
+        print("placement content -> \(placement.content)")
+        // mark the experience as shown
+        placement.clickthrough()
+        placement.impression()
+    }
+}, onError: { (error) in
+    print("Got error: \(error.localizedDescription)")
+})
+There are optional paramaters: mode - "LIVE", "SAMPLE", PREVIEW" (defaults to "LIVE"), attributes, campaignId, experienceId.
+
+```
+
+Objective-C
+```objective-c
+[QubitSDK getPlacementWithId:@"123456" onSuccess:^(QBPlacementEntity *> * _Nonnull placement) {
+    [placement clickthrough];
+    [placement impression];
+} onError:^(NSError * _Nonnull error) {
+    NSLog(@"%@", error.description);
+};
+```
 
 # Disabling Tracking
 If you would like to disable tracking, use the following method.

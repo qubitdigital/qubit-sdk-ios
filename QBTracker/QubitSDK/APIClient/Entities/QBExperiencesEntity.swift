@@ -44,6 +44,7 @@ public final class QBExperienceEntity: NSObject, NSCoding {
     public let isControl: Bool
     public let experienceId: Int
     public let variationId: Int
+    @objc(payload)
     public let payload: [String: Any]
     
     let callback: String
@@ -94,27 +95,23 @@ extension QBExperienceEntity {
     
     @objc(shown)
     public func shown() {
-        QBDispatchQueueService.runAsync(type: .experiences) { [weak self] in
-            guard let self = self else { return }
-            
-            guard let url = URL(string: self.callback) else {
-                QBLog.error("Invalid callback URL in \(#function): \(self.callback)")
-                return
-            }
-            
-            var request = URLRequest(url: url)
-            request.httpMethod = HTTPMethod.post.rawValue
-            
-            let jsonDict: [String: Any] = ["id": QBDevice.getId()]
-            guard let jsonData = try? JSONSerialization.data(withJSONObject: jsonDict) else {
-                QBLog.error("Could not attach deviceId to callback request: \(self.callback)")
-                return
-            }
-            
-            request.httpBody = jsonData
-            URLSession.shared.dataTask(with: request).resume()
-            QBLog.info("Callback URL: \(self.callback) was invoked")
+        guard let url = URL(string: self.callback) else {
+            QBLog.error("Invalid callback URL in \(#function): \(self.callback)")
+            return
         }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = HTTPMethod.post.rawValue
+
+        let jsonDict: [String: Any] = ["id": QBDevice.getId()]
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: jsonDict) else {
+            QBLog.error("Could not attach deviceId to callback request: \(self.callback)")
+            return
+        }
+
+        request.httpBody = jsonData
+        URLSession.shared.dataTask(with: request).resume()
+        QBLog.info("Callback URL: \(self.callback) was invoked")
     }
 }
 

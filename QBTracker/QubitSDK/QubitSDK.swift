@@ -127,6 +127,37 @@ public class QubitSDK: NSObject {
                                               variation: variation)
         }
     }
+
+    /// Fetch placement
+    ///
+    /// - Parameters:
+    ///   - mode: The mode to fetch placements content with, can be one of .live, .sample, .preview
+    ///   - placementId: The unique ID of the placement
+    ///   - attributes: placement attributes
+    ///   - campaignId: Unique ID of the campaign to preview. Passing this will fetch placements data for campaign preview
+    ///   - experienceId:Unique ID of the experience to preview. Passing this will fetch placements data for experience preview. This must be used in conjunction with campaignIds
+    ///   - onSuccess: callback when the download succeeds
+    ///   - onError: callback when the download fails
+
+    @objc(getPlacementWithId:mode:attributes:campaignId:experienceId:onSuccess:onError:)
+    public class func getPlacement(with id: String,
+                                   mode: String? = nil,
+                                   attributes: String? = nil,
+                                   campaignId: String? = nil,
+                                   experienceId: String? = nil,
+                                   onSuccess: @escaping (QBPlacementEntity) -> Void,
+                                   onError: @escaping (Error) -> Void) {
+        QBDispatchQueueService.runAsync(type: .qubit) {
+            QBTracker.shared.getPlacement(with: mode,
+                                          placementId: id,
+                                          attributes: attributes,
+                                          campaignId: campaignId,
+                                          experienceId: experienceId,
+                                          resolveVisitorState: true,
+                                          onSuccess: onSuccess,
+                                          onError: onError)
+        }
+    }
     
     /// Fetch current lookup entity,
     ///

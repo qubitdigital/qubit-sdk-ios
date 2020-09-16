@@ -27,6 +27,12 @@ import CoreData
     
 }
 
+extension QBLastEvent {
+    @NSManaged var data: String?
+    @NSManaged var dateAdded: NSDate?
+    @NSManaged var type: String?
+}
+
 @objc(QBContextEvent) extension QBContextEvent {
     
     @NSManaged var id: String?

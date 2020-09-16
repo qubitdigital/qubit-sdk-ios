@@ -31,6 +31,31 @@ import UIKit
   @objc deinit
   @objc override dynamic public init(entity: CoreData.NSEntityDescription, insertInto context: CoreData.NSManagedObjectContext?)
 }
+@objc @_inheritsConvenienceInitializers public class QBLastEvent : CoreData.NSManagedObject {
+  @objc deinit
+  @objc override dynamic public init(entity: CoreData.NSEntityDescription, insertInto context: CoreData.NSManagedObjectContext?)
+}
+public enum PlacementMode : Swift.String {
+  case live
+  case sample
+  case preview
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@objc final public class QBPlacementEntity : ObjectiveC.NSObject, Foundation.NSCoding {
+  @objc(Content) final public var content: [Swift.String : Any]?
+  @objc final public func encode(with coder: Foundation.NSCoder)
+  @objc public init?(coder: Foundation.NSCoder)
+  public init(with content: [Swift.String : Any]?, clickthroughUrl: Swift.String?, impressionUrl: Swift.String?)
+  public init(withDict dict: [Swift.String : Any]) throws
+  @objc(clickthrough) final public func clickthrough()
+  @objc(impression) final public func impression()
+  @objc deinit
+  @objc override dynamic public init()
+}
 @_inheritsConvenienceInitializers @objc public class QubitSDK : ObjectiveC.NSObject {
   public static var trackingId: Swift.String
   public static var deviceId: Swift.String {
@@ -45,6 +70,7 @@ import UIKit
   @objc(createEventWithType:dictionary:) public class func createEvent(type: Swift.String, dictionary: [Swift.String : Any]) -> Swift.AnyObject?
   @objc(stopTracking) public class func stopTracking()
   @objc(fetchExperiencesWithIds:onSuccess:onError:preview:variation:ignoreSegments:) public class func fetchExperiences(withIds ids: [Swift.Int], onSuccess: @escaping ([QubitSDK.QBExperienceEntity]) -> Swift.Void, onError: @escaping (Swift.Error) -> Swift.Void, preview: Swift.Bool = false, ignoreSegments: Swift.Bool = false, variation: Foundation.NSNumber? = nil)
+  @objc(getPlacementWithId:mode:attributes:campaignId:experienceId:resolveVisitorState:onSuccess:onError:) public class func getPlacement(with id: Swift.String, mode: Swift.String? = nil, attributes: [Swift.String : Any]?, campaignId: Swift.String? = nil, experienceId: Swift.String? = nil, resolveVisitorState: Swift.Bool = true, onSuccess: @escaping (QubitSDK.QBPlacementEntity) -> Swift.Void, onError: @escaping (Swift.Error) -> Swift.Void)
   @objc(getLookupData) public class func getLookupData() -> QubitSDK.QBLookupEntity?
   @objc deinit
   @objc override dynamic public init()
@@ -128,7 +154,7 @@ extension JSONQubitSerialization {
   final public let isControl: Swift.Bool
   final public let experienceId: Swift.Int
   final public let variationId: Swift.Int
-  final public let payload: [Swift.String : Any]
+  @objc(payload) final public let payload: [Swift.String : Any]
   final public var asDictionary: [Swift.String : Any] {
     get
   }
@@ -146,6 +172,9 @@ extension QBExperienceEntity {
   @objc deinit
   @objc override dynamic public init()
 }
+extension QubitSDK.PlacementMode : Swift.Equatable {}
+extension QubitSDK.PlacementMode : Swift.Hashable {}
+extension QubitSDK.PlacementMode : Swift.RawRepresentable {}
 extension QubitSDK.QBLogLevel : Swift.Equatable {}
 extension QubitSDK.QBLogLevel : Swift.Hashable {}
 extension QubitSDK.QBLogLevel : Swift.RawRepresentable {}

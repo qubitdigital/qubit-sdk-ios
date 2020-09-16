@@ -158,9 +158,25 @@ echo "${ROW_STRING}"
 echo "\n\n\n 🚛 Step 5 Copying in the project directory"
 echo "${ROW_STRING}"
 
-rm -rf "${PROJECT_DIR}/../Framework${CONFIGURATION}/${TARGET_NAME}.framework"
+UNIVERSAL_LIB_DESTINATION="${PROJECT_DIR}/../UniversalFramework${CONFIGURATION}/${TARGET_NAME}.framework"
 
-yes | cp -Rf "${UNIVERSAL_LIBRARY_DIR}/${FRAMEWORK_NAME}.framework" "${PROJECT_DIR}/../UniversalFramework${CONFIGURATION}/${TARGET_NAME}.framework"
+rm -rf ${UNIVERSAL_LIB_DESTINATION}
+
+yes | cp -Rf "${UNIVERSAL_LIBRARY_DIR}/${FRAMEWORK_NAME}.framework" ${UNIVERSAL_LIB_DESTINATION}
+
+###############TEST##########
+UNIVERSAL_SWIFT_HEADER=${UNIVERSAL_LIB_DESTINATION}/Headers/${FRAMEWORK_NAME}.h 
+
+> ${UNIVERSAL_SWIFT_HEADER}
+echo "UNIVERSAL LIB DESTINATION ${UNIVERSAL_LIB_DESTINATION}"
+echo "#include <TargetConditionals.h>" >> ${UNIVERSAL_SWIFT_HEADER}
+echo "#if TARGET_OS_SIMULATOR" >> ${UNIVERSAL_SWIFT_HEADER}
+cat ${BUILD_DIR}/${CONFIGURATION}-${DEVICE_SIM_ARCH}/${FRAMEWORK_NAME}.framework/Headers/${FRAMEWORK_NAME}.h >> ${UNIVERSAL_SWIFT_HEADER}
+echo "#else" >> ${UNIVERSAL_SWIFT_HEADER}
+cat ${BUILD_DIR}/${CONFIGURATION}-${DEVICE_ARCH}/${FRAMEWORK_NAME}.framework/Headers/${FRAMEWORK_NAME}.h >> ${UNIVERSAL_SWIFT_HEADER}
+echo "#endif" >> ${UNIVERSAL_SWIFT_HEADER}   
+
+####### TEST ############# 
 
 ######################
 # Step 6. Open the project directory
@@ -176,4 +192,3 @@ echo "${ROW_STRING}"
 ######################
 
 exitWithMessage
-
