@@ -57,6 +57,8 @@ extension QBDeviceInfoEntity {
             return "tv"
         case .carPlay:
             return "carPlay"
+        @unknown default:
+            return "unknown"
         }
     }
     
