@@ -6,6 +6,7 @@ Installation of the QubitSDK, to provide event tracking and lookup. To make use 
 
 | VERSION | UPDATES |
 |---|---|
+| 1.0.10 | Bug fixes. New QuibitSDK.xcframework.
 | 1.0.9 | Updated framework files to support iOS 14
 | 1.0.8 | Updated framework files
 | 1.0.7 | Upgrades to support React Native SDK
