@@ -73,7 +73,7 @@ If you wish to use QubitSDK without a package manager such as CocoaPods, you can
 To add QubitSDK to your project, open Xcode, and right-click on your project. Select "Add Files to <Your Project Name>". Select framework and press Add. The SDK will be added and linked to your project. 
 
 
-**Legacy framework files - to be deprecated in a future release **
+**Legacy framework files - to be deprecated in a future release**
 
 We prepared two versions of the framework for each configuration build - debug and release. FrameworkDebug contains files needed to run the SDK on devices and simulators (arm64, arm7, i384, and x86_64 architectures). FrameworkRelease contains files only for device architectures (arm, arm7, arm64). Please refer to our two example projects - QubitSwiftFrameworkDebugExampleApp and QubitSwiftFrameworkReleaseExampleApp. 
 
