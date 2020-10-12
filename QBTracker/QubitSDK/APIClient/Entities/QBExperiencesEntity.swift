@@ -17,7 +17,7 @@ final class QBExperiencesEntity: DictionaryInitializable {
     
     var experiencePayloads: [QBExperienceEntity]
     
-    init(withDict dict: [String : Any]) throws {
+    init(withDict dict: [String: Any]) throws {
         guard let experienceEntitiesDicts = dict[Keys.experiencePayloads] as? [[String: Any]] else {
             self.experiencePayloads = []
             return
