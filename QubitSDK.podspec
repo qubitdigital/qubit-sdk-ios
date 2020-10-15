@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
     s.name         = "QubitSDK"
     
-    s.version      = "1.0.11"
+    s.version      = "1.0.12"
     
     s.summary      = "Qubit experience delivery for iOS"
     
@@ -25,6 +25,6 @@ Pod::Spec.new do |s|
     s.source_files = 'QBTracker/QubitSDK/**/*.{swift}'
     s.resources = 'QBTracker/QubitSDK/Database/*.{xcdatamodeld}'
     s.framework  = "CoreData"
-    s.swift_versions = ['4.0', '4.1', '4.2', '5.0']
+    s.swift_versions = ['4.0', '4.1', '4.2', '5.0', '5.1', '5.2', '5.3']
     
     end
