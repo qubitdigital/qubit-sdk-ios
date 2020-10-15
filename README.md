@@ -26,36 +26,27 @@ Further release notes are available in the [GitHub release notes](https://github
 | 1.0.3 | Updated framework for Swift 5. |
 | 1.0.2 | Fixed issue where Boolean values inside events were lost. Fixed various iOS warnings. Prevented log writing in _HandleException_ if loglevel=disabled |
 | 1.0.0 | V1 Release including Native Experiences
-| 0.3.14 | Fixed accessing experience entity properties
-| 0.3.13 | Fixed issue with serializing nested dictionaries in Events
-| 0.3.12 | Experiences added to the SDK
-| 0.3.11 | Fix for serializing decimals in JSON
-| 0.3.10 | Added trackerID and deviceID to the QubitSDK
-| 0.3.9 | Xcode 10 supported, Fix loop cycle for sending events
-| 0.3.8 | Fix JSONSerialization for boolean values
-| 0.3.7 | Fixes
-| 0.3.6 | CoreData updated
-| 0.3.5 | JSONSerialization fixed in value precisions for
-| 0.3.4 | Fix issue with sending events
-| 0.3.3 | Fix crash for old devices with 32-bit architecture
-| 0.3.2 | Fix Common Crypto issues
-| 0.3.1 | Update to use Swift 4.0.3
-| 0.3.0 | Update to use Swift 4.0
-| 0.2.7 | Update to resolve potential reachability memory leak issues |
-| 0.2.6 | Removal of unused code with regards to automatic event generation and segment membership requests|
-| 0.2.5 | Update swizzling functionality|
-| 0.2.4 | Update that fixes some scenarios that used this SDK in Swift |
-| 0.2.3 | Update segmentation functionality |
-| 0.2.2 | Update to use initWithData |
+
+
+# Integration
+
+## Integration options
+
+| | Method | Supports | Host |
+|---|---|---|---|
+| 1 | CocoaPods | Swift & Objective-C | CocoaPods.org & GitHub |
+| 2 | UniversalFramework | Swift & Objective-C | GitHub |
 
 
 
-# Installation
 
-## Cocoa Pods
-Cocoa pods are a dependency management system for iOS. If you do not have cocoa pods configured, please read the installation documents on their website (https://guides.cocoapods.org/using/getting-started.html). If you use another dependency management system, please contact us for alternative options. 
+Further details on installation options are below.
 
-If you do not wish to implement CocoaPods, please read "Using Framework Files" section.
+
+## (1) CocoaPods
+CocoaPods is a dependency management system for iOS. If you do not have CocoaPods configured, please read the installation documents on their website (https://guides.cocoapods.org/using/getting-started.html). If you use another dependency management system, please contact us for alternative options. 
+
+If you do not wish to implement CocoaPods, check out the "Using Framework Files" section below.
 
 ### Install the QubitSDK package
 
@@ -78,7 +69,7 @@ Alternatively to give it a test run, run the command:
 
 ### Alternatively, install from GitHub
 
-Once you have cocoa pods installed, navigate to the Podfile in your app’s root directory. In the file, add the lines:
+Once you have CocoaPods installed, navigate to the Podfile in your app’s root directory. In the file, add the lines:
 
 ```
 use_frameworks!
@@ -101,9 +92,9 @@ pod install
 
 If you encounter permission issues, ensure the GitHub username step has been successfully completed. Please consult the cocoapods documentation if you have any other issues with this step. If your process freezes on “Analysing dependencies”, try running *pod repo remove master*, *pod setup*, then *pod install* again.
 
-## Deploying without CocoaPods - using a framework
+## (2) Integrate using a framework
 
-**UniversalFrameworkRelease**
+### UniversalFramework
 
 If you wish to use QubitSDK without a package manager such as CocoaPods, you can do so by importing the `UniversalFrameworkRelease/QubitSDK.framework` files into your project. This enables both debugging in the simulator and executing code on the iOS platform.
 
@@ -111,10 +102,16 @@ To add QubitSDK to your project using this method:
 
 1. Open Xcode, and right-click on your project. 
 2. Select "Add Files to <Your Project Name>". Select `UniversalFrameworkRelease/QubitSDK.framework` and press Add, with 'Copy items as needed' ticked.
-3. In Project Settings > General, ensure `QubitSDK.framework` is embedded into your project.
+3. In `Project Settings > General`, ensure `QubitSDK.framework` is embedded into your project.
 4. The SDK will now be available for use.
 
-**QubitSDK.xcframework**
+#### Using UniversalFramework with Objective-C
+
+With Xcode 12, you may experience issues building your app for testing in the iOS simulator. You may need to to add `arm64` to `excluded_architectures` in the Build Settings of your target app. If you wish to test on device, remove `arm64` from excluded architectures.
+
+This step is not necessary for Swift.
+
+### QubitSDK.xcframework
 
 Using a `.xcframework` will be the preferred approach for future releases and was available for use during the Xcode 12 beta. However, due to regression with Xcode 12.1 this framework cannot successfully build and has been temporarily removed.
 
