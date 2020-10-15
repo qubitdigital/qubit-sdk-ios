@@ -1,11 +1,22 @@
-# Qubit Mobile
-Installation of the QubitSDK, to provide event tracking and lookup. To make use of this SDK, please contact your Qubit Customer Success representative.
+# Qubit for Mobile app: iOS SDK
+This SDK enables comprehensive event tracking and Qubit experience delivery from within an iOS app.
 
-# Updates
+### Compatibility
+This release is compatible with Xcode 12 & iOS14, and supports Swift & Objective-C. 
 
+### Getting started
+To make use of this SDK, please contact your Qubit Customer Success representative.
+
+### Getting help
+Please contact support@qubit.com or raise an issue on GitHub.
+
+# Releases
+
+Further release notes are available in the [GitHub release notes](https://github.com/qubitdigital/qubit-sdk-ios/releases).
 
 | VERSION | UPDATES |
 |---|---|
+| 1.0.11 | Removed QuibitSDK.xcframework due to ongoing Xcode12 bug. UniversalFramework released.
 | 1.0.10 | Bug fixes for Objective-C and Swift. New QuibitSDK.xcframework released.
 | 1.0.9 | Updated framework files to support iOS 14
 | 1.0.8 | Updated framework files
@@ -38,25 +49,51 @@ Installation of the QubitSDK, to provide event tracking and lookup. To make use 
 | 0.2.2 | Update to use initWithData |
 
 
+
 # Installation
 
 ## Cocoa Pods
-Cocoa pods are a dependency management system for iOS. If you do not have cocoa pods configured, please read the installation documents on their website (https://guides.cocoapods.org/using/getting-started.html). If you use another dependency management system, please contact us for alternative options. If you do not wish to implement one, please read "Using Framework Files" section.
+Cocoa pods are a dependency management system for iOS. If you do not have cocoa pods configured, please read the installation documents on their website (https://guides.cocoapods.org/using/getting-started.html). If you use another dependency management system, please contact us for alternative options. 
+
+If you do not wish to implement CocoaPods, please read "Using Framework Files" section.
+
+### Install the QubitSDK package
+
+Releases of this SDK are found on CocoaPods here: https://cocoapods.org/pods/QubitSDK.
+
+Update the following into your Podfile:
+
+```
+target 'MyApp' do
+  pod 'QubitSDK', '~> 1.0.11'
+end
+```
+
+Then run a pod install inside your terminal, or from CocoaPods.app.
+
+Alternatively to give it a test run, run the command:
+
+`pod try QubitSDK`
+
+
+### Alternatively, install from GitHub
 
 Once you have cocoa pods installed, navigate to the Podfile in your app’s root directory. In the file, add the lines:
 
 ```
 use_frameworks!
 
-target :XXXXX do
+target 'MyApp' do
     pod "QubitSDK", :git =>
-    "https://github.com/qubitdigital/qubit-sdk-ios.git", :tag => "1.0.4"
+    "https://github.com/qubitdigital/qubit-sdk-ios.git", :tag => "1.0.11"
 end
 ```
 
-where *XXXXX* is the name of your app target. Specify a GitHub *tag* to ensure you only opt-in to new releases of this SDK.
+Specify a GitHub *tag* to ensure you only opt-in to new releases of this SDK.
 
-If you access the repo via SSH as opposed to HTTPS, the target URL will be *git@github.com:qubitdigital/qubit-sdk-ios.git*. Then, from your command line, run
+If you access the repo via SSH as opposed to HTTPS, the target URL will be *git@github.com:qubitdigital/qubit-sdk-ios.git*. 
+
+Then, from your command line, run
 
 ```
 pod install
@@ -66,16 +103,20 @@ If you encounter permission issues, ensure the GitHub username step has been suc
 
 ## Deploying without CocoaPods - using a framework
 
-**Recommended approach**
+**UniversalFrameworkRelease**
 
-If you wish to use QubitSDK without a package manager such as CocoaPods, you can do so by importing the `QubitSDK.xcframework` framework files to your project. This enables both debugging in the simulator and executing code on the iOS platform.
+If you wish to use QubitSDK without a package manager such as CocoaPods, you can do so by importing the `UniversalFrameworkRelease/QubitSDK.framework` files into your project. This enables both debugging in the simulator and executing code on the iOS platform.
 
-To add QubitSDK to your project, open Xcode, and right-click on your project. Select "Add Files to <Your Project Name>". Select framework and press Add. The SDK will be added and linked to your project. 
+To add QubitSDK to your project using this method:
 
+1. Open Xcode, and right-click on your project. 
+2. Select "Add Files to <Your Project Name>". Select `UniversalFrameworkRelease/QubitSDK.framework` and press Add, with 'Copy items as needed' ticked.
+3. In Project Settings > General, ensure `QubitSDK.framework` is embedded into your project.
+4. The SDK will now be available for use.
 
-**Legacy framework files - to be deprecated in a future release**
+**QubitSDK.xcframework**
 
-We prepared two versions of the framework for each configuration build - debug and release. FrameworkDebug contains files needed to run the SDK on devices and simulators (arm64, arm7, i384, and x86_64 architectures). FrameworkRelease contains files only for device architectures (arm, arm7, arm64). Please refer to our two example projects - QubitSwiftFrameworkDebugExampleApp and QubitSwiftFrameworkReleaseExampleApp. 
+Using a `.xcframework` will be the preferred approach for future releases and was available for use during the Xcode 12 beta. However, due to regression with Xcode 12.1 this framework cannot successfully build and has been temporarily removed.
 
 
 ## Starting the QubitSDK
@@ -86,15 +127,27 @@ The log level options for Swift are: .disabled, .error, .info, .debug, .verbose,
 
 To start the QubitSDK (preferably in your AppDelegate didFinishLaunchingWithOptions) use the following method
 
+### Objective-C
 
+CocoaPods:
+```objective-c
+@import QubitSDK;
+```
+
+Framework:
 ```objective-c
 #import "QubitSDK/QubitSDK.h"
+```
 
+Launch:
+```objective-c
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [QubitSDK startWithTrackingId: @"XXXXX" logLevel: QBLogLevelDisabled];
     return YES;
 }
 ```
+
+### Swift
 
 ```swift
 import QubitSDK
@@ -106,8 +159,6 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 ```
 
 Here *XXXXX* is your Qubit Tracking ID, which is a unique string representing your account, and will have already been provided to you. If you haven’t received a tracking ID, or don’t know what yours is, please contact us.
-Objective-C requires *QubitSDK/QubitSDK.h* to be declared as an import within the file.
-Swift requires QubitSDK to be declared as an import within the file.
 
 # Sending Events
 
@@ -187,8 +238,11 @@ QubitSDK.fetchExperiences(withIds: [143640], onSuccess: { (experiences) in
 Objective-C
 ```objective-c
 [QubitSDK fetchExperiencesWithIds:@[@1] onSuccess:^(NSArray<QBExperienceEntity *> * _Nonnull experiences) {
+    // select the first experience returned
     QBExperienceEntity* firstEntity = experiences.firstObject;
-    [firstEntity shown]; // make a POST call to the returned callback URL
+    
+    // make a POST call to the returned callback URL
+    [firstEntity shown];
 } onError:^(NSError * _Nonnull error) {
     NSLog(@"%@", error.description);
 } preview:false variation:false ignoreSegments:false];
@@ -212,9 +266,10 @@ QubitSDK.stopTracking()
 ```
 
 # Common Crypto Issue
-if add QubitSDK and still have problem with "Missing required module 'CommonCrypto'" please run in terminal:
+If you notice "Missing required module 'CommonCrypto'" then please run in the terminal:
 
 ```
 xcode-select --install
 ```
-after installation please build project again
+
+After installation, build your project again.
