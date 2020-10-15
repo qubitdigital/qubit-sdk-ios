@@ -98,7 +98,8 @@ If you encounter permission issues, ensure the GitHub username step has been suc
 
 If you wish to use QubitSDK without a package manager such as CocoaPods, you can do so by importing the `UniversalFrameworkRelease/QubitSDK.framework` files into your project. This enables both debugging in the simulator and executing code on the iOS platform.
 
-To add QubitSDK to your project using this method:
+To add QubitSDK to your project using this method, 
+just clone this GitHub repo and then:
 
 1. Open Xcode, and right-click on your project. 
 2. Select "Add Files to <Your Project Name>". Select `UniversalFrameworkRelease/QubitSDK.framework` and press Add, with 'Copy items as needed' ticked.
