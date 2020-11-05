@@ -19,6 +19,14 @@ public final class QBPlacementEntity: NSObject, NSCoding, DictionaryInitializabl
     public var impressionUrl: String?
     public var clickthroughUrl: String?
 
+    public var asDictionary: [String: Any] {
+        var dict = [String: Any]()
+        dict[Keys.content] = content
+        dict[Keys.impressionUrl] = impressionUrl
+        dict[Keys.clickthroughUrl] = clickthroughUrl
+        return dict
+    }
+    
     public func encode(with coder: NSCoder) {
         coder.encode(content, forKey: Keys.content)
         coder.encode(clickthroughUrl, forKey: Keys.clickthroughUrl)
