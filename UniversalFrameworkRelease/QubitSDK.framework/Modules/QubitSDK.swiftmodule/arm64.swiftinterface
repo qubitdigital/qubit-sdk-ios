@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3 (swiftlang-1200.0.29.2 clang-1200.0.30.1)
+// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.0.41 clang-1200.0.32.8)
 // swift-module-flags: -target arm64-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name QubitSDK
 import CommonCrypto
 import CoreData
@@ -47,14 +47,25 @@ public enum PlacementMode : Swift.String {
 }
 @objc final public class QBPlacementEntity : ObjectiveC.NSObject, Foundation.NSCoding {
   @objc(Content) final public var content: [Swift.String : Any]?
+  final public var impressionUrl: Swift.String?
+  final public var clickthroughUrl: Swift.String?
+  final public var asDictionary: [Swift.String : Any] {
+    get
+  }
   @objc final public func encode(with coder: Foundation.NSCoder)
   @objc public init?(coder: Foundation.NSCoder)
-  public init(with content: [Swift.String : Any]?, clickthroughUrl: Swift.String?, impressionUrl: Swift.String?)
+  public init(with content: [Swift.String : Any]? = nil, clickthroughUrl: Swift.String? = nil, impressionUrl: Swift.String? = nil)
   public init(withDict dict: [Swift.String : Any]) throws
   @objc(clickthrough) final public func clickthrough()
   @objc(impression) final public func impression()
   @objc deinit
   @objc override dynamic public init()
+}
+final public class QBPlacementEntityCallback {
+  public init(clickthroughUrl: Swift.String? = nil, impressionUrl: Swift.String? = nil)
+  @objc(clickthrough) final public func clickthrough()
+  @objc(impression) final public func impression()
+  @objc deinit
 }
 @_inheritsConvenienceInitializers @objc public class QubitSDK : ObjectiveC.NSObject {
   public static var trackingId: Swift.String
@@ -70,7 +81,7 @@ public enum PlacementMode : Swift.String {
   @objc(createEventWithType:dictionary:) public class func createEvent(type: Swift.String, dictionary: [Swift.String : Any]) -> Swift.AnyObject?
   @objc(stopTracking) public class func stopTracking()
   @objc(fetchExperiencesWithIds:onSuccess:onError:preview:variation:ignoreSegments:) public class func fetchExperiences(withIds ids: [Swift.Int], onSuccess: @escaping ([QubitSDK.QBExperienceEntity]) -> Swift.Void, onError: @escaping (Swift.Error) -> Swift.Void, preview: Swift.Bool = false, ignoreSegments: Swift.Bool = false, variation: Foundation.NSNumber? = nil)
-  @objc(getPlacementWithId:mode:attributes:campaignId:experienceId:resolveVisitorState:onSuccess:onError:) public class func getPlacement(with id: Swift.String, mode: Swift.String? = nil, attributes: [Swift.String : Any]?, campaignId: Swift.String? = nil, experienceId: Swift.String? = nil, resolveVisitorState: Swift.Bool = true, onSuccess: @escaping (QubitSDK.QBPlacementEntity) -> Swift.Void, onError: @escaping (Swift.Error) -> Swift.Void)
+  @objc(getPlacementWithId:mode:attributes:campaignId:experienceId:onSuccess:onError:) public class func getPlacement(with id: Swift.String, mode: Swift.String? = nil, attributes: Swift.String? = nil, campaignId: Swift.String? = nil, experienceId: Swift.String? = nil, onSuccess: @escaping (QubitSDK.QBPlacementEntity) -> Swift.Void, onError: @escaping (Swift.Error) -> Swift.Void)
   @objc(getLookupData) public class func getLookupData() -> QubitSDK.QBLookupEntity?
   @objc deinit
   @objc override dynamic public init()
