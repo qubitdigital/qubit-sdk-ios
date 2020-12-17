@@ -26,9 +26,6 @@ public class QubitSDK: NSObject {
     ///   - logLevel: QBLogLevel, default = .disabled
     @objc(startWithTrackingId:logLevel:)
     public class func start(withTrackingId id: String, logLevel: QBLogLevel = QBLogLevel.disabled) {
-        if logLevel != .disabled {
-            QubitSDK.handleException()
-        }
         trackingId = id
         QBDispatchQueueService.runAsync(type: .qubit) { QBTracker.shared.start(withTrackingId: id, logLevel: logLevel) }
     }
@@ -227,29 +224,3 @@ public class QBTrackerManager: NSObject {
 
 @available(*, unavailable, message:"this method is unavailable at new version of SDK")
 public let qubit: QBTrackerManager = QBTrackerManager()
-
-private extension QubitSDK {
-    static func handleException() {
-        NSSetUncaughtExceptionHandler { (_) in
-            QBLog.error(Thread.callStackSymbols.joined(separator: "\n"))
-        }
-        signal(SIGABRT) { (_) in
-            QBLog.error(Thread.callStackSymbols.joined(separator: "\n"))
-        }
-        signal(SIGILL) { (_) in
-            QBLog.error(Thread.callStackSymbols.joined(separator: "\n"))
-        }
-        signal(SIGSEGV) { (_) in
-            QBLog.error(Thread.callStackSymbols.joined(separator: "\n"))
-        }
-        signal(SIGFPE) { (_) in
-            QBLog.error(Thread.callStackSymbols.joined(separator: "\n"))
-        }
-        signal(SIGBUS) { (_) in
-            QBLog.error(Thread.callStackSymbols.joined(separator: "\n"))
-        }
-        signal(SIGPIPE) { (_) in
-            QBLog.error(Thread.callStackSymbols.joined(separator: "\n"))
-        }
-    }
-}
