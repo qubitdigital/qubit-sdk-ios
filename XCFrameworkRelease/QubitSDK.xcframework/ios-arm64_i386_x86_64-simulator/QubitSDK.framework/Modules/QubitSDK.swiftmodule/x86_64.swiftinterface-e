@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
-// swift-module-flags: -target i386-apple-ios9.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name QubitSDK
+// swift-module-flags: -target x86_64-apple-ios9.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name QubitSDK
 import CommonCrypto
 import CoreData
 import CoreFoundation
@@ -36,7 +36,7 @@ import UIKit
   public static var deviceId: Swift.String {
     get
   }
-  @objc(startWithTrackingId:logLevel:) public class func start(withTrackingId id: Swift.String, logLevel: QBLogLevel = QBLogLevel.disabled)
+  @objc(startWithTrackingId:logLevel:) public class func start(withTrackingId id: Swift.String, logLevel: QubitSDK.QBLogLevel = QBLogLevel.disabled)
   @objc(enable:) public class func enableTracker(enable: Swift.Bool)
   @objc(sendEventWithType:data:) public class func sendEvent(type: Swift.String, data: Swift.String)
   @objc(sendEventWithType:dictionary:) public class func sendEvent(type: Swift.String, dictionary: [Swift.String : Any])
@@ -44,8 +44,8 @@ import UIKit
   @objc(createEventWithType:data:) public class func createEvent(type: Swift.String, data: Swift.String) -> Swift.AnyObject?
   @objc(createEventWithType:dictionary:) public class func createEvent(type: Swift.String, dictionary: [Swift.String : Any]) -> Swift.AnyObject?
   @objc(stopTracking) public class func stopTracking()
-  @objc(fetchExperiencesWithIds:onSuccess:onError:preview:variation:ignoreSegments:) public class func fetchExperiences(withIds ids: [Swift.Int], onSuccess: @escaping ([QBExperienceEntity]) -> Swift.Void, onError: @escaping (Swift.Error) -> Swift.Void, preview: Swift.Bool = false, ignoreSegments: Swift.Bool = false, variation: Foundation.NSNumber? = nil)
-  @objc(getLookupData) public class func getLookupData() -> QBLookupEntity?
+  @objc(fetchExperiencesWithIds:onSuccess:onError:preview:variation:ignoreSegments:) public class func fetchExperiences(withIds ids: [Swift.Int], onSuccess: @escaping ([QubitSDK.QBExperienceEntity]) -> Swift.Void, onError: @escaping (Swift.Error) -> Swift.Void, preview: Swift.Bool = false, ignoreSegments: Swift.Bool = false, variation: Foundation.NSNumber? = nil)
+  @objc(getLookupData) public class func getLookupData() -> QubitSDK.QBLookupEntity?
   @objc deinit
   @objc override dynamic public init()
 }
@@ -55,18 +55,18 @@ import UIKit
 }
 @_inheritsConvenienceInitializers @objc public class QBTrackerManager : ObjectiveC.NSObject {
   @available(*, deprecated, message: "will be removed in next version")
-  @objc public static let sharedManager: QBTrackerManager
-  @available(*, unavailable, message: "this method is unavailable at new version of SDK, please use [QubitSDK startWithTrackingId:logLevel:]/start(withTrackingId)")
+  @objc public static let sharedManager: QubitSDK.QBTrackerManager
+  @available(*, unavailable, message: "this method is unavailable at new version of SDK, please use [QubitSDK startWithTrackingId:logLevel:]/QubitSDK.start(withTrackingId)")
   @objc(setTrackingId:) public func setTrackingId(trackingId: Swift.String)
   @available(*, unavailable, message: "this method is unavailable at new version of SDK")
   @objc(setDebugEndpoint:) public func setDebugEndpoint(endPointUrl: Swift.String)
-  @available(*, unavailable, message: "this method is unavailable at new version of SDK, please use [QubitSDK stopTracking]/stopTracking()")
+  @available(*, unavailable, message: "this method is unavailable at new version of SDK, please use [QubitSDK stopTracking]/QubitSDK.stopTracking()")
   @objc(unsubscribeToTracking) public func unsubscribeToTracking()
-  @available(*, unavailable, message: "this method is unavailable at new version of SDK, please use [QubitSDK startWithTrackingId:logLevel:]/start(withTrackingId)")
+  @available(*, unavailable, message: "this method is unavailable at new version of SDK, please use [QubitSDK startWithTrackingId:logLevel:]/QubitSDK.start(withTrackingId)")
   @objc(subscribeToTracking) public func subscribeToTracking()
-  @available(*, deprecated, message: "will be removed in next version of SDK, please use [QubitSDK sendEventWithType:dictionary:]/sendEvent(type,dictionary)")
+  @available(*, deprecated, message: "will be removed in next version of SDK, please use [QubitSDK sendEventWithType:dictionary:]/QubitSDK.sendEvent(type,dictionary)")
   @objc(dispatchEvent:withData:) public func dispatchEvent(type: Swift.String, withData: [Swift.String : Any])
-  @available(*, deprecated, message: "will be removed in next version of SDK, please use [QubitSDK sendEventWithType:data:]/sendEvent(type,data)")
+  @available(*, deprecated, message: "will be removed in next version of SDK, please use [QubitSDK sendEventWithType:data:]/QubitSDK.sendEvent(type,data)")
   @objc(dispatchEvent:withStringData:) public func dispatchEvent(type: Swift.String, withStringData: Swift.String)
   @available(*, unavailable, message: "this method is unavailable at new version of SDK")
   @objc(dispatchSessionEvent:withEnd:) public func dispatchSessionEvent(startTimeStamp: Foundation.TimeInterval, withEnd: Foundation.TimeInterval)
@@ -84,30 +84,30 @@ import UIKit
   @objc override dynamic public init()
 }
 @available(*, unavailable, message: "this method is unavailable at new version of SDK")
-public let qubit: QBTrackerManager
+public let qubit: QubitSDK.QBTrackerManager
 extension JSONQubitSerialization {
   public struct ReadingOptions : Swift.OptionSet {
     public let rawValue: Swift.UInt
     public init(rawValue: Swift.UInt)
-    public static let mutableContainers: JSONQubitSerialization.ReadingOptions
-    public static let mutableLeaves: JSONQubitSerialization.ReadingOptions
-    public static let allowFragments: JSONQubitSerialization.ReadingOptions
-    public typealias Element = JSONQubitSerialization.ReadingOptions
-    public typealias ArrayLiteralElement = JSONQubitSerialization.ReadingOptions
+    public static let mutableContainers: QubitSDK.JSONQubitSerialization.ReadingOptions
+    public static let mutableLeaves: QubitSDK.JSONQubitSerialization.ReadingOptions
+    public static let allowFragments: QubitSDK.JSONQubitSerialization.ReadingOptions
+    public typealias Element = QubitSDK.JSONQubitSerialization.ReadingOptions
+    public typealias ArrayLiteralElement = QubitSDK.JSONQubitSerialization.ReadingOptions
     public typealias RawValue = Swift.UInt
   }
   public struct WritingOptions : Swift.OptionSet {
     public let rawValue: Swift.UInt
     public init(rawValue: Swift.UInt)
-    public static let prettyPrinted: JSONQubitSerialization.WritingOptions
-    public typealias Element = JSONQubitSerialization.WritingOptions
-    public typealias ArrayLiteralElement = JSONQubitSerialization.WritingOptions
+    public static let prettyPrinted: QubitSDK.JSONQubitSerialization.WritingOptions
+    public typealias Element = QubitSDK.JSONQubitSerialization.WritingOptions
+    public typealias ArrayLiteralElement = QubitSDK.JSONQubitSerialization.WritingOptions
     public typealias RawValue = Swift.UInt
   }
 }
 @objc @_inheritsConvenienceInitializers open class JSONQubitSerialization : ObjectiveC.NSObject {
   open class func isValidJSONObject(_ obj: Any) -> Swift.Bool
-  open class func data(withJSONObject value: Any, options opt: JSONQubitSerialization.WritingOptions = []) throws -> Foundation.Data
+  open class func data(withJSONObject value: Any, options opt: QubitSDK.JSONQubitSerialization.WritingOptions = []) throws -> Foundation.Data
   @objc deinit
   @objc override dynamic public init()
 }
@@ -146,6 +146,6 @@ extension QBExperienceEntity {
   @objc deinit
   @objc override dynamic public init()
 }
-extension QBLogLevel : Swift.Equatable {}
-extension QBLogLevel : Swift.Hashable {}
-extension QBLogLevel : Swift.RawRepresentable {}
+extension QubitSDK.QBLogLevel : Swift.Equatable {}
+extension QubitSDK.QBLogLevel : Swift.Hashable {}
+extension QubitSDK.QBLogLevel : Swift.RawRepresentable {}
