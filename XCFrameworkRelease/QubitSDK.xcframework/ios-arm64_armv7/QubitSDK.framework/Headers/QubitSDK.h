@@ -390,7 +390,6 @@ SWIFT_CLASS("_TtC8QubitSDK8QubitSDK")
 @end
 
 
-
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
 #endif
@@ -786,7 +785,6 @@ SWIFT_CLASS("_TtC8QubitSDK8QubitSDK")
 + (QBLookupEntity * _Nullable)getLookupData SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
-
 
 
 #if __has_attribute(external_source_symbol)
