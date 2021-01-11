@@ -16,6 +16,7 @@ Further release notes are available in the [GitHub release notes](https://github
 
 | VERSION | UPDATES |
 |---|---|
+| 1.0.15 | Removed global exception handling. QuibitSDK.xcframework released.
 | 1.0.11 | Removed QuibitSDK.xcframework due to ongoing Xcode12 bug. UniversalFramework released.
 | 1.0.10 | Bug fixes for Objective-C and Swift. New QuibitSDK.xcframework released.
 | 1.0.9 | Updated framework files to support iOS 14
@@ -35,7 +36,7 @@ Further release notes are available in the [GitHub release notes](https://github
 | | Method | Supports | Host |
 |---|---|---|---|
 | 1 | CocoaPods | Swift & Objective-C | CocoaPods.org & GitHub |
-| 2 | UniversalFramework | Swift & Objective-C | GitHub |
+| 2 | XCFramework | Swift & Objective-C | GitHub |
 
 
 
@@ -56,7 +57,7 @@ Update the following into your Podfile:
 
 ```
 target 'MyApp' do
-  pod 'QubitSDK', '~> 1.0.11'
+  pod 'QubitSDK', '~> 1.0.15'
 end
 ```
 
@@ -76,7 +77,7 @@ use_frameworks!
 
 target 'MyApp' do
     pod "QubitSDK", :git =>
-    "https://github.com/qubitdigital/qubit-sdk-ios.git", :tag => "1.0.11"
+    "https://github.com/qubitdigital/qubit-sdk-ios.git", :tag => "1.0.15"
 end
 ```
 
@@ -94,7 +95,6 @@ If you encounter permission issues, ensure the GitHub username step has been suc
 
 ## (2) Integrate using a framework
 
-
 ### QubitSDK.xcframework
 If you wish to use QubitSDK without a package manager such as CocoaPods, you can do so by importing the `XCFrameworkRelease/QubitSDK.xcframework` files into your project. This enables both debugging in the simulator and executing code on the iOS platform.
 
@@ -106,9 +106,11 @@ just clone this GitHub repo and then:
 3. In `Project Settings > General`, ensure `QubitSDK.xcframework` is embedded into your project.
 4. The SDK will now be available for use.
 
+
 ### UniversalFramework
 If, for any reason, you don't wish to use the provided methods for integrating the SDK, you can still use the legacy method of integrating frameworks - UniversalFramework.
-This method is a little more challenging as it requires you to strip unused architectures during compilation.
+
+This method is a little more challenging as it requires you to strip unused architectures during compilation. Note that this will be deprecated in a future release.
 
 1. Open Xcode, and right-click on your project.
 2. Select "Add Files to <Your Project Name>". Select `UniversalFramework/QubitSDK.framework` and press Add, with 'Copy items as needed' ticked.
