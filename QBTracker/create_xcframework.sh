@@ -37,3 +37,5 @@ xcodebuild -create-xcframework -framework ${SIMULATOR_ARCHIVE_PATH}/Products/Lib
 rm -rf "${SIMULATOR_ARCHIVE_PATH}"
 rm -rf "${IOS_DEVICE_ARCHIVE_PATH}"
 
+cd "${FRAMEWORK_PATH}"
+find . -name "*.swiftinterface" -exec sed -i -e 's/QubitSDK\.//g' {} \;
