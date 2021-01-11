@@ -107,8 +107,8 @@ just clone this GitHub repo and then:
 4. The SDK will now be available for use.
 
 ### UniversalFramework
-If, for any reason, you don't want to use provided methods for integrating the SDK, you can still use old method of integrating frameworks - Universal Framework.
-This method is a little more challending as it requires to strip unused architectures during compiltaion.
+If, for any reason, you don't wish to use the provided methods for integrating the SDK, you can still use the legacy method of integrating frameworks - UniversalFramework.
+This method is a little more challenging as it requires you to strip unused architectures during compilation.
 
 1. Open Xcode, and right-click on your project.
 2. Select "Add Files to <Your Project Name>". Select `UniversalFramework/QubitSDK.framework` and press Add, with 'Copy items as needed' ticked.
