@@ -33,19 +33,22 @@ class QBEventServiceImp: QBEventService {
         }
         
         var request = URLRequest(url: url)
-        var arrayJson = [[String: Any]]()
         let batchTs = Int64(Date().timeIntervalSince1970)
         for event in events {
             var event = event
             event.setBatchTs(batchTs: batchTs)
-            if let json = event.codable() {
-                arrayJson.append(json)
-            }
         }
-        let jsonData = try? JSONQubitSerialization.data(withJSONObject: arrayJson, options: .prettyPrinted)
-        request.httpBody = jsonData
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        apiClient.makeRequestAndDecode(request, withMethod: HTTPMethod.post, then: completion)
+        do {
+            let jsonData = try JSONEncoder().encode(events)
+            request.httpBody = jsonData
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            apiClient.makeRequestAndDecode(request, withMethod: HTTPMethod.post, then: completion)
+        } catch {
+            QBLog.error("Error encoding events data into JSON")
+            completion?(.failure(error))
+            assert(false, "Cannot compose JSON from events")
+        }
     }
 }
