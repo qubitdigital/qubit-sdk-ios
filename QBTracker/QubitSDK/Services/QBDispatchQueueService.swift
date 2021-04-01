@@ -15,6 +15,7 @@ class QBDispatchQueueService {
         case upload = "EventUploadingDispatchQueue"
         case coredata = "CoreDataDispatchQueue"
         case experiences = "ExperiencesDispatchQueue"
+        case placement = "PlacementDispatchQueue"
         
         func queue() -> DispatchQueue {
             switch self {
@@ -26,6 +27,8 @@ class QBDispatchQueueService {
                 return QBDispatchQueueService.backgroundEventUploadingDispatchQueue
             case .experiences:
                 return QBDispatchQueueService.experiencesDispatchQueue
+            case .placement:
+                return QBDispatchQueueService.placementDispatchQueue
             }
         }
     }
@@ -34,6 +37,7 @@ class QBDispatchQueueService {
     private static let backgroundCoreDataDispatchQueue = create(type: .coredata)
     private static let backgroundQubitDispatchQueue = create(type: .qubit)
     private static let experiencesDispatchQueue = create(type: .experiences)
+        private static let placementDispatchQueue = create(type: .placement)
     
     private static func create(type: QBDispatchQueueType) -> DispatchQueue {
         return DispatchQueue(label: type.rawValue, qos: .background, autoreleaseFrequency: .inherit)

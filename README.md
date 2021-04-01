@@ -300,6 +300,38 @@ Objective-C
 
 Above call takes optional parameters like `preview`, `ignoreSegments` and `variation`.
 
+# Placements
+SDK contains methods to fetch placements. This can be achieved by:
+
+Swift
+```swift
+// Fetch a placement by ID ("143640" in this example)
+QubitSDK.getPlacement(withId: "143640", onSuccess: { (placement) in
+    if let placement = placement {
+        // list out the payload values
+        print("Got placement - content:")
+        print("placement content -> \(placement.content)")
+        // mark the experience as shown
+        placement.clickthrough()
+        placement.impression()
+    }
+}, onError: { (error) in
+    print("Got error: \(error.localizedDescription)")
+})
+There are optional paramaters: mode - "LIVE", "SAMPLE", PREVIEW" (defaults to "LIVE"), attributes, campaignId, experienceId.
+
+```
+
+Objective-C
+```objective-c
+[QubitSDK getPlacementWithId:@"123456" onSuccess:^(QBPlacementEntity *> * _Nonnull placement) {
+    [placement clickthrough];
+    [placement impression];
+} onError:^(NSError * _Nonnull error) {
+    NSLog(@"%@", error.description);
+};
+```
+
 # Disabling Tracking
 If you would like to disable tracking, use the following method.
 

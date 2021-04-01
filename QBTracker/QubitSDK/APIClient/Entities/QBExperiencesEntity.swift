@@ -44,7 +44,6 @@ public final class QBExperienceEntity: NSObject, NSCoding {
     public let isControl: Bool
     public let experienceId: Int
     public let variationId: Int
-
     @objc(payload)
     public let payload: [String: Any]
     

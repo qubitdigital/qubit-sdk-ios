@@ -14,3 +14,4 @@ public class QBEvent: NSManagedObject {}
 public class QBMetaEvent: NSManagedObject {}
 public class QBContextEvent: NSManagedObject {}
 public class QBSessionEvent: NSManagedObject {}
+public class QBLastEvent: NSManagedObject {}

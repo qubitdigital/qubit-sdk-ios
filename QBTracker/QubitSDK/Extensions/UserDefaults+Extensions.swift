@@ -56,6 +56,22 @@ extension UserDefaults {
             set(data, forKey: #function)
         }
     }
+
+    var lastSavedPlacements: [String: QBPlacementEntity] {
+        get {
+            guard let data = object(forKey: #function) as? Data,
+                let unarchivedData = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: QBPlacementEntity] else {
+                    return [:]
+            }
+
+            return unarchivedData
+        }
+
+        set {
+            let data = NSKeyedArchiver.archivedData(withRootObject: newValue as Any)
+            set(data, forKey: #function)
+        }
+    }
     
     var lastExperienceCacheTime: Double? {
         get {

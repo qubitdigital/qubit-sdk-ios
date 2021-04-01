@@ -20,6 +20,8 @@ struct QBConfigurationEntity: Codable {
     let vertical: String
     let experienceEndpoint: String
     let experienceCacheTimeout: Int
+    let placementsEndpoint: String
+    let placementsApiTimeout: Int
     
     //  AO: If endpoint is defined then data_location should be ignored.
     let endpoint: String
@@ -39,6 +41,8 @@ struct QBConfigurationEntity: Codable {
         self.dataLocation = (try? values.decode(String.self, forKey: .dataLocation)) ?? DefaultValues.dataLocation
         self.experienceEndpoint = (try? values.decode(String.self, forKey: .experienceEndpoint)) ?? DefaultValues.experienceEndpoint
         self.experienceCacheTimeout = (try? values.decode(Int.self, forKey: .experienceCacheTimeout)) ?? DefaultValues.experienceCacheTimeout
+        self.placementsEndpoint = (try? values.decode(String.self, forKey: .placementsEndpoint)) ?? DefaultValues.placementsEndpoint
+        self.placementsApiTimeout = (try? values.decode(Int.self, forKey: .placementsApiTimeout)) ?? DefaultValues.placementsApiTimeout
 
         if let endpoint = try? values.decode(String.self, forKey: .endpoint) {
             self.endpoint = endpoint
@@ -64,6 +68,8 @@ struct QBConfigurationEntity: Codable {
         self.dataLocation = DefaultValues.dataLocation
         self.experienceEndpoint = DefaultValues.experienceEndpoint
         self.experienceCacheTimeout = DefaultValues.experienceCacheTimeout
+        self.placementsEndpoint = DefaultValues.placementsEndpoint
+        self.placementsApiTimeout = DefaultValues.placementsApiTimeout
     }
     
     private enum CodingKeys: String, CodingKey {
@@ -79,6 +85,8 @@ struct QBConfigurationEntity: Codable {
         case dataLocation = "data_location"
         case experienceEndpoint = "experience_api_host"
         case experienceCacheTimeout = "experience_api_cache_expire_time"
+        case placementsEndpoint = "placement_api_endpoint"
+        case placementsApiTimeout = "placement_api_timeout"
     }
 }
 
@@ -98,6 +106,8 @@ extension QBConfigurationEntity {
         static let endpointUS = "gong-gc.qubit.com"
         static let experienceEndpoint = "sse.qubit.com"
         static let experienceCacheTimeout = 300
+        static let placementsEndpoint = "api.qubit.com/placements/query"
+        static let placementsApiTimeout = 5
     }
     
 }
@@ -122,6 +132,10 @@ extension QBConfigurationEntity {
     
     func mainEndpointUrl() -> URL? {
         return self.urlFrom(stringUrl: self.endpoint)
+    }
+
+    func placementsEndpointUrl() -> URL? {
+        return self.urlFrom(stringUrl: self.placementsEndpoint)
     }
     
     private func urlFrom(stringUrl: String?) -> URL? {

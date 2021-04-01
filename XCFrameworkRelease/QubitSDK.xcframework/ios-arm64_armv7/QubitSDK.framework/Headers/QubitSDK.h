@@ -250,6 +250,13 @@ SWIFT_CLASS("_TtC8QubitSDK26QBExperienceEntityCallback")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+
+SWIFT_CLASS("_TtC8QubitSDK11QBLastEvent")
+@interface QBLastEvent : NSManagedObject
+- (nonnull instancetype)initWithEntity:(NSEntityDescription * _Nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 typedef SWIFT_ENUM(NSInteger, QBLogLevel, open) {
   QBLogLevelDisabled = 0,
   QBLogLevelError = 1,
@@ -270,6 +277,18 @@ SWIFT_CLASS("_TtC8QubitSDK11QBMetaEvent")
 - (nonnull instancetype)initWithEntity:(NSEntityDescription * _Nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
+
+SWIFT_CLASS("_TtC8QubitSDK17QBPlacementEntity")
+@interface QBPlacementEntity : NSObject <NSCoding>
+@property (nonatomic, copy) NSDictionary<NSString *, id> * _Nullable Content;
+- (void)encodeWithCoder:(NSCoder * _Nonnull)coder;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+- (void)clickthrough;
+- (void)impression;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
 
 
 SWIFT_CLASS("_TtC8QubitSDK14QBSessionEvent")
@@ -370,6 +389,22 @@ SWIFT_CLASS("_TtC8QubitSDK8QubitSDK")
 /// \param variation variation of experience to return
 ///
 + (void)fetchExperiencesWithIds:(NSArray<NSNumber *> * _Nonnull)ids onSuccess:(void (^ _Nonnull)(NSArray<QBExperienceEntity *> * _Nonnull))onSuccess onError:(void (^ _Nonnull)(NSError * _Nonnull))onError preview:(BOOL)preview variation:(BOOL)ignoreSegments ignoreSegments:(NSNumber * _Nullable)variation;
+/// Fetch placement
+/// \param mode The mode to fetch placements content with, can be one of .live, .sample, .preview
+///
+/// \param placementId The unique ID of the placement
+///
+/// \param attributes placement attributes
+///
+/// \param campaignId Unique ID of the campaign to preview. Passing this will fetch placements data for campaign preview
+///
+/// \param experienceId Unique ID of the experience to preview. Passing this will fetch placements data for experience preview. This must be used in conjunction with campaignIds
+///
+/// \param onSuccess callback when the download succeeds
+///
+/// \param onError callback when the download fails
+///
++ (void)getPlacementWithId:(NSString * _Nonnull)id mode:(NSString * _Nullable)mode attributes:(NSDictionary<NSString *, id> * _Nullable)attributes campaignId:(NSString * _Nullable)campaignId experienceId:(NSString * _Nullable)experienceId resolveVisitorState:(BOOL)resolveVisitorState onSuccess:(void (^ _Nonnull)(QBPlacementEntity * _Nonnull))onSuccess onError:(void (^ _Nonnull)(NSError * _Nonnull))onError;
 /// Fetch current lookup entity,
 ///
 /// returns:
@@ -636,6 +671,13 @@ SWIFT_CLASS("_TtC8QubitSDK26QBExperienceEntityCallback")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+
+SWIFT_CLASS("_TtC8QubitSDK11QBLastEvent")
+@interface QBLastEvent : NSManagedObject
+- (nonnull instancetype)initWithEntity:(NSEntityDescription * _Nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 typedef SWIFT_ENUM(NSInteger, QBLogLevel, open) {
   QBLogLevelDisabled = 0,
   QBLogLevelError = 1,
@@ -656,6 +698,18 @@ SWIFT_CLASS("_TtC8QubitSDK11QBMetaEvent")
 - (nonnull instancetype)initWithEntity:(NSEntityDescription * _Nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
+
+SWIFT_CLASS("_TtC8QubitSDK17QBPlacementEntity")
+@interface QBPlacementEntity : NSObject <NSCoding>
+@property (nonatomic, copy) NSDictionary<NSString *, id> * _Nullable Content;
+- (void)encodeWithCoder:(NSCoder * _Nonnull)coder;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+- (void)clickthrough;
+- (void)impression;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
 
 
 SWIFT_CLASS("_TtC8QubitSDK14QBSessionEvent")
@@ -756,6 +810,22 @@ SWIFT_CLASS("_TtC8QubitSDK8QubitSDK")
 /// \param variation variation of experience to return
 ///
 + (void)fetchExperiencesWithIds:(NSArray<NSNumber *> * _Nonnull)ids onSuccess:(void (^ _Nonnull)(NSArray<QBExperienceEntity *> * _Nonnull))onSuccess onError:(void (^ _Nonnull)(NSError * _Nonnull))onError preview:(BOOL)preview variation:(BOOL)ignoreSegments ignoreSegments:(NSNumber * _Nullable)variation;
+/// Fetch placement
+/// \param mode The mode to fetch placements content with, can be one of .live, .sample, .preview
+///
+/// \param placementId The unique ID of the placement
+///
+/// \param attributes placement attributes
+///
+/// \param campaignId Unique ID of the campaign to preview. Passing this will fetch placements data for campaign preview
+///
+/// \param experienceId Unique ID of the experience to preview. Passing this will fetch placements data for experience preview. This must be used in conjunction with campaignIds
+///
+/// \param onSuccess callback when the download succeeds
+///
+/// \param onError callback when the download fails
+///
++ (void)getPlacementWithId:(NSString * _Nonnull)id mode:(NSString * _Nullable)mode attributes:(NSDictionary<NSString *, id> * _Nullable)attributes campaignId:(NSString * _Nullable)campaignId experienceId:(NSString * _Nullable)experienceId resolveVisitorState:(BOOL)resolveVisitorState onSuccess:(void (^ _Nonnull)(QBPlacementEntity * _Nonnull))onSuccess onError:(void (^ _Nonnull)(NSError * _Nonnull))onError;
 /// Fetch current lookup entity,
 ///
 /// returns:

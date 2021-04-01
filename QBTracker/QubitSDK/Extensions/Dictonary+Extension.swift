@@ -14,4 +14,23 @@ extension Dictionary {
             lhs[key] = value
         }
     }
+
+    static func + (left: Dictionary, right: Dictionary) -> Dictionary {
+        var map = Dictionary()
+        for (k, v) in left {
+            map[k] = v
+        }
+        for (k, v) in right {
+            map[k] = v
+        }
+        return map
+    }
+
+    var jsonString: String {
+        guard let data = try? JSONSerialization.data(withJSONObject: self, options: []), let string = String(data: data, encoding: .utf8) else {
+            return ""
+        }
+        return string
+    }
+
 }

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rxq-5S-lNU">
-                                <rect key="frame" x="40" y="74" width="295" height="77"/>
+                                <rect key="frame" x="40" y="54" width="295" height="77"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="77" id="lpJ-wM-dPe"/>
                                 </constraints>
@@ -34,7 +32,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ir-cj-uLI">
-                                <rect key="frame" x="40" y="159" width="295" height="77"/>
+                                <rect key="frame" x="40" y="139" width="295" height="77"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="77" id="bbj-BU-YU7"/>
                                 </constraints>
@@ -49,7 +47,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h2U-yL-cdp">
-                                <rect key="frame" x="16" y="268" width="343" height="21"/>
+                                <rect key="frame" x="16" y="248" width="343" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Qpn-a5-2sr"/>
                                 </constraints>
@@ -57,23 +55,58 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cgx-H8-TfT">
+                                <rect key="frame" x="40" y="289" width="295" height="30"/>
+                                <state key="normal" title="Get Placement"/>
+                                <connections>
+                                    <action selector="didTapGetPlacementButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1fq-ki-Olb"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0a4-t2-PKJ">
+                                <rect key="frame" x="81.5" y="327" width="86" height="30"/>
+                                <state key="normal" title="clickthrough"/>
+                                <connections>
+                                    <action selector="didTapClickthroughButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CJ1-Js-MtI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sw8-df-KpK">
+                                <rect key="frame" x="207.5" y="327" width="75" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="71g-Tt-J6v"/>
+                                </constraints>
+                                <state key="normal" title="impression"/>
+                                <connections>
+                                    <action selector="didTapImpressionButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Oay-ub-Hp1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="h2U-yL-cdp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="0fN-9e-7Vl"/>
                             <constraint firstItem="5Ir-cj-uLI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="2Qp-Uv-ehw"/>
+                            <constraint firstItem="Sw8-df-KpK" firstAttribute="leading" secondItem="cgx-H8-TfT" secondAttribute="centerX" constant="20" id="9Yt-sY-j8N"/>
+                            <constraint firstItem="Sw8-df-KpK" firstAttribute="top" secondItem="0a4-t2-PKJ" secondAttribute="top" id="Efo-XP-Ekh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="5Ir-cj-uLI" secondAttribute="trailing" constant="40" id="Fpx-RW-4SA"/>
+                            <constraint firstItem="cgx-H8-TfT" firstAttribute="top" secondItem="h2U-yL-cdp" secondAttribute="bottom" constant="20" id="Kkx-9Y-Tbo"/>
+                            <constraint firstItem="cgx-H8-TfT" firstAttribute="leading" secondItem="5Ir-cj-uLI" secondAttribute="leading" id="dfB-x7-XT3"/>
+                            <constraint firstItem="cgx-H8-TfT" firstAttribute="trailing" secondItem="5Ir-cj-uLI" secondAttribute="trailing" id="dhX-zO-EBa"/>
+                            <constraint firstItem="cgx-H8-TfT" firstAttribute="height" secondItem="5Ir-cj-uLI" secondAttribute="height" multiplier="0.38961" id="ez8-37-YDz"/>
                             <constraint firstItem="rxq-5S-lNU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="ipx-fC-Bfu"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rxq-5S-lNU" secondAttribute="trailing" constant="40" id="k48-uh-2MP"/>
                             <constraint firstItem="5Ir-cj-uLI" firstAttribute="top" secondItem="rxq-5S-lNU" secondAttribute="bottom" constant="8" id="m0L-lx-Jmj"/>
                             <constraint firstItem="rxq-5S-lNU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="54" id="rEw-Tu-WQu"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="h2U-yL-cdp" secondAttribute="trailing" constant="16" id="sCf-ku-lRo"/>
+                            <constraint firstItem="0a4-t2-PKJ" firstAttribute="trailing" secondItem="cgx-H8-TfT" secondAttribute="centerX" constant="-20" id="w97-2U-0fw"/>
+                            <constraint firstItem="0a4-t2-PKJ" firstAttribute="top" secondItem="cgx-H8-TfT" secondAttribute="bottom" constant="8" id="wgp-L8-vxn"/>
                             <constraint firstItem="h2U-yL-cdp" firstAttribute="top" secondItem="5Ir-cj-uLI" secondAttribute="bottom" constant="32" id="yMS-JF-P4A"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="clickthroughButton" destination="0a4-t2-PKJ" id="y7S-Xp-W0p"/>
                         <outlet property="eventsLabel" destination="h2U-yL-cdp" id="99B-yQ-CfI"/>
+                        <outlet property="getPlacementButton" destination="cgx-H8-TfT" id="edN-SF-P8M"/>
+                        <outlet property="impressionButton" destination="Sw8-df-KpK" id="dEQ-A4-og5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

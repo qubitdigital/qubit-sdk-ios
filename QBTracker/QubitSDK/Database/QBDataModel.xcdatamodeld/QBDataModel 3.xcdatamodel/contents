@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19G2021" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="QBContextEvent" representedClassName="QubitSDK.QBContextEvent" syncable="YES">
+        <attribute name="conversionCycleNumber" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="conversionNumber" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="lifetimeCurrency" optional="YES" attributeType="String"/>
+        <attribute name="lifetimeValue" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="sample" optional="YES" attributeType="String"/>
+        <attribute name="sessionNumber" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="sessionTs" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="sessionViewNumber" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="timeZoneOffset" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="viewNumber" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="viewTs" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QBEvent" inverseName="context" inverseEntity="QBEvent"/>
+    </entity>
+    <entity name="QBEvent" representedClassName="QubitSDK.QBEvent" syncable="YES">
+        <attribute name="data" optional="YES" attributeType="String"/>
+        <attribute name="dateAdded" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="errorRetryCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="sendFailed" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="context" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QBContextEvent" inverseName="event" inverseEntity="QBContextEvent"/>
+        <relationship name="lastEvent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QBLastEvent"/>
+        <relationship name="meta" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QBMetaEvent" inverseName="event" inverseEntity="QBMetaEvent"/>
+        <relationship name="session" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QBSessionEvent" inverseName="event" inverseEntity="QBSessionEvent"/>
+    </entity>
+    <entity name="QBLastEvent" representedClassName="QubitSDK.QBLastEvent" syncable="YES">
+        <attribute name="data" optional="YES" attributeType="String"/>
+        <attribute name="dateAdded" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="type"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="QBMetaEvent" representedClassName="QubitSDK.QBMetaEvent" syncable="YES">
+        <attribute name="batchTs" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="seq" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="source" optional="YES" attributeType="String"/>
+        <attribute name="trackingId" optional="YES" attributeType="String"/>
+        <attribute name="ts" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QBEvent" inverseName="meta" inverseEntity="QBEvent"/>
+    </entity>
+    <entity name="QBSessionEvent" representedClassName="QubitSDK.QBSessionEvent" syncable="YES">
+        <attribute name="appName" optional="YES" attributeType="String"/>
+        <attribute name="appType" optional="YES" attributeType="String"/>
+        <attribute name="appVersion" optional="YES" attributeType="String"/>
+        <attribute name="deviceName" optional="YES" attributeType="String"/>
+        <attribute name="deviceType" optional="YES" attributeType="String"/>
+        <attribute name="firstConversionTs" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="firstViewTs" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="ipAddress" optional="YES" attributeType="String"/>
+        <attribute name="ipLocationArea" optional="YES" attributeType="String"/>
+        <attribute name="ipLocationAreaCode" optional="YES" attributeType="String"/>
+        <attribute name="ipLocationCity" optional="YES" attributeType="String"/>
+        <attribute name="ipLocationCityCode" optional="YES" attributeType="String"/>
+        <attribute name="ipLocationCountry" optional="YES" attributeType="String"/>
+        <attribute name="ipLocationCountryCode" optional="YES" attributeType="String"/>
+        <attribute name="ipLocationLatitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="ipLocationLongitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="ipLocationRegion" optional="YES" attributeType="String"/>
+        <attribute name="ipLocationRegionCode" optional="YES" attributeType="String"/>
+        <attribute name="lastConversionTs" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="lastViewTs" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="osName" optional="YES" attributeType="String"/>
+        <attribute name="osVersion" optional="YES" attributeType="String"/>
+        <attribute name="screenHeight" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="screenWidth" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QBEvent" inverseName="session" inverseEntity="QBEvent"/>
+    </entity>
+    <elements>
+        <element name="QBContextEvent" positionX="-155" positionY="126" width="128" height="240"/>
+        <element name="QBEvent" positionX="-495" positionY="261" width="128" height="178"/>
+        <element name="QBMetaEvent" positionX="-146" positionY="396" width="128" height="165"/>
+        <element name="QBSessionEvent" positionX="-279" positionY="626" width="128" height="420"/>
+        <element name="QBLastEvent" positionX="-752.99609375" positionY="296.88671875" width="128" height="88"/>
+    </elements>
+</model>

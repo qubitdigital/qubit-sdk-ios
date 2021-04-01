@@ -46,11 +46,13 @@ class QBEventManager {
     private let sessionManager: QBSessionManager
     private let lookupManager: QBLookupManager
     private var reachability = QBReachability()
+    private let lastEventManager: QBLastEventManager
     
     init(withConfigurationManager configurationManager: QBConfigurationManager, sessionManager: QBSessionManager, lookupManager: QBLookupManager) {
         self.configurationManager = configurationManager
         self.sessionManager = sessionManager
         self.lookupManager = lookupManager
+        self.lastEventManager = QBLastEventManager(databaseManager: databaseManager)
         try? reachability?.startNotifier()
         
         reachability?.whenReachable = { [weak self] (reachability) in
@@ -116,6 +118,14 @@ class QBEventManager {
         event.add(context: context, meta: meta)
         self.addEventInQueue(event: event)
     }
+
+    func lastEvent(of type: String) -> QBLastEventEntity? {
+        guard let lastEvent = lastEventManager.lastEvent(of: type) else {
+            return nil
+        }
+
+        return QBLastEventEntity(from: lastEvent)
+    }
     
     func configurationUpdated() {
         startEventManager()
@@ -135,7 +145,7 @@ class QBEventManager {
                 }
                 
                 dbEvent = event.fillQBEvent(event: &dbEvent, context: &dbContext, meta: &dbMeta, session: &dbSession)
-                
+                self?.lastEventManager.createLastEventIfNeeded(event)
                 self?.databaseManager.save()
                 self?.trySendEventsWhenFirstEventAdded()
             }
