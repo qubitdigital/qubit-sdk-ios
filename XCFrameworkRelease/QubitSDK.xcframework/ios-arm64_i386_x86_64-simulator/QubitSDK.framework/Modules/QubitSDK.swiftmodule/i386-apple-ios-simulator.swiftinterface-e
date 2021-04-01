@@ -4,7 +4,6 @@
 import CommonCrypto
 import CoreData
 import CoreFoundation
-import Darwin
 import Foundation
 import Security
 import Swift
@@ -85,32 +84,6 @@ import UIKit
 }
 @available(*, unavailable, message: "this method is unavailable at new version of SDK")
 public let qubit: QubitSDK.QBTrackerManager
-extension JSONQubitSerialization {
-  public struct ReadingOptions : Swift.OptionSet {
-    public let rawValue: Swift.UInt
-    public init(rawValue: Swift.UInt)
-    public static let mutableContainers: QubitSDK.JSONQubitSerialization.ReadingOptions
-    public static let mutableLeaves: QubitSDK.JSONQubitSerialization.ReadingOptions
-    public static let allowFragments: QubitSDK.JSONQubitSerialization.ReadingOptions
-    public typealias Element = QubitSDK.JSONQubitSerialization.ReadingOptions
-    public typealias ArrayLiteralElement = QubitSDK.JSONQubitSerialization.ReadingOptions
-    public typealias RawValue = Swift.UInt
-  }
-  public struct WritingOptions : Swift.OptionSet {
-    public let rawValue: Swift.UInt
-    public init(rawValue: Swift.UInt)
-    public static let prettyPrinted: QubitSDK.JSONQubitSerialization.WritingOptions
-    public typealias Element = QubitSDK.JSONQubitSerialization.WritingOptions
-    public typealias ArrayLiteralElement = QubitSDK.JSONQubitSerialization.WritingOptions
-    public typealias RawValue = Swift.UInt
-  }
-}
-@objc @_inheritsConvenienceInitializers open class JSONQubitSerialization : ObjectiveC.NSObject {
-  open class func isValidJSONObject(_ obj: Any) -> Swift.Bool
-  open class func data(withJSONObject value: Any, options opt: QubitSDK.JSONQubitSerialization.WritingOptions = []) throws -> Foundation.Data
-  @objc deinit
-  @objc override dynamic public init()
-}
 @objc public enum QBLogLevel : Swift.Int {
   case disabled
   case error

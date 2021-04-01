@@ -25,7 +25,7 @@ enum QBEventType: String {
     }
 }
 
-struct QBEventEntity {
+struct QBEventEntity: Codable {
     let type: String
     let eventData: String
     
@@ -55,7 +55,7 @@ struct QBEventEntity {
     }
     
     func codable() -> [String: Any]? {
-        
+
         func convert(jsonData: Data?) -> Any? {
             if let data = jsonData {
                 do {
@@ -65,29 +65,26 @@ struct QBEventEntity {
             }
             return nil
         }
-        
+
         if let data = eventData.data(using: .utf8) {
-            do {
-                guard var jsonObject = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String: Any] else { return nil }
-                if let context: QBContextEntity = self.context, let contextData: Data = try? JSONEncoder().encode(context) {
-                    jsonObject["context"] =  convert(jsonData: contextData)
-                }
-                if let meta: QBMetaEntity = self.meta, let metaData: Data = try? JSONEncoder().encode(meta) {
-                    jsonObject["meta"] =  convert(jsonData: metaData)
-                }
-                if let session: QBSessionEntity = self.session, let sessionData: Data = try? JSONEncoder().encode(session) {
-                    if let sessionDictonary = convert(jsonData: sessionData) as? [String: Any] {
-                        jsonObject += sessionDictonary
-                    }
-                }
-                return jsonObject
-            } catch {
-                return nil
+            var jsonObject = (try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String: Any]) ?? [:]
+            if let context: QBContextEntity = self.context, let contextData: Data = try? JSONEncoder().encode(context) {
+                jsonObject["context"] =  convert(jsonData: contextData)
             }
-            
+            if let meta: QBMetaEntity = self.meta, let metaData: Data = try? JSONEncoder().encode(meta) {
+                jsonObject["meta"] =  convert(jsonData: metaData)
+            }
+            if let session: QBSessionEntity = self.session, let sessionData: Data = try? JSONEncoder().encode(session) {
+                if let sessionDictonary = convert(jsonData: sessionData) as? [String: Any] {
+                    jsonObject += sessionDictonary
+                }
+            }
+            return jsonObject
+
         }
         return nil
     }
+
 }
 
 // MARK: Instance creation event
