@@ -16,6 +16,7 @@ Further release notes are available in the [GitHub release notes](https://github
 
 | VERSION | UPDATES |
 |---|---|
+| 1.0.16 | Fixed regression where a percentage of events were incorrectly serialized to JSON.
 | 1.0.15 | Removed global exception handling. QuibitSDK.xcframework released.
 | 1.0.11 | Removed QuibitSDK.xcframework due to ongoing Xcode12 bug. UniversalFramework released.
 | 1.0.10 | Bug fixes for Objective-C and Swift. New QuibitSDK.xcframework released.
