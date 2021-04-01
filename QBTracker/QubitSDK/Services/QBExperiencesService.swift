@@ -34,7 +34,7 @@ class QBExperiencesServiceImp: QBExperiencesService {
                         variation: Int?,
                         then: ((Result<QBExperiencesEntity>) -> Void)?) {
         var queryParams: [String: Any?] = [
-            Constants.contextIdParam: id,
+            Constants.contextIdParam: id
         ]
         
         if preview {

@@ -51,7 +51,7 @@ extension QBAPIClient {
     func makeRequestAndDecode<T: Decodable>(_ request: URLRequest, withMethod: HTTPMethod, then: ((Result<T>) -> Void)?) {
         let request = setup(request: request, method: withMethod)
         let session = URLSession(configuration: .default)
-        
+
         let task = session.dataTask(with: request) { (data, response, error) in
             QBDispatchQueueService.runSync(type: .upload) {
                 if let error = error {

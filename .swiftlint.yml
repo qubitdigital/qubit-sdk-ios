@@ -29,6 +29,7 @@ function_body_length:
 
 disabled_rules:
   - todo
+  - identifier_name
   - line_length
   - trailing_whitespace
 
@@ -36,9 +37,8 @@ excluded:
   - QBTracker/QubitSDK/Utils/Keychain/QBKeychain.swift
   - QBTracker/QubitSDK/Utils/Reachability/QBReachability.swift
 
-line_length: 120  
+line_length: 120
 force_cast: warning
 force_try: warning
 identifier_name:
   min_length: 2
-
