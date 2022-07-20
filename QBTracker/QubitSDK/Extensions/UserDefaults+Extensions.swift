@@ -44,7 +44,7 @@ extension UserDefaults {
     var lastSavedRemoteExperiences: [QBExperienceEntity]? {
         get {
             guard let data = object(forKey: #function) as? Data,
-                let unarchivedData = NSKeyedUnarchiver.unarchiveObject(with: data) as? [QBExperienceEntity] else {
+                  let unarchivedData = try? NSKeyedUnarchiver.unarchivedObject(ofClasses: [NSArray.self, QBExperienceEntity.self], from: data) as? [QBExperienceEntity] else {
                 return nil
             }
             
@@ -52,7 +52,7 @@ extension UserDefaults {
         }
         
         set {
-            let data = NSKeyedArchiver.archivedData(withRootObject: newValue as Any)
+            let data = try? NSKeyedArchiver.archivedData(withRootObject: newValue as Any, requiringSecureCoding: false)
             set(data, forKey: #function)
         }
     }
@@ -60,7 +60,7 @@ extension UserDefaults {
     var lastSavedPlacements: [String: QBPlacementEntity] {
         get {
             guard let data = object(forKey: #function) as? Data,
-                let unarchivedData = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: QBPlacementEntity] else {
+                  let unarchivedData = try? NSKeyedUnarchiver.unarchivedObject(ofClasses: [NSDictionary.self, NSString.self, QBPlacementEntity.self], from: data) as? [String: QBPlacementEntity] else {
                     return [:]
             }
 
@@ -68,7 +68,7 @@ extension UserDefaults {
         }
 
         set {
-            let data = NSKeyedArchiver.archivedData(withRootObject: newValue as Any)
+            let data = try? NSKeyedArchiver.archivedData(withRootObject: newValue as Any, requiringSecureCoding: false)
             set(data, forKey: #function)
         }
     }

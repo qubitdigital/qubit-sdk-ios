@@ -1,7 +1,7 @@
-platform :ios, '9.0'
+platform :ios, '11.0'
 
 target 'QubitObjectiveCExampleApp' do
 
-	pod "QubitSDK", :path => "../"
+	pod "QubitSDK", :path => "../.."
 
 end

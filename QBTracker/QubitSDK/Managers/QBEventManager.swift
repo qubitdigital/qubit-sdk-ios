@@ -12,7 +12,7 @@ import CoreData
 
 struct QBEventManagerConfig {
     var sendingAttemptsDoneCount = 0
-    var dedupeActive: Bool = false
+    var dedupeActive: Bool = true
     var sendTimeFrameInterval: Int = 500
     let batchIntervalMs: Int = 500
     let expBackoffBaseTimeSec: Int = 5

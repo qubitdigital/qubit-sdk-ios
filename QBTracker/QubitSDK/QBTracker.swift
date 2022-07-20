@@ -93,6 +93,7 @@ class QBTracker {
 		lookupManager = nil
         sessionManager = nil
         experiencesManager = nil
+        placementManager = nil
         QBLog.info("tracker stoped")
     }
     

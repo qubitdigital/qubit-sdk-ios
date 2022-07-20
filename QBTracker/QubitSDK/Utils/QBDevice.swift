@@ -27,6 +27,11 @@ class QBDevice {
         return md5String
     }
     
+    static func setId(newId: String) {
+        let keychain = QBKeychainSwift()
+        keychain.set(newId, forKey: key)
+    }
+    
     private static func randomStringInMd5() -> String {
         let timestamp = NSDate().timeIntervalSince1970
         let randomValue = Int(timestamp) * Int(arc4random_uniform(10))

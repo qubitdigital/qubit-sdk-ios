@@ -149,7 +149,7 @@ class QBKeychainSwift {
     withAccess access: KeychainSwiftAccessOptions? = nil) -> Bool {
   
     let bytes: [UInt8] = value ? [1] : [0]
-    let data = Data(bytes: bytes)
+    let data = Data(bytes)
 
     return set(data, forKey: key, withAccess: access)
   }
@@ -189,7 +189,7 @@ class QBKeychainSwift {
     var query: [String: Any] = [
       KeychainSwiftConstants.klass       : kSecClassGenericPassword,
       KeychainSwiftConstants.attrAccount : prefixedKey,
-      KeychainSwiftConstants.returnData  : kCFBooleanTrue,
+      KeychainSwiftConstants.returnData  : kCFBooleanTrue ?? true,
       KeychainSwiftConstants.matchLimit  : kSecMatchLimitOne
     ]
     
@@ -351,16 +351,7 @@ enum KeychainSwiftAccessOptions {
   
   */
   case accessibleAfterFirstUnlockThisDeviceOnly
-  
-  /**
-  
-  The data in the keychain item can always be accessed regardless of whether the device is locked.
-  
-  This is not recommended for application use. Items with this attribute migrate to a new device when using encrypted backups.
-  
-  */
-  case accessibleAlways
-  
+    
   /**
   
   The data in the keychain can only be accessed when the device is unlocked. Only available if a passcode is set on the device.
@@ -370,14 +361,6 @@ enum KeychainSwiftAccessOptions {
   */
   case accessibleWhenPasscodeSetThisDeviceOnly
   
-  /**
-  
-  The data in the keychain item can always be accessed regardless of whether the device is locked.
-  
-  This is not recommended for application use. Items with this attribute do not migrate to a new device. Thus, after restoring from a backup of a different device, these items will not be present.
-  
-  */
-  case accessibleAlwaysThisDeviceOnly
   
   static var defaultOption: KeychainSwiftAccessOptions {
     return .accessibleWhenUnlocked
@@ -396,15 +379,9 @@ enum KeychainSwiftAccessOptions {
       
     case .accessibleAfterFirstUnlockThisDeviceOnly:
       return toString(kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly)
-      
-    case .accessibleAlways:
-      return toString(kSecAttrAccessibleAlways)
-      
+
     case .accessibleWhenPasscodeSetThisDeviceOnly:
       return toString(kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly)
-      
-    case .accessibleAlwaysThisDeviceOnly:
-      return toString(kSecAttrAccessibleAlwaysThisDeviceOnly)
     }
   }
   

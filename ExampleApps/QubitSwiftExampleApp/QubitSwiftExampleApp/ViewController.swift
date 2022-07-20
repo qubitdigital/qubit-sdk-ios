@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import QubitSDK
 
 class ViewController: UIViewController {
 

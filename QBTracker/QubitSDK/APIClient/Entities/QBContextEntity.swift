@@ -28,13 +28,14 @@ struct QBContextEntity: Codable {
     
     struct QBLifetimeValue: Codable {
         let value: Int
-        let currency = "USD"
+        let currency: String
         
         init?(withValue value: Int?) {
             guard let value = value else {
                 return nil
             }
             self.value = value
+            self.currency = "USD"
         }
     }
 }
