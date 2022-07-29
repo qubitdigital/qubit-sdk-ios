@@ -17,11 +17,7 @@ class QBDevice {
         if let deviceId = keychain.get(key), !deviceId.isEmpty {
             return deviceId
         }
-        
-        if let identifierForVendor = UIDevice.current.identifierForVendor?.uuidString {
-            return identifierForVendor
-        }
-        
+
         let md5String = randomStringInMd5()
         keychain.set(md5String, forKey: key)
         return md5String
