@@ -293,7 +293,7 @@ class QBEventManager {
     
     private func tryRemoveOldEvents() {
         let removeOldEventsTime = self.configurationManager.configuration.queueTimeout
-        let predicate = NSPredicate(format: "dateAdded > %@", Date().addingTimeInterval(TimeInterval(-removeOldEventsTime)) as CVarArg)
+        let predicate = NSPredicate(format: "dateAdded < %@", Date().addingTimeInterval(TimeInterval(-removeOldEventsTime)) as CVarArg)
         self.databaseManager.query(entityType: QBEvent.self, predicate: predicate, ascending: true, limit: 0) { (results) in
             QBLog.info("Remove oldest events from database")
             self.databaseManager.delete(entries: results)
