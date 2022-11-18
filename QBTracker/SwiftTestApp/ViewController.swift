@@ -65,7 +65,7 @@ class ViewController: UIViewController {
         guard let text = customDeviceIdTextField.text else {
             return
         }
-        QubitSDK.setCustomDeviceId(id: text)
+        QubitSDK.restartWithCustomDeviceID(id: text)
         printCurrentContext()
     }
     

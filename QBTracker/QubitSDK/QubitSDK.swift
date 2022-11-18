@@ -20,8 +20,7 @@ public class QubitSDK: NSObject {
         return QBDevice.getId()
     }
     
-    /// Sets custom deviceID.
-    /// When called, the SDK will restart its services to be ready to operate under new identifier.
+    /// Restarts the SDK with new, custom deviceID.
     ///
     /// Note that any previously cached placements and experiences will be invalidated due to changed deviceID.
     /// If you want to refetch them, you have to call ``fetchExperiences(withIds:onSuccess:onError:preview:ignoreSegments:variation:)``
@@ -29,8 +28,8 @@ public class QubitSDK: NSObject {
     ///
     /// - Parameters:
     ///     - id: new deviceID to be set.
-    @objc(setCustomDeviceId:)
-    public class func setCustomDeviceId(id: String) {
+    @objc(restartWithCustomDeviceID:)
+    public class func restartWithCustomDeviceID(id: String) {
         UserDefaults.standard.lastSavedPlacements = [:]
         UserDefaults.standard.lastSavedRemoteExperiences = nil
         stopTracking()
