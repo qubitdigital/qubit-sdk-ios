@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol QBSessionManagerDelegate: class {
+protocol QBSessionManagerDelegate: AnyObject {
     func newSessionStarted()
 }
 

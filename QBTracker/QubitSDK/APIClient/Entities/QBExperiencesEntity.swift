@@ -39,8 +39,7 @@ final class QBExperiencesEntity: DictionaryInitializable {
     }
 }
 
-public final class QBExperienceEntity: NSObject, NSCoding {
-
+public final class QBExperienceEntity: NSObject, NSCoding, NSSecureCoding {
     public let isControl: Bool
     public let experienceId: Int
     public let variationId: Int
@@ -48,6 +47,8 @@ public final class QBExperienceEntity: NSObject, NSCoding {
     public let payload: [String: Any]
     
     let callback: String
+    
+    public static var supportsSecureCoding: Bool = false
     
     public var asDictionary: [String: Any] {
         var dict = [String: Any]()

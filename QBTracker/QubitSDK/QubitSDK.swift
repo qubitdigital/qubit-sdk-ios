@@ -14,9 +14,27 @@ public class QubitSDK: NSObject {
     /// Return current tracking ID
     public static var trackingId: String = "Unknown. Call QubitSDK.start(...) before any other call."
     
-    /// Return current device ID
+    /// Returns current deviceID.
+    /// Unless new one is provided, this value will return the default device identifier or random md5 string.
     public static var deviceId: String {
         return QBDevice.getId()
+    }
+    
+    /// Restarts the SDK with new, custom deviceID.
+    ///
+    /// Note that any previously cached placements and experiences will be invalidated due to changed deviceID.
+    /// If you want to refetch them, you have to call ``fetchExperiences(withIds:onSuccess:onError:preview:ignoreSegments:variation:)``
+    /// or ``getPlacement(with:mode:attributes:campaignId:experienceId:onSuccess:onError:)`` manually.
+    ///
+    /// - Parameters:
+    ///     - id: new deviceID to be set.
+    @objc(restartWithCustomDeviceID:)
+    public class func restartWithCustomDeviceID(id: String) {
+        UserDefaults.standard.lastSavedPlacements = [:]
+        UserDefaults.standard.lastSavedRemoteExperiences = nil
+        stopTracking()
+        QBDevice.setId(newId: id)
+        start(withTrackingId: trackingId, logLevel: QBLog.logLevel)
     }
     
     /// Start the QubitSDK

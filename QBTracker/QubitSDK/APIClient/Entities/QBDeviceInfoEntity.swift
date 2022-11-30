@@ -17,13 +17,15 @@ struct QBDeviceInfoEntity: Codable {
     let deviceName: String
     let osName: String
     let osVersion: String
-    let appType = QBAppType.app
+    let appType: QBAppType
     let appName: String
     let appVersion: String
+    let sdkVersion: String
     let screenWidth: Int
     let screenHeight: Int
     
     init() {
+        appType = QBAppType.app
         deviceType = QBDeviceInfoEntity.getDeviceType()
         appName = QBDeviceInfoEntity.getApplicationName()
         appVersion = QBDeviceInfoEntity.getApplicationVesion()
@@ -31,6 +33,7 @@ struct QBDeviceInfoEntity: Codable {
         deviceName = QBDeviceInfoEntity.getDeviceModel()
         osName = device.systemName
         osVersion = device.systemVersion
+        sdkVersion = QBDeviceInfoEntity.getFrameworkVersion()
 
         let screenSize = UIScreen.main.bounds
         screenWidth = Int(screenSize.width)
@@ -42,7 +45,7 @@ struct QBDeviceInfoEntity: Codable {
 // MARK: - Helpers
 extension QBDeviceInfoEntity {
     func getOsNameAndVersion() -> String {
-        return osName + "@" + osVersion
+        return osName + "@OS:" + osVersion + "@SDK:" + sdkVersion
     }
     
     private static func getDeviceType() -> String {
@@ -57,6 +60,8 @@ extension QBDeviceInfoEntity {
             return "tv"
         case .carPlay:
             return "carPlay"
+        case .mac:
+            return "mac"
         @unknown default:
             return "unknown"
         }
@@ -72,6 +77,13 @@ extension QBDeviceInfoEntity {
     private static func getApplicationVesion() -> String {
         guard let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
             return "no version info"
+        }
+        return version
+    }
+    
+    private static func getFrameworkVersion() -> String {
+        guard let version = Bundle(for: QubitSDK.self).infoDictionary?["CFBundleShortVersionString"] as? String else {
+            return "SDK Version Unknown"
         }
         return version
     }

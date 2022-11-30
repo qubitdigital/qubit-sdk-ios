@@ -17,14 +17,15 @@ class QBDevice {
         if let deviceId = keychain.get(key), !deviceId.isEmpty {
             return deviceId
         }
-        
-        if let identifierForVendor = UIDevice.current.identifierForVendor?.uuidString {
-            return identifierForVendor
-        }
-        
+
         let md5String = randomStringInMd5()
         keychain.set(md5String, forKey: key)
         return md5String
+    }
+    
+    static func setId(newId: String) {
+        let keychain = QBKeychainSwift()
+        keychain.set(newId, forKey: key)
     }
     
     private static func randomStringInMd5() -> String {
