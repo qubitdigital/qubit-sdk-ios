@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol QBConfigurationManagerDelegate: class {
+protocol QBConfigurationManagerDelegate: AnyObject {
     func configurationUpdated()
 }
 
@@ -107,8 +107,8 @@ class QBConfigurationManager {
     func getEventsDedupeEndpoint() -> URL? {
         var url = self.configuration.mainEndpointUrl()
         url?.appendPathComponent("events/raw")
-        url?.appendPathComponent("\(self.trackingId)?dedupe=true")
-        return url
+        url?.appendPathComponent("\(self.trackingId)")
+        return url?.appending(queryParams: ["dedupe":true])
     }
 }
 

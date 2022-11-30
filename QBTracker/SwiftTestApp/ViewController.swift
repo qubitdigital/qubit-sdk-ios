@@ -17,7 +17,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var getPlacementButton: UIButton!
     @IBOutlet weak var impressionButton: UIButton!
     @IBOutlet weak var clickthroughButton: UIButton!
-
+    
+    @IBOutlet weak var customDeviceIdTextField: UITextField!
+    
     private var placement: QBPlacementEntity?
 
     override func viewDidLoad() {
@@ -57,6 +59,14 @@ class ViewController: UIViewController {
             QubitSDK.sendEvent(type: "View", data: "{\"type\" : \"tapOnEventButton\", \"number\":2.2}")
         }
         QubitSDK.sendEvent(type: "View", data: "{\"currency\" : \"PLN\", \"subtypes\":[\"1\", \"2\", \"3\"]}")
+    }
+    
+    @IBAction func setDeviceIdButton(_ sender: Any) {
+        guard let text = customDeviceIdTextField.text else {
+            return
+        }
+        QubitSDK.restartWithCustomDeviceID(id: text)
+        printCurrentContext()
     }
     
     @IBAction func tapOnCreateEventButton(_ sender: UIButton) {

@@ -106,7 +106,6 @@
 				42C704B61F56F37400595466 /* Sources */,
 				42C704B71F56F37400595466 /* Frameworks */,
 				42C704B81F56F37400595466 /* Resources */,
-				9767D6E251F4EC9E4BF5F1F7 /* [CP] Embed Pods Frameworks */,
 				325745927E0AA7DB8E3C2AE0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -189,31 +188,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QubitObjectiveCExampleApp/Pods-QubitObjectiveCExampleApp-resources.sh",
+				"${PODS_ROOT}/../../../QBTracker/QubitSDK/Database/QBDataModel.xcdatamodeld",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QBDataModel.momd",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QubitObjectiveCExampleApp/Pods-QubitObjectiveCExampleApp-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9767D6E251F4EC9E4BF5F1F7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-QubitObjectiveCExampleApp/Pods-QubitObjectiveCExampleApp-frameworks.sh",
-				"${PODS_ROOT}/../../Framework/QubitSDK.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QubitSDK.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QubitObjectiveCExampleApp/Pods-QubitObjectiveCExampleApp-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QubitObjectiveCExampleApp/Pods-QubitObjectiveCExampleApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -364,7 +348,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HAWH5C9J75;
 				INFOPLIST_FILE = QubitObjectiveCExampleApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qubit.QubitObjectiveCExampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -381,7 +365,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HAWH5C9J75;
 				INFOPLIST_FILE = QubitObjectiveCExampleApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qubit.QubitObjectiveCExampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
