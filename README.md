@@ -122,7 +122,7 @@ Framework:
 Launch:
 ```objective-c
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [QubitSDK startWithTrackingId: @"XXXXX" logLevel: QBLogLevelDisabled];
+    [QubitSDK startWithTrackingId: @"XXXXX" logLevel: QBLogLevelDisabled queuePriority: QBQueuePriorityBackground];
     return YES;
 }
 ```
@@ -133,7 +133,7 @@ Launch:
 import QubitSDK
 
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    QubitSDK.start(withTrackingId: "XXXXX", logLevel: .disabled)
+    QubitSDK.start(withTrackingId: "XXXXX", logLevel: .disabled, queuePriority: .background)
     return true
 }
 ```
