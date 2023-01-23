@@ -40,6 +40,7 @@
 		42F0CD7D1F4B182E00BD9010 /* QBConfigurationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F0CD7C1F4B182E00BD9010 /* QBConfigurationTest.swift */; };
 		42F62FF61F67E97700E444B5 /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F62FF41F67E97700E444B5 /* Double+Extensions.swift */; };
 		42F62FF71F67E97700E444B5 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F62FF51F67E97700E444B5 /* Int+Extensions.swift */; };
+		7BAB16D32978588700585532 /* QBQueuePriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BAB16D22978588700585532 /* QBQueuePriority.swift */; };
 		A01CC8571F4D8D29009336F8 /* QBDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01CC8561F4D8D29009336F8 /* QBDatabaseManager.swift */; };
 		A024B5B91F4D7B83009748A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A024B5B81F4D7B83009748A1 /* AppDelegate.swift */; };
 		A024B5BB1F4D7B83009748A1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A024B5BA1F4D7B83009748A1 /* ViewController.swift */; };
@@ -165,6 +166,7 @@
 		42F0CD7C1F4B182E00BD9010 /* QBConfigurationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBConfigurationTest.swift; sourceTree = "<group>"; };
 		42F62FF41F67E97700E444B5 /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
 		42F62FF51F67E97700E444B5 /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
+		7BAB16D22978588700585532 /* QBQueuePriority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBQueuePriority.swift; sourceTree = "<group>"; };
 		A01CC8561F4D8D29009336F8 /* QBDatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBDatabaseManager.swift; sourceTree = "<group>"; };
 		A024B5B61F4D7B83009748A1 /* SwiftTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A024B5B81F4D7B83009748A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				420738991F4F08E0005A0B9E /* QBLog.swift */,
 				42054D171F502C7A00386771 /* QBDevice.swift */,
 				427613961F710FC600114E3E /* QBEventTypeTransformer.swift */,
+				7BAB16D22978588700585532 /* QBQueuePriority.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -714,6 +717,7 @@
 				42F62FF61F67E97700E444B5 /* Double+Extensions.swift in Sources */,
 				A06075D72518965E00AD561D /* QBPlacementCallbackManager.swift in Sources */,
 				422370821F4C6B2B008D401E /* QBContextEntity.swift in Sources */,
+				7BAB16D32978588700585532 /* QBQueuePriority.swift in Sources */,
 				A0D30B821F559F180029D3DC /* QubitSDK.swift in Sources */,
 				B9AEA11821008780009812C0 /* QBDataModel.xcdatamodeld in Sources */,
 				423D43D61F62D0200075A85B /* Date+Extensions.swift in Sources */,

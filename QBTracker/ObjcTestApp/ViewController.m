@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [QubitSDK startWithTrackingId:@"miquido" logLevel:QBLogLevelVerbose];
+    [QubitSDK startWithTrackingId:@"miquido" logLevel:QBLogLevelVerbose queuePriority:QBQueuePriorityBackground];
     // Do any additional setup after loading the view, typically from a nib.
 }
 

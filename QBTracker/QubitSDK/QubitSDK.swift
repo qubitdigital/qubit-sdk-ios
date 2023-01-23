@@ -42,9 +42,11 @@ public class QubitSDK: NSObject {
     /// - Parameters:
     ///   - id: trackingId
     ///   - logLevel: QBLogLevel, default = .disabled
-    @objc(startWithTrackingId:logLevel:)
-    public class func start(withTrackingId id: String, logLevel: QBLogLevel = QBLogLevel.disabled) {
+    ///   - queuePriority: QBQueuePriority, default = .background
+    @objc(startWithTrackingId:logLevel:queuePriority:)
+    public class func start(withTrackingId id: String, logLevel: QBLogLevel = QBLogLevel.disabled, queuePriority: QBQueuePriority = .background) {
         trackingId = id
+        QBDispatchQueueService.setupQueuePriority(qos: queuePriority.qos)
         QBDispatchQueueService.runAsync(type: .qubit) { QBTracker.shared.start(withTrackingId: id, logLevel: logLevel) }
     }
     
