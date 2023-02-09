@@ -6,59 +6,59 @@
 	<dict>
 		<key>Headers/QubitSDK.h</key>
 		<data>
-		DvYBE4OuPDgyGlEbUW591o7mOwI=
+		y7mTKohE7476U62YRB56yQwVc74=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		4olxhxEO+rjTg9PQKk1LbRi17Zk=
+		BTDcicDgrpM9iwzexXW74HHdwUg=
 		</data>
 		<key>Modules/QubitSDK.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		ZV6yRT0r+q9Jh/EfxvzymnELMYo=
+		r9w6HURDD1J3U5Hqq+wHBY4FeHo=
 		</data>
 		<key>Modules/QubitSDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		9EJtYGyZ/Jzt4E0vdk6sruxjt4g=
+		YT+scbF5W71ZOdhxPie1nlePiEs=
 		</data>
 		<key>Modules/QubitSDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		giKZD5RicYKaMwYjItu4cTfN4M8=
+		8EntjzoCejuwe2s2jON49/dXsbE=
 		</data>
 		<key>Modules/QubitSDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		9EJtYGyZ/Jzt4E0vdk6sruxjt4g=
+		YT+scbF5W71ZOdhxPie1nlePiEs=
 		</data>
 		<key>Modules/QubitSDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		YEJtY64mXrrOxMwEMaZB8d93ulY=
+		hE1Oyd4MtUmZN3dVByrGEWYYLXE=
 		</data>
 		<key>Modules/QubitSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		ZV6yRT0r+q9Jh/EfxvzymnELMYo=
+		r9w6HURDD1J3U5Hqq+wHBY4FeHo=
 		</data>
 		<key>Modules/QubitSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		I/33IzPsxeBcas3+Xl27IbCN7w8=
+		6XiYglDPSnqiIHS7xY7vAIhipkI=
 		</data>
 		<key>Modules/QubitSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		vsZM08CC3Ko9R9UPAxqfBnN+P9s=
+		tEA/zbBwMtA5HWKFsDsGh8hqO/c=
 		</data>
 		<key>Modules/QubitSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		I/33IzPsxeBcas3+Xl27IbCN7w8=
+		6XiYglDPSnqiIHS7xY7vAIhipkI=
 		</data>
 		<key>Modules/QubitSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		kSvefkY7kI7olukcbL7mq1GjzO4=
+		GD7uaP5K1BOCB2FTGwLwbE/5gpI=
 		</data>
 		<key>QBDataModel.momd/QBDataModel 2.mom</key>
 		<data>
-		qBcjDh2qk65BzwV+rYaPUoxXh60=
+		3aMn5R3KUQF4EULjyOuNi1lY/mA=
 		</data>
 		<key>QBDataModel.momd/QBDataModel 3.mom</key>
 		<data>
-		Gthg36EwjGJ9cxGD2gOLYaUUVYw=
+		OqghIwZC2IGtUEcQGLsRVkiO5Fg=
 		</data>
 		<key>QBDataModel.momd/QBDataModel 3.omo</key>
 		<data>
@@ -66,7 +66,7 @@
 		</data>
 		<key>QBDataModel.momd/QBDataModel.mom</key>
 		<data>
-		OEKCHHCWX0CZ0vhmHCpf4bez/PQ=
+		HGcaWYmi9DvW1DyzOBf9AXwRgRA=
 		</data>
 		<key>QBDataModel.momd/VersionInfo.plist</key>
 		<data>
@@ -79,91 +79,91 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Ghs7TxdjmGhiGXpcPSFf0mNbZ2ggg5o3IJ3xq1K8yko=
+			VCebA1MaPfvq2qZCGbdjQ5xNpSlM63ctY1xb+4IhykU=
 			</data>
 		</dict>
 		<key>Modules/QubitSDK.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			wanJtpiymR2qKLeKF1/KsRXsC9daGzM3zOMcgeVz6h4=
+			HTXt/gg04bB5oERk8PFh9TDjCZcMQ4nCXXvHkz+Wg2o=
 			</data>
 		</dict>
 		<key>Modules/QubitSDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			YuhjzDpus4eLpGVUr+1SXMOVn5TatfpRtZsgFdvoJ+Y=
+			yGsCYp+emckl92dTywSGE5PI9eBtaqvGzba0TTKHqlU=
 			</data>
 		</dict>
 		<key>Modules/QubitSDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			yJ83XR2r5kXXhe7LneoRgLbs56WwLBZhREfdX43ZpH4=
+			Wq1+Z54N1vFzmAQTS9hpqEMghlAPdS9/rvxmXT6Pwa0=
 			</data>
 		</dict>
 		<key>Modules/QubitSDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			YuhjzDpus4eLpGVUr+1SXMOVn5TatfpRtZsgFdvoJ+Y=
+			yGsCYp+emckl92dTywSGE5PI9eBtaqvGzba0TTKHqlU=
 			</data>
 		</dict>
 		<key>Modules/QubitSDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			4NzE+INDcw59MybQHMOaBS1YB2u5tFyQSAn89FgvXkA=
+			dxnJhXajmHti1POadUjB8CIgVh57csNV+rOiEOFWh/4=
 			</data>
 		</dict>
 		<key>Modules/QubitSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			wanJtpiymR2qKLeKF1/KsRXsC9daGzM3zOMcgeVz6h4=
+			HTXt/gg04bB5oERk8PFh9TDjCZcMQ4nCXXvHkz+Wg2o=
 			</data>
 		</dict>
 		<key>Modules/QubitSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			YhfleYYS9DvsfHrtKtSkmCgIF09XF2tdhED946JfbiE=
+			KLhY7Z7hA6Loy6ZjgSZK9yQ92+052dZEw8V5NGoGtvg=
 			</data>
 		</dict>
 		<key>Modules/QubitSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			nK9xqcSmVrWsW/cBN1z36YPFNiw3JWlFCSZXbvmRNcc=
+			eqbrqEU4dUM3YN4Zlz50H9GxQb44+J7N8YuyuN02+f8=
 			</data>
 		</dict>
 		<key>Modules/QubitSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			YhfleYYS9DvsfHrtKtSkmCgIF09XF2tdhED946JfbiE=
+			KLhY7Z7hA6Loy6ZjgSZK9yQ92+052dZEw8V5NGoGtvg=
 			</data>
 		</dict>
 		<key>Modules/QubitSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Q6cvETzracWQdP0xriv6m97UJYUrcrgyOLcNpfvTUpw=
+			NINaBREYVPLwWhbe2UgH61yZQra0EaRAublhVstHrwY=
 			</data>
 		</dict>
 		<key>QBDataModel.momd/QBDataModel 2.mom</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			S2arW8gNeC3naiH+3DB8JXKFhjnkJiK5Ts9YCLrgwIE=
+			FHQOu38bb7zLcOuRQzLOCnJMP/NxhyrFv2WBe3EmzcA=
 			</data>
 		</dict>
 		<key>QBDataModel.momd/QBDataModel 3.mom</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Eny+OmZ0QZXk89GzEuuXlHR2IEDu920FI9xi71LZDRY=
+			i0M/UTrUltltFX0sAu7KIikaw2KgD7+nbTURzgWjwQk=
 			</data>
 		</dict>
 		<key>QBDataModel.momd/QBDataModel 3.omo</key>
@@ -177,7 +177,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Hnpf7i5xI/t8NbQUKUUb0Q9leaZ1mJHHkCRrNmnD9j4=
+			fKRFy54U75T9O2p10fgG2MKeJw7xm0wH7ZwmUbBjHak=
 			</data>
 		</dict>
 		<key>QBDataModel.momd/VersionInfo.plist</key>
