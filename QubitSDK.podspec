@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
     s.name         = "QubitSDK"
 
-    s.version      = "2.0.1"
+    s.version      = "2.0.2"
 
     s.summary      = "Qubit experience delivery for iOS"
 
@@ -12,7 +12,6 @@ Pod::Spec.new do |s|
 
     s.homepage     = "http://www.qubit.com"
 
-    #TODO: change license
     s.license      = { :type => 'MIT', :file => 'LICENSE' }
 
     s.authors      = { "Dariusz Zajac" => "dariusz.zajac@miquido.com", "Pavlo Davydiuk" => "pavlo.davydiuk@miquido.com" }
