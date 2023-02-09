@@ -54,14 +54,14 @@ To integrate QubitSDK into your Xcode project using Swift Package Manager:
 
 * File > Swift Packages > Add Package Dependency
 * Add `https://github.com/qubitdigital/qubit-sdk-ios.git`
-* Select *Up to Next Major* with `2.0.2`
+* Select *Up to Next Major* with `2.0.3`
 * In your target's *Build Phases* add *QubitSDK* to *Target Dependencies* and *Link Binary With Libraries*
 
 Or add to another package as a dependency:
 
 ```
 dependencies: [
-    .package(url: "https://github.com/qubitdigital/qubit-sdk-ios.git", .upToNextMajor(from: "2.0.2"))
+    .package(url: "https://github.com/qubitdigital/qubit-sdk-ios.git", .upToNextMajor(from: "2.0.3"))
 ]
 ```
 
@@ -78,7 +78,7 @@ Update the following into your Podfile:
 
 ```
 target 'MyApp' do
-  pod 'QubitSDK', '~> 2.0.2'
+  pod 'QubitSDK', '~> 2.0.3'
 end
 ```
 
@@ -98,7 +98,7 @@ use_frameworks!
 
 target 'MyApp' do
     pod "QubitSDK", :git =>
-    "https://github.com/qubitdigital/qubit-sdk-ios.git", :tag => "2.0.2"
+    "https://github.com/qubitdigital/qubit-sdk-ios.git", :tag => "2.0.3"
 end
 ```
 
