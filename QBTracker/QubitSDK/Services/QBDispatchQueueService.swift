@@ -8,14 +8,11 @@
 
 import Foundation
 
-class QBDispatchQueueService {
-    
+enum QBDispatchQueueService {
     enum QBDispatchQueueType: String {
         case qubit = "QubitDispatchQueue"
         case upload = "EventUploadingDispatchQueue"
         case coredata = "CoreDataDispatchQueue"
-        case experiences = "ExperiencesDispatchQueue"
-        case placement = "PlacementDispatchQueue"
         
         func queue() -> DispatchQueue {
             switch self {
@@ -25,22 +22,22 @@ class QBDispatchQueueService {
                 return QBDispatchQueueService.backgroundCoreDataDispatchQueue
             case .upload:
                 return QBDispatchQueueService.backgroundEventUploadingDispatchQueue
-            case .experiences:
-                return QBDispatchQueueService.experiencesDispatchQueue
-            case .placement:
-                return QBDispatchQueueService.placementDispatchQueue
             }
         }
     }
     
-    private static let backgroundEventUploadingDispatchQueue = create(type: .upload)
-    private static let backgroundCoreDataDispatchQueue = create(type: .coredata)
-    private static let backgroundQubitDispatchQueue = create(type: .qubit)
-    private static let experiencesDispatchQueue = create(type: .experiences)
-        private static let placementDispatchQueue = create(type: .placement)
+    private static var backgroundEventUploadingDispatchQueue = create(type: .upload)
+    private static var backgroundCoreDataDispatchQueue = create(type: .coredata)
+    private static var backgroundQubitDispatchQueue = create(type: .qubit)
     
-    private static func create(type: QBDispatchQueueType) -> DispatchQueue {
-        return DispatchQueue(label: type.rawValue, qos: .background, autoreleaseFrequency: .inherit)
+    static func setupQueuePriority(qos: DispatchQoS) {
+        backgroundEventUploadingDispatchQueue = create(type: .upload, qos: qos)
+        backgroundCoreDataDispatchQueue = create(type: .coredata, qos: qos)
+        backgroundQubitDispatchQueue = create(type: .qubit, qos: qos)
+    }
+    
+    private static func create(type: QBDispatchQueueType, qos: DispatchQoS = .background) -> DispatchQueue {
+        return DispatchQueue(label: type.rawValue, qos: qos, autoreleaseFrequency: .inherit)
     }
     
     static func runAsync(type: QBDispatchQueueType, function: @escaping () -> Void ) { type.queue().async { function() } }
