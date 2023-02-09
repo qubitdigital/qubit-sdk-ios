@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)
+// swift-compiler-version: Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)
 // swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name QubitSDK
 // swift-module-flags-ignorable: -enable-bare-slash-regex
 import CommonCrypto
@@ -68,13 +68,25 @@ final public class QBPlacementEntityCallback {
   @objc(impression) final public func impression()
   @objc deinit
 }
+@objc public enum QBQueuePriority : Swift.Int {
+  case background
+  case utility
+  case `default`
+  case userInitiated
+  case userInteractive
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
 @_inheritsConvenienceInitializers @objc public class QubitSDK : ObjectiveC.NSObject {
   public static var trackingId: Swift.String
   public static var deviceId: Swift.String {
     get
   }
   @objc(restartWithCustomDeviceID:) public class func restartWithCustomDeviceID(id: Swift.String)
-  @objc(startWithTrackingId:logLevel:) public class func start(withTrackingId id: Swift.String, logLevel: QBLogLevel = QBLogLevel.disabled)
+  @objc(startWithTrackingId:logLevel:queuePriority:) public class func start(withTrackingId id: Swift.String, logLevel: QBLogLevel = QBLogLevel.disabled, queuePriority: QBQueuePriority = .background)
   @objc(enable:) public class func enableTracker(enable: Swift.Bool)
   @objc(sendEventWithType:data:) public class func sendEvent(type: Swift.String, data: Swift.String)
   @objc(sendEventWithType:dictionary:) public class func sendEvent(type: Swift.String, dictionary: [Swift.String : Any])
@@ -161,6 +173,9 @@ extension QBExperienceEntity {
 extension PlacementMode : Swift.Equatable {}
 extension PlacementMode : Swift.Hashable {}
 extension PlacementMode : Swift.RawRepresentable {}
+extension QBQueuePriority : Swift.Equatable {}
+extension QBQueuePriority : Swift.Hashable {}
+extension QBQueuePriority : Swift.RawRepresentable {}
 extension QBLogLevel : Swift.Equatable {}
 extension QBLogLevel : Swift.Hashable {}
 extension QBLogLevel : Swift.RawRepresentable {}

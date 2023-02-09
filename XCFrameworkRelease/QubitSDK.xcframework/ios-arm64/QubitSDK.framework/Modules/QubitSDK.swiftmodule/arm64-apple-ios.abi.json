@@ -2170,6 +2170,347 @@
       },
       {
         "kind": "TypeDecl",
+        "name": "QBQueuePriority",
+        "printedName": "QBQueuePriority",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "background",
+            "printedName": "background",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(QubitSDK.QBQueuePriority.Type) -> QubitSDK.QBQueuePriority",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "QBQueuePriority",
+                    "printedName": "QubitSDK.QBQueuePriority",
+                    "usr": "c:@M@QubitSDK@E@QBQueuePriority"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "QubitSDK.QBQueuePriority.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "QBQueuePriority",
+                        "printedName": "QubitSDK.QBQueuePriority",
+                        "usr": "c:@M@QubitSDK@E@QBQueuePriority"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "c:@M@QubitSDK@E@QBQueuePriority@QBQueuePriorityBackground",
+            "mangledName": "$s8QubitSDK15QBQueuePriorityO10backgroundyA2CmF",
+            "moduleName": "QubitSDK",
+            "declAttributes": [
+              "ObjC"
+            ],
+            "fixedbinaryorder": 0
+          },
+          {
+            "kind": "Var",
+            "name": "utility",
+            "printedName": "utility",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(QubitSDK.QBQueuePriority.Type) -> QubitSDK.QBQueuePriority",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "QBQueuePriority",
+                    "printedName": "QubitSDK.QBQueuePriority",
+                    "usr": "c:@M@QubitSDK@E@QBQueuePriority"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "QubitSDK.QBQueuePriority.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "QBQueuePriority",
+                        "printedName": "QubitSDK.QBQueuePriority",
+                        "usr": "c:@M@QubitSDK@E@QBQueuePriority"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "c:@M@QubitSDK@E@QBQueuePriority@QBQueuePriorityUtility",
+            "mangledName": "$s8QubitSDK15QBQueuePriorityO7utilityyA2CmF",
+            "moduleName": "QubitSDK",
+            "declAttributes": [
+              "ObjC"
+            ],
+            "fixedbinaryorder": 1
+          },
+          {
+            "kind": "Var",
+            "name": "default",
+            "printedName": "default",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(QubitSDK.QBQueuePriority.Type) -> QubitSDK.QBQueuePriority",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "QBQueuePriority",
+                    "printedName": "QubitSDK.QBQueuePriority",
+                    "usr": "c:@M@QubitSDK@E@QBQueuePriority"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "QubitSDK.QBQueuePriority.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "QBQueuePriority",
+                        "printedName": "QubitSDK.QBQueuePriority",
+                        "usr": "c:@M@QubitSDK@E@QBQueuePriority"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "c:@M@QubitSDK@E@QBQueuePriority@QBQueuePriorityDefault",
+            "mangledName": "$s8QubitSDK15QBQueuePriorityO7defaultyA2CmF",
+            "moduleName": "QubitSDK",
+            "declAttributes": [
+              "ObjC"
+            ],
+            "fixedbinaryorder": 2
+          },
+          {
+            "kind": "Var",
+            "name": "userInitiated",
+            "printedName": "userInitiated",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(QubitSDK.QBQueuePriority.Type) -> QubitSDK.QBQueuePriority",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "QBQueuePriority",
+                    "printedName": "QubitSDK.QBQueuePriority",
+                    "usr": "c:@M@QubitSDK@E@QBQueuePriority"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "QubitSDK.QBQueuePriority.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "QBQueuePriority",
+                        "printedName": "QubitSDK.QBQueuePriority",
+                        "usr": "c:@M@QubitSDK@E@QBQueuePriority"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "c:@M@QubitSDK@E@QBQueuePriority@QBQueuePriorityUserInitiated",
+            "mangledName": "$s8QubitSDK15QBQueuePriorityO13userInitiatedyA2CmF",
+            "moduleName": "QubitSDK",
+            "declAttributes": [
+              "ObjC"
+            ],
+            "fixedbinaryorder": 3
+          },
+          {
+            "kind": "Var",
+            "name": "userInteractive",
+            "printedName": "userInteractive",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(QubitSDK.QBQueuePriority.Type) -> QubitSDK.QBQueuePriority",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "QBQueuePriority",
+                    "printedName": "QubitSDK.QBQueuePriority",
+                    "usr": "c:@M@QubitSDK@E@QBQueuePriority"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "QubitSDK.QBQueuePriority.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "QBQueuePriority",
+                        "printedName": "QubitSDK.QBQueuePriority",
+                        "usr": "c:@M@QubitSDK@E@QBQueuePriority"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "c:@M@QubitSDK@E@QBQueuePriority@QBQueuePriorityUserInteractive",
+            "mangledName": "$s8QubitSDK15QBQueuePriorityO15userInteractiveyA2CmF",
+            "moduleName": "QubitSDK",
+            "declAttributes": [
+              "ObjC"
+            ],
+            "fixedbinaryorder": 4
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(rawValue:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "QubitSDK.QBQueuePriority?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "QBQueuePriority",
+                    "printedName": "QubitSDK.QBQueuePriority",
+                    "usr": "c:@M@QubitSDK@E@QBQueuePriority"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:8QubitSDK15QBQueuePriorityO8rawValueACSgSi_tcfc",
+            "mangledName": "$s8QubitSDK15QBQueuePriorityO8rawValueACSgSi_tcfc",
+            "moduleName": "QubitSDK",
+            "implicit": true,
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Var",
+            "name": "rawValue",
+            "printedName": "rawValue",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:8QubitSDK15QBQueuePriorityO8rawValueSivp",
+            "mangledName": "$s8QubitSDK15QBQueuePriorityO8rawValueSivp",
+            "moduleName": "QubitSDK",
+            "implicit": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:8QubitSDK15QBQueuePriorityO8rawValueSivg",
+                "mangledName": "$s8QubitSDK15QBQueuePriorityO8rawValueSivg",
+                "moduleName": "QubitSDK",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Enum",
+        "usr": "c:@M@QubitSDK@E@QBQueuePriority",
+        "mangledName": "$s8QubitSDK15QBQueuePriorityO",
+        "moduleName": "QubitSDK",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "enumRawTypeName": "Int",
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "RawRepresentable",
+            "printedName": "RawRepresentable",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "RawValue",
+                "printedName": "RawValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:SY",
+            "mangledName": "$sSY"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "QubitSDK",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
         "name": "QubitSDK",
         "printedName": "QubitSDK",
         "children": [
@@ -2354,7 +2695,7 @@
           {
             "kind": "Function",
             "name": "start",
-            "printedName": "start(withTrackingId:logLevel:)",
+            "printedName": "start(withTrackingId:logLevel:queuePriority:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -2373,14 +2714,21 @@
                 "printedName": "QubitSDK.QBLogLevel",
                 "hasDefaultArg": true,
                 "usr": "c:@M@QubitSDK@E@QBLogLevel"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "QBQueuePriority",
+                "printedName": "QubitSDK.QBQueuePriority",
+                "hasDefaultArg": true,
+                "usr": "c:@M@QubitSDK@E@QBQueuePriority"
               }
             ],
             "declKind": "Func",
-            "usr": "c:@M@QubitSDK@objc(cs)QubitSDK(cm)startWithTrackingId:logLevel:",
-            "mangledName": "$s8QubitSDKAAC5start14withTrackingId8logLevelySS_AA05QBLogH0OtFZ",
+            "usr": "c:@M@QubitSDK@objc(cs)QubitSDK(cm)startWithTrackingId:logLevel:queuePriority:",
+            "mangledName": "$s8QubitSDKAAC5start14withTrackingId8logLevel13queuePriorityySS_AA05QBLogH0OAA07QBQueueJ0OtFZ",
             "moduleName": "QubitSDK",
             "static": true,
-            "objc_name": "startWithTrackingId:logLevel:",
+            "objc_name": "startWithTrackingId:logLevel:queuePriority:",
             "declAttributes": [
               "AccessControl",
               "ObjC",
@@ -4891,1155 +5239,1183 @@
   },
   "ConstValues": [
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBExperiencesService.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBExperiencesService.swift",
       "kind": "StringLiteral",
       "offset": 3259,
       "length": 4,
       "value": "\"v1\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBExperiencesService.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBExperiencesService.swift",
       "kind": "StringLiteral",
       "offset": 3305,
       "length": 13,
       "value": "\"experiences\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBExperiencesService.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBExperiencesService.swift",
       "kind": "StringLiteral",
       "offset": 3355,
       "length": 11,
       "value": "\"contextId\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBExperiencesService.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBExperiencesService.swift",
       "kind": "StringLiteral",
       "offset": 3401,
       "length": 9,
       "value": "\"preview\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBExperiencesService.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBExperiencesService.swift",
       "kind": "StringLiteral",
       "offset": 3447,
       "length": 11,
       "value": "\"variation\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBExperiencesService.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBExperiencesService.swift",
       "kind": "StringLiteral",
       "offset": 3500,
       "length": 16,
       "value": "\"ignoreSegments\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBConfigurationManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBConfigurationManager.swift",
       "kind": "IntegerLiteral",
       "offset": 381,
       "length": 1,
       "value": "3"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBConfigurationManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBConfigurationManager.swift",
       "kind": "StringLiteral",
       "offset": 1631,
       "length": 68,
       "value": "\"configuration lastUpdateTimeStamp updated = \""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBConfigurationManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBConfigurationManager.swift",
       "kind": "StringLiteral",
       "offset": 1698,
       "length": 2,
       "value": "\"\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBDispatchQueueService.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBDispatchQueueService.swift",
       "kind": "StringLiteral",
-      "offset": 265,
+      "offset": 259,
       "length": 20,
       "value": "\"QubitDispatchQueue\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBDispatchQueueService.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBDispatchQueueService.swift",
       "kind": "StringLiteral",
-      "offset": 308,
+      "offset": 302,
       "length": 29,
       "value": "\"EventUploadingDispatchQueue\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBDispatchQueueService.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBDispatchQueueService.swift",
       "kind": "StringLiteral",
-      "offset": 362,
+      "offset": 356,
       "length": 23,
       "value": "\"CoreDataDispatchQueue\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBDispatchQueueService.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBDispatchQueueService.swift",
       "kind": "StringLiteral",
-      "offset": 413,
-      "length": 26,
-      "value": "\"ExperiencesDispatchQueue\""
-    },
-    {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBDispatchQueueService.swift",
-      "kind": "StringLiteral",
-      "offset": 465,
-      "length": 24,
-      "value": "\"PlacementDispatchQueue\""
-    },
-    {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBDispatchQueueService.swift",
-      "kind": "StringLiteral",
-      "offset": 265,
+      "offset": 259,
       "length": 20,
       "value": "\"QubitDispatchQueue\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBDispatchQueueService.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBDispatchQueueService.swift",
       "kind": "StringLiteral",
-      "offset": 308,
+      "offset": 302,
       "length": 29,
       "value": "\"EventUploadingDispatchQueue\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBDispatchQueueService.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBDispatchQueueService.swift",
       "kind": "StringLiteral",
-      "offset": 362,
+      "offset": 356,
       "length": 23,
       "value": "\"CoreDataDispatchQueue\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBDispatchQueueService.swift",
-      "kind": "StringLiteral",
-      "offset": 413,
-      "length": 26,
-      "value": "\"ExperiencesDispatchQueue\""
-    },
-    {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBDispatchQueueService.swift",
-      "kind": "StringLiteral",
-      "offset": 465,
-      "length": 24,
-      "value": "\"PlacementDispatchQueue\""
-    },
-    {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/QBApiClient.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/QBApiClient.swift",
       "kind": "StringLiteral",
       "offset": 258,
       "length": 5,
       "value": "\"GET\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/QBApiClient.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/QBApiClient.swift",
       "kind": "StringLiteral",
       "offset": 280,
       "length": 6,
       "value": "\"POST\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/QBApiClient.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/QBApiClient.swift",
       "kind": "StringLiteral",
       "offset": 302,
       "length": 5,
       "value": "\"PUT\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/QBApiClient.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/QBApiClient.swift",
       "kind": "StringLiteral",
       "offset": 326,
       "length": 8,
       "value": "\"DELETE\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/QBApiClient.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/QBApiClient.swift",
       "kind": "StringLiteral",
       "offset": 258,
       "length": 5,
       "value": "\"GET\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/QBApiClient.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/QBApiClient.swift",
       "kind": "StringLiteral",
       "offset": 280,
       "length": 6,
       "value": "\"POST\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/QBApiClient.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/QBApiClient.swift",
       "kind": "StringLiteral",
       "offset": 302,
       "length": 5,
       "value": "\"PUT\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/QBApiClient.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/QBApiClient.swift",
       "kind": "StringLiteral",
       "offset": 326,
       "length": 8,
       "value": "\"DELETE\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/GraphQLQueries\/QBPlacementsGraphQLQuery.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/GraphQLQueries\/QBPlacementsGraphQLQuery.swift",
       "kind": "StringLiteral",
       "offset": 71,
       "length": 6,
       "value": "\"LIVE\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/GraphQLQueries\/QBPlacementsGraphQLQuery.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/GraphQLQueries\/QBPlacementsGraphQLQuery.swift",
       "kind": "StringLiteral",
       "offset": 96,
       "length": 8,
       "value": "\"SAMPLE\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/GraphQLQueries\/QBPlacementsGraphQLQuery.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/GraphQLQueries\/QBPlacementsGraphQLQuery.swift",
       "kind": "StringLiteral",
       "offset": 124,
       "length": 9,
       "value": "\"PREVIEW\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/GraphQLQueries\/QBPlacementsGraphQLQuery.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/GraphQLQueries\/QBPlacementsGraphQLQuery.swift",
       "kind": "StringLiteral",
       "offset": 71,
       "length": 6,
       "value": "\"LIVE\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/GraphQLQueries\/QBPlacementsGraphQLQuery.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/GraphQLQueries\/QBPlacementsGraphQLQuery.swift",
       "kind": "StringLiteral",
       "offset": 96,
       "length": 8,
       "value": "\"SAMPLE\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/GraphQLQueries\/QBPlacementsGraphQLQuery.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/GraphQLQueries\/QBPlacementsGraphQLQuery.swift",
       "kind": "StringLiteral",
       "offset": 124,
       "length": 9,
       "value": "\"PREVIEW\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/GraphQLQueries\/QBPlacementsGraphQLQuery.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/GraphQLQueries\/QBPlacementsGraphQLQuery.swift",
       "kind": "BooleanLiteral",
       "offset": 2101,
       "length": 4,
       "value": "true"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/GraphQLQueries\/QBPlacementsGraphQLQuery.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/GraphQLQueries\/QBPlacementsGraphQLQuery.swift",
       "kind": "StringLiteral",
       "offset": 823,
       "length": 24,
       "value": "\"QubitSDK.QBPlacementsGraphQLQuery\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBPlacementEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBPlacementEntity.swift",
       "kind": "StringLiteral",
       "offset": 236,
       "length": 17,
       "value": "\"QubitSDK.QBPlacementEntity\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBPlacementEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBPlacementEntity.swift",
       "kind": "StringLiteral",
       "offset": 2876,
       "length": 17,
       "value": "\"clickthroughUrl\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBPlacementEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBPlacementEntity.swift",
       "kind": "StringLiteral",
       "offset": 2925,
       "length": 15,
       "value": "\"impressionUrl\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBPlacementEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBPlacementEntity.swift",
       "kind": "StringLiteral",
       "offset": 2966,
       "length": 9,
       "value": "\"content\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBPlacementCallbackManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBPlacementCallbackManager.swift",
       "kind": "Array",
       "offset": 163,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/QubitSDK.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBQueuePriority.swift",
+      "kind": "IntegerLiteral",
+      "offset": 232,
+      "length": 7,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBQueuePriority.swift",
+      "kind": "IntegerLiteral",
+      "offset": 249,
+      "length": 9,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBQueuePriority.swift",
+      "kind": "IntegerLiteral",
+      "offset": 268,
+      "length": 13,
+      "value": "3"
+    },
+    {
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBQueuePriority.swift",
+      "kind": "IntegerLiteral",
+      "offset": 291,
+      "length": 15,
+      "value": "4"
+    },
+    {
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBQueuePriority.swift",
+      "kind": "IntegerLiteral",
+      "offset": 232,
+      "length": 7,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBQueuePriority.swift",
+      "kind": "IntegerLiteral",
+      "offset": 249,
+      "length": 9,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBQueuePriority.swift",
+      "kind": "IntegerLiteral",
+      "offset": 268,
+      "length": 13,
+      "value": "3"
+    },
+    {
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBQueuePriority.swift",
+      "kind": "IntegerLiteral",
+      "offset": 291,
+      "length": 15,
+      "value": "4"
+    },
+    {
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/QubitSDK.swift",
       "kind": "StringLiteral",
       "offset": 278,
       "length": 58,
       "value": "\"Unknown. Call QubitSDK.start(...) before any other call.\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/QubitSDK.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/QubitSDK.swift",
       "kind": "BooleanLiteral",
-      "offset": 5037,
+      "offset": 5237,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/QubitSDK.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/QubitSDK.swift",
       "kind": "BooleanLiteral",
-      "offset": 5106,
+      "offset": 5306,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBDevice.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBDevice.swift",
       "kind": "StringLiteral",
       "offset": 215,
       "length": 18,
       "value": "\"QUBIT_VISITOR_ID\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBSession.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBSession.swift",
       "kind": "StringLiteral",
       "offset": 2341,
       "length": 2,
       "value": "\"\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBSession.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBSession.swift",
       "kind": "IntegerLiteral",
       "offset": 2379,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBSession.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBSession.swift",
       "kind": "IntegerLiteral",
       "offset": 2432,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBSession.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBSession.swift",
       "kind": "IntegerLiteral",
       "offset": 2488,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBSession.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBSession.swift",
       "kind": "IntegerLiteral",
       "offset": 2522,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBSession.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBSession.swift",
       "kind": "IntegerLiteral",
       "offset": 2570,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBSession.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBSession.swift",
       "kind": "IntegerLiteral",
       "offset": 2611,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBSession.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBSession.swift",
       "kind": "IntegerLiteral",
       "offset": 2654,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBConfigurationService.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Services\/QBConfigurationService.swift",
       "kind": "StringLiteral",
       "offset": 489,
       "length": 57,
       "value": "\"https:\/\/s3-eu-west-1.amazonaws.com\/qubit-mobile-config\/\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBSessionManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBSessionManager.swift",
       "kind": "IntegerLiteral",
       "offset": 598,
       "length": 9,
       "value": "1800000"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBPlacementManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBPlacementManager.swift",
       "kind": "StringLiteral",
       "offset": 6543,
       "length": 6,
       "value": "\"view\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBPlacementManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBPlacementManager.swift",
       "kind": "StringLiteral",
       "offset": 6580,
       "length": 10,
       "value": "\"currency\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBPlacementManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBPlacementManager.swift",
       "kind": "StringLiteral",
       "offset": 6617,
       "length": 6,
       "value": "\"type\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBPlacementManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBPlacementManager.swift",
       "kind": "StringLiteral",
       "offset": 6654,
       "length": 10,
       "value": "\"subtypes\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBPlacementManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBPlacementManager.swift",
       "kind": "StringLiteral",
       "offset": 6695,
       "length": 10,
       "value": "\"language\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBPlacementManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBPlacementManager.swift",
       "kind": "StringLiteral",
       "offset": 6761,
       "length": 6,
       "value": "\"user\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBPlacementManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBPlacementManager.swift",
       "kind": "StringLiteral",
       "offset": 6792,
       "length": 4,
       "value": "\"id\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBPlacementManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBPlacementManager.swift",
       "kind": "StringLiteral",
       "offset": 6824,
       "length": 7,
       "value": "\"email\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBPlacementManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBPlacementManager.swift",
       "kind": "StringLiteral",
       "offset": 6893,
       "length": 9,
       "value": "\"visitor\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBPlacementManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBPlacementManager.swift",
       "kind": "StringLiteral",
       "offset": 6927,
       "length": 4,
       "value": "\"id\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBPlacementManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBPlacementManager.swift",
       "kind": "StringLiteral",
       "offset": 6957,
       "length": 5,
       "value": "\"url\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBPlacementManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBPlacementManager.swift",
       "kind": "StringLiteral",
       "offset": 7000,
       "length": 17,
       "value": "\"userAgentString\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBEventManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBEventManager.swift",
       "kind": "IntegerLiteral",
       "offset": 255,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBEventManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBEventManager.swift",
       "kind": "BooleanLiteral",
       "offset": 286,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBEventManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBEventManager.swift",
       "kind": "IntegerLiteral",
       "offset": 329,
       "length": 3,
       "value": "500"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBEventManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBEventManager.swift",
       "kind": "IntegerLiteral",
       "offset": 364,
       "length": 3,
       "value": "500"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBEventManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBEventManager.swift",
       "kind": "IntegerLiteral",
       "offset": 405,
       "length": 1,
       "value": "5"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBEventManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBEventManager.swift",
       "kind": "IntegerLiteral",
       "offset": 451,
       "length": 1,
       "value": "7"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBEventManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBEventManager.swift",
       "kind": "IntegerLiteral",
       "offset": 488,
       "length": 2,
       "value": "60"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBEventManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBEventManager.swift",
       "kind": "IntegerLiteral",
       "offset": 493,
       "length": 1,
       "value": "5"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBEventManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBEventManager.swift",
       "kind": "IntegerLiteral",
       "offset": 519,
       "length": 1,
       "value": "1"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBEventManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBEventManager.swift",
       "kind": "IntegerLiteral",
       "offset": 547,
       "length": 2,
       "value": "15"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBEventManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBEventManager.swift",
       "kind": "BooleanLiteral",
       "offset": 974,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBEventManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBEventManager.swift",
       "kind": "BooleanLiteral",
       "offset": 1014,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBEventManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBEventManager.swift",
       "kind": "BooleanLiteral",
       "offset": 1055,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
       "kind": "StringLiteral",
       "offset": 195,
       "length": 10,
       "value": "\"[‼️]\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
       "kind": "StringLiteral",
       "offset": 222,
       "length": 10,
       "value": "\"[ℹ️]\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
       "kind": "StringLiteral",
       "offset": 250,
       "length": 8,
       "value": "\"[💬]\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
       "kind": "StringLiteral",
       "offset": 278,
       "length": 8,
       "value": "\"[🔬]\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
       "kind": "StringLiteral",
       "offset": 306,
       "length": 10,
       "value": "\"[⚠️]\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
       "kind": "StringLiteral",
       "offset": 195,
       "length": 10,
       "value": "\"[‼️]\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
       "kind": "StringLiteral",
       "offset": 222,
       "length": 10,
       "value": "\"[ℹ️]\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
       "kind": "StringLiteral",
       "offset": 250,
       "length": 8,
       "value": "\"[💬]\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
       "kind": "StringLiteral",
       "offset": 278,
       "length": 8,
       "value": "\"[🔬]\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
       "kind": "StringLiteral",
       "offset": 306,
       "length": 10,
       "value": "\"[⚠️]\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
       "kind": "IntegerLiteral",
       "offset": 383,
       "length": 5,
       "value": "1"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
       "kind": "IntegerLiteral",
       "offset": 398,
       "length": 4,
       "value": "2"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
       "kind": "IntegerLiteral",
       "offset": 412,
       "length": 5,
       "value": "3"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
       "kind": "IntegerLiteral",
       "offset": 427,
       "length": 7,
       "value": "4"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
       "kind": "IntegerLiteral",
       "offset": 444,
       "length": 7,
       "value": "5"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
       "kind": "IntegerLiteral",
       "offset": 383,
       "length": 5,
       "value": "1"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
       "kind": "IntegerLiteral",
       "offset": 398,
       "length": 4,
       "value": "2"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
       "kind": "IntegerLiteral",
       "offset": 412,
       "length": 5,
       "value": "3"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
       "kind": "IntegerLiteral",
       "offset": 427,
       "length": 7,
       "value": "4"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
       "kind": "IntegerLiteral",
       "offset": 444,
       "length": 7,
       "value": "5"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBLog.swift",
       "kind": "StringLiteral",
       "offset": 502,
       "length": 24,
       "value": "\"yyyy-MM-dd hh:mm:ssSSS\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBExperiencesEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBExperiencesEntity.swift",
       "kind": "BooleanLiteral",
       "offset": 1734,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBExperiencesEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBExperiencesEntity.swift",
       "kind": "StringLiteral",
       "offset": 1438,
       "length": 18,
       "value": "\"QubitSDK.QBExperienceEntity\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBExperiencesEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBExperiencesEntity.swift",
       "kind": "StringLiteral",
       "offset": 4348,
       "length": 26,
       "value": "\"QubitSDK.QBExperienceEntityCallback\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBExperiencesEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBExperiencesEntity.swift",
       "kind": "StringLiteral",
       "offset": 4777,
       "length": 10,
       "value": "\"callback\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBExperiencesEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBExperiencesEntity.swift",
       "kind": "StringLiteral",
       "offset": 4815,
       "length": 11,
       "value": "\"isControl\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBExperiencesEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBExperiencesEntity.swift",
       "kind": "StringLiteral",
       "offset": 4857,
       "length": 4,
       "value": "\"id\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBExperiencesEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBExperiencesEntity.swift",
       "kind": "StringLiteral",
       "offset": 4891,
       "length": 11,
       "value": "\"variation\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBExperiencesEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBExperiencesEntity.swift",
       "kind": "StringLiteral",
       "offset": 4928,
       "length": 9,
       "value": "\"payload\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBExperiencesEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBExperiencesEntity.swift",
       "kind": "StringLiteral",
       "offset": 4974,
       "length": 20,
       "value": "\"experiencePayloads\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/Keychain\/QBKeychain.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/Keychain\/QBKeychain.swift",
       "kind": "StringLiteral",
       "offset": 1683,
       "length": 2,
       "value": "\"\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/Keychain\/QBKeychain.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/Keychain\/QBKeychain.swift",
       "kind": "BooleanLiteral",
       "offset": 2528,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Database\/QBDatabaseManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Database\/QBDatabaseManager.swift",
       "kind": "StringLiteral",
       "offset": 240,
       "length": 13,
       "value": "\"QBDataModel\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Database\/QBDatabaseManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Database\/QBDatabaseManager.swift",
       "kind": "BooleanLiteral",
       "offset": 522,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Database\/QBDatabaseManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Database\/QBDatabaseManager.swift",
       "kind": "IntegerLiteral",
       "offset": 542,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Database\/QBDatabaseManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Database\/QBDatabaseManager.swift",
       "kind": "BooleanLiteral",
       "offset": 1734,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Database\/QBDatabaseManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Database\/QBDatabaseManager.swift",
       "kind": "IntegerLiteral",
       "offset": 1754,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/QBTracker.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/QBTracker.swift",
       "kind": "BooleanLiteral",
       "offset": 612,
       "length": 4,
       "value": "true"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/QBTracker.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/QBTracker.swift",
       "kind": "BooleanLiteral",
       "offset": 3731,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/QBTracker.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/QBTracker.swift",
       "kind": "BooleanLiteral",
       "offset": 3796,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/QBTracker.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/QBTracker.swift",
       "kind": "BooleanLiteral",
       "offset": 4866,
       "length": 4,
       "value": "true"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "StringLiteral",
       "offset": 3830,
       "length": 31,
       "value": "\"configuration_reload_interval\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "StringLiteral",
       "offset": 3890,
       "length": 15,
       "value": "\"queue_timeout\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "StringLiteral",
       "offset": 3959,
       "length": 22,
       "value": "\"lookup_attribute_url\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "StringLiteral",
       "offset": 4018,
       "length": 28,
       "value": "\"lookup_get_request_timeout\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "StringLiteral",
       "offset": 4083,
       "length": 26,
       "value": "\"lookup_cache_expire_time\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "StringLiteral",
       "offset": 4182,
       "length": 15,
       "value": "\"data_location\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "StringLiteral",
       "offset": 4232,
       "length": 21,
       "value": "\"experience_api_host\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "StringLiteral",
       "offset": 4292,
       "length": 34,
       "value": "\"experience_api_cache_expire_time\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "StringLiteral",
       "offset": 4361,
       "length": 24,
       "value": "\"placement_api_endpoint\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "StringLiteral",
       "offset": 4422,
       "length": 23,
       "value": "\"placement_api_timeout\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "StringLiteral",
       "offset": 3830,
       "length": 31,
       "value": "\"configuration_reload_interval\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "StringLiteral",
       "offset": 3890,
       "length": 15,
       "value": "\"queue_timeout\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "StringLiteral",
       "offset": 3959,
       "length": 22,
       "value": "\"lookup_attribute_url\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "StringLiteral",
       "offset": 4018,
       "length": 28,
       "value": "\"lookup_get_request_timeout\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "StringLiteral",
       "offset": 4083,
       "length": 26,
       "value": "\"lookup_cache_expire_time\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "StringLiteral",
       "offset": 4182,
       "length": 15,
       "value": "\"data_location\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "StringLiteral",
       "offset": 4232,
       "length": 21,
       "value": "\"experience_api_host\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "StringLiteral",
       "offset": 4292,
       "length": 34,
       "value": "\"experience_api_cache_expire_time\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "StringLiteral",
       "offset": 4361,
       "length": 24,
       "value": "\"placement_api_endpoint\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "StringLiteral",
       "offset": 4422,
       "length": 23,
       "value": "\"placement_api_timeout\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "BooleanLiteral",
       "offset": 4580,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "IntegerLiteral",
       "offset": 4635,
       "length": 2,
       "value": "60"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "IntegerLiteral",
       "offset": 4672,
       "length": 2,
       "value": "60"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "StringLiteral",
       "offset": 4706,
       "length": 2,
       "value": "\"\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "StringLiteral",
       "offset": 4745,
       "length": 18,
       "value": "\"lookup.qubit.com\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "IntegerLiteral",
       "offset": 4806,
       "length": 2,
       "value": "60"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "IntegerLiteral",
       "offset": 4851,
       "length": 1,
       "value": "5"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "StringLiteral",
       "offset": 4883,
       "length": 4,
       "value": "\"ec\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "StringLiteral",
       "offset": 4922,
       "length": 4,
       "value": "\"EU\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "StringLiteral",
       "offset": 4959,
       "length": 19,
       "value": "\"gong-eb.qubit.com\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "StringLiteral",
       "offset": 5011,
       "length": 19,
       "value": "\"gong-gc.qubit.com\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "StringLiteral",
       "offset": 5071,
       "length": 15,
       "value": "\"sse.qubit.com\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "IntegerLiteral",
       "offset": 5131,
       "length": 3,
       "value": "300"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "StringLiteral",
       "offset": 5175,
       "length": 32,
       "value": "\"api.qubit.com\/placements\/query\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBConfigurationEntity.swift",
       "kind": "IntegerLiteral",
       "offset": 5250,
       "length": 1,
       "value": "5"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBEventEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBEventEntity.swift",
       "kind": "StringLiteral",
       "offset": 768,
       "length": 2,
       "value": "\"\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBEventEntity.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBEventEntity.swift",
       "kind": "StringLiteral",
       "offset": 792,
       "length": 2,
       "value": "\"\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/GraphQLQueries\/QBGraphQLQuery.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/GraphQLQueries\/QBGraphQLQuery.swift",
       "kind": "FloatLiteral",
       "offset": 786,
       "length": 3,
       "value": "5.0"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBEventTypeTransformer.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBEventTypeTransformer.swift",
       "kind": "StringLiteral",
       "offset": 222,
       "length": 3,
       "value": "\".\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/Reachability\/QBReachability.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/Reachability\/QBReachability.swift",
       "kind": "StringLiteral",
       "offset": 1609,
       "length": 33,
       "value": "\"ReachabilityChangedNotification\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/Reachability\/QBReachability.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/Reachability\/QBReachability.swift",
       "kind": "BooleanLiteral",
       "offset": 3454,
       "length": 4,
       "value": "true"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/Reachability\/QBReachability.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/Reachability\/QBReachability.swift",
       "kind": "BooleanLiteral",
       "offset": 3525,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/Reachability\/QBReachability.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/Reachability\/QBReachability.swift",
       "kind": "StringLiteral",
       "offset": 3663,
       "length": 32,
       "value": "\"uk.co.ashleymills.reachability\""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBLookupManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBLookupManager.swift",
       "kind": "StringLiteral",
       "offset": 983,
       "length": 61,
       "value": "\"lookup lastUpdateTimeStamp updated = \""
     },
     {
-      "filePath": "\/Users\/henryporter\/projects\/mobile\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBLookupManager.swift",
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/qa\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBLookupManager.swift",
       "kind": "StringLiteral",
       "offset": 1043,
       "length": 2,
