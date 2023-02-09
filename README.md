@@ -37,16 +37,33 @@ Further release notes are available in the [GitHub release notes](https://github
 
 | | Method | Supports | Host |
 |---|---|---|---|
-| 1 | CocoaPods | Swift & Objective-C | CocoaPods.org & GitHub |
-| 2 | XCFramework | Swift & Objective-C | GitHub |
+| 1 | Swift Package Manager | Swift | GitHub |
+| 2 | CocoaPods | Swift & Objective-C | CocoaPods.org & GitHub |
+| 3 | XCFramework | Swift & Objective-C | GitHub |
 
 
 
 
 Further details on installation options are below.
 
+## (1) Swift Package Manager
 
-## (1) CocoaPods
+To integrate QubitSDK into your Xcode project using Swift Package Manager:
+
+* File > Swift Packages > Add Package Dependency
+* Add `https://github.com/qubitdigital/qubit-sdk-ios.git`
+* Select *Up to Next Major* with `2.0.2`
+* In your target's *Build Phases* add *QubitSDK* to *Target Dependencies* and *Link Binary With Libraries*
+
+Or add to another package as a dependency:
+
+```
+dependencies: [
+    .package(url: "https://github.com/qubitdigital/qubit-sdk-ios.git", .upToNextMajor(from: "2.0.2"))
+]
+```
+
+## (2) CocoaPods
 CocoaPods is a dependency management system for iOS. If you do not have CocoaPods configured, please read the installation documents on their website (https://guides.cocoapods.org/using/getting-started.html). If you use another dependency management system, please contact us for alternative options.
 
 If you do not wish to implement CocoaPods, check out the "Using Framework Files" section below.
@@ -59,7 +76,7 @@ Update the following into your Podfile:
 
 ```
 target 'MyApp' do
-  pod 'QubitSDK', '~> 1.0.15'
+  pod 'QubitSDK', '~> 2.0.2'
 end
 ```
 
@@ -79,7 +96,7 @@ use_frameworks!
 
 target 'MyApp' do
     pod "QubitSDK", :git =>
-    "https://github.com/qubitdigital/qubit-sdk-ios.git", :tag => "1.0.15"
+    "https://github.com/qubitdigital/qubit-sdk-ios.git", :tag => "2.0.2"
 end
 ```
 
@@ -95,9 +112,9 @@ pod install
 
 If you encounter permission issues, ensure the GitHub username step has been successfully completed. Please consult the cocoapods documentation if you have any other issues with this step. If your process freezes on “Analysing dependencies”, try running *pod repo remove master*, *pod setup*, then *pod install* again.
 
-## (2) Integrate using a framework
+## (3) Integrate using a framework
 
-If you wish to use QubitSDK without a package manager such as CocoaPods, take a look at [our framework options](README-frameworks.md).
+If you wish to use QubitSDK without a package manager such as SPM or CocoaPods, take a look at [our framework options](README-frameworks.md).
 
 ## Starting the QubitSDK
 Starting the QubitSDK with a tracking ID will allow us to correctly identify your data.  
@@ -122,7 +139,7 @@ Framework:
 Launch:
 ```objective-c
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [QubitSDK startWithTrackingId: @"XXXXX" logLevel: QBLogLevelDisabled];
+    [QubitSDK startWithTrackingId: @"XXXXX" logLevel: QBLogLevelDisabled queuePriority: QBQueuePriorityBackground];
     return YES;
 }
 ```
@@ -133,7 +150,7 @@ Launch:
 import QubitSDK
 
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    QubitSDK.start(withTrackingId: "XXXXX", logLevel: .disabled)
+    QubitSDK.start(withTrackingId: "XXXXX", logLevel: .disabled, queuePriority: .background)
     return true
 }
 ```
