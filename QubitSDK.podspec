@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
     s.name         = "QubitSDK"
 
-    s.version      = "2.0.3"
+    s.version      = "2.0.4"
 
     s.summary      = "Qubit experience delivery for iOS"
 
