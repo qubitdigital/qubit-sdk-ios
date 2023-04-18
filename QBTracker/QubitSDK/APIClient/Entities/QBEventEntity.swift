@@ -17,7 +17,7 @@ enum QBEventType: String {
         switch type {
         case "qubit.session":
             self = .session
-        case "View":
+        case _ where type.hasSuffix("View"):
             self = .view
         default:
             self = .other
