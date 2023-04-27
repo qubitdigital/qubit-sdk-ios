@@ -82,10 +82,14 @@ extension QBDeviceInfoEntity {
     }
     
     private static func getFrameworkVersion() -> String {
+        #if SWIFT_PACKAGE
+        return QubitSDK.version
+        #else
         guard let version = Bundle(for: QubitSDK.self).infoDictionary?["CFBundleShortVersionString"] as? String else {
             return "SDK Version Unknown"
         }
         return version
+        #endif
     }
     
     private static func getDeviceModel() -> String {
