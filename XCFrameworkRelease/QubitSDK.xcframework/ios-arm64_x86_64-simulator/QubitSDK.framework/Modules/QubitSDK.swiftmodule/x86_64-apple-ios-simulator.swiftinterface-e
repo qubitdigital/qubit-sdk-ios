@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)
 // swift-module-flags: -target x86_64-apple-ios11.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name QubitSDK
 // swift-module-flags-ignorable: -enable-bare-slash-regex
 import CommonCrypto
@@ -14,8 +14,8 @@ import _Concurrency
 import _StringProcessing
 @objc public class QBLookupEntity : ObjectiveC.NSObject, Swift.Codable {
   @objc deinit
-  public func encode(to encoder: Swift.Encoder) throws
-  required public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
 }
 @objc @_inheritsConvenienceInitializers public class QBEvent : CoreData.NSManagedObject {
   @objc override dynamic public init(entity: CoreData.NSEntityDescription, insertInto context: CoreData.NSManagedObjectContext?)
@@ -81,6 +81,7 @@ final public class QBPlacementEntityCallback {
   }
 }
 @_inheritsConvenienceInitializers @objc public class QubitSDK : ObjectiveC.NSObject {
+  public static let version: Swift.String
   public static var trackingId: Swift.String
   public static var deviceId: Swift.String {
     get
@@ -94,8 +95,8 @@ final public class QBPlacementEntityCallback {
   @objc(createEventWithType:data:) public class func createEvent(type: Swift.String, data: Swift.String) -> Swift.AnyObject?
   @objc(createEventWithType:dictionary:) public class func createEvent(type: Swift.String, dictionary: [Swift.String : Any]) -> Swift.AnyObject?
   @objc(stopTracking) public class func stopTracking()
-  @objc(fetchExperiencesWithIds:onSuccess:onError:preview:variation:ignoreSegments:) public class func fetchExperiences(withIds ids: [Swift.Int], onSuccess: @escaping ([QubitSDK.QBExperienceEntity]) -> Swift.Void, onError: @escaping (Swift.Error) -> Swift.Void, preview: Swift.Bool = false, ignoreSegments: Swift.Bool = false, variation: Foundation.NSNumber? = nil)
-  @objc(getPlacementWithId:mode:attributes:campaignId:experienceId:onSuccess:onError:) public class func getPlacement(with id: Swift.String, mode: Swift.String? = nil, attributes: Swift.String? = nil, campaignId: Swift.String? = nil, experienceId: Swift.String? = nil, onSuccess: @escaping (QubitSDK.QBPlacementEntity) -> Swift.Void, onError: @escaping (Swift.Error) -> Swift.Void)
+  @objc(fetchExperiencesWithIds:onSuccess:onError:preview:variation:ignoreSegments:) public class func fetchExperiences(withIds ids: [Swift.Int], onSuccess: @escaping ([QubitSDK.QBExperienceEntity]) -> Swift.Void, onError: @escaping (any Swift.Error) -> Swift.Void, preview: Swift.Bool = false, ignoreSegments: Swift.Bool = false, variation: Foundation.NSNumber? = nil)
+  @objc(getPlacementWithId:mode:attributes:campaignId:experienceId:onSuccess:onError:) public class func getPlacement(with id: Swift.String, mode: Swift.String? = nil, attributes: Swift.String? = nil, campaignId: Swift.String? = nil, experienceId: Swift.String? = nil, onSuccess: @escaping (QubitSDK.QBPlacementEntity) -> Swift.Void, onError: @escaping (any Swift.Error) -> Swift.Void)
   @objc(getLookupData) public class func getLookupData() -> QubitSDK.QBLookupEntity?
   @objc override dynamic public init()
   @objc deinit
