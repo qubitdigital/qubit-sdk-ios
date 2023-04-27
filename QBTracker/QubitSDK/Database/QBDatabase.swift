@@ -14,7 +14,12 @@ class QBDatabase {
     var managedObjectContext: NSManagedObjectContext
     
     init?(modelName: String) {
+        #if SWIFT_PACKAGE
+        let bundle = Bundle.module
+        #else
         let bundle = Bundle(for: QBDatabase.self)
+        #endif
+        
         guard let modelUrl = bundle.url(forResource: modelName, withExtension: "momd") else {
             QBLog.error("FatalError loading model \(modelName) from bundle")
             return nil
