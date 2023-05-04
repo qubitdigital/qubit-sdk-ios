@@ -60,16 +60,14 @@ class QBSessionManager {
     }
     
     func eventAdded(type: QBEventType, timestampInMS: Int64) {
+        self.currentSession.sequenceEventNumber += 1
         switch type {
-        case .session:
+        case .session, .other:
             return
         case .view:
             self.currentSession.viewNumber += 1
             self.currentSession.sessionViewNumber += 1
             self.currentSession.viewTimestampInMS = timestampInMS
-            fallthrough
-        case .other:
-            self.currentSession.sequenceEventNumber += 1
         }
         self.saveSession()
     }
