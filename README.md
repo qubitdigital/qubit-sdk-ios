@@ -16,7 +16,8 @@ Further release notes are available in the [GitHub release notes](https://github
 
 | VERSION | UPDATES |
 |---|---|
-| 2.0.3 | Bugs and performance fixes; initial support for Swift Package Manager
+| 2.0.4 | Swift Package Manager is now supported for installation
+| 2.0.3 | Bugs and performance fixes
 | 2.0.1 | Introduction of functionality to reset the SDK using a custom device ID of your choice 
 | 2.0.0 | Major release, bringing support for Placement API. Upgrade to 2.* to use this feature.
 | 1.0.16 | Fixed regression where a percentage of events were incorrectly serialized to JSON.
@@ -54,14 +55,14 @@ To integrate QubitSDK into your Xcode project using Swift Package Manager:
 
 * File > Swift Packages > Add Package Dependency
 * Add `https://github.com/qubitdigital/qubit-sdk-ios.git`
-* Select *Up to Next Major* with `2.0.3`
+* Select *Up to Next Major* with `2.0.4`
 * In your target's *Build Phases* add *QubitSDK* to *Target Dependencies* and *Link Binary With Libraries*
 
 Or add to another package as a dependency:
 
 ```
 dependencies: [
-    .package(url: "https://github.com/qubitdigital/qubit-sdk-ios.git", .upToNextMajor(from: "2.0.3"))
+    .package(url: "https://github.com/qubitdigital/qubit-sdk-ios.git", .upToNextMajor(from: "2.0.4"))
 ]
 ```
 
@@ -78,7 +79,7 @@ Update the following into your Podfile:
 
 ```
 target 'MyApp' do
-  pod 'QubitSDK', '~> 2.0.3'
+  pod 'QubitSDK', '~> 2.0.4'
 end
 ```
 
@@ -98,7 +99,7 @@ use_frameworks!
 
 target 'MyApp' do
     pod "QubitSDK", :git =>
-    "https://github.com/qubitdigital/qubit-sdk-ios.git", :tag => "2.0.3"
+    "https://github.com/qubitdigital/qubit-sdk-ios.git", :tag => "2.0.4"
 end
 ```
 
