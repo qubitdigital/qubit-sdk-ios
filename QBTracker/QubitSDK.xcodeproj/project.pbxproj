@@ -78,6 +78,7 @@
 		B9987BA41F6C4D7A00CA6AB7 /* QBEntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9987BA11F6C4D2A00CA6AB7 /* QBEntityTests.swift */; };
 		B9ABEC361F6AC49200C6217B /* QBDispatchQueueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9ABEC351F6AC49200C6217B /* QBDispatchQueueService.swift */; };
 		B9AEA11821008780009812C0 /* QBDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A0F5BF571F4D7833009EFE8D /* QBDataModel.xcdatamodeld */; };
+		EB2CD7822A335F8B001AC2E2 /* QBEventTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2CD7812A335F8B001AC2E2 /* QBEventTypeTests.swift */; };
 		EB8C04512396820F000939F3 /* lookup_entity.json in Resources */ = {isa = PBXBuildFile; fileRef = B983902C1F6FD3410002993F /* lookup_entity.json */; };
 /* End PBXBuildFile section */
 
@@ -211,6 +212,7 @@
 		B9987B9F1F6C478800CA6AB7 /* configuration_entity.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = configuration_entity.json; sourceTree = "<group>"; };
 		B9987BA11F6C4D2A00CA6AB7 /* QBEntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBEntityTests.swift; sourceTree = "<group>"; };
 		B9ABEC351F6AC49200C6217B /* QBDispatchQueueService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBDispatchQueueService.swift; sourceTree = "<group>"; };
+		EB2CD7812A335F8B001AC2E2 /* QBEventTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBEventTypeTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -347,6 +349,7 @@
 				42F0CD5E1F4AEE2B00BD9010 /* Info.plist */,
 				42F0CD7C1F4B182E00BD9010 /* QBConfigurationTest.swift */,
 				A08335D91F4EF13400F509D5 /* QBEventDatabaseTests.swift */,
+				EB2CD7812A335F8B001AC2E2 /* QBEventTypeTests.swift */,
 			);
 			path = QBTrackerTests;
 			sourceTree = "<group>";
@@ -761,6 +764,7 @@
 				42F0CD7D1F4B182E00BD9010 /* QBConfigurationTest.swift in Sources */,
 				A08335DA1F4EF13400F509D5 /* QBEventDatabaseTests.swift in Sources */,
 				B9987BA41F6C4D7A00CA6AB7 /* QBEntityTests.swift in Sources */,
+				EB2CD7822A335F8B001AC2E2 /* QBEventTypeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,12 +12,12 @@ enum QBEventType: String {
     case session
     case view
     case other
-    
+
     public init(type: String) {
         switch type {
         case "qubit.session":
             self = .session
-        case _ where type.hasSuffix("View"):
+        case _ where type.range(of: "^([^.]+\\.)?[a-z]{2}View$", options: .regularExpression) != nil:
             self = .view
         default:
             self = .other
