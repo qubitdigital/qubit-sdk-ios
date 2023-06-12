@@ -63,7 +63,7 @@ class QBSessionManager {
         self.currentSession.sequenceEventNumber += 1
         switch type {
         case .session, .other:
-            return
+            break
         case .view:
             self.currentSession.viewNumber += 1
             self.currentSession.sessionViewNumber += 1
