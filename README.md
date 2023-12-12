@@ -158,7 +158,31 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 }
 ```
 
-Here *XXXXX* is your Qubit Tracking ID, which is a unique string representing your account, and will have already been provided to you. If you haven’t received a tracking ID, or don’t know what yours is, please contact us.
+Here *XXXXX* is your Qubit Tracking ID, which is a unique string representing your account, and will have already been provided to you.
+
+To get `trackingId` and `deviceId`, you can refer to the corresponding properties of the imported library:
+
+```objective-c
+NSLog([QubitSDK trackingId]);
+NSLog([QubitSDK deviceId]);
+```
+
+```swift
+print(QubitSDK.trackingId)
+print(QubitSDK.deviceId)
+```
+
+If you need to change the `deviceId`, you need to restart the SDK with a new ID:
+
+```objective-c
+NSString *newDeviceID = @"YourNewDeviceID";
+[QubitSDK restartWithCustomDeviceID:newDeviceID];
+```
+
+```swift
+let newDeviceID = "yourNewDeviceID"
+QubitSDK.restartWithCustomDeviceID(id: newDeviceID)
+```
 
 # Sending Events
 
