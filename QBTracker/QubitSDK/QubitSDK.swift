@@ -11,7 +11,7 @@ import Foundation
 @objc
 public class QubitSDK: NSObject {
     /// Current QubitSDK version. Necessary since SPM doesn't use custom Info.plist.
-    public static let version = "2.0.4"
+    public static let version = "2.0.5"
     
     /// Return current tracking ID
     public static var trackingId: String = "Unknown. Call QubitSDK.start(...) before any other call."

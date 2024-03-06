@@ -6569,7 +6569,7 @@
       "kind": "StringLiteral",
       "offset": 312,
       "length": 7,
-      "value": "\"2.0.4\""
+      "value": "\"2.0.5\""
     },
     {
       "filePath": "\/Users\/hp\/projects\/mobile\/ios\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/QubitSDK.swift",
@@ -6924,21 +6924,21 @@
     {
       "filePath": "\/Users\/hp\/projects\/mobile\/ios\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBSessionManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 1894,
+      "offset": 1815,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/hp\/projects\/mobile\/ios\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBSessionManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 1949,
+      "offset": 1954,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/hp\/projects\/mobile\/ios\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Managers\/QBSessionManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 2117,
+      "offset": 2009,
       "length": 1,
       "value": "1"
     },
@@ -9038,77 +9038,77 @@
     {
       "filePath": "\/Users\/hp\/projects\/mobile\/ios\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBEventEntity.swift",
       "kind": "StringLiteral",
-      "offset": 300,
+      "offset": 296,
       "length": 15,
       "value": "\"qubit.session\""
     },
     {
       "filePath": "\/Users\/hp\/projects\/mobile\/ios\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBEventEntity.swift",
       "kind": "StringLiteral",
-      "offset": 358,
-      "length": 6,
-      "value": "\"View\""
+      "offset": 377,
+      "length": 27,
+      "value": "\"^([^.]+\\.)?[a-z]{2}View$\""
     },
     {
       "filePath": "\/Users\/hp\/projects\/mobile\/ios\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBEventEntity.swift",
       "kind": "StringLiteral",
-      "offset": 768,
+      "offset": 845,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/hp\/projects\/mobile\/ios\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBEventEntity.swift",
       "kind": "StringLiteral",
-      "offset": 792,
+      "offset": 869,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/hp\/projects\/mobile\/ios\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBEventEntity.swift",
       "kind": "Array",
-      "offset": 1522,
+      "offset": 1599,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/hp\/projects\/mobile\/ios\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBEventEntity.swift",
       "kind": "Dictionary",
-      "offset": 1794,
+      "offset": 1871,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/hp\/projects\/mobile\/ios\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBEventEntity.swift",
       "kind": "StringLiteral",
-      "offset": 1946,
+      "offset": 2023,
       "length": 9,
       "value": "\"context\""
     },
     {
       "filePath": "\/Users\/hp\/projects\/mobile\/ios\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBEventEntity.swift",
       "kind": "StringLiteral",
-      "offset": 2138,
+      "offset": 2215,
       "length": 6,
       "value": "\"meta\""
     },
     {
       "filePath": "\/Users\/hp\/projects\/mobile\/ios\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBEventEntity.swift",
       "kind": "BooleanLiteral",
-      "offset": 2724,
+      "offset": 2801,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/hp\/projects\/mobile\/ios\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBEventEntity.swift",
       "kind": "StringLiteral",
-      "offset": 2756,
+      "offset": 2833,
       "length": 66,
       "value": "\"Please check your `data: String` parameter has valid JSON format\""
     },
     {
       "filePath": "\/Users\/hp\/projects\/mobile\/ios\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBEventEntity.swift",
       "kind": "StringLiteral",
-      "offset": 4553,
+      "offset": 4630,
       "length": 2,
       "value": "\"\""
     },
