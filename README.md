@@ -16,6 +16,7 @@ Further release notes are available in the [GitHub release notes](https://github
 
 | VERSION | UPDATES |
 |---|---|
+| 2.0.5 | Improvements to event trackin - ensure viewNumber, sessionViewNumber and viewTs is accurately calculated
 | 2.0.4 | Swift Package Manager is now supported for installation
 | 2.0.3 | Bugs and performance fixes
 | 2.0.1 | Introduction of functionality to reset the SDK using a custom device ID of your choice 
