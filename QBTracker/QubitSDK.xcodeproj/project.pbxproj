@@ -168,6 +168,7 @@
 		42F0CD7C1F4B182E00BD9010 /* QBConfigurationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBConfigurationTest.swift; sourceTree = "<group>"; };
 		42F62FF41F67E97700E444B5 /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
 		42F62FF51F67E97700E444B5 /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
+		5A2CCBB82BB6B8A300C190EE /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		7BAB16D22978588700585532 /* QBQueuePriority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBQueuePriority.swift; sourceTree = "<group>"; };
 		A01CC8561F4D8D29009336F8 /* QBDatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBDatabaseManager.swift; sourceTree = "<group>"; };
 		A024B5B61F4D7B83009748A1 /* SwiftTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -339,6 +340,7 @@
 				A08D69BA1F556CE800CE2FD5 /* QBTracker.swift */,
 				A0D30B811F559F180029D3DC /* QubitSDK.swift */,
 				42F0CD521F4AEE2B00BD9010 /* Info.plist */,
+				5A2CCBB82BB6B8A300C190EE /* PrivacyInfo.xcprivacy */,
 			);
 			path = QubitSDK;
 			sourceTree = "<group>";
