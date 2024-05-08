@@ -14,7 +14,8 @@ class QBDevice {
     
     static func getId() -> String {
         let keychain = QBKeychainSwift()
-        if let deviceId = keychain.get(key), !deviceId.isEmpty {
+
+        if let deviceId = keychain.get(key), !deviceId.isEmpty, deviceId != String(0).md5 {
             return deviceId
         }
 
@@ -30,7 +31,7 @@ class QBDevice {
     
     private static func randomStringInMd5() -> String {
         let timestamp = NSDate().timeIntervalSince1970
-        let randomValue = Int(timestamp) * Int(arc4random_uniform(10))
+        let randomValue = Int(timestamp) * Int.random(in: 1...10)
         let md5String = String(randomValue).md5
         return md5String
     }
