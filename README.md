@@ -16,6 +16,7 @@ Further release notes are available in the [GitHub release notes](https://github
 
 | VERSION | UPDATES |
 |---|---|
+| 2.0.8 | Fix regression in DeviceId creation that could lead to conflicts
 | 2.0.7 | Update iOS Privacy Manifest with further best practice for geolocation
 | 2.0.6 | Add iOS Privacy Manifest covering best practice use cases
 | 2.0.5 | Improvements to event tracking - ensure viewNumber, sessionViewNumber and viewTs is accurately calculated

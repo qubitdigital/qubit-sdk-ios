@@ -2,12 +2,13 @@ Pod::Spec.new do |s|
 
     s.name         = "QubitSDK"
 
-    s.version      = "2.0.7"
+    s.version      = "2.0.8"
 
-    s.summary      = "Qubit experience delivery for iOS"
+    s.summary      = "Easy Qubit integration for iOS"
 
     s.description  = <<-DESC
-    Qubit experience delivery for iOS
+    Collect events, deploy Experiences, 
+    and implement Placements within your iOS app.
     DESC
 
     s.homepage     = "http://www.qubit.com"
