@@ -5603,7 +5603,7 @@
       "kind": "StringLiteral",
       "offset": 312,
       "length": 7,
-      "value": "\"2.0.6\""
+      "value": "\"2.0.8\""
     },
     {
       "filePath": "\/Users\/hp\/projects\/mobile\/ios\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/QubitSDK.swift",
@@ -5632,6 +5632,13 @@
       "offset": 215,
       "length": 18,
       "value": "\"QUBIT_VISITOR_ID\""
+    },
+    {
+      "filePath": "\/Users\/hp\/projects\/mobile\/ios\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/Utils\/QBDevice.swift",
+      "kind": "IntegerLiteral",
+      "offset": 275,
+      "length": 1,
+      "value": "0"
     },
     {
       "filePath": "\/Users\/hp\/projects\/mobile\/ios\/release\/qubit-sdk-ios\/QBTracker\/QubitSDK\/APIClient\/Entities\/QBSession.swift",
