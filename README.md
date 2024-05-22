@@ -4,6 +4,31 @@ This SDK enables comprehensive event tracking and Qubit experience delivery from
 ### Compatibility
 This release is compatible with Xcode 12 & iOS14, and supports Swift & Objective-C.
 
+### Privacy
+
+This repository contains the privacy manifest, which details the data collected by the SDK:
+
+| Data type               | What it's used for                       |
+|-------------------------|------------------------------------------|
+| **Device ID**           | Product personalization and analytics    |
+| **Product Interaction** | Product personalization and analytics    |
+| **Email Address**       | Product personalization and analytics    |
+| **User ID**             | Product personalization and analytics    |
+| **Coarse Location**     | Product personalization and analytics    |
+| **Other Data Types**    | Analytics                                |
+
+> **Note**
+> 
+> **Other Data Types** here represent `system version` and `system name` of the devices that use the SDK.
+
+The SDK doesn't collect any sensitive data, such as payment information or passwords.
+It only has access to the data that the app has access to.
+This level of access is reflected in the `NSPrivacyAccessedAPITypeReasons` key via the `CA92.1` value.
+
+Examine the file for more details: https://github.com/qubitdigital/qubit-sdk-ios/blob/master/QBTracker/QubitSDK/PrivacyInfo.xcprivacy
+
+See the Apple documentation: [Privacy manifest files](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files).
+
 ### Getting started
 To make use of this SDK, please contact your Qubit Customer Success representative.
 
@@ -47,9 +72,6 @@ Further release notes are available in the [GitHub release notes](https://github
 | 1 | Swift Package Manager | Swift | GitHub |
 | 2 | CocoaPods | Swift & Objective-C | CocoaPods.org & GitHub |
 | 3 | XCFramework | Swift & Objective-C | GitHub |
-
-
-
 
 Further details on installation options are below.
 
