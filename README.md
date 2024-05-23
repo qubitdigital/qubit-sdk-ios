@@ -27,7 +27,7 @@ This level of access is reflected in the `NSPrivacyAccessedAPITypeReasons` key v
 
 Examine the file for more details: https://github.com/qubitdigital/qubit-sdk-ios/blob/master/QBTracker/QubitSDK/PrivacyInfo.xcprivacy
 
-See the Apple documentation: [Privacy manifest files](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files).
+For more general information about privacy manifest files, see the Apple documentation: [Privacy manifest files](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files).
 
 ### Getting started
 To make use of this SDK, please contact your Qubit Customer Success representative.
