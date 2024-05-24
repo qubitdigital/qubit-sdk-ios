@@ -27,7 +27,7 @@ This level of access is reflected in the `NSPrivacyAccessedAPITypeReasons` key v
 
 > **IMPORTANT**
 >
-> If you choose to include additional data to sent events, you must update the privacy manifest accordingly. 
+> If you choose to include additional data in sent events, you must update the privacy manifest accordingly. 
 
 Examine the file for more details: https://github.com/qubitdigital/qubit-sdk-ios/blob/master/QBTracker/QubitSDK/PrivacyInfo.xcprivacy
 
