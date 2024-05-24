@@ -21,9 +21,13 @@ This repository contains the privacy manifest, which details the data collected 
 > 
 > **Other Data Types** here represent `system version` and `system name` of the devices that use the SDK.
 
-The SDK doesn't collect any sensitive data, such as payment information or passwords.
-It only has access to the data that the app has access to.
+The SDK collects metadata automatically, but it also has access to any data that you chose to implement. 
+This way, the SDK has access to all the data that you put into the `QubitSDK.sendEvent()` calls. 
 This level of access is reflected in the `NSPrivacyAccessedAPITypeReasons` key via the `CA92.1` value.
+
+> **IMPORTANT**
+>
+> If you choose to include additional data to sent events, you must update the privacy manifest accordingly. 
 
 Examine the file for more details: https://github.com/qubitdigital/qubit-sdk-ios/blob/master/QBTracker/QubitSDK/PrivacyInfo.xcprivacy
 
