@@ -21,8 +21,8 @@ This repository contains the privacy manifest, which details the data collected 
 > 
 > **Other Data Types** here represent `system version` and `system name` of the devices that use the SDK.
 
-The SDK collects metadata automatically, but it also has access to any data that you chose to implement. 
-This way, the SDK has access to all the data that you put into the `QubitSDK.sendEvent()` calls. 
+The SDK collects metadata about the device (such as the application version and iOS version) automatically. 
+It also collects any additional data that you chose to implement, which means data passed through `QubitSDK.sendEvent()` calls.
 This level of access is reflected in the `NSPrivacyAccessedAPITypeReasons` key via the `CA92.1` value.
 
 > **IMPORTANT**
